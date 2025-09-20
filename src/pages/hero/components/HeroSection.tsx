@@ -22,7 +22,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
   }?text=${encodeURIComponent(contactT.whatsappMessage)}`;
 
   return (
-    <main id="home" className="flex-1 pt-20 pb-20 lg:pt-32 lg:pb-24">
+    <main id="home" className="flex-1 pt-28 pb-20 lg:pt-32 lg:pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Mobile: Stack vertically */}
         <div className="lg:hidden">

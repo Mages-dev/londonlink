@@ -20,9 +20,9 @@ export function GoalsSection({ currentLanguage }: GoalsSectionProps) {
   const t = goalsTranslations[currentLanguage];
 
   return (
-    <section id="goals" className="relative py-20 overflow-hidden">
-      {/* Main Goals Section with Blue Gradient Background */}
-      <div className="relative py-16 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 dark:from-blue-900 dark:via-blue-800 dark:to-blue-700">
+    <section id="goals" className="relative overflow-hidden">
+      {/* Main Goals Section - Uses parent background */}
+      <div className="relative py-20">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Title */}
           <div className="text-center mb-12">
@@ -75,7 +75,7 @@ export function GoalsSection({ currentLanguage }: GoalsSectionProps) {
       </div>
 
       {/* Section 2 - Achievement Promise */}
-      <div className="relative py-16 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 dark:from-blue-900 dark:via-blue-800 dark:to-blue-700">
+      <div className="relative py-20">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Image - Left side */}

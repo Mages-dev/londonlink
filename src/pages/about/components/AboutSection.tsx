@@ -18,15 +18,15 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
       className="relative py-20 bg-white dark:bg-slate-800 overflow-hidden"
     >
       {/* Section 1 - Main Introduction */}
-      <div className="relative py-16 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 dark:from-blue-900 dark:via-blue-800 dark:to-blue-700">
+      <div className="relative py-16 dark:bg-slate-800">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Text Content */}
-            <div className="text-white">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+            <div>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight text-gray-900 dark:text-white">
                 {t.section1.title}
               </h2>
-              <p className="text-lg md:text-xl text-blue-100 leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
                 {t.section1.description}
               </p>
             </div>
@@ -49,7 +49,7 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
       </div>
 
       {/* Section 2 - Philosophy */}
-      <div className="py-16 bg-white dark:bg-slate-800">
+      <div className="py-16 dark:bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-12 items-start">
             {/* Image - Left side on desktop */}
@@ -86,7 +86,7 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
       </div>
 
       {/* Section 3 - History */}
-      <div className="py-16 bg-gray-50 dark:bg-slate-900">
+      <div className="py-16 dark:bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-12 items-start">
             {/* Text Content */}
