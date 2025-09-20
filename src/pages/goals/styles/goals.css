@@ -1,0 +1,65 @@
+/* Goals Section - Specific Styles */
+
+/* CSS Variables for Goals Section */
+:root {
+  --goals-card-icon-bg-color: #818181;
+  --goals-card-borders-color: #ffffff;
+  --goals-card-hover-border-color: #fbbf24;
+}
+
+/* Dark mode variables */
+.dark {
+  --goals-card-icon-bg-color: #818181;
+  --goals-card-borders-color: #ffffff;
+  --goals-card-hover-border-color: #fbbf24;
+}
+
+/* Goals section icon frame */
+.goals-icon-frame {
+  width: 60px;
+  height: 60px;
+  background-color: var(--goals-card-icon-bg-color);
+  border-radius: 12px;
+  border: 4px solid var(--goals-card-borders-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+  transition: all 0.3s ease;
+}
+
+/* Icon styling inside the frame */
+.goals-icon-frame img,
+.goals-icon-frame svg {
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
+/* Additional goals-specific animations */
+.goals-card {
+  transition: all 0.3s ease;
+}
+
+.goals-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Goals section specific utilities */
+.goals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .goals-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .goals-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
