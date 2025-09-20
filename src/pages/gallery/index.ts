@@ -11,3 +11,10 @@ export { galleryTranslations } from "./translations";
 
 // Constants
 export { GALLERY_IMAGES, L_SHAPE_LAYOUT } from "./constants/images";
+
+// Styles
+export {
+  GALLERY_STYLE_CLASSES,
+  GALLERY_ANIMATIONS,
+  GALLERY_GRID_CONFIG,
+} from "./styles";

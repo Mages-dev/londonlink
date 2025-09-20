@@ -5,6 +5,8 @@ import { useState } from "react";
 import { Language } from "@/types";
 import { galleryTranslations } from "../translations";
 import { GALLERY_IMAGES } from "../constants/images";
+// Import gallery styles
+import "../styles";
 
 interface GallerySectionProps {
   currentLanguage: Language;
