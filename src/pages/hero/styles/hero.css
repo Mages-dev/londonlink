@@ -1,0 +1,152 @@
+/* Hero Section - Specific Styles */
+
+/* CSS Variables for Hero Section */
+:root {
+  --hero-card-icon-bg-color: #818181;
+  --hero-card-borders-color: #ffffff;
+  --hero-card-hover-border-color: #fbbf24;
+  --hero-card-bg-color: rgba(31, 41, 55, 0.8);
+  --hero-card-hover-bg-color: rgba(31, 41, 55, 0.9);
+}
+
+/* Dark mode variables */
+.dark {
+  --hero-card-icon-bg-color: #818181;
+  --hero-card-borders-color: #ffffff;
+  --hero-card-hover-border-color: #fbbf24;
+  --hero-card-bg-color: rgba(31, 41, 55, 0.8);
+  --hero-card-hover-bg-color: rgba(31, 41, 55, 0.9);
+}
+
+/* Hero section icon frame */
+.hero-icon-frame {
+  width: 60px;
+  height: 60px;
+  background-color: var(--hero-card-icon-bg-color);
+  border-radius: 12px;
+  border: 4px solid var(--hero-card-borders-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+  transition: all 0.3s ease;
+}
+
+/* Icon styling inside the frame */
+.hero-icon-frame img,
+.hero-icon-frame svg {
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
+/* Additional hero-specific animations */
+.hero-card {
+  background-color: var(--hero-card-bg-color);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-card:hover {
+  transform: translateY(-2px);
+  background-color: var(--hero-card-hover-bg-color);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.hero-card:hover .hero-icon-frame {
+  border-color: var(--hero-card-hover-border-color);
+  transform: scale(1.05);
+}
+
+/* Hero section specific utilities */
+.hero-advantages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .hero-advantages-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-advantages-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-advantages-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* Smaller font size for 5-column layout to ensure single line titles */
+  .hero-card h3 {
+    font-size: 0.875rem;
+  }
+
+  .hero-card p {
+    font-size: 0.8rem;
+  }
+}
+
+/* Spacing adjustments for better layout */
+.hero-card .hero-icon-frame {
+  margin-bottom: 1.5rem; /* Increased spacing between icon and text */
+}
+
+/* Title optimization to prevent line breaks */
+.hero-card h3 {
+  font-size: 0.95rem; /* Optimized size to fit all titles in one line */
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  white-space: nowrap; /* Prevent line breaks */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis if text is too long */
+  min-height: 1.2rem; /* Consistent height for all titles */
+}
+
+.hero-card p {
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+/* Responsive adjustments for smaller cards */
+@media (max-width: 1023px) {
+  .hero-card {
+    padding: 1.5rem;
+  }
+
+  .hero-icon-frame {
+    width: 50px;
+    height: 50px;
+  }
+
+  .hero-card .hero-icon-frame {
+    margin-bottom: 1rem;
+  }
+
+  .hero-card h3 {
+    white-space: normal; /* Allow wrapping on smaller screens */
+  }
+}
+
+@media (max-width: 639px) {
+  .hero-advantages-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .hero-card {
+    padding: 1.25rem;
+  }
+
+  .hero-card .hero-icon-frame {
+    margin-bottom: 0; /* Reset for mobile side-by-side layout */
+  }
+}

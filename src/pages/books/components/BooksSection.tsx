@@ -14,12 +14,6 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
       {/* Background with gradient similar to the original */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 dark:from-blue-900 dark:via-blue-800 dark:to-blue-700"></div>
 
-      {/* Decorative background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-300/20 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
-      </div>
-
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-center">
           {/* Left side - Text content */}
