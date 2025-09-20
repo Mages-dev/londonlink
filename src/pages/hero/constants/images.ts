@@ -4,6 +4,7 @@ export const HERO_IMAGES = {
     main: "/assets/images/hero/backgrounds/hero.png",
     mobile: "/assets/images/hero/backgrounds/hero.png",
     gradient: "/assets/images/hero/backgrounds/hero.png",
+    enrollNow: "/assets/images/hero/backgrounds/hero-2.png",
   },
   features: {
     books: "/assets/images/hero/features/interactive-books.svg",
@@ -36,6 +37,7 @@ export const HERO_IMAGE_ALTS = {
     main: "LondonLink hero background with English learning theme",
     mobile: "Mobile optimized hero background",
     gradient: "Gradient overlay for better text readability",
+    enrollNow: "Enroll now section background with students in video call",
   },
   features: {
     books: "Interactive books icon representing digital learning materials",

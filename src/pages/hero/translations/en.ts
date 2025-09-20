@@ -89,4 +89,14 @@ export const heroTranslationsEn = {
       },
     ],
   },
+
+  // Enroll now section
+  enrollNow: {
+    title: "Enroll now:",
+    buttonText: "Contact us",
+    description:
+      "By clicking the button above, you'll be directed to our WhatsApp.",
+    subDescription:
+      "Send us a message and we'll continue your enrollment there.",
+  },
 } as const;

@@ -203,6 +203,73 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
           </div>
         </div>
       </div>
+
+      {/* Enroll Now Section */}
+      <div className="relative py-16">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Background Image Container - Full image display */}
+          <div className="relative rounded-3xl overflow-visible aspect-[16/9] md:aspect-[21/9] lg:aspect-[24/9]">
+            {/* Background Image */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="relative w-full h-full flex items-center justify-center scale-[1.2]">
+                <Image
+                  src={HERO_IMAGES.backgrounds.enrollNow}
+                  alt={HERO_IMAGE_ALTS.backgrounds.enrollNow}
+                  fill
+                  className="object-contain object-center"
+                  priority={false}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                />
+                {/* Blue overlay positioned only over the actual image area */}
+                <div
+                  className="absolute inset-0 bg-blue-600/60"
+                  style={{
+                    maskImage: "url(" + HERO_IMAGES.backgrounds.enrollNow + ")",
+                    maskSize: "contain",
+                    maskRepeat: "no-repeat",
+                    maskPosition: "center",
+                    WebkitMaskImage:
+                      "url(" + HERO_IMAGES.backgrounds.enrollNow + ")",
+                    WebkitMaskSize: "contain",
+                    WebkitMaskRepeat: "no-repeat",
+                    WebkitMaskPosition: "center",
+                  }}
+                ></div>
+              </div>
+            </div>
+
+            {/* Content - Positioned to not cover important image areas */}
+            <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 sm:px-8 py-8">
+              {/* Title */}
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+                {t.enrollNow.title}
+              </h2>
+
+              {/* CTA Button */}
+              <div className="mb-6">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl text-base md:text-lg"
+                >
+                  {t.enrollNow.buttonText}
+                </a>
+              </div>
+
+              {/* Description */}
+              <div className="max-w-xl lg:max-w-2xl mx-auto">
+                <p className="text-sm sm:text-base lg:text-lg text-white mb-1">
+                  {t.enrollNow.description}
+                </p>
+                <p className="text-sm sm:text-base lg:text-lg text-white">
+                  {t.enrollNow.subDescription}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   );
 }
