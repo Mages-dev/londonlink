@@ -167,14 +167,14 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
           </div>
 
           {/* Course Objectives Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 justify-items-center">
             {t.courseObjectives.cards.map((objective, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl flex flex-col h-52"
+                className="bg-white rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl flex flex-col w-full max-w-[280px] sm:max-w-none h-60 sm:h-52"
               >
-                {/* Image - Slightly larger */}
-                <div className="relative h-36">
+                {/* Image - Taller for mobile */}
+                <div className="relative h-44 sm:h-36">
                   <Image
                     src={
                       HERO_IMAGES.courseObjectives[
@@ -207,38 +207,17 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
       {/* Enroll Now Section */}
       <div className="relative py-16">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Background Image Container - Full image display */}
-          <div className="relative rounded-3xl overflow-visible aspect-[16/9] md:aspect-[21/9] lg:aspect-[24/9]">
-            {/* Background Image */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative w-full h-full flex items-center justify-center scale-[1.2]">
-                <Image
-                  src={HERO_IMAGES.backgrounds.enrollNow}
-                  alt={HERO_IMAGE_ALTS.backgrounds.enrollNow}
-                  fill
-                  className="object-contain object-center"
-                  priority={false}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                />
-                {/* Blue overlay positioned only over the actual image area */}
-                <div
-                  className="absolute inset-0 bg-blue-600/60"
-                  style={{
-                    maskImage: "url(" + HERO_IMAGES.backgrounds.enrollNow + ")",
-                    maskSize: "contain",
-                    maskRepeat: "no-repeat",
-                    maskPosition: "center",
-                    WebkitMaskImage:
-                      "url(" + HERO_IMAGES.backgrounds.enrollNow + ")",
-                    WebkitMaskSize: "contain",
-                    WebkitMaskRepeat: "no-repeat",
-                    WebkitMaskPosition: "center",
-                  }}
-                ></div>
-              </div>
-            </div>
+          {/* Background Image Container - Simplified approach */}
+          <div
+            className="relative rounded-3xl aspect-square bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url(${HERO_IMAGES.backgrounds.enrollNow})`,
+            }}
+          >
+            {/* Blue overlay */}
+            <div className="absolute inset-0 bg-blue-600/60 rounded-3xl"></div>
 
-            {/* Content - Positioned to not cover important image areas */}
+            {/* Content */}
             <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 sm:px-8 py-8">
               {/* Title */}
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
