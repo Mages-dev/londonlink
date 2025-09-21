@@ -39,24 +39,19 @@ export function LShapeGallery({
     <div className="relative max-w-6xl mx-auto">
       {/* L-Shape Container */}
       <div className="grid grid-cols-8 grid-rows-6 gap-2 md:gap-4 h-[600px] md:h-[800px] lg:h-[900px]">
-        
         {/* HORIZONTAL PART OF L - Top Row */}
         {horizontalImages.map((image, index) => {
           const isLarge = index === 0 || index === 3; // First and fourth images are large
           const isMedium = index === 1 || index === 4; // Second and fifth are medium
-          
+
           let gridClasses = "";
-          let heightClasses = "";
-          
+
           if (isLarge) {
             gridClasses = "col-span-2 row-span-2";
-            heightClasses = "h-full";
           } else if (isMedium) {
             gridClasses = "col-span-1 row-span-2";
-            heightClasses = "h-full";
           } else {
             gridClasses = "col-span-1 row-span-1";
-            heightClasses = "h-full";
           }
 
           return (
@@ -100,14 +95,18 @@ export function LShapeGallery({
               />
 
               {/* Overlay */}
-              <div className={`absolute inset-0 bg-black transition-opacity duration-300 ${
-                hoveredImage === image.id ? "opacity-20" : "opacity-0"
-              }`} />
+              <div
+                className={`absolute inset-0 bg-black transition-opacity duration-300 ${
+                  hoveredImage === image.id ? "opacity-20" : "opacity-0"
+                }`}
+              />
 
               {/* Hover Content */}
-              <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
-                hoveredImage === image.id ? "opacity-100" : "opacity-0"
-              }`}>
+              <div
+                className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
+                  hoveredImage === image.id ? "opacity-100" : "opacity-0"
+                }`}
+              >
                 <div className="text-white text-center p-2">
                   <div className="text-sm font-medium">{image.title}</div>
                   <div className="text-xs mt-1 opacity-80">{t.viewMore}</div>
@@ -120,15 +119,16 @@ export function LShapeGallery({
         {/* VERTICAL PART OF L - Right Column */}
         {verticalImages.map((image, index) => {
           const actualIndex = index + 7; // Offset for animation delay
-          const isLarge = index === 2; // Third image in vertical is large
           const isMedium = index === 0 || index === 4; // First and last are medium
-          
+
           let gridClasses = "";
           let rowStart = "";
-          
+
           if (index === 0) {
             // First vertical image - starts at row 3
-            gridClasses = isMedium ? "col-span-1 row-span-2" : "col-span-1 row-span-1";
+            gridClasses = isMedium
+              ? "col-span-1 row-span-2"
+              : "col-span-1 row-span-1";
             rowStart = "row-start-3";
           } else if (index === 1) {
             // Second vertical image
@@ -189,14 +189,18 @@ export function LShapeGallery({
               />
 
               {/* Overlay */}
-              <div className={`absolute inset-0 bg-black transition-opacity duration-300 ${
-                hoveredImage === image.id ? "opacity-20" : "opacity-0"
-              }`} />
+              <div
+                className={`absolute inset-0 bg-black transition-opacity duration-300 ${
+                  hoveredImage === image.id ? "opacity-20" : "opacity-0"
+                }`}
+              />
 
               {/* Hover Content */}
-              <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
-                hoveredImage === image.id ? "opacity-100" : "opacity-0"
-              }`}>
+              <div
+                className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
+                  hoveredImage === image.id ? "opacity-100" : "opacity-0"
+                }`}
+              >
                 <div className="text-white text-center p-2">
                   <div className="text-sm font-medium">{image.title}</div>
                   <div className="text-xs mt-1 opacity-80">{t.viewMore}</div>
@@ -213,7 +217,9 @@ export function LShapeGallery({
           LONDON<span className="text-gray-400">LINK</span>
         </div>
         <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          {currentLanguage === "en" ? "L-Shape Gallery" : "Galeria em Formato L"}
+          {currentLanguage === "en"
+            ? "L-Shape Gallery"
+            : "Galeria em Formato L"}
         </div>
       </div>
     </div>
