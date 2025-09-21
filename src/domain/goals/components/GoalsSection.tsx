@@ -9,7 +9,7 @@ import {
   GOALS_IMAGES,
   GOALS_IMAGE_ALTS,
 } from "../constants/images";
-import { CONTACT_INFO } from "@/pages/shared/constants/contacts";
+import { CONTACT_INFO } from "@/domain/shared/constants/contacts";
 import "../styles";
 
 interface GoalsSectionProps {

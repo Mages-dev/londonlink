@@ -6,7 +6,7 @@ import {
   OptimizedImage,
   SHARED_IMAGES,
   SHARED_IMAGE_ALTS,
-} from "@/pages/shared";
+} from "@/domain/shared";
 
 // Navigation items with bilingual support
 const navigationItems: NavigationItem[] = [

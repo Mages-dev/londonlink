@@ -1,7 +1,7 @@
 "use client";
 
 import { Language } from "@/types";
-import { OptimizedImage } from "@/pages/shared";
+import { OptimizedImage } from "@/domain/shared";
 import { BOOKS_IMAGES, BOOKS_IMAGE_ALTS } from "../constants/images";
 
 interface BooksSectionProps {

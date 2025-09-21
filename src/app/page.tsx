@@ -10,7 +10,7 @@ import {
   GallerySection,
   ContactSection,
   Footer,
-} from "@/pages/sections";
+} from "@/domain/sections";
 import { Language } from "@/types";
 
 export default function Home() {

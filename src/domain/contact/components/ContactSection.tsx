@@ -1,8 +1,8 @@
 import { Language } from "@/types";
 import { MapPin } from "lucide-react";
 import Image from "next/image";
-import { CONTACT_INFO } from "@/pages/shared/constants/contacts";
-import { contactTranslations } from "@/pages/contact/translations";
+import { CONTACT_INFO } from "@/domain/shared/constants/contacts";
+import { contactTranslations } from "@/domain/contact/translations";
 
 interface ContactSectionProps {
   currentLanguage: Language;

@@ -2,19 +2,19 @@
 // This file exports all domain-specific translations for easy access
 
 // Import translations from domains
-import { heroTranslations } from "@/pages/hero/translations";
-import { aboutTranslations } from "@/pages/about/translations";
-import { galleryTranslations } from "@/pages/gallery/translations";
-import { contactTranslations } from "@/pages/contact/translations";
+import { heroTranslations } from "@/domain/hero/translations";
+import { aboutTranslations } from "@/domain/about/translations";
+import { galleryTranslations } from "@/domain/gallery/translations";
+import { contactTranslations } from "@/domain/contact/translations";
 
 // Import types and config
 import type { Language } from "@/translations/config";
 
 // Re-export everything for external use
-export { heroTranslations } from "@/pages/hero/translations";
-export { aboutTranslations } from "@/pages/about/translations";
-export { galleryTranslations } from "@/pages/gallery/translations";
-export { contactTranslations } from "@/pages/contact/translations";
+export { heroTranslations } from "@/domain/hero/translations";
+export { aboutTranslations } from "@/domain/about/translations";
+export { galleryTranslations } from "@/domain/gallery/translations";
+export { contactTranslations } from "@/domain/contact/translations";
 
 // Future domain translations can be added here:
 // export { booksTranslations } from "@/pages/books/translations";

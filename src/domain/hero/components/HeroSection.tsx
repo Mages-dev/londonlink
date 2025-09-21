@@ -5,8 +5,8 @@ import { Language } from "@/types";
 import { HERO_IMAGES, HERO_IMAGE_ALTS } from "../constants/images";
 import { heroTranslations } from "../translations";
 import "../styles";
-import { CONTACT_INFO } from "@/pages/shared/constants/contacts";
-import { contactTranslations } from "@/pages/contact/translations";
+import { CONTACT_INFO } from "@/domain/shared/constants/contacts";
+import { contactTranslations } from "@/domain/contact/translations";
 
 interface HeroSectionProps {
   currentLanguage: Language;
