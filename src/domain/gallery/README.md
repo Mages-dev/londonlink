@@ -76,7 +76,7 @@ grid-cols-8 grid-rows-6  /* 8 colunas x 6 linhas */
 ## 📁 Estrutura de Arquivos
 
 ```
-src/pages/gallery/
+src/domain/gallery/
 ├── components/
 │   ├── GallerySection.tsx     # Componente principal
 │   ├── LShapeGallery.tsx      # Layout em L (separado)
@@ -92,6 +92,7 @@ src/pages/gallery/
 │   ├── en.ts                  # Traduções em inglês
 │   ├── pt.ts                  # Traduções em português
 │   └── index.ts               # Exportações centrais
+├── index.ts                   # Exportações do domínio
 └── README.md                  # Esta documentação
 ```
 
@@ -119,7 +120,7 @@ import {
   GALLERY_STYLE_CLASSES,
   GALLERY_ANIMATIONS,
   GALLERY_GRID_CONFIG,
-} from "@/pages/gallery";
+} from "@/domain/gallery";
 
 // Classes CSS
 GALLERY_STYLE_CLASSES.grid;
