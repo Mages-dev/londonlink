@@ -37,7 +37,7 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
         {/* L-Shape Gallery */}
         <div className="relative max-w-5xl mx-auto">
           {/* L-Shape Container */}
-          <div className="grid grid-cols-4 grid-rows-5 gap-0 h-[600px] md:h-[780px] lg:h-[900px]">
+          <div className="grid grid-cols-4 grid-rows-5 gap-2 md:gap-4 h-[600px] md:h-[780px] lg:h-[900px]">
             {/* VERTICAL PART OF L - Left Columns (Haste do L - 2 colunas) */}
             {verticalImages.map((image, index) => {
               const getGridPosition = () => {
@@ -63,33 +63,10 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
                 }
               };
 
-              const getBorderClass = () => {
-                switch (index) {
-                  case 0: // Imagem 1: topo + esquerda
-                    return "l-border-top-left";
-                  case 1: // Imagem 2: topo + direita
-                    return "l-border-top-right";
-                  case 2: // Imagem 3: esquerda
-                    return "l-border-left";
-                  case 3: // Imagem 4: direita
-                    return "l-border-right";
-                  case 4: // Imagem 5: esquerda
-                    return "l-border-left";
-                  case 5: // Imagem 6: direita
-                    return "l-border-right";
-                  case 6: // Imagem 7: esquerda
-                    return "l-border-left";
-                  case 7: // Imagem 8: direita
-                    return "l-border-right";
-                  default:
-                    return "";
-                }
-              };
-
               return (
                 <div
                   key={image.id}
-                  className={`${getGridPosition()} ${getBorderClass()} relative overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group animate-fade-in-up`}
+                  className={`${getGridPosition()} relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group animate-fade-in-up`}
                   onMouseEnter={() => setHoveredImage(image.id)}
                   onMouseLeave={() => setHoveredImage(null)}
                   onClick={() => setSelectedImage(image.id)}
@@ -131,25 +108,10 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
                 }
               };
 
-              const getBorderClass = () => {
-                switch (index) {
-                  case 0: // Imagem 9: esquerda + fundo
-                    return "l-border-left-bottom";
-                  case 1: // Imagem 10: fundo
-                    return "l-border-bottom";
-                  case 2: // Imagem 11: topo + fundo
-                    return "l-border-top-bottom";
-                  case 3: // Imagem 12: topo + direita + fundo
-                    return "l-border-top-right-bottom";
-                  default:
-                    return "";
-                }
-              };
-
               return (
                 <div
                   key={image.id}
-                  className={`${getGridPosition()} ${getBorderClass()} relative overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group animate-fade-in-up`}
+                  className={`${getGridPosition()} relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group animate-fade-in-up`}
                   onMouseEnter={() => setHoveredImage(image.id)}
                   onMouseLeave={() => setHoveredImage(null)}
                   onClick={() => setSelectedImage(image.id)}

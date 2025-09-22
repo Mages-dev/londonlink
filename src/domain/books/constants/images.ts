@@ -7,6 +7,8 @@ export const BOOKS_IMAGES = {
   },
   previews: {
     threeLionsTrilogy: "/assets/images/books/previews/three-lions-trilogy.jpg",
+    author: "/assets/images/books/previews/author.jpg",
+    students: "/assets/images/books/previews/students.jpg",
   },
   thumbnails: {
     threeLionsPart1Thumb:
@@ -26,6 +28,8 @@ export const BOOKS_IMAGE_ALTS = {
   },
   previews: {
     threeLionsTrilogy: "Three Lions English Complete Trilogy",
+    author: "Author of Three Lions English",
+    students: "Students learning with Three Lions English",
   },
   thumbnails: {
     threeLionsPart1Thumb: "Three Lions English Part 1 Thumbnail",

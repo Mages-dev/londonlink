@@ -12,17 +12,6 @@ export const GALLERY_STYLE_CLASSES = {
   image: "gallery-image",
   overlay: "gallery-overlay",
 
-  // L-Shape borders
-  lBorderTopLeft: "l-border-top-left",
-  lBorderTopRight: "l-border-top-right",
-  lBorderLeft: "l-border-left",
-  lBorderRight: "l-border-right",
-  lBorderRightBottom: "l-border-right-bottom",
-  lBorderLeftBottom: "l-border-left-bottom",
-  lBorderBottom: "l-border-bottom",
-  lBorderTopBottom: "l-border-top-bottom",
-  lBorderTopRightBottom: "l-border-top-right-bottom",
-
   // Animations
   fadeIn: "animate-fade-in",
   fadeInUp: "animate-fade-in-up",
@@ -43,16 +32,12 @@ export const GALLERY_ANIMATIONS = {
   fadeInUp: "0.6s",
   scaleIn: "0.3s",
   hover: "0.3s",
-  neonPulse: "2s",
 } as const;
 
 // Grid configuration constants
 export const GALLERY_GRID_CONFIG = {
   columns: 4,
   rows: 5,
-  gapMobile: "0",
-  gapDesktop: "0",
-  borderRadius: "0",
-  borderWidth: "5px",
-  neonEffect: true,
+  gapMobile: "0.5rem",
+  gapDesktop: "1rem",
 } as const;
