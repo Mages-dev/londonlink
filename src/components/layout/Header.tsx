@@ -39,6 +39,13 @@ const navigationItems: NavigationItem[] = [
     },
   },
   {
+    href: "#feedbacks",
+    label: {
+      pt: "Feedbacks",
+      en: "Feedbacks",
+    },
+  },
+  {
     href: "#gallery",
     label: {
       pt: "Galeria",
@@ -65,6 +72,20 @@ export default function Header({
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  // Detect window width for responsive navigation
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    // Set initial width
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Detect active section based on scroll position
   useEffect(() => {
@@ -74,6 +95,7 @@ export default function Header({
         "about",
         "goals",
         "books",
+        "feedbacks",
         "gallery",
         "contact",
       ];
@@ -131,12 +153,12 @@ export default function Header({
               width={180}
               height={60}
               priority
-              className="h-8 sm:h-10 md:h-12 lg:h-14 xl:h-16 w-auto object-contain"
+              className="h-8 sm:h-10 md:h-10 lg:h-14 xl:h-16 w-auto object-contain"
             />
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-10">
+          <div className="hidden lg:flex items-center space-x-10">
             {navigationItems.map((item) => {
               const isActive = activeSection === item.href.replace("#", "");
               return (
@@ -158,6 +180,40 @@ export default function Header({
                 </button>
               );
             })}
+          </div>
+
+          {/* Tablet Navigation (817px - 1023px) */}
+          <div
+            className={`items-center ${
+              windowWidth >= 817 && windowWidth < 1024 ? "flex" : "hidden"
+            }`}
+          >
+            <div
+              className="flex items-center"
+              style={{ gap: "clamp(0.7rem, 2.5vw, 1rem)" }}
+            >
+              {navigationItems.map((item) => {
+                const isActive = activeSection === item.href.replace("#", "");
+                return (
+                  <button
+                    key={item.href}
+                    onClick={() => scrollToSection(item.href)}
+                    className={`font-medium transition-all duration-200 text-sm cursor-pointer relative px-2 py-1 rounded ${
+                      isActive
+                        ? "text-white font-semibold bg-yellow-400/20"
+                        : "text-gray-300 hover:text-white hover:bg-gray-800/30"
+                    }`}
+                    aria-label={`Navigate to ${item.label[currentLanguage]}`}
+                  >
+                    {item.label[currentLanguage]}
+                    {/* Active indicator */}
+                    {isActive && (
+                      <span className="absolute -bottom-0.5 left-1 right-1 h-0.5 bg-yellow-400 rounded-full"></span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Language Toggle & Mobile Menu Button */}
@@ -195,7 +251,9 @@ export default function Header({
             {/* Mobile Menu Button */}
             <button
               onClick={toggleMobileMenu}
-              className="md:hidden p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+              className={`p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 ${
+                windowWidth < 817 || windowWidth >= 1024 ? "block" : "hidden"
+              }`}
               aria-label="Toggle mobile menu"
               aria-expanded={isMobileMenuOpen}
             >
@@ -222,7 +280,9 @@ export default function Header({
 
         {/* Mobile Navigation */}
         <div
-          className={`md:hidden transition-all duration-300 ease-in-out ${
+          className={`transition-all duration-300 ease-in-out ${
+            windowWidth < 817 || windowWidth >= 1024 ? "block" : "hidden"
+          } ${
             isMobileMenuOpen
               ? "max-h-96 opacity-100 mt-6"
               : "max-h-0 opacity-0 overflow-hidden"

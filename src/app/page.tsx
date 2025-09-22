@@ -7,6 +7,7 @@ import {
   AboutSection,
   GoalsSection,
   BooksSection,
+  FeedbacksSection,
   GallerySection,
   ContactSection,
   Footer,
@@ -31,6 +32,7 @@ export default function Home() {
       <AboutSection currentLanguage={currentLanguage} />
       <GoalsSection currentLanguage={currentLanguage} />
       <BooksSection currentLanguage={currentLanguage} />
+      <FeedbacksSection currentLanguage={currentLanguage} />
       <GallerySection currentLanguage={currentLanguage} />
       <ContactSection currentLanguage={currentLanguage} />
       <Footer />

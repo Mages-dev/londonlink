@@ -1,0 +1,140 @@
+/* Feedbacks Section Specific Styles */
+
+/* Testimonial card animations */
+.testimonial-card {
+  transition: all 0.3s ease-in-out;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Star rating animations */
+.star-rating {
+  display: flex;
+  gap: 2px;
+}
+
+.star-icon {
+  transition: all 0.2s ease-in-out;
+  color: #fbbf24;
+}
+
+.star-icon:hover {
+  transform: scale(1.2);
+}
+
+/* Quote icon styling */
+.quote-icon {
+  opacity: 0.8;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  font-size: 4rem;
+  color: #ffffff;
+  z-index: 0;
+}
+
+/* Testimonial text styling */
+.testimonial-text {
+  position: relative;
+  z-index: 1;
+  transition: all 0.5s ease-in-out;
+}
+
+/* Smooth transitions for testimonial content */
+.testimonial-text * {
+  transition: all 0.5s ease-in-out;
+}
+
+/* Smooth transitions for testimonial images */
+.testimonial-image {
+  transition: all 0.5s ease-in-out;
+}
+
+/* Statistics counter animation */
+.stat-number {
+  font-weight: 700;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: countUp 2s ease-out;
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Verified badge styling */
+.verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Carousel navigation */
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.carousel-nav:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-nav.prev {
+  left: -24px;
+}
+
+.carousel-nav.next {
+  right: -24px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .carousel-nav {
+    width: 40px;
+    height: 40px;
+  }
+
+  .carousel-nav.prev {
+    left: -20px;
+  }
+
+  .carousel-nav.next {
+    right: -20px;
+  }
+
+  .quote-icon {
+    font-size: 3rem;
+  }
+}
