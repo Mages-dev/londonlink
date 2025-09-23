@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "../lib/themes/halloween.css";
+import { ThemeProvider } from "@/contexts";
+
+// Import test utilities in development
+if (process.env.NODE_ENV === "development") {
+  import("../lib/themes/test-theme");
+}
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -73,7 +80,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
         suppressHydrationWarning
       >
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Header } from "@/components/layout";
+import { HeaderWithTheme } from "@/components/layout";
 import {
   HeroSection,
   AboutSection,
@@ -13,6 +13,8 @@ import {
   Footer,
 } from "@/domain/sections";
 import { Language } from "@/types";
+import { HalloweenEffects } from "@/components/ui";
+import ThemeDebug from "@/components/ui/ThemeDebug";
 
 export default function Home() {
   const [currentLanguage, setCurrentLanguage] = useState<Language>("pt");
@@ -23,7 +25,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 dark:from-blue-900 dark:via-blue-800 dark:to-blue-700">
-      <Header
+      <HeaderWithTheme
         currentLanguage={currentLanguage}
         onLanguageChange={handleLanguageChange}
       />
@@ -36,6 +38,12 @@ export default function Home() {
       <GallerySection currentLanguage={currentLanguage} />
       <ContactSection currentLanguage={currentLanguage} />
       <Footer />
+
+      {/* Halloween effects overlay */}
+      <HalloweenEffects />
+
+      {/* Debug info - only in development */}
+      {process.env.NODE_ENV === "development" && <ThemeDebug />}
     </div>
   );
 }

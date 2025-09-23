@@ -7,6 +7,7 @@ import { heroTranslations } from "../translations";
 import "../styles";
 import { CONTACT_INFO } from "@/domain/shared/constants/contacts";
 import { contactTranslations } from "@/domain/contact/translations";
+import { useTheme } from "@/contexts";
 
 interface HeroSectionProps {
   currentLanguage: Language;
@@ -15,6 +16,10 @@ interface HeroSectionProps {
 export function HeroSection({ currentLanguage }: HeroSectionProps) {
   const t = heroTranslations[currentLanguage];
   const contactT = contactTranslations[currentLanguage];
+  const { commemorativeTheme } = useTheme();
+
+  // Check if Halloween theme is active
+  const isHalloweenTheme = commemorativeTheme === "halloween";
 
   // WhatsApp configuration using shared constants
   const whatsappUrl = `${
@@ -28,7 +33,11 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
         <div className="lg:hidden">
           {/* Text content for mobile */}
           <div className="text-center mb-12">
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h1
+              className={`text-3xl md:text-4xl font-bold text-white mb-4 ${
+                isHalloweenTheme ? "halloween-text-glow" : ""
+              }`}
+            >
               {t.title}
             </h1>
             <p className="text-lg md:text-xl text-blue-100 mb-8 leading-relaxed max-w-2xl mx-auto">
@@ -38,7 +47,9 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-white hover:bg-gray-100 text-blue-700 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+              className={`inline-block bg-white hover:bg-gray-100 text-blue-700 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl ${
+                isHalloweenTheme ? "halloween-button halloween-glow" : ""
+              }`}
             >
               {t.ctaButton}
             </a>
@@ -62,7 +73,11 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
         <div className="hidden lg:grid lg:grid-cols-2 lg:items-center lg:min-h-[600px] lg:gap-0">
           {/* Text content container */}
           <div className="text-left pr-8 z-10">
-            <h1 className="text-4xl xl:text-5xl font-bold text-white mb-6 leading-tight">
+            <h1
+              className={`text-4xl xl:text-5xl font-bold text-white mb-6 leading-tight ${
+                isHalloweenTheme ? "halloween-text-glow" : ""
+              }`}
+            >
               {t.title}
             </h1>
             <p className="text-xl xl:text-2xl text-blue-100 mb-8 leading-relaxed">
@@ -72,7 +87,9 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-white hover:bg-gray-100 text-blue-700 font-semibold py-4 px-10 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl text-lg"
+              className={`inline-block bg-white hover:bg-gray-100 text-blue-700 font-semibold py-4 px-10 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl text-lg ${
+                isHalloweenTheme ? "halloween-button halloween-glow" : ""
+              }`}
             >
               {t.ctaButton}
             </a>
@@ -113,7 +130,9 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
             {t.advantages.cards.map((advantage, index) => (
               <div
                 key={index}
-                className="hero-card rounded-2xl p-6 hover:scale-105 transition-all duration-300"
+                className={`hero-card rounded-2xl p-6 hover:scale-105 transition-all duration-300 ${
+                  isHalloweenTheme ? "halloween-card halloween-float" : ""
+                }`}
               >
                 {/* Mobile Layout: Icon and text side by side, Desktop: stacked */}
                 <div className="flex gap-4 md:block">

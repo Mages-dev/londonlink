@@ -18,6 +18,9 @@ export interface Course {
 // Re-export Language type from translations config for consistency
 export type { Language } from "@/translations/config";
 
+// Theme types
+export * from "./theme";
+
 export interface NavigationItem {
   href: string;
   label: {

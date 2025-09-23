@@ -1,2 +1,6 @@
 // UI Components exports
 // Add component exports here as they are created
+
+export { default as ThemeSelector } from "./ThemeSelector";
+export { default as ThemeSuggestion } from "./ThemeSuggestion";
+export { default as HalloweenEffects } from "./HalloweenEffects";

@@ -7,6 +7,7 @@ import {
   SHARED_IMAGES,
   SHARED_IMAGE_ALTS,
 } from "@/domain/shared";
+import { ThemeSelector } from "@/components/ui";
 
 // Navigation items with bilingual support
 const navigationItems: NavigationItem[] = [
@@ -64,11 +65,13 @@ const navigationItems: NavigationItem[] = [
 interface HeaderProps {
   currentLanguage?: Language;
   onLanguageChange?: (language: Language) => void;
+  disableThemeSelector?: boolean;
 }
 
 export default function Header({
   currentLanguage = "pt",
   onLanguageChange,
+  disableThemeSelector = false,
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -216,8 +219,14 @@ export default function Header({
             </div>
           </div>
 
-          {/* Language Toggle & Mobile Menu Button */}
-          <div className="flex items-center space-x-6">
+          {/* Theme Selector, Language Toggle & Mobile Menu Button */}
+          <div className="flex items-center space-x-4">
+            {/* Theme Selector - Only render in development */}
+            {!disableThemeSelector &&
+              process.env.NODE_ENV === "development" && (
+                <ThemeSelector currentLanguage={currentLanguage} />
+              )}
+
             {/* Language Toggle */}
             <button
               onClick={handleLanguageToggle}
