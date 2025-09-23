@@ -14,7 +14,7 @@ jobs:
     environment: dev
     steps:
     - name: SSH Command
-      uses: cross-the-world/ssh-pipeline@v1.2.0
+      uses: cross-the-world/ssh-pipeline@7f022867934a210af826af99ef80d96f03a094d5
       with:
         host: ${{ secrets.YUSUKE_HOST }}
         port: 22
