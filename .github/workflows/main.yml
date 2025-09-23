@@ -20,7 +20,6 @@ jobs:
         port: 22
         user: ${{ secrets.YUSUKE_USER }}
         private_key: ${{ secrets.YUSUKE_PK }}
-        host_fingerprint: ${{ secrets.YUSUKE_FP }}
         command: |
           eval "$(ssh-agent -s)"
           ssh-add "$YUSUKE_KEY"
