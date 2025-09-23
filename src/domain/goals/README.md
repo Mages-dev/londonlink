@@ -112,7 +112,7 @@ public/assets/images/goals/previews/
 ## Uso
 
 ```typescript
-import { GoalsSection } from "@/pages/goals";
+import { GoalsSection } from "@/domain/goals";
 
 <GoalsSection currentLanguage={currentLanguage} />;
 ```
@@ -175,7 +175,7 @@ A seção utiliza estilos específicos definidos em `src/pages/goals/styles/goal
 O botão CTA da segunda seção está integrado com o WhatsApp:
 
 ```typescript
-import { CONTACT_INFO } from "@/pages/shared/constants/contacts";
+import { CONTACT_INFO } from "@/domain/shared/constants/contacts";
 
 // Botão que abre WhatsApp
 <a

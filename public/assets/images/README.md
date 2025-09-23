@@ -27,23 +27,27 @@ src/assets/images/
 ## 🎯 Best Practices
 
 ### 1. **Naming Convention**
+
 - Use kebab-case: `hero-main-bg.jpg`
 - Be descriptive: `beginner-book-cover.jpg`
 - Include size when relevant: `logo-small.svg`
 
 ### 2. **File Formats**
+
 - **SVG**: Icons, logos, simple illustrations
 - **WebP**: Modern browsers, best compression
 - **JPG**: Photos, complex images
 - **PNG**: Images with transparency
 
 ### 3. **Size Guidelines**
+
 - **Hero backgrounds**: 1920x1080px (16:9)
 - **Book covers**: 400x600px (2:3)
 - **Thumbnails**: 150x150px (1:1)
 - **Icons**: 24x24px, 32x32px, 48x48px
 
 ### 4. **Optimization**
+
 - Compress images before adding
 - Use appropriate quality settings
 - Consider multiple sizes for responsive design
@@ -51,14 +55,16 @@ src/assets/images/
 ## 🔧 Usage Examples
 
 ### Import from constants:
+
 ```typescript
-import { HERO_IMAGES, HERO_IMAGE_ALTS } from '@/pages/hero/constants/images';
-import { SHARED_IMAGES } from '@/pages/shared/constants/images';
+import { HERO_IMAGES, HERO_IMAGE_ALTS } from "@/domain/hero/constants/images";
+import { SHARED_IMAGES } from "@/domain/shared/constants/images";
 ```
 
 ### Use with OptimizedImage component:
+
 ```tsx
-import { OptimizedImage } from '@/pages/shared';
+import { OptimizedImage } from "@/domain/shared";
 
 <OptimizedImage
   src={HERO_IMAGES.backgrounds.main}
@@ -66,10 +72,11 @@ import { OptimizedImage } from '@/pages/shared';
   width={800}
   height={600}
   priority
-/>
+/>;
 ```
 
 ### Responsive images:
+
 ```tsx
 <OptimizedImage
   src={BOOKS_IMAGES.covers.beginnerBook}
@@ -83,8 +90,9 @@ import { OptimizedImage } from '@/pages/shared';
 ## 📱 Responsive Strategy
 
 Each domain can have multiple versions:
+
 - `image-mobile.jpg` (< 768px)
-- `image-tablet.jpg` (768px - 1024px)  
+- `image-tablet.jpg` (768px - 1024px)
 - `image-desktop.jpg` (> 1024px)
 
 ## 🚀 Performance Tips

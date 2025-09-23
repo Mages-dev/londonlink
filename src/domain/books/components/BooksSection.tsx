@@ -50,8 +50,8 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
       </div>
 
       {/* Author Section */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 max-lg:px-[15%]">
-        <div className="grid lg:grid-cols-[3fr_7fr] gap-8 lg:gap-16 items-center">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-20">
+        <div className="grid lg:grid-cols-[4fr_6fr] gap-8 lg:gap-16 items-center">
           {/* Left side - Author image */}
           <div className="relative w-full h-full">
             {/* Author image with decorative border - reduced size */}
@@ -182,9 +182,9 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
 
       {/* Students Section */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-[6fr_4fr] gap-8 lg:gap-16 items-center">
           {/* Left side - Students story text */}
-          <div className="text-left">
+          <div className="text-left lg:order-1 order-2">
             <div className="space-y-6 text-white">
               <p className="text-lg md:text-xl leading-relaxed">
                 {currentLanguage === "en" ? (
@@ -360,10 +360,10 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
           </div>
 
           {/* Right side - Students image */}
-          <div className="relative flex justify-center lg:justify-end">
+          <div className="relative w-full h-full lg:order-2 order-1">
             <div className="relative">
               {/* Students image with decorative border */}
-              <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-2xl">
+              <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-2xl max-lg:mx-auto max-lg:w-[65%]">
                 <div className="relative border-4 border-red-500 rounded-xl overflow-hidden">
                   <OptimizedImage
                     src={BOOKS_IMAGES.previews.students}

@@ -10,7 +10,7 @@ src/translations/
 ├── config.ts         # Configuração de idiomas e utilitários
 └── README.md         # Esta documentação
 
-src/pages/[domain]/translations/
+src/domain/[domain]/translations/
 ├── index.ts          # Combina todas as traduções do domínio
 ├── en.ts             # Traduções em inglês
 ├── pt.ts             # Traduções em português
@@ -30,7 +30,7 @@ Atualmente suportamos:
 ### 1. Importar traduções de um domínio específico
 
 ```typescript
-import { heroTranslations } from "@/pages/hero/translations";
+import { heroTranslations } from "@/domain/hero/translations";
 
 // Usar no componente
 const t = heroTranslations[currentLanguage];
@@ -64,9 +64,9 @@ if (isValidLanguage("pt")) {
 Cada domínio (hero, about, books, etc.) mantém suas próprias traduções:
 
 ```
-src/pages/hero/translations/index.ts
-src/pages/about/translations/index.ts
-src/pages/books/translations/index.ts
+src/domain/hero/translations/index.ts
+src/domain/about/translations/index.ts
+src/domain/books/translations/index.ts
 ```
 
 ### Exemplo de estrutura de tradução:
@@ -110,7 +110,7 @@ export const LANGUAGE_CONFIG = {
 ### 2. **Criar arquivo de tradução para cada domínio:**
 
 ```typescript
-// src/pages/hero/translations/es.ts
+// src/domain/hero/translations/es.ts
 export const heroTranslationsEs = {
   title: "¿Quieres aprender inglés?",
   subtitle: "Dinos qué necesitas...",
@@ -122,7 +122,7 @@ export const heroTranslationsEs = {
 ### 3. **Atualizar o index do domínio:**
 
 ```typescript
-// src/pages/hero/translations/index.ts
+// src/domain/hero/translations/index.ts
 import { heroTranslationsEs } from "./es";
 
 export const heroTranslations = {

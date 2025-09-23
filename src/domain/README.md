@@ -5,7 +5,7 @@ Esta estrutura organiza cada seção da aplicação como um domínio independent
 ## Estrutura por Domínio
 
 ```
-src/pages/
+src/domain/
 ├── hero/           # Seção Hero/Principal
 ├── about/          # Seção Sobre
 ├── books/          # Seção Livros
@@ -32,22 +32,22 @@ domain/
 
 ### Adicionando uma nova funcionalidade ao Hero
 
-1. **Componente**: `src/pages/hero/components/HeroButton.tsx`
-2. **Hook**: `src/pages/hero/hooks/useHeroAnimations.ts`
-3. **Tipos**: `src/pages/hero/types/index.ts`
-4. **Constantes**: `src/pages/hero/constants/index.ts`
-5. **Traduções**: `src/pages/hero/translations/index.ts`
+1. **Componente**: `src/domain/hero/components/HeroButton.tsx`
+2. **Hook**: `src/domain/hero/hooks/useHeroAnimations.ts`
+3. **Tipos**: `src/domain/hero/types/index.ts`
+4. **Constantes**: `src/domain/hero/constants/index.ts`
+5. **Traduções**: `src/domain/hero/translations/index.ts`
 
 ### Importando em outros arquivos
 
 ```typescript
 // Importar componente principal
-import { HeroSection } from "@/pages/hero";
+import { HeroSection } from "@/domain/hero";
 
 // Importar recursos específicos
-import { useHeroAnimations } from "@/pages/hero/hooks/useHeroAnimations";
-import { HERO_FEATURES } from "@/pages/hero/constants";
-import { heroTranslations } from "@/pages/hero/translations";
+import { useHeroAnimations } from "@/domain/hero/hooks/useHeroAnimations";
+import { HERO_FEATURES } from "@/domain/hero/constants";
+import { heroTranslations } from "@/domain/hero/translations";
 ```
 
 ## Benefícios

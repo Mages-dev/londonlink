@@ -17,7 +17,7 @@ export { galleryTranslations } from "@/domain/gallery/translations";
 export { contactTranslations } from "@/domain/contact/translations";
 
 // Future domain translations can be added here:
-// export { booksTranslations } from "@/pages/books/translations";
+// export { booksTranslations } from "@/domain/books/translations";
 
 // Re-export types and config
 export type { Language } from "@/translations/config";
