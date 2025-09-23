@@ -20,37 +20,75 @@ src/
 │   ├── globals.css        # Global styles
 │   ├── layout.tsx         # Root layout
 │   └── page.tsx           # Home page
-├── components/            # React components
-│   ├── ui/               # UI components
-│   ├── layout/           # Layout components
+├── domain/                # Domain-Driven Architecture
+│   ├── hero/              # Hero section domain
+│   ├── about/             # About section domain
+│   ├── goals/             # Goals section domain
+│   ├── books/             # Books section domain
+│   ├── gallery/           # Gallery section domain
+│   ├── contact/           # Contact section domain
+│   ├── shared/            # Shared components across domains
+│   └── sections.ts        # Domain exports
+├── components/            # Global React components
+│   ├── ui/               # Reusable UI components
+│   ├── layout/           # Layout components (Header, Footer)
 │   ├── forms/            # Form components
 │   └── index.ts          # Component exports
+├── translations/          # Internationalization system
+│   ├── config.ts         # Language configuration
+│   ├── utils.ts          # Translation utilities
+│   └── index.ts          # Translation exports
 ├── contexts/             # React contexts
-├── hooks/                # Custom hooks
+├── hooks/                # Global custom hooks
 ├── lib/                  # Utility functions
 ├── types/                # TypeScript definitions
-├── styles/               # Additional styles
+├── styles/               # Additional global styles
 └── assets/               # Static assets
-    ├── images/
+    ├── images/           # Organized by domain
     └── icons/
+```
+
+### Domain Structure
+
+Each domain follows a consistent internal structure:
+
+```
+domain/[section]/
+├── components/           # React components specific to this domain
+├── hooks/               # Custom hooks for this domain
+├── constants/           # Domain-specific constants
+├── translations/        # Bilingual content (en/pt)
+├── styles/             # Domain-specific styles
+├── types/              # TypeScript definitions
+└── index.ts            # Domain exports
 ```
 
 ## 🎯 Features
 
-- **Multi-section Landing Page**: Home, About, Books, Gallery, Contact
-- **Bilingual Support**: Portuguese and English
-- **Interactive Gallery**: Image carousel functionality
-- **Contact Forms**: Course registration and contact forms
-- **Responsive Design**: Mobile-first approach
-- **Accessibility**: ARIA compliant components
-- **Theme System**: Context-based theming
-- **Performance**: Lazy loading and optimization
+### Core Sections
+
+- **Hero Section**: Interactive landing with call-to-action
+- **About Section**: Information about LondonLink methodology
+- **Goals Section**: Student learning objectives and outcomes
+- **Books Section**: Three Lions English book series showcase
+- **Gallery Section**: Interactive L-shaped image gallery with modal
+- **Contact Section**: Course registration and contact forms
+
+### Technical Features
+
+- **Domain-Driven Architecture**: Organized by business domains
+- **Bilingual Support**: Complete Portuguese/English internationalization
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **Accessibility**: ARIA compliant components and semantic HTML
+- **Performance**: Optimized images, lazy loading, and code splitting
+- **Type Safety**: Full TypeScript implementation
+- **Modern React**: React 19 with Next.js 15 App Router
 
 ## 🛠️ Development
 
 ### Prerequisites
 
-- Node.js 18.18.0 or higher
+- Node.js 22.0.0 or higher
 - npm, yarn, pnpm, or bun
 
 ### Getting Started
@@ -85,12 +123,39 @@ pnpm dev
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
 
-## 📋 Development Principles
+### Working with Domains
+
+#### Adding a New Domain
+
+1. Create domain folder: `src/domain/[new-domain]/`
+2. Add required structure: `components/`, `translations/`, `constants/`
+3. Export from `src/domain/sections.ts`
+4. Import in main page: `src/app/page.tsx`
+
+#### Domain Best Practices
+
+- Keep domain-specific code within the domain folder
+- Use shared components from `/components` for global UI elements
+- Place domain-specific translations in the domain's `translations/` folder
+- Export main components through domain's `index.ts`
+
+## 🏗️ Architecture Principles
+
+### Domain-Driven Design (DDD)
+
+- **Domain Isolation**: Each section is a self-contained domain
+- **Clear Boundaries**: Components, hooks, and styles are domain-specific
+- **Scalability**: Easy to add new sections without affecting existing ones
+- **Maintainability**: Code organized by business context, not technical layers
+
+### Development Principles
 
 - **Accessible Components**: ARIA attributes and semantic HTML
 - **Clear Code Structure**: Simple and maintainable code
 - **Iterative Development**: Start small, improve gradually
 - **UX Clarity**: Fast, responsive, with user feedback
+- **Type Safety**: Comprehensive TypeScript usage
+- **Component Reusability**: Shared components in `/components` and `/domain/shared`
 
 ## 🎨 Design System
 
@@ -105,11 +170,28 @@ The project uses a custom design system with:
 
 ## 🌐 Internationalization
 
-LondonLink supports both Portuguese and English:
+LondonLink features a comprehensive bilingual system:
 
-- Content is provided in both languages
-- UI elements are bilingual
-- Navigation and forms support both languages
+### Supported Languages
+
+- **English (en)** - Default language
+- **Portuguese (pt)** - Brazilian Portuguese
+
+### Translation Architecture
+
+- **Domain-Specific**: Each domain manages its own translations
+- **Centralized Config**: Language settings in `/src/translations/config.ts`
+- **Type-Safe**: TypeScript ensures translation consistency
+- **Fallback System**: Automatic fallback to English if translation missing
+
+### Usage Example
+
+```typescript
+import { heroTranslations } from "@/domain/hero/translations";
+
+const t = heroTranslations[currentLanguage];
+console.log(t.title); // "Do you want to learn English?" or "Você quer aprender inglês?"
+```
 
 ## 📱 Responsive Design
 
