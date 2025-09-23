@@ -14,13 +14,13 @@ jobs:
     environment: dev
     steps:
     - name: SSH Command
-      uses: D3rHase/ssh-command-action@v0.3.1
+      uses: cross-the-world/ssh-pipeline@v1.2.0
       with:
         host: ${{ secrets.YUSUKE_HOST }}
         port: 22
         user: ${{ secrets.YUSUKE_USER }}
-        private_key: ${{ secrets.YUSUKE_PK }}
-        command: |
+        pass: ${{ secrets.YUSUKE_PK }}
+        script: |
           eval "$(ssh-agent -s)"
           ssh-add "$YUSUKE_KEY"
           cd /var/www/mages.dev/londonlink
