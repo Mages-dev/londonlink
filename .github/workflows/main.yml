@@ -6,8 +6,6 @@ on:
 
 env:
   NODE_VERSION: '22.x'
-  YUSUKE_PK: ${{ secrets.YUSUKE_PK }}
-  YUSUKE_KEY: ${{ secrets.YUSUKE_KEY }}
 
 jobs:
   build-and-deploy:
@@ -17,8 +15,8 @@ jobs:
     - name: Write SSH keys
       run: |
         install -m 600 -D /dev/null ~/.ssh/id_rsa
-        echo "$YUSUKE_PK" > ~/.ssh/id_rsa
-        host='youkko.com'
+        echo "${{ secrets.YUSUKE_PK }}" > ~/.ssh/id_rsa
+        host='${{ secrets.YUSUKE_HOST }}'
         hosts="$(dig +short "$host" | grep -v '\.$' | sed -z 's|\n|,|g')$host"
         ssh-keyscan -H "$hosts" > ~/.ssh/known_hosts
     - name: SSH Command
@@ -29,7 +27,7 @@ jobs:
         user: ${{ secrets.YUSUKE_USER }}
         command: |
           eval "$(ssh-agent -s)"
-          ssh-add "$YUSUKE_KEY"
+          ssh-add "${{ secrets.YUSUKE_KEY }}"
           cd /var/www/mages.dev/londonlink
           pm2 stop londonlink
           pm2 delete londonlink
