@@ -6,6 +6,7 @@ on:
 
 env:
   NODE_VERSION: '22.x'
+  YUSUKE_PK: ${{ secrets.YUSUKE_PK }}
   YUSUKE_KEY: ${{ secrets.YUSUKE_KEY }}
 
 jobs:
@@ -13,14 +14,20 @@ jobs:
     runs-on: ubuntu-22.04
     environment: dev
     steps:
+    - name: Write SSH keys
+      run: |
+        install -m 600 -D /dev/null ~/.ssh/id_rsa
+        echo "$YUSUKE_PK" > ~/.ssh/id_rsa
+        host='youkko.com'
+        hosts="$(dig +short "$host" | grep -v '\.$' | sed -z 's|\n|,|g')$host"
+        ssh-keyscan -H "$hosts" > ~/.ssh/known_hosts
     - name: SSH Command
-      uses: YaCenturion/ssh-sh@v2
+      uses: fifsky/ssh-action@v0.0.6
       with:
-        HOST: ${{ secrets.YUSUKE_HOST }}
-        PORT: 22
-        USERNAME: ${{ secrets.YUSUKE_USER }}
-        SSH_KEY: ${{ secrets.YUSUKE_PK }}
-        RUN_MAIN: |
+        host: ${{ secrets.YUSUKE_HOST }}
+        port: 22
+        user: ${{ secrets.YUSUKE_USER }}
+        command: |
           eval "$(ssh-agent -s)"
           ssh-add "$YUSUKE_KEY"
           cd /var/www/mages.dev/londonlink
