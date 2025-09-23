@@ -50,137 +50,132 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
       </div>
 
       {/* Author Section */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 max-lg:px-[15%]">
+        <div className="grid lg:grid-cols-[3fr_7fr] gap-8 lg:gap-16 items-center">
           {/* Left side - Author image */}
-          <div className="relative flex justify-center lg:justify-start">
-            <div className="relative">
-              {/* Author image with decorative border */}
-              <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-2xl">
-                <div className="relative border-4 border-red-500 rounded-xl overflow-hidden">
-                  <OptimizedImage
-                    src={BOOKS_IMAGES.previews.author}
-                    alt={BOOKS_IMAGE_ALTS.previews.author}
-                    width={400}
-                    height={500}
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
+          <div className="relative w-full h-full">
+            {/* Author image with decorative border - reduced size */}
+            <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-2xl w-full h-full max-lg:w-[65%] max-lg:mx-auto">
+              <div className="relative border-4 border-red-500 rounded-xl overflow-hidden w-full h-full">
+                <OptimizedImage
+                  src={BOOKS_IMAGES.previews.author}
+                  alt={BOOKS_IMAGE_ALTS.previews.author}
+                  width={400}
+                  height={500}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
 
           {/* Right side - Author story text */}
-          <div className="text-left">
-            <div className="space-y-6 text-white">
-              <p className="text-lg md:text-xl leading-relaxed">
-                {currentLanguage === "en" ? (
-                  <>
-                    While working as a coordinator at an English school in
-                    Recife, I noticed that the textbooks provided to teach our
-                    students weren&apos;t making our lives as teachers easier.
-                  </>
-                ) : (
-                  <>
-                    Enquanto trabalhava como coordenador em uma escola de inglês
-                    no Recife, percebi que os livros didáticos fornecidos para
-                    ensinar nossos alunos não estavam facilitando nossas vidas
-                    como professores.
-                  </>
-                )}
-              </p>
+          <div className="space-y-6 text-white">
+            <p className="text-lg md:text-xl leading-relaxed">
+              {currentLanguage === "en" ? (
+                <>
+                  While working as a coordinator at an English school in Recife,
+                  I noticed that the textbooks provided to teach our students
+                  weren&apos;t making our lives as teachers easier.
+                </>
+              ) : (
+                <>
+                  Enquanto trabalhava como coordenador em uma escola de inglês
+                  no Recife, percebi que os livros didáticos fornecidos para
+                  ensinar nossos alunos não estavam facilitando nossas vidas
+                  como professores.
+                </>
+              )}
+            </p>
 
-              <p className="text-lg md:text-xl leading-relaxed">
-                {currentLanguage === "en" ? (
-                  <>
-                    The dialogues or &lsquo;stories&rsquo; used to demonstrate
-                    grammar areas were
-                    <span className="text-yellow-300 font-semibold">
-                      {" "}
-                      very boring
-                    </span>
-                    , and often the language didn&apos;t reflect how we actually
-                    <span className="text-yellow-300 font-semibold">
-                      {" "}
-                      speak
-                    </span>{" "}
-                    English. The exercises were repetitive and didn&apos;t
-                    challenge
-                    <span className="text-yellow-300 font-semibold">
-                      {" "}
-                      students
-                    </span>{" "}
-                    in any way.
-                  </>
-                ) : (
-                  <>
-                    Os diálogos ou &lsquo;histórias&rsquo; usados para
-                    demonstrar áreas gramaticais eram
-                    <span className="text-yellow-300 font-semibold">
-                      {" "}
-                      muito chatos
-                    </span>
-                    , e frequentemente a linguagem não refletia como realmente
-                    <span className="text-yellow-300 font-semibold">
-                      {" "}
-                      falamos
-                    </span>{" "}
-                    inglês. Os exercícios eram repetitivos e não desafiavam os
-                    <span className="text-yellow-300 font-semibold">
-                      {" "}
-                      alunos
-                    </span>{" "}
-                    de forma alguma.
-                  </>
-                )}
-              </p>
+            <p className="text-lg md:text-xl leading-relaxed">
+              {currentLanguage === "en" ? (
+                <>
+                  The dialogues or &lsquo;stories&rsquo; used to demonstrate
+                  grammar areas were
+                  <span className="text-yellow-300 font-semibold">
+                    {" "}
+                    very boring
+                  </span>
+                  , and often the language didn&apos;t reflect how we actually
+                  <span className="text-yellow-300 font-semibold">
+                    {" "}
+                    speak
+                  </span>{" "}
+                  English. The exercises were repetitive and didn&apos;t
+                  challenge
+                  <span className="text-yellow-300 font-semibold">
+                    {" "}
+                    students
+                  </span>{" "}
+                  in any way.
+                </>
+              ) : (
+                <>
+                  Os diálogos ou &lsquo;histórias&rsquo; usados para demonstrar
+                  áreas gramaticais eram
+                  <span className="text-yellow-300 font-semibold">
+                    {" "}
+                    muito chatos
+                  </span>
+                  , e frequentemente a linguagem não refletia como realmente
+                  <span className="text-yellow-300 font-semibold">
+                    {" "}
+                    falamos
+                  </span>{" "}
+                  inglês. Os exercícios eram repetitivos e não desafiavam os
+                  <span className="text-yellow-300 font-semibold">
+                    {" "}
+                    alunos
+                  </span>{" "}
+                  de forma alguma.
+                </>
+              )}
+            </p>
 
-              <p className="text-lg md:text-xl leading-relaxed">
-                {currentLanguage === "en" ? (
-                  <>
-                    When I shared my concerns with the owner, he said &lsquo;Do
-                    you think
-                    <span className="text-yellow-300 font-semibold">
-                      {" "}
-                      you could write something better?
-                    </span>
-                    &rsquo;. I think he was surprised when I
-                    <span className="text-yellow-300 font-semibold">
-                      {" "}
-                      said yes
-                    </span>
-                    , but he asked me to do exactly that – but in the same
-                    format
-                    <span className="text-yellow-300 font-semibold">
-                      {" "}
-                      as the old books
-                    </span>
-                    .
-                  </>
-                ) : (
-                  <>
-                    Quando compartilhei minhas preocupações com o proprietário,
-                    ele disse &lsquo;Você acha que
-                    <span className="text-yellow-300 font-semibold">
-                      {" "}
-                      poderia escrever algo melhor?
-                    </span>
-                    &rsquo;. Acho que ele ficou surpreso quando eu
-                    <span className="text-yellow-300 font-semibold">
-                      {" "}
-                      disse que sim
-                    </span>
-                    , mas ele me pediu para fazer exatamente isso – mas no mesmo
-                    formato
-                    <span className="text-yellow-300 font-semibold">
-                      {" "}
-                      dos livros antigos
-                    </span>
-                    .
-                  </>
-                )}
-              </p>
-            </div>
+            <p className="text-lg md:text-xl leading-relaxed">
+              {currentLanguage === "en" ? (
+                <>
+                  When I shared my concerns with the owner, he said &lsquo;Do
+                  you think
+                  <span className="text-yellow-300 font-semibold">
+                    {" "}
+                    you could write something better?
+                  </span>
+                  &rsquo;. I think he was surprised when I
+                  <span className="text-yellow-300 font-semibold">
+                    {" "}
+                    said yes
+                  </span>
+                  , but he asked me to do exactly that – but in the same format
+                  <span className="text-yellow-300 font-semibold">
+                    {" "}
+                    as the old books
+                  </span>
+                  .
+                </>
+              ) : (
+                <>
+                  Quando compartilhei minhas preocupações com o proprietário,
+                  ele disse &lsquo;Você acha que
+                  <span className="text-yellow-300 font-semibold">
+                    {" "}
+                    poderia escrever algo melhor?
+                  </span>
+                  &rsquo;. Acho que ele ficou surpreso quando eu
+                  <span className="text-yellow-300 font-semibold">
+                    {" "}
+                    disse que sim
+                  </span>
+                  , mas ele me pediu para fazer exatamente isso – mas no mesmo
+                  formato
+                  <span className="text-yellow-300 font-semibold">
+                    {" "}
+                    dos livros antigos
+                  </span>
+                  .
+                </>
+              )}
+            </p>
           </div>
         </div>
       </div>

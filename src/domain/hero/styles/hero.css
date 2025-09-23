@@ -81,6 +81,13 @@
 
 @media (min-width: 1024px) {
   .hero-advantages-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero-advantages-grid {
     grid-template-columns: repeat(5, 1fr);
     gap: 1.5rem;
   }
