@@ -1,37 +1,17 @@
-name: Deploy to Yusuke
+name: Deploy to DigitalOcean
 
 on:
   push:
     branches: ["main"]
 
-env:
-  NODE_VERSION: '22.x'
-
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-22.04
-    environment: dev
+  deploy:
+    runs-on: ubuntu-latest
     steps:
-    - name: Write SSH keys
-      run: |
-        install -m 600 -D /dev/null ~/.ssh/id_rsa
-        echo "${{ secrets.YUSUKE_PK }}" > ~/.ssh/id_rsa
-        host='${{ secrets.YUSUKE_HOST }}'
-        hosts="$(dig +short "$host" | grep -v '\.$' | sed -z 's|\n|,|g')$host"
-        ssh-keyscan -H "$hosts" > ~/.ssh/known_hosts
-    - name: SSH Command
-      uses: fifsky/ssh-action@v0.0.6
+    - name: SSH
+      uses: webfactory/ssh-agent@v0.9.0
       with:
-        host: ${{ secrets.YUSUKE_HOST }}
-        port: 22
-        user: ${{ secrets.YUSUKE_USER }}
-        command: |
-          eval "$(ssh-agent -s)"
-          ssh-add "${{ secrets.YUSUKE_KEY }}"
-          cd /var/www/mages.dev/londonlink
-          pm2 stop londonlink
-          pm2 delete londonlink
-          git pull
-          npm install
-          npm run build
-          pm2 start npm --name londonlink -- start
+        ssh-private-key: ${{ secrets.YUSUKE_PK }}
+    - name: Deploy to Droplet
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.YUSUKE_USER }}@${{ secrets.YUSUKE_HOST }} "/home/${{ secrets.YUSUKE_USER }}/deploy-londonlink.sh"
