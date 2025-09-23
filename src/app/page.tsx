@@ -15,7 +15,7 @@ import {
 import { Language } from "@/types";
 
 export default function Home() {
-  const [currentLanguage, setCurrentLanguage] = useState<Language>("en");
+  const [currentLanguage, setCurrentLanguage] = useState<Language>("pt");
 
   const handleLanguageChange = (language: Language) => {
     setCurrentLanguage(language);

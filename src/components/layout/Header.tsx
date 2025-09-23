@@ -67,7 +67,7 @@ interface HeaderProps {
 }
 
 export default function Header({
-  currentLanguage = "en",
+  currentLanguage = "pt",
   onLanguageChange,
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
