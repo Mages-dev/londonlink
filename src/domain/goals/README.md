@@ -81,7 +81,7 @@ Seção com imagem e call-to-action que apresenta:
 - **Ícones**: Frame de 60x60px com background cinza (#818181) e borda branca
 - **Cores**: Títulos em amarelo, texto em cinza claro, ícones brancos
 - **Layout Responsivo**:
-  - **Mobile**: Ícone e texto lado a lado (flexbox horizontal)
+  - **Mobile**: Ícone e texto lado a lado (flexbox horizontal com gap-6)
   - **Desktop**: Ícone acima do texto (layout vertical)
 - **Acessibilidade**: Suporte completo a screen readers
 - **Animações**: Hover effects nos cards com transições suaves

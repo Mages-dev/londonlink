@@ -42,9 +42,9 @@ export function GoalsSection({ currentLanguage }: GoalsSectionProps) {
                 className="bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 hover:bg-gray-800/90 transition-all duration-300 hover:scale-105 hover:shadow-xl border border-gray-700/50"
               >
                 {/* Mobile Layout: Icon and text side by side */}
-                <div className="flex gap-4 md:block">
+                <div className="flex gap-6 md:block">
                   {/* Icon */}
-                  <div className="goals-icon-frame flex-shrink-0 md:mb-4">
+                  <div className="goals-icon-frame flex-shrink-0 mb-4">
                     <Image
                       src={GOALS_ICONS[goal.icon as keyof typeof GOALS_ICONS]}
                       alt={
@@ -80,20 +80,22 @@ export function GoalsSection({ currentLanguage }: GoalsSectionProps) {
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Image - Left side */}
             <div className="relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
-                <Image
-                  src={GOALS_IMAGES.goal1}
-                  alt={GOALS_IMAGE_ALTS.goal1[currentLanguage]}
-                  width={600}
-                  height={400}
-                  className="w-full h-auto object-cover"
-                  priority
-                />
+              <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-2xl transform hover:scale-105 transition-transform duration-300 max-lg:w-[50%] max-md:w-[65%] max-lg:mx-auto">
+                <div className="relative border-4 border-red-500 rounded-xl overflow-hidden">
+                  <Image
+                    src={GOALS_IMAGES.goal1}
+                    alt={GOALS_IMAGE_ALTS.goal1[currentLanguage]}
+                    width={600}
+                    height={400}
+                    className="w-full h-auto object-cover"
+                    priority
+                  />
+                </div>
               </div>
             </div>
 
             {/* Text Content - Right side */}
-            <div className="text-white">
+            <div className="text-white max-lg:text-center">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
                 {t.section2.title}
               </h2>
@@ -102,14 +104,16 @@ export function GoalsSection({ currentLanguage }: GoalsSectionProps) {
               </p>
 
               {/* CTA Button */}
-              <a
-                href={CONTACT_INFO.phone.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-gray-800/80 hover:bg-gray-800/90 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl border border-gray-700/50"
-              >
-                {t.section2.ctaButton}
-              </a>
+              <div className="max-lg:text-center">
+                <a
+                  href={CONTACT_INFO.phone.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-gray-800/80 hover:bg-gray-800/90 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl border border-gray-700/50"
+                >
+                  {t.section2.ctaButton}
+                </a>
+              </div>
             </div>
           </div>
         </div>

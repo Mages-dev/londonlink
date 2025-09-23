@@ -16,7 +16,7 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-center">
           {/* Left side - Text content */}
-          <div className="lg:col-span-2 text-left">
+          <div className="lg:col-span-2 text-center">
             <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 lg:mb-6 leading-tight">
               {currentLanguage === "en"
                 ? "Three Lions English"
