@@ -1,4 +1,5 @@
 import { ThemeConfig, CommemorativeTheme } from "@/types/theme";
+import { getCurrentEasterDates } from "./easter-calculator";
 
 // Halloween Theme Configuration
 const halloweenTheme: ThemeConfig = {
@@ -206,14 +207,118 @@ const newYearTheme: ThemeConfig = {
   icon: "🎆",
 };
 
+// Valentine Theme Configuration
+const valentineTheme: ThemeConfig = {
+  name: "valentine",
+  displayName: {
+    pt: "Dia dos Namorados",
+    en: "Valentine's Day",
+  },
+  description: {
+    pt: "Tema romântico do Dia dos Namorados com cores rosa e vermelha",
+    en: "Romantic Valentine's Day theme with pink and red colors",
+  },
+  colors: {
+    light: {
+      background: "#ffffff",
+      foreground: "#171717",
+      primary: "#e11d48", // Rose/Pink
+      primaryDark: "#be185d",
+      primaryLight: "#f43f5e",
+      secondary: "#6b7280",
+      accent: "#ec4899", // Hot Pink
+      muted: "#fdf2f8",
+      border: "#f9a8d4",
+      blueGradientStart: "#e11d48",
+      blueGradientEnd: "#ec4899",
+      special: "#f472b6", // Pink
+      specialSecondary: "#be185d",
+      specialAccent: "#fce7f3", // Light Pink
+    },
+    dark: {
+      background: "#1f1018",
+      foreground: "#fdf2f8",
+      primary: "#f43f5e",
+      primaryDark: "#e11d48",
+      primaryLight: "#fb7185",
+      secondary: "#9ca3af",
+      accent: "#f472b6",
+      muted: "#4c1d24",
+      border: "#9f1239",
+      blueGradientStart: "#881337",
+      blueGradientEnd: "#be185d",
+      special: "#f9a8d4",
+      specialSecondary: "#831843",
+      specialAccent: "#fce7f3",
+    },
+  },
+  dateRange: {
+    start: { month: 2, day: 12 }, // February 12th (2 days before Valentine's)
+    end: { month: 2, day: 14 }, // February 14th (Valentine's Day)
+  },
+  customClasses: ["valentine-sparkle", "valentine-hearts", "valentine-glow"],
+  icon: "💕",
+};
+
+// Easter Theme Configuration
+const easterTheme: ThemeConfig = {
+  name: "easter",
+  displayName: {
+    pt: "Páscoa",
+    en: "Easter",
+  },
+  description: {
+    pt: "Tema da Páscoa com cores pastel e elementos primaveris",
+    en: "Easter theme with pastel colors and spring elements",
+  },
+  colors: {
+    light: {
+      background: "#ffffff",
+      foreground: "#171717",
+      primary: "#10b981", // Emerald/Green
+      primaryDark: "#059669",
+      primaryLight: "#34d399",
+      secondary: "#6b7280",
+      accent: "#f59e0b", // Amber/Yellow
+      muted: "#f0fdf4",
+      border: "#a7f3d0",
+      blueGradientStart: "#10b981",
+      blueGradientEnd: "#f59e0b",
+      special: "#fbbf24", // Yellow
+      specialSecondary: "#065f46",
+      specialAccent: "#fef3c7", // Light Yellow
+    },
+    dark: {
+      background: "#0f1419",
+      foreground: "#f0fdf4",
+      primary: "#34d399",
+      primaryDark: "#10b981",
+      primaryLight: "#6ee7b7",
+      secondary: "#9ca3af",
+      accent: "#fbbf24",
+      muted: "#064e3b",
+      border: "#059669",
+      blueGradientStart: "#065f46",
+      blueGradientEnd: "#92400e",
+      special: "#fcd34d",
+      specialSecondary: "#451a03",
+      specialAccent: "#fef3c7",
+    },
+  },
+  dateRange: undefined, // Uses dynamic dates instead
+  dynamicDates: getCurrentEasterDates(),
+  customClasses: ["easter-sparkle", "easter-flowers", "easter-glow"],
+  icon: "🐰",
+};
+
 // Theme configurations map
 export const THEME_CONFIGS: Record<CommemorativeTheme, ThemeConfig> = {
   default: defaultTheme,
+  valentine: valentineTheme,
+  easter: easterTheme,
   halloween: halloweenTheme,
   christmas: christmasTheme,
   "new-year": newYearTheme,
-  valentine: defaultTheme, // Placeholder
-  easter: defaultTheme, // Placeholder
 };
 
 // Helper function to get theme config
@@ -224,6 +329,27 @@ export const getThemeConfig = (theme: CommemorativeTheme): ThemeConfig => {
 // Helper function to check if a theme is in season
 export const isThemeInSeason = (theme: CommemorativeTheme): boolean => {
   const config = getThemeConfig(theme);
+
+  // Check dynamic dates first (for themes like Easter)
+  if (config.dynamicDates) {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const yearData = config.dynamicDates[currentYear];
+
+    if (!yearData) return false; // Year not configured
+
+    const currentMonth = now.getMonth() + 1;
+    const currentDay = now.getDate();
+
+    return isDateInRange(
+      currentMonth,
+      currentDay,
+      yearData.start,
+      yearData.end
+    );
+  }
+
+  // Check fixed date range
   if (!config.dateRange) return false;
 
   const now = new Date();
@@ -232,6 +358,16 @@ export const isThemeInSeason = (theme: CommemorativeTheme): boolean => {
 
   const { start, end } = config.dateRange;
 
+  return isDateInRange(currentMonth, currentDay, start, end);
+};
+
+// Helper function to check if a date is within a range
+function isDateInRange(
+  currentMonth: number,
+  currentDay: number,
+  start: { month: number; day: number },
+  end: { month: number; day: number }
+): boolean {
   // Handle year-crossing date ranges (e.g., Christmas to New Year)
   if (start.month > end.month) {
     return (
@@ -252,11 +388,17 @@ export const isThemeInSeason = (theme: CommemorativeTheme): boolean => {
     (currentMonth === end.month && currentDay <= end.day) ||
     (currentMonth > start.month && currentMonth < end.month)
   );
-};
+}
 
 // Get currently suggested theme based on date
 export const getSuggestedTheme = (): CommemorativeTheme | undefined => {
-  const themes: CommemorativeTheme[] = ["halloween", "christmas"];
+  const themes: CommemorativeTheme[] = [
+    "valentine",
+    "easter",
+    "halloween",
+    "christmas",
+    "new-year",
+  ];
 
   for (const theme of themes) {
     if (isThemeInSeason(theme)) {

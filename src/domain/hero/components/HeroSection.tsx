@@ -19,6 +19,8 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
   const { commemorativeTheme } = useTheme();
 
   // Check if seasonal themes are active
+  const isValentineTheme = commemorativeTheme === "valentine";
+  const isEasterTheme = commemorativeTheme === "easter";
   const isHalloweenTheme = commemorativeTheme === "halloween";
   const isChristmasTheme = commemorativeTheme === "christmas";
   const isNewYearTheme = commemorativeTheme === "new-year";
@@ -37,6 +39,8 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
           <div className="text-center mb-12">
             <h1
               className={`text-3xl md:text-4xl font-bold text-white mb-4 ${
+                isValentineTheme ? "valentine-text-glow" : ""
+              } ${isEasterTheme ? "easter-text-glow" : ""} ${
                 isHalloweenTheme ? "halloween-text-glow" : ""
               } ${isChristmasTheme ? "christmas-text-glow" : ""} ${
                 isNewYearTheme ? "newyear-text-glow" : ""
@@ -52,6 +56,8 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-block bg-white hover:bg-gray-100 text-blue-700 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl ${
+                isValentineTheme ? "valentine-button valentine-glow" : ""
+              } ${isEasterTheme ? "easter-button easter-glow" : ""} ${
                 isHalloweenTheme ? "halloween-button halloween-glow" : ""
               } ${isChristmasTheme ? "christmas-button christmas-glow" : ""} ${
                 isNewYearTheme ? "newyear-button newyear-glow" : ""
@@ -81,6 +87,8 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
           <div className="text-left pr-8 z-10">
             <h1
               className={`text-4xl xl:text-5xl font-bold text-white mb-6 leading-tight ${
+                isValentineTheme ? "valentine-text-glow" : ""
+              } ${isEasterTheme ? "easter-text-glow" : ""} ${
                 isHalloweenTheme ? "halloween-text-glow" : ""
               } ${isChristmasTheme ? "christmas-text-glow" : ""} ${
                 isNewYearTheme ? "newyear-text-glow" : ""
@@ -96,6 +104,8 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-block bg-white hover:bg-gray-100 text-blue-700 font-semibold py-4 px-10 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl text-lg ${
+                isValentineTheme ? "valentine-button valentine-glow" : ""
+              } ${isEasterTheme ? "easter-button easter-glow" : ""} ${
                 isHalloweenTheme ? "halloween-button halloween-glow" : ""
               } ${isChristmasTheme ? "christmas-button christmas-glow" : ""} ${
                 isNewYearTheme ? "newyear-button newyear-glow" : ""

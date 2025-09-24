@@ -35,6 +35,8 @@ export default function ThemeSelector({
 
   const availableThemes: CommemorativeTheme[] = [
     "default",
+    "valentine",
+    "easter",
     "halloween",
     "christmas",
     "new-year",

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface FloatingElement {
@@ -48,7 +48,7 @@ export default function NewYearEffects() {
   }, []);
 
   // Create floating elements
-  const createElements = () => {
+  const createElements = useCallback(() => {
     if (!isNewYearTheme) {
       setElements([]);
       return;
@@ -70,10 +70,10 @@ export default function NewYearEffects() {
     }
 
     setElements(newElements);
-  };
+  }, [isNewYearTheme, newYearEmojis]);
 
   // Create confetti pieces
-  const createConfetti = () => {
+  const createConfetti = useCallback(() => {
     if (!isNewYearTheme) {
       setConfetti([]);
       return;
@@ -87,7 +87,8 @@ export default function NewYearEffects() {
         id: i,
         x: Math.random() * window.innerWidth,
         y: -20,
-        color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
+        color:
+          confettiColors[Math.floor(Math.random() * confettiColors.length)],
         size: Math.random() * 8 + 4, // 4-12px
         speed: Math.random() * 3 + 2, // 2-5 speed
         rotation: Math.random() * 360,
@@ -95,7 +96,7 @@ export default function NewYearEffects() {
     }
 
     setConfetti(newConfetti);
-  };
+  }, [isNewYearTheme, confettiColors]);
 
   // Initialize and handle resize
   useEffect(() => {
@@ -111,7 +112,7 @@ export default function NewYearEffects() {
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [mounted, isNewYearTheme, newYearEmojis, confettiColors]);
+  }, [mounted, isNewYearTheme, createElements, createConfetti]);
 
   // Animate floating elements
   useEffect(() => {
@@ -208,7 +209,7 @@ export default function NewYearEffects() {
       <div className="fixed inset-0 pointer-events-none z-0">
         {/* Subtle New Year pattern overlay */}
         <div className="absolute inset-0 newyear-pattern opacity-25" />
-        
+
         {/* Glowing orbs */}
         <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-amber-500/10 rounded-full blur-xl animate-pulse" />
         <div className="absolute top-3/4 right-1/4 w-32 h-32 bg-indigo-500/10 rounded-full blur-xl animate-pulse delay-1000" />
@@ -224,7 +225,7 @@ export default function NewYearEffects() {
             key={`firework-${i}`}
             className="absolute text-2xl animate-bounce"
             style={{
-              left: `${(i * 20 + 15)}%`,
+              left: `${i * 20 + 15}%`,
               bottom: "10px",
               animationDelay: `${i * 0.8}s`,
               animationDuration: `${2 + i * 0.3}s`,
@@ -256,9 +257,7 @@ export default function NewYearEffects() {
 
       {/* Countdown Clock Effect (decorative) */}
       <div className="fixed top-4 right-4 pointer-events-none z-10">
-        <div className="text-4xl animate-pulse">
-          🕛
-        </div>
+        <div className="text-4xl animate-pulse">🕛</div>
       </div>
     </>
   );

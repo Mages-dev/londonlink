@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface FloatingElement {
@@ -31,7 +31,7 @@ export default function ChristmasEffects() {
   }, []);
 
   // Create floating elements
-  const createElements = () => {
+  const createElements = useCallback(() => {
     if (!isChristmasTheme) {
       setElements([]);
       return;
@@ -43,7 +43,8 @@ export default function ChristmasEffects() {
     for (let i = 0; i < elementCount; i++) {
       newElements.push({
         id: i,
-        emoji: christmasEmojis[Math.floor(Math.random() * christmasEmojis.length)],
+        emoji:
+          christmasEmojis[Math.floor(Math.random() * christmasEmojis.length)],
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
         size: Math.random() * 20 + 15, // 15-35px
@@ -53,7 +54,7 @@ export default function ChristmasEffects() {
     }
 
     setElements(newElements);
-  };
+  }, [isChristmasTheme, christmasEmojis]);
 
   // Initialize and handle resize
   useEffect(() => {
@@ -67,7 +68,7 @@ export default function ChristmasEffects() {
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [mounted, isChristmasTheme, christmasEmojis]);
+  }, [mounted, isChristmasTheme, createElements]);
 
   useEffect(() => {
     if (!isChristmasTheme || elements.length === 0) return;
@@ -121,12 +122,12 @@ export default function ChristmasEffects() {
       <div className="fixed inset-0 pointer-events-none z-0">
         {/* Subtle Christmas pattern overlay */}
         <div className="absolute inset-0 christmas-pattern opacity-30" />
-        
+
         {/* Glowing orbs */}
         <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-red-500/10 rounded-full blur-xl animate-pulse" />
         <div className="absolute top-3/4 right-1/4 w-24 h-24 bg-green-500/10 rounded-full blur-xl animate-pulse delay-1000" />
         <div className="absolute top-1/2 left-3/4 w-20 h-20 bg-yellow-500/10 rounded-full blur-xl animate-pulse delay-2000" />
-        
+
         {/* Christmas lights effect */}
         <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-red-500/20 via-green-500/20 to-red-500/20 animate-pulse" />
         <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-green-500/20 via-red-500/20 to-green-500/20 animate-pulse delay-500" />
@@ -140,7 +141,7 @@ export default function ChristmasEffects() {
             key={`snow-${i}`}
             className="absolute text-white/60 animate-bounce"
             style={{
-              left: `${(i * 15 + 10)}%`,
+              left: `${i * 15 + 10}%`,
               top: "-20px",
               fontSize: "1.5rem",
               animationDelay: `${i * 0.5}s`,

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "../lib/themes/valentine.css";
+import "../lib/themes/easter.css";
 import "../lib/themes/halloween.css";
 import "../lib/themes/christmas.css";
 import "../lib/themes/new-year.css";

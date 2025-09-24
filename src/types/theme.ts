@@ -53,6 +53,14 @@ export interface ThemeConfig {
     start: { month: number; day: number };
     end: { month: number; day: number };
   };
+  // Optional dynamic dates for themes like Easter that change yearly
+  dynamicDates?: Record<
+    number,
+    {
+      start: { month: number; day: number };
+      end: { month: number; day: number };
+    }
+  >;
   // Custom CSS classes for special effects
   customClasses?: string[];
   // Emoji or icon for the theme selector

@@ -115,6 +115,61 @@ export function testDateBasedThemes() {
       expected: "default",
       description: "After New Year period",
     },
+    {
+      date: "2025-02-11",
+      expected: "default",
+      description: "Before Valentine period",
+    },
+    {
+      date: "2025-02-12",
+      expected: "valentine",
+      description: "Start of Valentine period",
+    },
+    {
+      date: "2025-02-13",
+      expected: "valentine",
+      description: "During Valentine period",
+    },
+    {
+      date: "2025-02-14",
+      expected: "valentine",
+      description: "Valentine's Day",
+    },
+    {
+      date: "2025-02-15",
+      expected: "default",
+      description: "After Valentine period",
+    },
+    {
+      date: "2025-04-18",
+      expected: "easter",
+      description: "Start of Easter period 2025",
+    },
+    {
+      date: "2025-04-20",
+      expected: "easter",
+      description: "Easter Sunday 2025",
+    },
+    {
+      date: "2025-04-21",
+      expected: "default",
+      description: "After Easter period 2025",
+    },
+    {
+      date: "2026-04-03",
+      expected: "easter",
+      description: "Start of Easter period 2026",
+    },
+    {
+      date: "2026-04-05",
+      expected: "easter",
+      description: "Easter Sunday 2026",
+    },
+    {
+      date: "2026-04-06",
+      expected: "default",
+      description: "After Easter period 2026",
+    },
   ];
 
   testDates.forEach(({ date, expected, description }) => {
@@ -129,11 +184,27 @@ export function testDateBasedThemes() {
     const isNewYearSeason =
       (month === 12 && day === 31) || // Dec 31st
       (month === 1 && day <= 2); // Jan 1st-2nd
+    const isValentineSeason = month === 2 && day >= 12 && day <= 14;
+
+    // Easter dates for testing (calculated dates)
+    const easterDates = {
+      2025: { month: 4, day: 20 }, // April 20, 2025
+      2026: { month: 4, day: 5 }, // April 5, 2026
+    };
+    const year = testDate.getFullYear();
+    const easterData = easterDates[year as keyof typeof easterDates];
+    const isEasterSeason =
+      easterData &&
+      month === easterData.month &&
+      day >= easterData.day - 2 &&
+      day <= easterData.day;
 
     let result = "default";
     if (isHalloweenSeason) result = "halloween";
     if (isChristmasSeason) result = "christmas";
     if (isNewYearSeason) result = "new-year";
+    if (isValentineSeason) result = "valentine";
+    if (isEasterSeason) result = "easter";
 
     console.log(
       `${date} (${description}): Expected ${expected}, Got ${result} ${
@@ -190,7 +261,11 @@ export function forceNewYearTheme() {
   console.log("🎆 Forcing New Year theme...");
 
   // Add theme class to body
-  document.body.classList.remove("theme-halloween", "theme-christmas");
+  document.body.classList.remove(
+    "theme-halloween",
+    "theme-christmas",
+    "theme-valentine"
+  );
   document.body.classList.add("theme-new-year");
 
   // Apply New Year CSS variables
@@ -204,6 +279,55 @@ export function forceNewYearTheme() {
 }
 
 /**
+ * Force enable Valentine theme for testing
+ */
+export function forceValentineTheme() {
+  console.log("💕 Forcing Valentine theme...");
+
+  // Add theme class to body
+  document.body.classList.remove(
+    "theme-halloween",
+    "theme-christmas",
+    "theme-new-year"
+  );
+  document.body.classList.add("theme-valentine");
+
+  // Apply Valentine CSS variables
+  const root = document.documentElement;
+  root.style.setProperty("--primary", "#e11d48");
+  root.style.setProperty("--accent", "#ec4899");
+  root.style.setProperty("--special", "#f472b6");
+  root.style.setProperty("--special-accent", "#fce7f3");
+
+  console.log("Valentine theme applied! 💕");
+}
+
+/**
+ * Force enable Easter theme for testing
+ */
+export function forceEasterTheme() {
+  console.log("🐰 Forcing Easter theme...");
+
+  // Add theme class to body
+  document.body.classList.remove(
+    "theme-halloween",
+    "theme-christmas",
+    "theme-new-year",
+    "theme-valentine"
+  );
+  document.body.classList.add("theme-easter");
+
+  // Apply Easter CSS variables
+  const root = document.documentElement;
+  root.style.setProperty("--primary", "#10b981");
+  root.style.setProperty("--accent", "#f59e0b");
+  root.style.setProperty("--special", "#fbbf24");
+  root.style.setProperty("--special-accent", "#fef3c7");
+
+  console.log("Easter theme applied! 🌸");
+}
+
+/**
  * Remove all seasonal themes
  */
 export function removeSeasonalThemes() {
@@ -213,6 +337,8 @@ export function removeSeasonalThemes() {
   document.body.classList.remove("theme-halloween");
   document.body.classList.remove("theme-christmas");
   document.body.classList.remove("theme-new-year");
+  document.body.classList.remove("theme-valentine");
+  document.body.classList.remove("theme-easter");
 
   // Reset to default colors
   const root = document.documentElement;
@@ -235,6 +361,10 @@ if (typeof window !== "undefined") {
   (window as any).testHalloweenTheme = testHalloweenTheme;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any).testDateBasedThemes = testDateBasedThemes;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (window as any).forceValentineTheme = forceValentineTheme;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (window as any).forceEasterTheme = forceEasterTheme;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any).forceHalloweenTheme = forceHalloweenTheme;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

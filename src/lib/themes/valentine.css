@@ -1,0 +1,350 @@
+/* Valentine Theme CSS Variables and Classes */
+
+/* Valentine Theme Colors */
+.theme-valentine {
+  /* Light mode Valentine colors */
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #e11d48; /* Rose/Pink */
+  --primary-dark: #be185d;
+  --primary-light: #f43f5e;
+  --secondary: #6b7280;
+  --accent: #ec4899; /* Hot Pink */
+  --muted: #fdf2f8;
+  --border: #f9a8d4;
+  --blue-gradient-start: #e11d48;
+  --blue-gradient-end: #ec4899;
+  --special: #f472b6; /* Pink */
+  --special-secondary: #be185d;
+  --special-accent: #fce7f3; /* Light Pink */
+}
+
+.theme-valentine.dark {
+  /* Dark mode Valentine colors */
+  --background: #1f1018;
+  --foreground: #fdf2f8;
+  --primary: #f43f5e;
+  --primary-dark: #e11d48;
+  --primary-light: #fb7185;
+  --secondary: #9ca3af;
+  --accent: #f472b6;
+  --muted: #4c1d24;
+  --border: #9f1239;
+  --blue-gradient-start: #881337;
+  --blue-gradient-end: #be185d;
+  --special: #f9a8d4;
+  --special-secondary: #831843;
+  --special-accent: #fce7f3;
+}
+
+/* Valentine Special Effects */
+
+/* Sparkle Animation */
+@keyframes valentine-sparkle {
+  0%, 100% { 
+    opacity: 0.5; 
+    transform: scale(0.8) rotate(0deg);
+  }
+  25% { 
+    opacity: 1; 
+    transform: scale(1.2) rotate(90deg);
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: scale(1) rotate(180deg);
+  }
+  75% { 
+    opacity: 1; 
+    transform: scale(1.1) rotate(270deg);
+  }
+}
+
+/* Hearts Animation */
+@keyframes valentine-hearts {
+  0% {
+    transform: translateY(100vh) rotate(0deg) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Valentine Glow Animation */
+@keyframes valentine-glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 5px var(--special),
+      0 0 10px var(--special),
+      0 0 15px var(--primary);
+  }
+  50% {
+    box-shadow: 
+      0 0 10px var(--special),
+      0 0 20px var(--special),
+      0 0 30px var(--primary),
+      0 0 40px var(--accent);
+  }
+}
+
+/* Love Pulse Animation */
+@keyframes valentine-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.08);
+    filter: brightness(1.2);
+  }
+}
+
+/* Romantic Float Animation */
+@keyframes valentine-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(-2deg);
+  }
+  33% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(-4px) rotate(-1deg);
+  }
+}
+
+/* Valentine Component Classes */
+
+/* Sparkle Effect */
+.valentine-sparkle {
+  animation: valentine-sparkle 2s ease-in-out infinite;
+  position: relative;
+}
+
+.valentine-sparkle::before {
+  content: '💖';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 1.1em;
+  animation: valentine-sparkle 1.8s ease-in-out infinite reverse;
+}
+
+.valentine-sparkle::after {
+  content: '✨';
+  position: absolute;
+  bottom: -8px;
+  left: -8px;
+  font-size: 0.9em;
+  animation: valentine-sparkle 2.2s ease-in-out infinite;
+}
+
+/* Hearts Effect */
+.valentine-hearts {
+  position: relative;
+  overflow: hidden;
+}
+
+.valentine-hearts::before {
+  content: '💕';
+  position: absolute;
+  bottom: 100%;
+  left: 20%;
+  font-size: 1.5em;
+  animation: valentine-hearts 4s ease-out infinite;
+  animation-delay: 0s;
+}
+
+.valentine-hearts::after {
+  content: '💗';
+  position: absolute;
+  bottom: 100%;
+  right: 25%;
+  font-size: 1.3em;
+  animation: valentine-hearts 4.5s ease-out infinite;
+  animation-delay: 2s;
+}
+
+/* Valentine Glow */
+.valentine-glow {
+  animation: valentine-glow 2s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* Valentine Text Glow */
+.valentine-text-glow {
+  text-shadow: 
+    0 0 5px var(--special),
+    0 0 10px var(--special),
+    0 0 15px var(--primary);
+  animation: valentine-pulse 2s ease-in-out infinite;
+}
+
+/* Valentine Card */
+.valentine-card {
+  background: linear-gradient(135deg, 
+    rgba(225, 29, 72, 0.1) 0%, 
+    rgba(236, 72, 153, 0.1) 100%);
+  border: 2px solid var(--special);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.valentine-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 
+    0 15px 30px rgba(225, 29, 72, 0.3),
+    0 0 25px var(--special);
+}
+
+.valentine-card::before {
+  content: '💝';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5em;
+  opacity: 0.8;
+  animation: valentine-pulse 2.5s ease-in-out infinite;
+}
+
+/* Valentine Button */
+.valentine-button {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  border: 2px solid var(--special);
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.valentine-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px var(--special);
+}
+
+.valentine-button::before {
+  content: '💘';
+  position: absolute;
+  top: 50%;
+  left: -35px;
+  transform: translateY(-50%);
+  font-size: 1.3em;
+  transition: left 0.3s ease;
+}
+
+.valentine-button:hover::before {
+  left: 8px;
+}
+
+/* Love Letter Effect */
+@keyframes valentine-letter {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-5px) rotate(1deg);
+  }
+  75% {
+    transform: translateY(-3px) rotate(-1deg);
+  }
+}
+
+.valentine-letter {
+  animation: valentine-letter 3s ease-in-out infinite;
+}
+
+/* Valentine Background Pattern */
+.valentine-pattern {
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(225, 29, 72, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(244, 114, 182, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 60% 20%, rgba(252, 231, 243, 0.1) 0%, transparent 50%);
+}
+
+/* Cupid Arrow Effect */
+@keyframes valentine-arrow {
+  0% {
+    transform: translateX(-100vw) rotate(-45deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100vw) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+.valentine-arrow {
+  position: absolute;
+  animation: valentine-arrow 6s linear infinite;
+}
+
+/* Rose Petals Effect */
+@keyframes valentine-petals {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.valentine-petals {
+  position: absolute;
+  animation: valentine-petals 8s linear infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .valentine-sparkle::before,
+  .valentine-sparkle::after {
+    font-size: 0.9em;
+  }
+  
+  .valentine-card::before {
+    font-size: 1.2em;
+  }
+  
+  .valentine-button::before {
+    font-size: 1.1em;
+  }
+}
+
+/* Accessibility - Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .valentine-sparkle,
+  .valentine-sparkle::before,
+  .valentine-sparkle::after,
+  .valentine-hearts::before,
+  .valentine-hearts::after,
+  .valentine-glow,
+  .valentine-text-glow,
+  .valentine-letter,
+  .valentine-arrow,
+  .valentine-petals {
+    animation: none;
+  }
+  
+  .valentine-card:hover,
+  .valentine-button:hover {
+    transform: none;
+  }
+}
