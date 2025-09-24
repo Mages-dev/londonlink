@@ -100,7 +100,7 @@ const defaultTheme: ThemeConfig = {
   icon: "🌐",
 };
 
-// Christmas Theme Configuration (for future use)
+// Christmas Theme Configuration
 const christmasTheme: ThemeConfig = {
   name: "christmas",
   displayName: {
@@ -153,12 +153,65 @@ const christmasTheme: ThemeConfig = {
   icon: "🎄",
 };
 
+// New Year Theme Configuration
+const newYearTheme: ThemeConfig = {
+  name: "new-year",
+  displayName: {
+    pt: "Ano Novo",
+    en: "New Year",
+  },
+  description: {
+    pt: "Tema festivo de Ano Novo com cores douradas e prateadas",
+    en: "Festive New Year theme with gold and silver colors",
+  },
+  colors: {
+    light: {
+      background: "#ffffff",
+      foreground: "#171717",
+      primary: "#d97706", // Amber/Gold
+      primaryDark: "#b45309",
+      primaryLight: "#f59e0b",
+      secondary: "#6b7280",
+      accent: "#6366f1", // Indigo/Purple
+      muted: "#fef3c7",
+      border: "#fbbf24",
+      blueGradientStart: "#d97706",
+      blueGradientEnd: "#6366f1",
+      special: "#eab308", // Gold
+      specialSecondary: "#4338ca",
+      specialAccent: "#f3f4f6", // Silver
+    },
+    dark: {
+      background: "#0c0a09",
+      foreground: "#fafaf9",
+      primary: "#f59e0b",
+      primaryDark: "#d97706",
+      primaryLight: "#fbbf24",
+      secondary: "#9ca3af",
+      accent: "#8b5cf6",
+      muted: "#451a03",
+      border: "#78716c",
+      blueGradientStart: "#92400e",
+      blueGradientEnd: "#5b21b6",
+      special: "#fbbf24",
+      specialSecondary: "#3730a3",
+      specialAccent: "#e5e7eb",
+    },
+  },
+  dateRange: {
+    start: { month: 12, day: 31 }, // December 31st (New Year's Eve)
+    end: { month: 1, day: 2 }, // January 2nd (day after New Year)
+  },
+  customClasses: ["newyear-sparkle", "newyear-fireworks", "newyear-glow"],
+  icon: "🎆",
+};
+
 // Theme configurations map
 export const THEME_CONFIGS: Record<CommemorativeTheme, ThemeConfig> = {
   default: defaultTheme,
   halloween: halloweenTheme,
   christmas: christmasTheme,
-  "new-year": defaultTheme, // Placeholder
+  "new-year": newYearTheme,
   valentine: defaultTheme, // Placeholder
   easter: defaultTheme, // Placeholder
 };

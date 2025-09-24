@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "../lib/themes/halloween.css";
 import "../lib/themes/christmas.css";
+import "../lib/themes/new-year.css";
 import { ThemeProvider } from "@/contexts";
 
 // Import test utilities in development

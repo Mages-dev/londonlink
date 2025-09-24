@@ -37,6 +37,7 @@ export default function ThemeSelector({
     "default",
     "halloween",
     "christmas",
+    "new-year",
   ];
 
   const handleModeChange = (newMode: ThemeMode) => {

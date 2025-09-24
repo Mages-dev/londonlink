@@ -90,6 +90,31 @@ export function testDateBasedThemes() {
       expected: "default",
       description: "After Christmas period",
     },
+    {
+      date: "2024-12-30",
+      expected: "default",
+      description: "Before New Year period",
+    },
+    {
+      date: "2024-12-31",
+      expected: "new-year",
+      description: "New Year's Eve",
+    },
+    {
+      date: "2025-01-01",
+      expected: "new-year",
+      description: "New Year's Day",
+    },
+    {
+      date: "2025-01-02",
+      expected: "new-year",
+      description: "End of New Year period",
+    },
+    {
+      date: "2025-01-03",
+      expected: "default",
+      description: "After New Year period",
+    },
   ];
 
   testDates.forEach(({ date, expected, description }) => {
@@ -101,10 +126,14 @@ export function testDateBasedThemes() {
     // Manually check seasonal theme logic
     const isHalloweenSeason = month === 10 && day >= 24 && day <= 31;
     const isChristmasSeason = month === 12 && day >= 15 && day <= 25;
+    const isNewYearSeason =
+      (month === 12 && day === 31) || // Dec 31st
+      (month === 1 && day <= 2); // Jan 1st-2nd
 
     let result = "default";
     if (isHalloweenSeason) result = "halloween";
     if (isChristmasSeason) result = "christmas";
+    if (isNewYearSeason) result = "new-year";
 
     console.log(
       `${date} (${description}): Expected ${expected}, Got ${result} ${
@@ -141,7 +170,7 @@ export function forceChristmasTheme() {
   console.log("🎄 Forcing Christmas theme...");
 
   // Add theme class to body
-  document.body.classList.remove("theme-halloween");
+  document.body.classList.remove("theme-halloween", "theme-new-year");
   document.body.classList.add("theme-christmas");
 
   // Apply Christmas CSS variables
@@ -155,6 +184,26 @@ export function forceChristmasTheme() {
 }
 
 /**
+ * Force enable New Year theme for testing
+ */
+export function forceNewYearTheme() {
+  console.log("🎆 Forcing New Year theme...");
+
+  // Add theme class to body
+  document.body.classList.remove("theme-halloween", "theme-christmas");
+  document.body.classList.add("theme-new-year");
+
+  // Apply New Year CSS variables
+  const root = document.documentElement;
+  root.style.setProperty("--primary", "#d97706");
+  root.style.setProperty("--accent", "#6366f1");
+  root.style.setProperty("--special", "#eab308");
+  root.style.setProperty("--special-accent", "#f3f4f6");
+
+  console.log("New Year theme applied! 🎆");
+}
+
+/**
  * Remove all seasonal themes
  */
 export function removeSeasonalThemes() {
@@ -163,6 +212,7 @@ export function removeSeasonalThemes() {
   // Remove theme classes from body
   document.body.classList.remove("theme-halloween");
   document.body.classList.remove("theme-christmas");
+  document.body.classList.remove("theme-new-year");
 
   // Reset to default colors
   const root = document.documentElement;
@@ -189,6 +239,8 @@ if (typeof window !== "undefined") {
   (window as any).forceHalloweenTheme = forceHalloweenTheme;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any).forceChristmasTheme = forceChristmasTheme;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (window as any).forceNewYearTheme = forceNewYearTheme;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any).removeSeasonalThemes = removeSeasonalThemes;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
