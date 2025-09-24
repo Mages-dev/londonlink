@@ -261,7 +261,7 @@ export default function Header({
             <button
               onClick={toggleMobileMenu}
               className={`p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 ${
-                windowWidth < 817 || windowWidth >= 1024 ? "block" : "hidden"
+                windowWidth < 817 ? "block" : "hidden"
               }`}
               aria-label="Toggle mobile menu"
               aria-expanded={isMobileMenuOpen}
@@ -290,7 +290,7 @@ export default function Header({
         {/* Mobile Navigation */}
         <div
           className={`transition-all duration-300 ease-in-out ${
-            windowWidth < 817 || windowWidth >= 1024 ? "block" : "hidden"
+            windowWidth < 817 ? "block" : "hidden"
           } ${
             isMobileMenuOpen
               ? "max-h-96 opacity-100 mt-6"
