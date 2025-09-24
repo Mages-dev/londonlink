@@ -257,32 +257,22 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
             <div className="absolute inset-0 bg-blue-600/60 rounded-3xl"></div>
 
             {/* Content */}
-            <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 sm:px-8 py-8">
+            <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-5 sm:px-10 py-10">
               {/* Title */}
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-7">
                 {t.enrollNow.title}
               </h2>
 
               {/* CTA Button */}
-              <div className="mb-6">
+              <div className="mb-7">
                 <a
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-6 md:py-4 md:px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl text-base md:text-lg"
+                  className="inline-block bg-gray-900 hover:bg-gray-800 text-white font-semibold py-4 px-7 md:py-5 md:px-10 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl text-lg md:text-xl"
                 >
                   {t.enrollNow.buttonText}
                 </a>
-              </div>
-
-              {/* Description */}
-              <div className="max-w-xl lg:max-w-2xl mx-auto">
-                <p className="text-sm sm:text-base lg:text-lg text-white mb-1">
-                  {t.enrollNow.description}
-                </p>
-                <p className="text-sm sm:text-base lg:text-lg text-white">
-                  {t.enrollNow.subDescription}
-                </p>
               </div>
             </div>
           </div>

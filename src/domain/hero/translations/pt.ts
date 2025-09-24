@@ -95,9 +95,5 @@ export const heroTranslationsPt = {
   enrollNow: {
     title: "Inscreva-se agora:",
     buttonText: "Fale conosco",
-    description:
-      "Ao clicar no botão acima, você será direcionado para o nosso WhatsApp.",
-    subDescription:
-      "Envie-nos uma mensagem e continuaremos sua inscrição por lá.",
   },
 } as const;

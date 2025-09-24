@@ -33,15 +33,17 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
 
             {/* Image */}
             <div className="relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
-                <Image
-                  src={ABOUT_IMAGES.about1}
-                  alt={ABOUT_IMAGE_ALTS.about1[currentLanguage]}
-                  width={600}
-                  height={400}
-                  className="w-full h-auto object-cover"
-                  priority
-                />
+              <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-2xl transform hover:scale-105 transition-transform duration-300">
+                <div className="relative border-4 border-red-500 rounded-xl overflow-hidden">
+                  <Image
+                    src={ABOUT_IMAGES.about1}
+                    alt={ABOUT_IMAGE_ALTS.about1[currentLanguage]}
+                    width={600}
+                    height={400}
+                    className="w-full h-auto object-cover"
+                    priority
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -54,14 +56,16 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
           <div className="grid lg:grid-cols-5 gap-12 items-start">
             {/* Image - Left side on desktop */}
             <div className="order-2 lg:order-1 lg:col-span-2">
-              <div className="relative rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300 sticky top-8">
-                <Image
-                  src={ABOUT_IMAGES.about2}
-                  alt={ABOUT_IMAGE_ALTS.about2[currentLanguage]}
-                  width={600}
-                  height={400}
-                  className="w-full h-auto object-cover"
-                />
+              <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-xl transform hover:scale-105 transition-transform duration-300 sticky top-8">
+                <div className="relative border-4 border-red-500 rounded-xl overflow-hidden">
+                  <Image
+                    src={ABOUT_IMAGES.about2}
+                    alt={ABOUT_IMAGE_ALTS.about2[currentLanguage]}
+                    width={600}
+                    height={400}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
               </div>
             </div>
 
@@ -108,14 +112,16 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
 
             {/* Image */}
             <div className="relative lg:col-span-2">
-              <div className="relative rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300 sticky top-8">
-                <Image
-                  src={ABOUT_IMAGES.about3}
-                  alt={ABOUT_IMAGE_ALTS.about3[currentLanguage]}
-                  width={600}
-                  height={400}
-                  className="w-full h-auto object-cover"
-                />
+              <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-xl transform hover:scale-105 transition-transform duration-300 sticky top-8">
+                <div className="relative border-4 border-red-500 rounded-xl overflow-hidden">
+                  <Image
+                    src={ABOUT_IMAGES.about3}
+                    alt={ABOUT_IMAGE_ALTS.about3[currentLanguage]}
+                    width={600}
+                    height={400}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
               </div>
             </div>
           </div>
