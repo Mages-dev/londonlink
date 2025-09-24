@@ -18,8 +18,9 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
   const contactT = contactTranslations[currentLanguage];
   const { commemorativeTheme } = useTheme();
 
-  // Check if Halloween theme is active
+  // Check if seasonal themes are active
   const isHalloweenTheme = commemorativeTheme === "halloween";
+  const isChristmasTheme = commemorativeTheme === "christmas";
 
   // WhatsApp configuration using shared constants
   const whatsappUrl = `${
@@ -36,7 +37,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
             <h1
               className={`text-3xl md:text-4xl font-bold text-white mb-4 ${
                 isHalloweenTheme ? "halloween-text-glow" : ""
-              }`}
+              } ${isChristmasTheme ? "christmas-text-glow" : ""}`}
             >
               {t.title}
             </h1>
@@ -49,7 +50,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               rel="noopener noreferrer"
               className={`inline-block bg-white hover:bg-gray-100 text-blue-700 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl ${
                 isHalloweenTheme ? "halloween-button halloween-glow" : ""
-              }`}
+              } ${isChristmasTheme ? "christmas-button christmas-glow" : ""}`}
             >
               {t.ctaButton}
             </a>
@@ -76,7 +77,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
             <h1
               className={`text-4xl xl:text-5xl font-bold text-white mb-6 leading-tight ${
                 isHalloweenTheme ? "halloween-text-glow" : ""
-              }`}
+              } ${isChristmasTheme ? "christmas-text-glow" : ""}`}
             >
               {t.title}
             </h1>
@@ -89,7 +90,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               rel="noopener noreferrer"
               className={`inline-block bg-white hover:bg-gray-100 text-blue-700 font-semibold py-4 px-10 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl text-lg ${
                 isHalloweenTheme ? "halloween-button halloween-glow" : ""
-              }`}
+              } ${isChristmasTheme ? "christmas-button christmas-glow" : ""}`}
             >
               {t.ctaButton}
             </a>

@@ -13,7 +13,7 @@ import {
   Footer,
 } from "@/domain/sections";
 import { Language } from "@/types";
-import { HalloweenEffects } from "@/components/ui";
+import { HalloweenEffects, ChristmasEffects } from "@/components/ui";
 import ThemeDebug from "@/components/ui/ThemeDebug";
 
 export default function Home() {
@@ -39,8 +39,9 @@ export default function Home() {
       <ContactSection currentLanguage={currentLanguage} />
       <Footer />
 
-      {/* Halloween effects overlay */}
+      {/* Seasonal effects overlay */}
       <HalloweenEffects />
+      <ChristmasEffects />
 
       {/* Debug info - only in development */}
       {process.env.NODE_ENV === "development" && <ThemeDebug />}

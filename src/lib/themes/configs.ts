@@ -146,8 +146,8 @@ const christmasTheme: ThemeConfig = {
     },
   },
   dateRange: {
-    start: { month: 12, day: 1 },
-    end: { month: 12, day: 31 },
+    start: { month: 12, day: 15 }, // December 15th (10 days before Christmas)
+    end: { month: 12, day: 25 }, // December 25th (Christmas day)
   },
   customClasses: ["christmas-sparkle", "christmas-snow", "christmas-glow"],
   icon: "🎄",

@@ -94,17 +94,19 @@ O sistema aplica temas automaticamente baseado na data atual:
 
 #### **Ativação Automática:**
 
-- O tema Halloween é **ativado automaticamente** entre 24 e 31 de outubro
+- Os temas são **ativados automaticamente** durante seus períodos específicos
+- **Halloween**: 24 a 31 de outubro
+- **Natal**: 15 a 25 de dezembro
 - Não requer intervenção do usuário
 - Sistema verifica diariamente e aplica/remove temas conforme necessário
 
 #### **Para Desenvolvedores - Testes:**
 
 1. Abra o console do navegador
-2. Execute: `testHalloweenTheme()` - para verificar o status atual
-3. Execute: `testDateBasedThemes()` - para testar diferentes datas
-4. Execute: `forceHalloweenTheme()` - para forçar ativação manual
-5. Execute: `removeHalloweenTheme()` - para remover tema
+2. Execute: `testDateBasedThemes()` - para testar diferentes datas
+3. Execute: `forceHalloweenTheme()` - para forçar tema Halloween
+4. Execute: `forceChristmasTheme()` - para forçar tema Natal
+5. Execute: `removeSeasonalThemes()` - para remover todos os temas
 
 #### **Seleção Manual (Apenas Desenvolvimento):**
 
@@ -167,7 +169,9 @@ function ComponenteComCores() {
 
 ## 📅 Ativação Automática por Datas
 
-O tema Halloween é **ativado automaticamente** durante o período:
+Os temas comemorativos são **ativados automaticamente** durante seus períodos:
+
+### 🎃 **Halloween**
 
 - **Início**: 24 de outubro (1 semana antes do Halloween)
 - **Fim**: 31 de outubro (dia do Halloween)
@@ -176,6 +180,18 @@ O tema Halloween é **ativado automaticamente** durante o período:
 dateRange: {
   start: { month: 10, day: 24 }, // October 24th
   end: { month: 10, day: 31 }    // October 31st (Halloween day)
+}
+```
+
+### 🎄 **Natal**
+
+- **Início**: 15 de dezembro (10 dias antes do Natal)
+- **Fim**: 25 de dezembro (dia do Natal)
+
+```typescript
+dateRange: {
+  start: { month: 12, day: 15 }, // December 15th
+  end: { month: 12, day: 25 }    // December 25th (Christmas day)
 }
 ```
 
