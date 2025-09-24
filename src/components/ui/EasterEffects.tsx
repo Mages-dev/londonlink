@@ -34,7 +34,7 @@ export default function EasterEffects() {
 
   // Easter emojis for floating effects (memoized to prevent re-creation)
   const easterEmojis = useMemo(
-    () => ["🐰", "🥚", "🐣", "🐤", "🌷", "🌸", "🌺", "🦋", "🌿", "🌱"],
+    () => ["🐰", "🥚", "🐣", "🐤", "🥕", "🌷", "🌸", "🌺", "🦋", "🌿", "🌱"],
     []
   );
 
@@ -285,12 +285,12 @@ export default function EasterEffects() {
 
       {/* Easter Bunny (decorative) */}
       <div className="fixed top-4 left-4 pointer-events-none z-10">
-        <div className="text-3xl animate-bounce">🐰🌸</div>
+        <div className="text-3xl animate-bounce">🐰🥕</div>
       </div>
 
       {/* Spring Garden (decorative) */}
       <div className="fixed bottom-4 right-4 pointer-events-none z-10">
-        <div className="text-2xl animate-pulse">🌱🌷</div>
+        <div className="text-2xl animate-pulse">🥕🌱</div>
       </div>
     </>
   );
