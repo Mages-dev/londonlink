@@ -52,10 +52,10 @@ export function FeedbacksSection({ currentLanguage }: FeedbacksSectionProps) {
   };
 
   return (
-    <section id="feedbacks" className="relative overflow-hidden">
+    <section id="feedbacks" className="relative overflow-hidden pt-30 pb-16">
       {/* Uses parent background - no additional gradient needed */}
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 lg:mb-6 leading-tight">

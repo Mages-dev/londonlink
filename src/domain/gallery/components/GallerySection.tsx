@@ -24,9 +24,9 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
   return (
     <section
       id="gallery"
-      className="h-screen pt-30 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-blue-900"
+      className="min-h-screen pt-30 pb-16 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-blue-900"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Community Header - Showcasing student success stories and transformations */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -38,9 +38,9 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
         </div>
 
         {/* L-Shape Gallery */}
-        <div className="relative max-w-5xl mx-auto">
+        <div className="relative max-w-5xl mx-auto overflow-hidden">
           {/* L-Shape Container */}
-          <div className="grid grid-cols-4 grid-rows-5 gap-0 h-[600px] md:h-[780px] lg:h-[900px]">
+          <div className="gallery-grid">
             {/* VERTICAL PART OF L - Left Columns (Haste do L - 2 colunas) */}
             {verticalImages.map((image, index) => {
               const getGridPosition = () => {
@@ -182,10 +182,10 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
         {/* Modal/Popup para visualizar imagem completa */}
         {selectedImage && (
           <div
-            className="fixed inset-0 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 flex items-center justify-center z-50 p-4 bg-black bg-opacity-80 backdrop-blur-sm"
             onClick={() => setSelectedImage(null)}
           >
-            <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-2xl border-4 border-gray-200 dark:border-gray-600 p-4 max-w-7xl max-h-full">
+            <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-2xl border-4 border-gray-200 dark:border-gray-600 p-4 max-w-4xl max-h-[90vh] overflow-hidden">
               <button
                 className="absolute -top-3 -right-3 text-gray-700 dark:text-gray-300 text-2xl font-bold bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 transition-all z-10 shadow-lg"
                 onClick={(e) => {
@@ -204,9 +204,9 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
                   GALLERY_IMAGES.find((img) => img.id === selectedImage)?.alt ||
                   ""
                 }
-                width={1200}
-                height={800}
-                className="max-w-full max-h-[80vh] object-contain rounded"
+                width={1000}
+                height={600}
+                className="max-w-full max-h-[75vh] object-contain rounded"
                 priority
               />
             </div>
