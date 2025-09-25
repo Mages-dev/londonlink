@@ -1,24 +1,25 @@
 // Gallery section - English translations
 
 export const galleryTranslationsEn = {
-  title: "Gallery",
-  subtitle: "Explore our visual content and see our learning platform in action.",
-  
+  title: "Community Gallery",
+  subtitle:
+    "See how our student community is transforming their lives through English. Each image tells a story of success and personal growth.",
+
   // Image descriptions for accessibility
   imageAlts: {
-    screenshot: "LondonLink platform screenshot",
-    feature: "Platform feature demonstration",
-    interface: "User interface example",
-    lesson: "Interactive lesson example",
+    screenshot: "LondonLink community student in learning moment",
+    feature: "Student achievement on English learning platform",
+    interface: "Community member success experience",
+    lesson: "Personal transformation through English learning",
   },
-  
+
   // Interactive elements
   viewMore: "View More",
   closeGallery: "Close Gallery",
   previousImage: "Previous Image",
   nextImage: "Next Image",
   imageCounter: "Image {current} of {total}",
-  
+
   // Loading states
   loading: "Loading images...",
   loadError: "Failed to load image",

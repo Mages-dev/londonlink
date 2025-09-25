@@ -24,14 +24,17 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
   return (
     <section
       id="gallery"
-      className="py-16 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-blue-900"
+      className="h-screen pt-30 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-blue-900"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+        {/* Community Header - Showcasing student success stories and transformations */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             {t.title}
           </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            {t.subtitle}
+          </p>
         </div>
 
         {/* L-Shape Gallery */}
