@@ -76,6 +76,7 @@ export default function Header({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [windowWidth, setWindowWidth] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   // Detect window width for responsive navigation
   useEffect(() => {
@@ -92,38 +93,50 @@ export default function Header({
 
   // Detect active section based on scroll position
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = [
-        "home",
-        "about",
-        "goals",
-        "books",
-        "feedbacks",
-        "gallery",
-        "contact",
-      ];
-      const scrollPosition = window.scrollY + 100; // Offset for fixed header
+    let timeoutId: NodeJS.Timeout;
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            setActiveSection(section);
-            break;
+    const handleScroll = () => {
+      // Skip detection during programmatic scrolling
+      if (isScrolling) return;
+
+      // Debounce scroll detection
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        const sections = [
+          "home",
+          "about",
+          "goals",
+          "books",
+          "feedbacks",
+          "gallery",
+          "contact",
+        ];
+        const scrollPosition = window.scrollY + 100; // Offset for fixed header
+
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const { offsetTop, offsetHeight } = element;
+            if (
+              scrollPosition >= offsetTop &&
+              scrollPosition < offsetTop + offsetHeight
+            ) {
+              setActiveSection(section);
+              break;
+            }
           }
         }
-      }
+      }, 100); // 100ms debounce
     };
 
     window.addEventListener("scroll", handleScroll);
     handleScroll(); // Check initial position
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timeoutId);
+    };
+  }, [isScrolling]);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -137,9 +150,19 @@ export default function Header({
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      // Set scrolling flag to prevent conflicts
+      setIsScrolling(true);
+
       // Update active section immediately for better UX
       setActiveSection(href.replace("#", ""));
+
+      // Perform smooth scroll
+      element.scrollIntoView({ behavior: "smooth" });
+
+      // Reset scrolling flag after animation completes
+      setTimeout(() => {
+        setIsScrolling(false);
+      }, 1000); // Smooth scroll typically takes ~500-800ms
     }
     setIsMobileMenuOpen(false);
   };
