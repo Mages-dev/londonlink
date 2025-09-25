@@ -254,8 +254,8 @@ const valentineTheme: ThemeConfig = {
     },
   },
   dateRange: {
-    start: { month: 2, day: 12 }, // February 12th (2 days before Valentine's)
-    end: { month: 2, day: 14 }, // February 14th (Valentine's Day)
+    start: { month: 2, day: 14 }, // February 14th (Valentine's Day only)
+    end: { month: 2, day: 14 }, // February 14th (Valentine's Day only)
   },
   customClasses: ["valentine-sparkle", "valentine-hearts", "valentine-glow"],
   icon: "💕",
@@ -446,8 +446,8 @@ function isDateInRange(
 // Get currently suggested theme based on date
 export const getSuggestedTheme = (): CommemorativeTheme | undefined => {
   const themes: CommemorativeTheme[] = [
-    "carnival",
-    "valentine",
+    "valentine", // Prioridade máxima (data fixa)
+    "carnival", // Segundo (pode ser interrompido pelo Valentine)
     "easter",
     "halloween",
     "christmas",
