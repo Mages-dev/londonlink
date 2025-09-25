@@ -4,7 +4,7 @@ export const HERO_IMAGES = {
     main: "/assets/images/hero/backgrounds/hero.webp",
     mobile: "/assets/images/hero/backgrounds/hero.webp",
     gradient: "/assets/images/hero/backgrounds/hero.webp",
-    enrollNow: "/assets/images/hero/backgrounds/hero-2.png",
+    enrollNow: "/assets/images/hero/backgrounds/hero-2.webp",
   },
   features: {
     books: "/assets/images/hero/features/interactive-books.svg",
