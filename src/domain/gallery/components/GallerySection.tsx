@@ -38,7 +38,7 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
         </div>
 
         {/* L-Shape Gallery */}
-        <div className="relative max-w-5xl mx-auto overflow-hidden">
+        <div className="relative max-w-4xl mx-auto overflow-hidden">
           {/* L-Shape Container */}
           <div className="gallery-grid">
             {/* VERTICAL PART OF L - Left Columns (Haste do L - 2 colunas) */}

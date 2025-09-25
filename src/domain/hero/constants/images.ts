@@ -1,9 +1,9 @@
 // Hero section images
 export const HERO_IMAGES = {
   backgrounds: {
-    main: "/assets/images/hero/backgrounds/hero.png",
-    mobile: "/assets/images/hero/backgrounds/hero.png",
-    gradient: "/assets/images/hero/backgrounds/hero.png",
+    main: "/assets/images/hero/backgrounds/hero.webp",
+    mobile: "/assets/images/hero/backgrounds/hero.webp",
+    gradient: "/assets/images/hero/backgrounds/hero.webp",
     enrollNow: "/assets/images/hero/backgrounds/hero-2.png",
   },
   features: {
