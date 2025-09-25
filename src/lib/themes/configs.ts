@@ -1,5 +1,6 @@
 import { ThemeConfig, CommemorativeTheme } from "@/types/theme";
 import { getCurrentEasterDates } from "./easter-calculator";
+import { getCurrentCarnivalDates } from "./carnival-calculator";
 
 // Halloween Theme Configuration
 const halloweenTheme: ThemeConfig = {
@@ -311,9 +312,61 @@ const easterTheme: ThemeConfig = {
   icon: "🐰",
 };
 
+// Carnival Theme Configuration
+const carnivalTheme: ThemeConfig = {
+  name: "carnival",
+  displayName: {
+    pt: "Carnaval",
+    en: "Carnival",
+  },
+  description: {
+    pt: "Tema vibrante de Carnaval com cores alegres e elementos festivos",
+    en: "Vibrant Carnival theme with joyful colors and festive elements",
+  },
+  colors: {
+    light: {
+      background: "#ffffff",
+      foreground: "#171717",
+      primary: "#ff6b35", // Laranja vibrante
+      primaryDark: "#e55a2b",
+      primaryLight: "#ff8c5a",
+      secondary: "#6b7280",
+      accent: "#f7931e", // Amarelo dourado
+      muted: "#fff7ed",
+      border: "#fed7aa",
+      blueGradientStart: "#ff6b35",
+      blueGradientEnd: "#c41e3a",
+      special: "#c41e3a", // Vermelho intenso
+      specialSecondary: "#2e8b57", // Verde esmeralda
+      specialAccent: "#9932cc", // Roxo real
+    },
+    dark: {
+      background: "#0f0a19",
+      foreground: "#fff7ed",
+      primary: "#ff8c5a",
+      primaryDark: "#ff6b35",
+      primaryLight: "#ffad85",
+      secondary: "#9ca3af",
+      accent: "#fbbf24",
+      muted: "#451a03",
+      border: "#c41e3a",
+      blueGradientStart: "#451a03",
+      blueGradientEnd: "#7c2d12",
+      special: "#ef4444",
+      specialSecondary: "#059669",
+      specialAccent: "#a855f7",
+    },
+  },
+  dateRange: undefined, // Uses dynamic dates instead
+  dynamicDates: getCurrentCarnivalDates(),
+  customClasses: ["carnival-sparkle", "carnival-confetti", "carnival-glow"],
+  icon: "🎭",
+};
+
 // Theme configurations map
 export const THEME_CONFIGS: Record<CommemorativeTheme, ThemeConfig> = {
   default: defaultTheme,
+  carnival: carnivalTheme,
   valentine: valentineTheme,
   easter: easterTheme,
   halloween: halloweenTheme,
@@ -393,6 +446,7 @@ function isDateInRange(
 // Get currently suggested theme based on date
 export const getSuggestedTheme = (): CommemorativeTheme | undefined => {
   const themes: CommemorativeTheme[] = [
+    "carnival",
     "valentine",
     "easter",
     "halloween",

@@ -14,6 +14,7 @@ import {
 } from "@/domain/sections";
 import { Language } from "@/types";
 import {
+  CarnivalEffects,
   ValentineEffects,
   EasterEffects,
   HalloweenEffects,
@@ -46,6 +47,7 @@ export default function Home() {
       <Footer />
 
       {/* Seasonal effects overlay */}
+      <CarnivalEffects />
       <ValentineEffects />
       <EasterEffects />
       <HalloweenEffects />

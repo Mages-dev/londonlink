@@ -8,7 +8,8 @@ export type CommemorativeTheme =
   | "christmas"
   | "new-year"
   | "valentine"
-  | "easter";
+  | "easter"
+  | "carnival";
 
 export interface ThemeColors {
   // Base colors
