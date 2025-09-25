@@ -5,6 +5,8 @@ export const FEEDBACKS_IMAGES = {
     rodolphoNiceto: "/assets/images/feedbacks/students/RodolphoNiceto.jpg",
     henriqueMenezes: "/assets/images/feedbacks/students/HenriqueMenezes.jpg",
     aylaReis: "/assets/images/feedbacks/students/AylaReis.jpg",
+    karlaNaves: null, // No photo available
+    ceilaLopes: null, // No photo available
   },
   backgrounds: {
     feedbacksHero: "/assets/images/feedbacks/backgrounds/feedbacks-hero.jpg",
@@ -23,6 +25,8 @@ export const FEEDBACKS_IMAGE_ALTS = {
     rodolphoNiceto: "Student testimonial - Rodolpho Niceto",
     henriqueMenezes: "Student testimonial - Henrique Menezes",
     aylaReis: "Student testimonial - Ayla Reis",
+    karlaNaves: "Student testimonial - Karla Naves",
+    ceilaLopes: "Student testimonial - Ceila Lopes",
   },
   backgrounds: {
     feedbacksHero: "Feedbacks section hero background",

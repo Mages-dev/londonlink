@@ -10,32 +10,46 @@ export const feedbacksTranslationsPt = {
   // Testimonials
   testimonials: [
     {
-      id: "michelle-medeiros",
+      id: "michelleMedeiros",
       name: "Michelle Medeiros",
       location: "Brasil",
       rating: 5,
       text: "Sempre quis aprender inglês para facilitar a comunicação nas minhas viagens. Tentei fazer alguns cursos, mas não aprendi muito. Conheci o Jay através da minha cunhada e irmã que já faziam o curso e adoravam. Na LondonLink me senti parte de uma família onde amigos me ensinaram inglês. As aulas são interativas, dinâmicas e sempre diferentes.",
     },
     {
-      id: "rodolpho-niceto",
+      id: "rodolphoNiceto",
       name: "Rodolpho Niceto",
       location: "Brasil",
       rating: 5,
       text: "O método de ensino é realmente um grande diferencial, combinando conversas dinâmicas com gramática de forma leve e eficiente. Além disso, a interação com diferentes professores ao longo do curso tem sido essencial.",
     },
     {
-      id: "henrique-menezes",
+      id: "henriqueMenezes",
       name: "Henrique Menezes",
       location: "Brasil",
       rating: 5,
       text: "A LondonLink é uma escola de inglês moderna que se adapta perfeitamente às necessidades de cada aluno. Gosto especialmente da flexibilidade e abordagem personalizada.",
     },
     {
-      id: "ayla-reis",
+      id: "aylaReis",
       name: "Ayla Reis",
       location: "Brasil",
       rating: 5,
       text: "Estudar na London Link foi um divisor de águas para o meu inglês. Antes, meu inglês era quebrado e eu não tinha confiança para conversas básicas. Agora me sinto preparada para falar com qualquer pessoa.",
+    },
+    {
+      id: "karlaNaves",
+      name: "Karla Naves",
+      location: "Brasil",
+      rating: 5,
+      text: "Encontrei na Londonlink exatamente o que eu precisava. Horários flexíveis que adaptaram a minha rotina, conteúdos dinâmicos e personalizados para aquilo que você procura, além de professores muito qualificados, atenciosos e que transformam a aula em um momento super leve e divertido.",
+    },
+    {
+      id: "ceilaLopes",
+      name: "Ceila Lopes",
+      location: "Brasil",
+      rating: 5,
+      text: "Nós conhecemos o LondonLink por intermédio de nossos filhos e então resolvemos tentar. Tivemos uma grata surpresa, o curso de inglês superou nossas expectativas de várias maneiras: Os professores são excelentes — pacientes e sempre dispostos a ajudar. O método de ensino torna o processo de aprendizado fácil e envolvente. Outro grande benefício é a flexibilidade do horário, o que nos permite conciliar os estudos com outros compromissos pessoais e profissionais. Além disso, o material didático fornecido é de primeira qualidade, bem estruturado e fácil de seguir. No geral, o curso oferece uma combinação perfeita de ensino de qualidade, conveniência e recursos valiosos.",
     },
   ],
 
