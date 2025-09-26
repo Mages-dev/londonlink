@@ -1,22 +1,24 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { useThemeSuggestions } from '@/contexts/ThemeContext';
-import { THEME_CONFIGS } from '@/lib/themes/configs';
-import { Language } from '@/types';
+import React, { useState, useEffect } from "react";
+import { useThemeSuggestions } from "@/contexts/ThemeContext";
+import { THEME_CONFIGS } from "@/lib/themes/configs";
+import { Language } from "@/types";
 
 interface ThemeSuggestionProps {
   currentLanguage: Language;
 }
 
-export default function ThemeSuggestion({ currentLanguage }: ThemeSuggestionProps) {
-  const { 
-    suggestedTheme, 
-    shouldShowSuggestion, 
-    acceptSuggestion, 
-    dismissSuggestion 
+export default function ThemeSuggestion({
+  currentLanguage,
+}: ThemeSuggestionProps) {
+  const {
+    suggestedTheme,
+    shouldShowSuggestion,
+    acceptSuggestion,
+    dismissSuggestion,
   } = useThemeSuggestions();
-  
+
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -58,17 +60,17 @@ export default function ThemeSuggestion({ currentLanguage }: ThemeSuggestionProp
     pt: {
       title: `Que tal experimentar o tema ${themeConfig.displayName.pt}?`,
       description: themeConfig.description.pt,
-      accept: 'Ativar tema',
-      dismiss: 'Não, obrigado',
-      seasonal: 'Tema sazonal disponível!'
+      accept: "Ativar tema",
+      dismiss: "Não, obrigado",
+      seasonal: "Tema sazonal disponível!",
     },
     en: {
       title: `How about trying the ${themeConfig.displayName.en} theme?`,
       description: themeConfig.description.en,
-      accept: 'Activate theme',
-      dismiss: 'No, thanks',
-      seasonal: 'Seasonal theme available!'
-    }
+      accept: "Activate theme",
+      dismiss: "No, thanks",
+      seasonal: "Seasonal theme available!",
+    },
   };
 
   const currentMessages = messages[currentLanguage];
@@ -77,9 +79,9 @@ export default function ThemeSuggestion({ currentLanguage }: ThemeSuggestionProp
     <div className="fixed top-4 right-4 z-50">
       <div
         className={`max-w-sm bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 ${
-          isAnimating 
-            ? 'transform translate-x-0 opacity-100 scale-100' 
-            : 'transform translate-x-full opacity-0 scale-95'
+          isAnimating
+            ? "transform translate-x-0 opacity-100 scale-100"
+            : "transform translate-x-full opacity-0 scale-95"
         }`}
       >
         {/* Header with seasonal indicator */}
@@ -103,20 +105,20 @@ export default function ThemeSuggestion({ currentLanguage }: ThemeSuggestionProp
 
           {/* Preview colors */}
           <div className="flex space-x-2 mb-4">
-            <div 
+            <div
               className="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-gray-600"
-              style={{ backgroundColor: themeConfig.colors.light.primary }}
+              style={{ backgroundColor: themeConfig.colors.primary }}
               title="Primary color"
             />
-            <div 
+            <div
               className="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-gray-600"
-              style={{ backgroundColor: themeConfig.colors.light.accent }}
+              style={{ backgroundColor: themeConfig.colors.accent }}
               title="Accent color"
             />
-            {themeConfig.colors.light.special && (
-              <div 
+            {themeConfig.colors.special && (
+              <div
                 className="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-gray-600"
-                style={{ backgroundColor: themeConfig.colors.light.special }}
+                style={{ backgroundColor: themeConfig.colors.special }}
                 title="Special color"
               />
             )}
@@ -143,10 +145,20 @@ export default function ThemeSuggestion({ currentLanguage }: ThemeSuggestionProp
         <button
           onClick={handleDismiss}
           className="absolute top-2 right-2 p-1 text-white hover:bg-white/20 rounded-full transition-colors duration-200"
-          aria-label={currentLanguage === 'pt' ? 'Fechar' : 'Close'}
+          aria-label={currentLanguage === "pt" ? "Fechar" : "Close"}
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
       </div>

@@ -12,6 +12,7 @@ import {
   ContactSection,
   Footer,
 } from "@/domain/sections";
+import { WhatsAppFloat } from "@/components";
 import { Language } from "@/types";
 import {
   CarnivalEffects,
@@ -53,6 +54,9 @@ export default function Home() {
       <HalloweenEffects />
       <ChristmasEffects />
       <NewYearEffects />
+
+      {/* WhatsApp Float Button */}
+      <WhatsAppFloat currentLanguage={currentLanguage} />
 
       {/* Debug info - only in development */}
       {process.env.NODE_ENV === "development" && <ThemeDebug />}
