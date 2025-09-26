@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { HeaderWithTheme } from "@/components/layout";
+import { HeaderWithTheme, Footer } from "@/layout";
 import {
   HeroSection,
   AboutSection,
@@ -10,7 +10,6 @@ import {
   FeedbacksSection,
   GallerySection,
   ContactSection,
-  Footer,
 } from "@/domain/sections";
 import { WhatsAppFloat } from "@/components";
 import { Language } from "@/types";

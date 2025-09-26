@@ -1,5 +1,4 @@
 // Components
-export { Footer } from "./components/Footer";
 export { OptimizedImage } from "./components/OptimizedImage";
 
 // Hooks

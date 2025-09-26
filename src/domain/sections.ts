@@ -7,7 +7,6 @@ export { FeedbacksSection } from "./feedbacks";
 export { GallerySection } from "./gallery";
 export { ContactSection } from "./contact";
 export {
-  Footer,
   OptimizedImage,
   SHARED_IMAGES,
   SHARED_IMAGE_ALTS,

@@ -3,3 +3,4 @@
 
 export { default as Header } from "./Header";
 export { default as HeaderWithTheme } from "./HeaderWithTheme";
+export { Footer } from "./Footer";

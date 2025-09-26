@@ -80,8 +80,8 @@ export function WhatsAppFloat({ currentLanguage }: WhatsAppFloatProps) {
         <Image
           src="/icons/whatsApp.svg"
           alt="WhatsApp"
-          width={50}
-          height={50}
+          width={40}
+          height={40}
           className="whatsapp-float__icon"
         />
 

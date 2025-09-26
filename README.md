@@ -20,37 +20,95 @@ src/
 │   ├── globals.css        # Global styles
 │   ├── layout.tsx         # Root layout
 │   └── page.tsx           # Home page
+├── layout/                # Layout & Structural Components
+│   ├── Header.tsx         # Main navigation header
+│   ├── HeaderWithTheme.tsx # Header with theme switching
+│   ├── Footer.tsx         # Application footer
+│   ├── index.ts           # Layout exports
+│   └── README.md          # Layout documentation
+├── components/            # Global React Components
+│   ├── WhatsAppFloat/     # WhatsApp floating button
+│   │   ├── WhatsAppFloat.tsx
+│   │   ├── WhatsAppFloat.css
+│   │   ├── index.ts
+│   │   └── README.md
+│   ├── ui/               # Reusable UI components
+│   ├── forms/            # Form components
+│   └── index.ts          # Component exports
 ├── domain/                # Domain-Driven Architecture
 │   ├── hero/              # Hero section domain
 │   ├── about/             # About section domain
 │   ├── goals/             # Goals section domain
 │   ├── books/             # Books section domain
+│   ├── feedbacks/         # Feedbacks section domain
 │   ├── gallery/           # Gallery section domain
 │   ├── contact/           # Contact section domain
-│   ├── shared/            # Shared components across domains
+│   ├── shared/            # Shared utilities across domains
 │   └── sections.ts        # Domain exports
-├── components/            # Global React components
-│   ├── ui/               # Reusable UI components
-│   ├── layout/           # Layout components (Header, Footer)
-│   ├── forms/            # Form components
-│   └── index.ts          # Component exports
 ├── translations/          # Internationalization system
 │   ├── config.ts         # Language configuration
 │   ├── utils.ts          # Translation utilities
 │   └── index.ts          # Translation exports
-├── contexts/             # React contexts
+├── contexts/             # React contexts (Theme, etc.)
 ├── hooks/                # Global custom hooks
-├── lib/                  # Utility functions
-├── types/                # TypeScript definitions
-├── styles/               # Additional global styles
-└── assets/               # Static assets
-    ├── images/           # Organized by domain
-    └── icons/
+├── lib/                  # Utility functions & themes
+└── types/                # TypeScript definitions
 ```
 
-### Domain Structure
+### Static Assets Structure
 
-Each domain follows a consistent internal structure:
+```
+public/                   # Static assets (same level as src/)
+├── assets/images/        # Images organized by domain
+│   ├── hero/            # Hero section images
+│   │   ├── backgrounds/ # Hero background images
+│   │   ├── features/    # Feature icons and illustrations
+│   │   └── illustrations/ # Hero-specific illustrations
+│   ├── about/           # About section images
+│   ├── books/           # Book covers and previews
+│   │   ├── covers/      # Book cover images
+│   │   ├── previews/    # Book preview screenshots
+│   │   └── thumbnails/  # Small book thumbnails
+│   ├── gallery/         # Gallery images
+│   │   ├── screenshots/ # App/platform screenshots
+│   │   ├── demos/       # Demo images and GIFs
+│   │   └── portfolio/   # Portfolio pieces
+│   ├── goals/           # Goals section images
+│   ├── contact/         # Contact section images
+│   ├── feedbacks/       # Student feedback images
+│   └── shared/          # Global/shared images
+│       ├── logos/       # Brand logos and favicons
+│       ├── icons/       # UI icons and symbols
+│       └── backgrounds/ # Global background patterns
+└── icons/               # SVG icons (flags, social, etc.)
+    ├── whatsApp.svg     # WhatsApp icon
+    ├── uk.svg           # UK flag
+    └── br.svg           # Brazil flag
+```
+
+### Architecture Overview
+
+The project follows a **layered architecture** with clear separation of concerns:
+
+#### 🏗️ Layout Layer (`/layout`)
+
+Structural components that define the application's skeleton:
+
+- **Header/Footer**: Navigation and branding
+- **Global Layout**: Page structure and routing
+- **Theme Integration**: Commemorative themes and dark mode
+
+#### 🧩 Components Layer (`/components`)
+
+Global, reusable components with domain-like organization:
+
+- **WhatsAppFloat**: Self-contained floating contact button
+- **UI Components**: Reusable interface elements
+- **Form Components**: Input and validation components
+
+#### 🎯 Domain Layer (`/domain`)
+
+Business logic organized by functional areas:
 
 ```
 domain/[section]/
@@ -62,6 +120,15 @@ domain/[section]/
 ├── types/              # TypeScript definitions
 └── index.ts            # Domain exports
 ```
+
+#### 🔧 Infrastructure Layer
+
+Supporting systems and utilities:
+
+- **Translations**: Internationalization system
+- **Contexts**: Global state management
+- **Hooks**: Shared custom hooks
+- **Types**: TypeScript definitions
 
 ## 🎯 Features
 
@@ -123,7 +190,7 @@ pnpm dev
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
 
-### Working with Domains
+### Working with the Architecture
 
 #### Adding a New Domain
 
@@ -132,30 +199,166 @@ pnpm dev
 3. Export from `src/domain/sections.ts`
 4. Import in main page: `src/app/page.tsx`
 
-#### Domain Best Practices
+#### Adding a Global Component
 
-- Keep domain-specific code within the domain folder
-- Use shared components from `/components` for global UI elements
-- Place domain-specific translations in the domain's `translations/` folder
-- Export main components through domain's `index.ts`
+1. Create component folder: `src/components/[ComponentName]/`
+2. Add component file, styles, and documentation
+3. Export from `src/components/index.ts`
+4. Import where needed: `import { ComponentName } from "@/components"`
+
+#### Adding Layout Components
+
+1. Create component in: `src/layout/ComponentName.tsx`
+2. Export from `src/layout/index.ts`
+3. Import in pages: `import { ComponentName } from "@/layout"`
+
+#### Best Practices
+
+- **Layout**: Use for structural, navigation, and page-level components
+- **Components**: Use for global, reusable functionality (like WhatsAppFloat)
+- **Domain**: Use for business-specific logic and components
+- **Shared**: Use for utilities that span multiple domains
 
 ## 🏗️ Architecture Principles
 
+### Layered Architecture
+
+The project implements a **clean, layered architecture** with clear separation of concerns:
+
+#### 1. **Structural Layer** (`/layout`)
+
+- **Purpose**: Application structure and navigation
+- **Scope**: Global, affects entire application
+- **Examples**: Header, Footer, main layout containers
+
+#### 2. **Functional Layer** (`/components`)
+
+- **Purpose**: Reusable, global functionality
+- **Scope**: Cross-cutting concerns
+- **Examples**: WhatsAppFloat, UI components, form elements
+
+#### 3. **Business Layer** (`/domain`)
+
+- **Purpose**: Business logic and domain-specific features
+- **Scope**: Isolated, domain-specific
+- **Examples**: Hero section, About section, Contact forms
+
+#### 4. **Infrastructure Layer** (`/lib`, `/contexts`, `/hooks`)
+
+- **Purpose**: Supporting utilities and shared logic
+- **Scope**: Foundation for other layers
+- **Examples**: Theme management, translations, utilities
+
 ### Domain-Driven Design (DDD)
 
-- **Domain Isolation**: Each section is a self-contained domain
+- **Domain Isolation**: Each business section is self-contained
 - **Clear Boundaries**: Components, hooks, and styles are domain-specific
 - **Scalability**: Easy to add new sections without affecting existing ones
 - **Maintainability**: Code organized by business context, not technical layers
 
 ### Development Principles
 
+- **Separation of Concerns**: Clear boundaries between layers
+- **Component Isolation**: Each component has its own folder with styles and docs
 - **Accessible Components**: ARIA attributes and semantic HTML
 - **Clear Code Structure**: Simple and maintainable code
 - **Iterative Development**: Start small, improve gradually
 - **UX Clarity**: Fast, responsive, with user feedback
 - **Type Safety**: Comprehensive TypeScript usage
-- **Component Reusability**: Shared components in `/components` and `/domain/shared`
+- **Modular Architecture**: Easy to add, remove, or modify features
+
+### Import Patterns
+
+The layered architecture enables clean import patterns:
+
+```typescript
+// Structural components
+import { HeaderWithTheme, Footer } from "@/layout";
+
+// Global functionality
+import { WhatsAppFloat } from "@/components";
+
+// Business logic
+import { HeroSection } from "@/domain/hero";
+import { ContactSection } from "@/domain/contact";
+
+// Shared utilities
+import { OptimizedImage } from "@/domain/shared";
+
+// Infrastructure
+import { useTheme } from "@/contexts";
+import { translations } from "@/translations";
+```
+
+## 🖼️ Assets Organization
+
+### Image Management Strategy
+
+LondonLink uses a **domain-driven approach** for organizing images and static assets:
+
+#### **Domain-Specific Images** (`public/assets/images/[domain]/`)
+
+Each business domain has its own image folder:
+
+- **Hero Section** (`/hero/`): Landing page visuals, backgrounds, feature icons
+- **About Section** (`/about/`): Team photos, methodology illustrations
+- **Books Section** (`/books/`): Book covers, previews, thumbnails
+- **Gallery Section** (`/gallery/`): Screenshots, demos, portfolio pieces
+- **Goals Section** (`/goals/`): Learning objective illustrations
+- **Contact Section** (`/contact/`): Location images, contact visuals
+- **Feedbacks Section** (`/feedbacks/`): Student photos and testimonials
+
+#### **Shared Assets** (`public/assets/images/shared/`)
+
+Global images used across multiple sections:
+
+- **Logos** (`/logos/`): Brand logos, favicons, variations
+- **Icons** (`/icons/`): UI icons, symbols, decorative elements
+- **Backgrounds** (`/backgrounds/`): Global patterns, gradients
+
+#### **Global Icons** (`public/icons/`)
+
+SVG icons for UI elements:
+
+- **Social Icons**: WhatsApp, Instagram, etc.
+- **Flag Icons**: Country flags for language selection
+- **UI Icons**: Navigation, actions, status indicators
+
+### Image Optimization Guidelines
+
+1. **Format Selection**:
+
+   - **SVG**: Icons, logos, simple illustrations
+   - **WebP/AVIF**: Modern browsers, best compression
+   - **JPG**: Photos, complex images
+   - **PNG**: Images with transparency
+
+2. **Size Guidelines**:
+
+   - **Hero backgrounds**: 1920x1080px (16:9)
+   - **Book covers**: 400x600px (2:3)
+   - **Thumbnails**: 150x150px (1:1)
+   - **Icons**: 24x24px, 32x32px, 48x48px
+
+3. **Naming Convention**:
+   - Use kebab-case: `hero-main-bg.jpg`
+   - Be descriptive: `beginner-book-cover.jpg`
+   - Include size when relevant: `logo-small.svg`
+
+### Usage with Next.js Image
+
+```tsx
+import { OptimizedImage } from "@/domain/shared";
+import { HERO_IMAGES } from "@/domain/hero/constants/images";
+
+<OptimizedImage
+  src={HERO_IMAGES.backgrounds.main}
+  alt="Hero background"
+  width={800}
+  height={600}
+  priority // For above-the-fold images
+/>;
+```
 
 ## 🎨 Design System
 
