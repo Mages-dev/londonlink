@@ -1,6 +1,6 @@
 // Theme types for LondonLink
 
-export type ThemeMode = "light" | "dark" | "auto";
+export type ThemeMode = "dark" | "auto";
 
 export type CommemorativeTheme =
   | "default"
@@ -45,10 +45,7 @@ export interface ThemeConfig {
     pt: string;
     en: string;
   };
-  colors: {
-    light: ThemeColors;
-    dark: ThemeColors;
-  };
+  colors: ThemeColors;
   // Date range when theme should be suggested
   dateRange?: {
     start: { month: number; day: number };

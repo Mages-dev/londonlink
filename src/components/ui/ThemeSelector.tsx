@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
-import { CommemorativeTheme, ThemeMode } from "@/types/theme";
+import { CommemorativeTheme } from "@/types/theme";
 import { THEME_CONFIGS } from "@/lib/themes/configs";
 import { Language } from "@/types";
 
@@ -16,9 +16,8 @@ export default function ThemeSelector({
   className = "",
 }: ThemeSelectorProps) {
   const {
-    mode,
     commemorativeTheme,
-    setMode,
+
     setCommemorativeTheme,
     resetToAutomatic,
     isThemeInSeason,
@@ -26,12 +25,6 @@ export default function ThemeSelector({
   } = useTheme();
 
   const [isOpen, setIsOpen] = useState(false);
-
-  const modeLabels = {
-    light: { pt: "Claro", en: "Light" },
-    dark: { pt: "Escuro", en: "Dark" },
-    auto: { pt: "Automático", en: "Auto" },
-  };
 
   const availableThemes: CommemorativeTheme[] = [
     "default",
@@ -42,10 +35,6 @@ export default function ThemeSelector({
     "christmas",
     "new-year",
   ];
-
-  const handleModeChange = (newMode: ThemeMode) => {
-    setMode(newMode);
-  };
 
   const handleThemeChange = (theme: CommemorativeTheme) => {
     setCommemorativeTheme(theme);
@@ -119,29 +108,6 @@ export default function ThemeSelector({
                 </div>
               </div>
             )}
-            {/* Mode Selection */}
-            <div className="mb-4">
-              <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                {currentLanguage === "pt" ? "Modo" : "Mode"}
-              </h3>
-              <div className="flex space-x-2">
-                {(["light", "dark", "auto"] as ThemeMode[]).map(
-                  (modeOption) => (
-                    <button
-                      key={modeOption}
-                      onClick={() => handleModeChange(modeOption)}
-                      className={`px-3 py-1 text-xs rounded-md transition-all duration-200 ${
-                        mode === modeOption
-                          ? "bg-blue-500 text-white"
-                          : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
-                      }`}
-                    >
-                      {modeLabels[modeOption][currentLanguage]}
-                    </button>
-                  )
-                )}
-              </div>
-            </div>
 
             {/* Commemorative Theme Selection */}
             <div>
