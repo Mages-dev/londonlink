@@ -11,61 +11,52 @@ import { ThemeSelector } from "@/components/ui";
 
 // Navigation items with bilingual support
 const navigationItems: NavigationItem[] = [
-  {
-    href: "#home",
-    label: {
-      pt: "Início",
-      en: "Home",
-    },
-  },
-  {
-    href: "#about",
-    label: {
-      pt: "Sobre",
-      en: "About",
-    },
-  },
-  {
-    href: "#goals",
-    label: {
-      pt: "Objetivos",
-      en: "Goals",
-    },
-  },
-  {
-    href: "#books",
-    label: {
-      pt: "Livros",
-      en: "Books",
-    },
-  },
-  {
-    href: "#feedbacks",
-    label: {
-      pt: "Feedbacks",
-      en: "Feedbacks",
-    },
-  },
-  {
-    href: "#gallery",
-    label: {
-      pt: "Galeria",
-      en: "Gallery",
-    },
-  },
-  {
-    href: "#contact",
-    label: {
-      pt: "Contato",
-      en: "Contact",
-    },
-  },
+  { href: "#home", label: { pt: "Início", en: "Home" } },
+  { href: "#about", label: { pt: "Sobre", en: "About" } },
+  { href: "#goals", label: { pt: "Objetivos", en: "Goals" } },
+  { href: "#books", label: { pt: "Livros", en: "Books" } },
+  { href: "#feedbacks", label: { pt: "Feedbacks", en: "Feedbacks" } },
+  { href: "#gallery", label: { pt: "Galeria", en: "Gallery" } },
+  { href: "#contact", label: { pt: "Contato", en: "Contact" } },
 ];
 
 interface HeaderProps {
   currentLanguage?: Language;
   onLanguageChange?: (language: Language) => void;
   disableThemeSelector?: boolean;
+}
+
+// 🔹 Novo hook para detectar seção ativa via IntersectionObserver
+function useActiveSection(
+  sections: string[],
+  setActiveSection: (id: string) => void
+) {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        // Ajusta para ativar a seção quando ela chega mais pro topo
+        rootMargin: "-20% 0px -70% 0px",
+        threshold: 0,
+      }
+    );
+
+    const elements = sections
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
+
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, [sections, setActiveSection]);
 }
 
 export default function Header({
@@ -83,60 +74,20 @@ export default function Header({
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
-
-    // Set initial width
     handleResize();
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Detect active section based on scroll position
-  useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-
-    const handleScroll = () => {
-      // Skip detection during programmatic scrolling
-      if (isScrolling) return;
-
-      // Debounce scroll detection
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        const sections = [
-          "home",
-          "about",
-          "goals",
-          "books",
-          "feedbacks",
-          "gallery",
-          "contact",
-        ];
-        const scrollPosition = window.scrollY + 100; // Offset for fixed header
-
-        for (const section of sections) {
-          const element = document.getElementById(section);
-          if (element) {
-            const { offsetTop, offsetHeight } = element;
-            if (
-              scrollPosition >= offsetTop &&
-              scrollPosition < offsetTop + offsetHeight
-            ) {
-              setActiveSection(section);
-              break;
-            }
-          }
-        }
-      }, 100); // 100ms debounce
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Check initial position
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      clearTimeout(timeoutId);
-    };
-  }, [isScrolling]);
+  // 🔹 Agora usamos IntersectionObserver em vez de cálculo manual
+  useActiveSection(
+    ["home", "about", "goals", "books", "feedbacks", "gallery", "contact"],
+    (id) => {
+      if (!isScrolling) {
+        setActiveSection(id);
+      }
+    }
+  );
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -150,25 +101,16 @@ export default function Header({
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      // Set scrolling flag to prevent conflicts
       setIsScrolling(true);
-
-      // Update active section immediately for better UX
       setActiveSection(href.replace("#", ""));
-
-      // Perform smooth scroll
       element.scrollIntoView({ behavior: "smooth" });
-
-      // Reset scrolling flag after animation completes
-      setTimeout(() => {
-        setIsScrolling(false);
-      }, 1000); // Smooth scroll typically takes ~500-800ms
+      setTimeout(() => setIsScrolling(false), 1000);
     }
     setIsMobileMenuOpen(false);
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-slate-700">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/75 backdrop-blur-sm border-b border-gray-200 dark:border-slate-700">
       <nav className="max-w-7xl mx-auto px-6 py-5">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -199,7 +141,6 @@ export default function Header({
                   aria-label={`Navigate to ${item.label[currentLanguage]}`}
                 >
                   {item.label[currentLanguage]}
-                  {/* Active indicator */}
                   {isActive && (
                     <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-yellow-400 rounded-full"></span>
                   )}
@@ -208,7 +149,7 @@ export default function Header({
             })}
           </div>
 
-          {/* Tablet Navigation (817px - 1023px) */}
+          {/* Tablet Navigation */}
           <div
             className={`items-center ${
               windowWidth >= 817 && windowWidth < 1024 ? "flex" : "hidden"
@@ -232,7 +173,6 @@ export default function Header({
                     aria-label={`Navigate to ${item.label[currentLanguage]}`}
                   >
                     {item.label[currentLanguage]}
-                    {/* Active indicator */}
                     {isActive && (
                       <span className="absolute -bottom-0.5 left-1 right-1 h-0.5 bg-yellow-400 rounded-full"></span>
                     )}
@@ -242,21 +182,16 @@ export default function Header({
             </div>
           </div>
 
-          {/* Theme Selector, Language Toggle & Mobile Menu Button */}
+          {/* Theme Selector, Language Toggle & Mobile Menu */}
           <div className="flex items-center space-x-4">
-            {/* Theme Selector - Only render in development */}
             {!disableThemeSelector &&
               process.env.NODE_ENV === "development" && (
                 <ThemeSelector currentLanguage={currentLanguage} />
               )}
 
-            {/* Language Toggle */}
             <button
               onClick={handleLanguageToggle}
               className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 shadow-sm hover:shadow-md"
-              aria-label={`Switch to ${
-                currentLanguage === "en" ? "Portuguese" : "English"
-              }`}
             >
               <div className="w-6 h-6 rounded-full overflow-hidden shadow-sm">
                 <OptimizedImage
@@ -280,7 +215,6 @@ export default function Header({
               </span>
             </button>
 
-            {/* Mobile Menu Button */}
             <button
               onClick={toggleMobileMenu}
               className={`p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 ${
@@ -332,7 +266,6 @@ export default function Header({
                       ? "text-white font-semibold bg-yellow-400/20 border-l-4 border-yellow-400"
                       : "text-gray-300 hover:text-white hover:bg-gray-800/50"
                   }`}
-                  aria-label={`Navigate to ${item.label[currentLanguage]}`}
                 >
                   {item.label[currentLanguage]}
                 </button>

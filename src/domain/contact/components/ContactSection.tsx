@@ -14,9 +14,9 @@ export function ContactSection({ currentLanguage }: ContactSectionProps) {
   return (
     <section
       id="contact"
-      className="min-h-screen bg-gray-50 dark:bg-slate-900 flex flex-col"
+      className="py-16 bg-gray-50 dark:bg-slate-900 flex flex-col"
     >
-      <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-16">
+      <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto w-full">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8">

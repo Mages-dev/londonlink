@@ -13,7 +13,7 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
     <section id="books" className="relative overflow-hidden">
       {/* Uses parent background - no additional gradient needed */}
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-center">
           {/* Left side - Text content */}
           <div className="lg:col-span-2 text-center">
@@ -50,7 +50,7 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
       </div>
 
       {/* Author Section */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-20">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-16">
         <div className="grid lg:grid-cols-[4fr_6fr] gap-8 lg:gap-16 items-center">
           {/* Left side - Author image */}
           <div className="relative w-full h-full">
@@ -181,7 +181,7 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
       </div>
 
       {/* Students Section */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid lg:grid-cols-[6fr_4fr] gap-8 lg:gap-16 items-center">
           {/* Left side - Students story text */}
           <div className="text-left lg:order-1 order-2">

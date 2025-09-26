@@ -52,7 +52,7 @@ export function FeedbacksSection({ currentLanguage }: FeedbacksSectionProps) {
   };
 
   return (
-    <section id="feedbacks" className="relative overflow-hidden pt-30 pb-16">
+    <section id="feedbacks" className="relative overflow-hidden py-16">
       {/* Uses parent background - no additional gradient needed */}
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
