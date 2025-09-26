@@ -20,7 +20,7 @@ export function GoalsSection({ currentLanguage }: GoalsSectionProps) {
   const t = goalsTranslations[currentLanguage];
 
   return (
-    <section id="goals" className="relative overflow-hidden">
+    <section id="goals" className="section-bg-hero relative overflow-hidden">
       {/* Main Goals Section - Uses parent background */}
       <div className="relative py-16">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

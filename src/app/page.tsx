@@ -31,7 +31,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 dark:from-blue-900 dark:via-blue-800 dark:to-blue-700">
+    <div className="min-h-screen flex flex-col section-bg-hero">
       <HeaderWithTheme
         currentLanguage={currentLanguage}
         onLanguageChange={handleLanguageChange}

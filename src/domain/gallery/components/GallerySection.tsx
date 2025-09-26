@@ -22,10 +22,7 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
   const horizontalImages = GALLERY_IMAGES.slice(8, 12); // Bottom horizontal part of L (base)
 
   return (
-    <section
-      id="gallery"
-      className="py-16 pb-16 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-blue-900"
-    >
+    <section id="gallery" className="section-bg-contact py-16 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Community Header - Showcasing student success stories and transformations */}
         <div className="text-center mb-12">

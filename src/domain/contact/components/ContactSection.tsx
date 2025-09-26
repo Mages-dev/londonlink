@@ -12,17 +12,14 @@ export function ContactSection({ currentLanguage }: ContactSectionProps) {
   const t = contactTranslations[currentLanguage];
 
   return (
-    <section
-      id="contact"
-      className="py-16 bg-gray-50 dark:bg-slate-900 flex flex-col"
-    >
+    <section id="contact" className="section-bg-hero py-16 flex flex-col">
       <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto w-full">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
               {t.title}
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto">
+            <p className="text-xl text-gray-200 max-w-4xl mx-auto">
               {t.description}
             </p>
           </div>

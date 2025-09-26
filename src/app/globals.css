@@ -14,6 +14,7 @@
   --border: #e2e8f0;
   --blue-gradient-start: #1e40af;
   --blue-gradient-end: #3b82f6;
+  --book-teal: #2190a3;
 }
 
 @theme inline {
@@ -28,6 +29,7 @@
   --color-border: var(--border);
   --color-blue-gradient-start: var(--blue-gradient-start);
   --color-blue-gradient-end: var(--blue-gradient-end);
+  --color-book-teal: var(--book-teal);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -98,4 +100,29 @@ body {
   .section-padding {
     padding: 2rem 0;
   }
+}
+
+/* Section Background Variations */
+
+/* Contact-style neutral background */
+.section-bg-contact {
+  background: #f9fafb;
+}
+
+.dark .section-bg-contact {
+  background: #0f172a;
+}
+
+/* Hero-style teal background (book-teal) */
+.section-bg-hero {
+  background: linear-gradient(135deg, #1a7a8a 0%, #2190a3 50%, #2aa5b8 100%);
+}
+
+.dark .section-bg-hero {
+  background: linear-gradient(135deg, #0f5a66 0%, #1a7a8a 50%, #2190a3 100%);
+}
+
+/* Balanced blue background (for reference) */
+.section-bg-balanced {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #4338ca 100%);
 }

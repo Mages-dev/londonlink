@@ -13,9 +13,9 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
   const t = aboutTranslations[currentLanguage];
 
   return (
-    <section id="about" className="bg-white dark:bg-slate-800 overflow-hidden">
+    <section id="about" className="section-bg-contact overflow-hidden">
       {/* Section 1 - Main Introduction */}
-      <div className="relative py-16 dark:bg-slate-800">
+      <div className="relative py-16">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Text Content */}
@@ -48,7 +48,7 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
       </div>
 
       {/* Section 2 - Philosophy */}
-      <div className="py-16 dark:bg-slate-800">
+      <div className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-12 items-start">
             {/* Image - Left side on desktop */}
@@ -87,7 +87,7 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
       </div>
 
       {/* Section 3 - History */}
-      <div className="py-16 dark:bg-slate-800">
+      <div className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-12 items-start">
             {/* Text Content */}

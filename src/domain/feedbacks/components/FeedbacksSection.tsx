@@ -42,7 +42,7 @@ export function FeedbacksSection({ currentLanguage }: FeedbacksSectionProps) {
     return Array.from({ length: 5 }, (_, i) => (
       <span
         key={i}
-        className={`star-icon text-2xl ${
+        className={`star-icon text-3xl ${
           i < rating ? "text-yellow-400" : "text-gray-300"
         }`}
       >
@@ -52,7 +52,10 @@ export function FeedbacksSection({ currentLanguage }: FeedbacksSectionProps) {
   };
 
   return (
-    <section id="feedbacks" className="relative overflow-hidden py-16">
+    <section
+      id="feedbacks"
+      className="section-bg-hero relative overflow-hidden py-16"
+    >
       {/* Uses parent background - no additional gradient needed */}
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,10 +64,10 @@ export function FeedbacksSection({ currentLanguage }: FeedbacksSectionProps) {
           <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 lg:mb-6 leading-tight">
             {t.title}
           </h2>
-          <p className="text-lg md:text-xl lg:text-2xl text-blue-100 font-light mb-4">
+          <p className="text-lg md:text-xl lg:text-2xl text-teal-100 font-light mb-4">
             {t.subtitle}
           </p>
-          <p className="text-base md:text-lg text-blue-200 max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-teal-200 max-w-3xl mx-auto">
             {t.description}
           </p>
         </div>
@@ -124,7 +127,7 @@ export function FeedbacksSection({ currentLanguage }: FeedbacksSectionProps) {
                 <div className="flex-1 w-full text-center md:text-left flex flex-col justify-center">
                   {/* Name and Stars on same line */}
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-2">
-                    <h4 className="text-xl font-semibold text-white transition-all duration-500 ease-in-out">
+                    <h4 className="text-2xl font-semibold text-white transition-all duration-500 ease-in-out">
                       {t.testimonials[currentTestimonial].name}
                     </h4>
                     <div className="star-rating justify-center md:justify-end transition-all duration-500 ease-in-out">
@@ -173,7 +176,7 @@ export function FeedbacksSection({ currentLanguage }: FeedbacksSectionProps) {
                       onClick={() => goToTestimonial(index)}
                       className={`w-3 h-3 rounded-full transition-colors duration-200 cursor-pointer ${
                         index === currentTestimonial
-                          ? "bg-red-600"
+                          ? "bg-yellow-400"
                           : "bg-white/40 hover:bg-white/60"
                       }`}
                       aria-label={`Go to testimonial ${index + 1}`}
@@ -216,7 +219,7 @@ export function FeedbacksSection({ currentLanguage }: FeedbacksSectionProps) {
               <h4 className="text-lg font-semibold text-white mb-1">
                 {stat.label}
               </h4>
-              <p className="text-sm text-blue-200">{stat.description}</p>
+              <p className="text-sm text-gray-200">{stat.description}</p>
             </div>
           ))}
         </div>
@@ -226,7 +229,7 @@ export function FeedbacksSection({ currentLanguage }: FeedbacksSectionProps) {
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
             {t.cta.title}
           </h3>
-          <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-teal-100 mb-8 max-w-2xl mx-auto">
             {t.cta.description}
           </p>
           <a

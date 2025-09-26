@@ -10,7 +10,7 @@ interface BooksSectionProps {
 
 export function BooksSection({ currentLanguage }: BooksSectionProps) {
   return (
-    <section id="books" className="relative overflow-hidden">
+    <section id="books" className="section-bg-contact relative overflow-hidden">
       {/* Uses parent background - no additional gradient needed */}
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
