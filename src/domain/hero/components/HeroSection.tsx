@@ -56,7 +56,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-block bg-white hover:bg-gray-100 text-blue-700 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl ${
+              className={`inline-block bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl ${
                 isCarnivalTheme ? "carnival-button carnival-glow" : ""
               } ${isValentineTheme ? "valentine-button valentine-glow" : ""} ${
                 isEasterTheme ? "easter-button easter-glow" : ""
@@ -104,7 +104,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-block bg-white hover:bg-gray-100 text-blue-700 font-semibold py-4 px-10 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl text-lg ${
+              className={`inline-block bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold py-4 px-10 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl text-lg ${
                 isCarnivalTheme ? "carnival-button carnival-glow" : ""
               } ${isValentineTheme ? "valentine-button valentine-glow" : ""} ${
                 isEasterTheme ? "easter-button easter-glow" : ""
@@ -121,7 +121,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
             <Image
               src={HERO_IMAGES.backgrounds.main}
               alt={HERO_IMAGE_ALTS.backgrounds.main}
-              width={833}
+              width={700}
               height={625}
               className="h-auto object-cover min-h-[357px]"
               style={{
@@ -178,7 +178,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
 
                   {/* Content */}
                   <div className="flex-1">
-                    <h3 className="font-bold text-white mb-2">
+                    <h3 className="font-bold text-yellow-400 mb-2">
                       {advantage.title}
                     </h3>
                     <p className="text-blue-100">{advantage.description}</p>
@@ -254,8 +254,8 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               backgroundImage: `url(${HERO_IMAGES.backgrounds.enrollNow})`,
             }}
           >
-            {/* Blue overlay */}
-            <div className="absolute inset-0 bg-blue-600/60 rounded-3xl"></div>
+            {/* Teal overlay */}
+            <div className="absolute inset-0 bg-teal-600/60 rounded-3xl"></div>
 
             {/* Content */}
             <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-5 sm:px-10 py-10">
@@ -270,7 +270,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block bg-gray-900 hover:bg-gray-800 text-white font-semibold py-4 px-7 md:py-5 md:px-10 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl text-lg md:text-xl"
+                  className="inline-block bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold py-4 px-7 md:py-5 md:px-10 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl text-lg md:text-xl"
                 >
                   {t.enrollNow.buttonText}
                 </a>

@@ -127,7 +127,7 @@ export function FeedbacksSection({ currentLanguage }: FeedbacksSectionProps) {
                 <div className="flex-1 w-full text-center md:text-left flex flex-col justify-center">
                   {/* Name and Stars on same line */}
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-2">
-                    <h4 className="text-2xl font-semibold text-white transition-all duration-500 ease-in-out">
+                    <h4 className="text-3xl font-semibold text-white transition-all duration-500 ease-in-out">
                       {t.testimonials[currentTestimonial].name}
                     </h4>
                     <div className="star-rating justify-center md:justify-end transition-all duration-500 ease-in-out">
