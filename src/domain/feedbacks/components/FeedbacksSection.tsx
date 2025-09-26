@@ -42,7 +42,7 @@ export function FeedbacksSection({ currentLanguage }: FeedbacksSectionProps) {
     return Array.from({ length: 5 }, (_, i) => (
       <span
         key={i}
-        className={`star-icon text-3xl ${
+        className={`star-icon text-4xl ${
           i < rating ? "text-yellow-400" : "text-gray-300"
         }`}
       >
