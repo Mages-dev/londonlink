@@ -105,21 +105,13 @@ body {
 
 /* Section Background Variations */
 
-/* Contact-style neutral background */
+/* Contact-style neutral background (default dark) */
 .section-bg-contact {
-  background: #f9fafb;
-}
-
-.dark .section-bg-contact {
   background: #0f172a;
 }
 
-/* Hero-style teal background (book-teal) */
+/* Hero-style teal background (book-teal) - default dark */
 .section-bg-hero {
-  background: linear-gradient(135deg, #1a7a8a 0%, #2190a3 50%, #2aa5b8 100%);
-}
-
-.dark .section-bg-hero {
   background: linear-gradient(135deg, #0f5a66 0%, #1a7a8a 50%, #2190a3 100%);
 }
 
