@@ -15,7 +15,7 @@ const navigationItems: NavigationItem[] = [
   { href: "#about", label: { pt: "Sobre", en: "About" } },
   { href: "#goals", label: { pt: "Objetivos", en: "Goals" } },
   { href: "#books", label: { pt: "Livros", en: "Books" } },
-  { href: "#feedbacks", label: { pt: "Feedbacks", en: "Feedbacks" } },
+  { href: "#feedback", label: { pt: "Feedback", en: "Feedback" } },
   { href: "#gallery", label: { pt: "Galeria", en: "Gallery" } },
   { href: "#contact", label: { pt: "Contato", en: "Contact" } },
 ];
@@ -81,7 +81,7 @@ export default function Header({
 
   // 🔹 Agora usamos IntersectionObserver em vez de cálculo manual
   useActiveSection(
-    ["home", "about", "goals", "books", "feedbacks", "gallery", "contact"],
+    ["home", "about", "goals", "books", "feedback", "gallery", "contact"],
     (id) => {
       if (!isScrolling) {
         setActiveSection(id);

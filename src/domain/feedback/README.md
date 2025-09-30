@@ -1,19 +1,19 @@
-# Feedbacks Section
+# Feedback Section
 
-Esta seção é responsável por exibir depoimentos e feedbacks de alunos no site LondonLink.
+Esta seção é responsável por exibir depoimentos e feedback de alunos no site LondonLink.
 
 ## Estrutura
 
 ```
-src/domain/feedbacks/
+src/domain/feedback/
 ├── components/
-│   └── FeedbacksSection.tsx   # Componente principal da seção
+│   └── FeedbackSection.tsx   # Componente principal da seção
 ├── constants/
-│   └── images.ts             # Constantes de imagens dos feedbacks
+│   └── images.ts             # Constantes de imagens do feedback
 ├── hooks/
 │   └── index.ts              # Hooks customizados (futuro)
 ├── styles/
-│   ├── feedbacks.css         # Estilos específicos da seção
+│   ├── feedback.css          # Estilos específicos da seção
 │   └── index.ts              # Exportações dos estilos
 ├── translations/
 │   ├── en.ts                 # Traduções em inglês
@@ -27,7 +27,7 @@ src/domain/feedbacks/
 
 ## Conteúdo da Seção
 
-A seção Feedbacks apresenta:
+A seção Feedback apresenta:
 
 - **Título principal**: "What Our Students Say" (EN) / "O Que Nossos Alunos Dizem" (PT)
 - **Carrossel de depoimentos**: 6 depoimentos de alunos reais
@@ -37,14 +37,16 @@ A seção Feedbacks apresenta:
 
 ## Componentes
 
-### FeedbacksSection
+### FeedbackSection
 
-Componente principal que renderiza toda a seção de feedbacks.
+Componente principal que renderiza toda a seção de feedback.
 
 **Props:**
+
 - `currentLanguage`: Idioma atual da aplicação (`Language`)
 
 **Características:**
+
 - Carrossel interativo de depoimentos
 - Sistema de navegação com setas e indicadores
 - Avaliação por estrelas
@@ -56,17 +58,20 @@ Componente principal que renderiza toda a seção de feedbacks.
 ## Funcionalidades
 
 ### Carrossel de Depoimentos
+
 - Navegação por setas (anterior/próximo)
 - Indicadores de posição
 - Transições suaves
 - Controle por teclado (futuro)
 
 ### Sistema de Avaliação
+
 - Exibição de estrelas (1-5)
 - Animações hover
 - Cores diferenciadas
 
 ### Estatísticas
+
 - Contadores animados
 - 4 métricas principais:
   - 500+ Alunos Satisfeitos
@@ -76,25 +81,25 @@ Componente principal que renderiza toda a seção de feedbacks.
 
 ## Constantes
 
-### FEEDBACKS_IMAGES
+### FEEDBACK_IMAGES
 
-Objeto contendo todas as URLs das imagens dos feedbacks:
+Objeto contendo todas as URLs das imagens do feedback:
 
 ```typescript
-export const FEEDBACKS_IMAGES = {
+export const FEEDBACK_IMAGES = {
   testimonials: {
-    student1: "/assets/images/feedbacks/testimonials/student-1.jpg",
-    student2: "/assets/images/feedbacks/testimonials/student-2.jpg",
+    student1: "/assets/images/feedback/testimonials/student-1.jpg",
+    student2: "/assets/images/feedback/testimonials/student-2.jpg",
     // ... mais estudantes
   },
   backgrounds: {
-    feedbacksHero: "/assets/images/feedbacks/backgrounds/feedbacks-hero.jpg",
-    testimonialsBg: "/assets/images/feedbacks/backgrounds/testimonials-bg.jpg",
+    feedbackHero: "/assets/images/feedback/backgrounds/feedback-hero.jpg",
+    testimonialsBg: "/assets/images/feedback/backgrounds/testimonials-bg.jpg",
   },
   icons: {
-    star: "/assets/images/feedbacks/icons/star.svg",
-    quote: "/assets/images/feedbacks/icons/quote.svg",
-    verified: "/assets/images/feedbacks/icons/verified.svg",
+    star: "/assets/images/feedback/icons/star.svg",
+    quote: "/assets/images/feedback/icons/quote.svg",
+    verified: "/assets/images/feedback/icons/verified.svg",
   },
 };
 ```
@@ -108,7 +113,7 @@ Textos alternativos para acessibilidade das imagens.
 ### Estrutura das Traduções
 
 ```typescript
-export const feedbacksTranslationsEn = {
+export const feedbackTranslationsEn = {
   title: "What Our Students Say",
   subtitle: "Real feedback from real students...",
   testimonials: [
@@ -144,7 +149,7 @@ export const feedbacksTranslationsEn = {
 
 ## Estilos
 
-A seção utiliza estilos específicos definidos em `src/domain/feedbacks/styles/feedbacks.css`:
+A seção utiliza estilos específicos definidos em `src/domain/feedback/styles/feedback.css`:
 
 ```css
 /* Testimonial card animations */
@@ -194,24 +199,24 @@ A seção utiliza estilos específicos definidos em `src/domain/feedbacks/styles
 
 ### Arquitetura DDD dos Estilos
 
-- **Isolamento**: Estilos específicos ficam dentro do domínio Feedbacks
-- **Reutilização**: Classes exportadas via `FEEDBACKS_STYLE_CLASSES`
+- **Isolamento**: Estilos específicos ficam dentro do domínio Feedback
+- **Reutilização**: Classes exportadas via `FEEDBACK_STYLE_CLASSES`
 - **Manutenibilidade**: Estilos organizados por contexto
 - **Escalabilidade**: Fácil adição de novos estilos sem afetar outros domínios
 
 ## Uso
 
 ```typescript
-import { FeedbacksSection } from "@/domain/feedbacks";
+import { FeedbackSection } from "@/domain/feedback";
 
 // Em um componente
-<FeedbacksSection currentLanguage="pt" />
+<FeedbackSection currentLanguage="pt" />;
 ```
 
 ## Futuras Implementações
 
 - Integração com API de depoimentos
-- Sistema de moderação de feedbacks
+- Sistema de moderação de feedback
 - Filtros por categoria/tipo de curso
 - Animações mais avançadas
 - Suporte a vídeo depoimentos

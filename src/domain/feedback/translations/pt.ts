@@ -1,6 +1,6 @@
-// Feedbacks section - Portuguese translations
+// Feedback section - Portuguese translations
 
-export const feedbacksTranslationsPt = {
+export const feedbackTranslationsPt = {
   title: "O Que Nossos Alunos Dizem",
   subtitle:
     "Feedback real de alunos reais que alcançaram seus objetivos no inglês",

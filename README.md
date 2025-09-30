@@ -40,7 +40,7 @@ src/
 │   ├── about/             # About section domain
 │   ├── goals/             # Goals section domain
 │   ├── books/             # Books section domain
-│   ├── feedbacks/         # Feedbacks section domain
+│   ├── feedback/          # Feedback section domain
 │   ├── gallery/           # Gallery section domain
 │   ├── contact/           # Contact section domain
 │   ├── shared/            # Shared utilities across domains
@@ -75,7 +75,7 @@ public/                   # Static assets (same level as src/)
 │   │   └── portfolio/   # Portfolio pieces
 │   ├── goals/           # Goals section images
 │   ├── contact/         # Contact section images
-│   ├── feedbacks/       # Student feedback images
+│   ├── feedback/        # Student feedback images
 │   └── shared/          # Global/shared images
 │       ├── logos/       # Brand logos and favicons
 │       ├── icons/       # UI icons and symbols
@@ -306,7 +306,7 @@ Each business domain has its own image folder:
 - **Gallery Section** (`/gallery/`): Screenshots, demos, portfolio pieces
 - **Goals Section** (`/goals/`): Learning objective illustrations
 - **Contact Section** (`/contact/`): Location images, contact visuals
-- **Feedbacks Section** (`/feedbacks/`): Student photos and testimonials
+- **Feedback Section** (`/feedback/`): Student photos and testimonials
 
 #### **Shared Assets** (`public/assets/images/shared/`)
 

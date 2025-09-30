@@ -1,6 +1,6 @@
-// Feedbacks section - English translations
+// Feedback section - English translations
 
-export const feedbacksTranslationsEn = {
+export const feedbackTranslationsEn = {
   title: "What Our Students Say",
   subtitle: "Real feedback from real students who achieved their English goals",
   description:

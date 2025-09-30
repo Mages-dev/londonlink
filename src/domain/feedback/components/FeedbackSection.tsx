@@ -4,15 +4,15 @@ import { useState, useEffect } from "react";
 import { Language } from "@/types";
 import { OptimizedImage } from "@/domain/shared";
 import { CONTACT_INFO } from "@/domain/shared/constants/contacts";
-import { FEEDBACKS_IMAGES, FEEDBACKS_IMAGE_ALTS } from "../constants/images";
-import { feedbacksTranslations } from "../translations";
+import { FEEDBACK_IMAGES, FEEDBACK_IMAGE_ALTS } from "../constants/images";
+import { feedbackTranslations } from "../translations";
 
-interface FeedbacksSectionProps {
+interface FeedbackSectionProps {
   currentLanguage: Language;
 }
 
-export function FeedbacksSection({ currentLanguage }: FeedbacksSectionProps) {
-  const t = feedbacksTranslations[currentLanguage];
+export function FeedbackSection({ currentLanguage }: FeedbackSectionProps) {
+  const t = feedbackTranslations[currentLanguage];
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   // Auto-rotate testimonials every 8 seconds
@@ -53,7 +53,7 @@ export function FeedbacksSection({ currentLanguage }: FeedbacksSectionProps) {
 
   return (
     <section
-      id="feedbacks"
+      id="feedback"
       className="section-bg-hero relative overflow-hidden py-16"
     >
       {/* Uses parent background - no additional gradient needed */}
@@ -86,11 +86,10 @@ export function FeedbacksSection({ currentLanguage }: FeedbacksSectionProps) {
                   {(() => {
                     const testimonial = t.testimonials[currentTestimonial];
                     const imageKey =
-                      testimonial.id as keyof typeof FEEDBACKS_IMAGES.testimonials;
-                    const currentImage =
-                      FEEDBACKS_IMAGES.testimonials[imageKey];
+                      testimonial.id as keyof typeof FEEDBACK_IMAGES.testimonials;
+                    const currentImage = FEEDBACK_IMAGES.testimonials[imageKey];
                     const currentAlt =
-                      FEEDBACKS_IMAGE_ALTS.testimonials[imageKey];
+                      FEEDBACK_IMAGE_ALTS.testimonials[imageKey];
 
                     if (currentImage) {
                       return (
