@@ -107,18 +107,18 @@ export default function ThemeSuggestion({
           <div className="flex space-x-2 mb-4">
             <div
               className="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-gray-600"
-              style={{ backgroundColor: themeConfig.colors.primary }}
+              style={{ backgroundColor: themeConfig.colors.dark.primary }}
               title="Primary color"
             />
             <div
               className="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-gray-600"
-              style={{ backgroundColor: themeConfig.colors.accent }}
+              style={{ backgroundColor: themeConfig.colors.dark.accent }}
               title="Accent color"
             />
-            {themeConfig.colors.special && (
+            {themeConfig.colors.dark.special && (
               <div
                 className="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-gray-600"
-                style={{ backgroundColor: themeConfig.colors.special }}
+                style={{ backgroundColor: themeConfig.colors.dark.special }}
                 title="Special color"
               />
             )}
