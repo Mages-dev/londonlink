@@ -35,7 +35,7 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
         </div>
 
         {/* L-Shape Gallery */}
-        <div className="relative max-w-4xl mx-auto overflow-hidden">
+        <div className="relative max-w-4xl mx-auto p-4">
           {/* L-Shape Container */}
           <div className="gallery-grid">
             {/* VERTICAL PART OF L - Left Columns (Haste do L - 2 colunas) */}
@@ -89,20 +89,22 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
               return (
                 <div
                   key={image.id}
-                  className={`${getGridPosition()} ${getBorderClass()} relative overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group animate-fade-in-up`}
+                  className={`${getGridPosition()} ${getBorderClass()} relative cursor-pointer group animate-fade-in-up`}
                   onMouseEnter={() => setHoveredImage(image.id)}
                   onMouseLeave={() => setHoveredImage(null)}
                   onClick={() => setSelectedImage(image.id)}
                 >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className={`object-cover transition-transform duration-300 ${
-                      hoveredImage === image.id ? "scale-110" : "scale-100"
-                    }`}
-                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  />
+                  <div className="absolute inset-0 overflow-hidden">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className={`object-cover transition-transform duration-300 ${
+                        hoveredImage === image.id ? "scale-110" : "scale-100"
+                      }`}
+                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                    />
+                  </div>
 
                   {/* Overlay */}
                   <div
@@ -149,20 +151,22 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
               return (
                 <div
                   key={image.id}
-                  className={`${getGridPosition()} ${getBorderClass()} relative overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group animate-fade-in-up`}
+                  className={`${getGridPosition()} ${getBorderClass()} relative cursor-pointer group animate-fade-in-up`}
                   onMouseEnter={() => setHoveredImage(image.id)}
                   onMouseLeave={() => setHoveredImage(null)}
                   onClick={() => setSelectedImage(image.id)}
                 >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className={`object-cover transition-transform duration-300 ${
-                      hoveredImage === image.id ? "scale-110" : "scale-100"
-                    }`}
-                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  />
+                  <div className="absolute inset-0 overflow-hidden">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className={`object-cover transition-transform duration-300 ${
+                        hoveredImage === image.id ? "scale-110" : "scale-100"
+                      }`}
+                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                    />
+                  </div>
 
                   {/* Overlay */}
                   <div
