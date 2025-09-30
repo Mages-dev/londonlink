@@ -17,12 +17,12 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-center">
           {/* Left side - Text content */}
           <div className="lg:col-span-2 text-center">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 lg:mb-6 leading-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 dark:text-white mb-4 lg:mb-6 leading-tight">
               {currentLanguage === "en"
                 ? "Three Lions English"
                 : "Three Lions English"}
             </h2>
-            <p className="text-lg md:text-xl lg:text-2xl text-blue-100 font-light">
+            <p className="text-lg md:text-xl lg:text-2xl text-gray-700 dark:text-blue-100 font-light">
               {currentLanguage === "en"
                 ? "The trilogy is complete"
                 : "A trilogia está completa"}
@@ -69,7 +69,7 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
           </div>
 
           {/* Right side - Author story text */}
-          <div className="space-y-6 text-white">
+          <div className="space-y-6 text-gray-900 dark:text-white">
             <p className="text-lg md:text-xl leading-relaxed">
               {currentLanguage === "en" ? (
                 <>
@@ -92,18 +92,18 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
                 <>
                   The dialogues or &lsquo;stories&rsquo; used to demonstrate
                   grammar areas were
-                  <span className="text-yellow-300 font-semibold">
+                  <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                     {" "}
                     very boring
                   </span>
                   , and often the language didn&apos;t reflect how we actually
-                  <span className="text-yellow-300 font-semibold">
+                  <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                     {" "}
                     speak
                   </span>{" "}
                   English. The exercises were repetitive and didn&apos;t
                   challenge
-                  <span className="text-yellow-300 font-semibold">
+                  <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                     {" "}
                     students
                   </span>{" "}
@@ -113,17 +113,17 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
                 <>
                   Os diálogos ou &lsquo;histórias&rsquo; usados para demonstrar
                   áreas gramaticais eram
-                  <span className="text-yellow-300 font-semibold">
+                  <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                     {" "}
                     muito chatos
                   </span>
                   , e frequentemente a linguagem não refletia como realmente
-                  <span className="text-yellow-300 font-semibold">
+                  <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                     {" "}
                     falamos
                   </span>{" "}
                   inglês. Os exercícios eram repetitivos e não desafiavam os
-                  <span className="text-yellow-300 font-semibold">
+                  <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                     {" "}
                     alunos
                   </span>{" "}
@@ -137,17 +137,17 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
                 <>
                   When I shared my concerns with the owner, he said &lsquo;Do
                   you think
-                  <span className="text-yellow-300 font-semibold">
+                  <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                     {" "}
                     you could write something better?
                   </span>
                   &rsquo;. I think he was surprised when I
-                  <span className="text-yellow-300 font-semibold">
+                  <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                     {" "}
                     said yes
                   </span>
                   , but he asked me to do exactly that – but in the same format
-                  <span className="text-yellow-300 font-semibold">
+                  <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                     {" "}
                     as the old books
                   </span>
@@ -157,18 +157,18 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
                 <>
                   Quando compartilhei minhas preocupações com o proprietário,
                   ele disse &lsquo;Você acha que
-                  <span className="text-yellow-300 font-semibold">
+                  <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                     {" "}
                     poderia escrever algo melhor?
                   </span>
                   &rsquo;. Acho que ele ficou surpreso quando eu
-                  <span className="text-yellow-300 font-semibold">
+                  <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                     {" "}
                     disse que sim
                   </span>
                   , mas ele me pediu para fazer exatamente isso – mas no mesmo
                   formato
-                  <span className="text-yellow-300 font-semibold">
+                  <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                     {" "}
                     dos livros antigos
                   </span>
@@ -185,13 +185,13 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
         <div className="grid lg:grid-cols-[6fr_4fr] gap-8 lg:gap-16 items-center">
           {/* Left side - Students story text */}
           <div className="text-left lg:order-1 order-2">
-            <div className="space-y-6 text-white">
+            <div className="space-y-6 text-gray-900 dark:text-white">
               <p className="text-lg md:text-xl leading-relaxed">
                 {currentLanguage === "en" ? (
                   <>
                     So when I stopped working for other schools and started my
                     own –
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       LondonLink
                     </span>{" "}
@@ -199,7 +199,7 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
                     books, but using my own formulas based on the teaching
                     experiences and methods I&apos;d cultivated during my years
                     teaching in
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       Minas Gerais, Brasília and Recife
                     </span>
@@ -209,7 +209,7 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
                   <>
                     Então, quando parei de trabalhar para outras escolas e
                     comecei a minha própria –
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       LondonLink
                     </span>{" "}
@@ -217,7 +217,7 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
                     de livros, mas usando minhas próprias fórmulas baseadas nas
                     experiências de ensino e métodos que cultivei durante meus
                     anos ensinando em
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       Minas Gerais, Brasília e Recife
                     </span>
@@ -230,18 +230,18 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
                 {currentLanguage === "en" ? (
                   <>
                     They&apos;re designed to be used not just by
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       beginners
                     </span>
                     , but also by students with greater English understanding
                     who need to
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       review the basics
                     </span>{" "}
                     to further improve their fluency at a
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       higher level
                     </span>
@@ -250,18 +250,18 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
                 ) : (
                   <>
                     Eles foram projetados para serem usados não apenas por
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       iniciantes
                     </span>
                     , mas também por alunos com maior compreensão do inglês que
                     precisam
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       revisar o básico
                     </span>{" "}
                     para melhorar ainda mais sua fluência em um
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       nível mais alto
                     </span>
@@ -274,11 +274,11 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
                 {currentLanguage === "en" ? (
                   <>
                     I called the 3 books &lsquo;
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       Three Lions English
                     </span>
                     &rsquo; – based on the emblem used by the
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       English football team
                     </span>
@@ -287,11 +287,11 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
                 ) : (
                   <>
                     Chamei os 3 livros de &lsquo;
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       Three Lions English
                     </span>
                     &rsquo; – baseado no emblema usado pela
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       seleção inglesa de futebol
                     </span>
@@ -304,24 +304,24 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
                 {currentLanguage === "en" ? (
                   <>
                     Since then, the books have been taught daily to a
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       wide variety of students
                     </span>{" "}
                     by a diverse team of
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       brilliant teachers
                     </span>{" "}
                     who provide feedback and monitor student progress. This has
                     allowed me to make
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       small changes and improvements
                     </span>{" "}
                     when needed over time. After many years, I believe we
                     finally have the
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       finished product
                     </span>
@@ -331,24 +331,24 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
                   <>
                     Desde então, os livros têm sido ensinados diariamente para
                     uma
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       grande variedade de alunos
                     </span>{" "}
                     por uma equipe diversa de
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       professores brilhantes
                     </span>{" "}
                     que fornecem feedback e monitoram o progresso dos alunos.
                     Isso me permitiu fazer
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       pequenas mudanças e melhorias
                     </span>{" "}
                     quando necessário ao longo do tempo. Após muitos anos,
                     acredito que finalmente temos o
-                    <span className="text-yellow-300 font-semibold">
+                    <span className="text-yellow-600 dark:text-yellow-300 font-semibold">
                       {" "}
                       produto finalizado
                     </span>

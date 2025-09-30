@@ -14,20 +14,38 @@ const halloweenTheme: ThemeConfig = {
     en: "Spooky Halloween theme with orange and purple colors",
   },
   colors: {
-    background: "#0c0a09", // Stone-950
-    foreground: "#fafaf9", // Stone-50
-    primary: "#fb923c", // Orange-400
-    primaryDark: "#ea580c", // Orange-600
-    primaryLight: "#fed7aa", // Orange-200
-    secondary: "#a8a29e", // Stone-400
-    accent: "#dc2626", // Red-600
-    muted: "#292524", // Stone-800
-    border: "#57534e", // Stone-600
-    blueGradientStart: "#7c2d12", // Red-900
-    blueGradientEnd: "#ea580c", // Orange-600
-    special: "#c084fc", // Purple-400 (brighter for dark mode)
-    specialSecondary: "#111827", // Gray-900
-    specialAccent: "#fcd34d", // Amber-300
+    light: {
+      background: "#fef7ed", // Orange-50
+      foreground: "#1c1917", // Stone-900
+      primary: "#ea580c", // Orange-600
+      primaryDark: "#c2410c", // Orange-700
+      primaryLight: "#fb923c", // Orange-400
+      secondary: "#78716c", // Stone-500
+      accent: "#7c2d12", // Red-900
+      muted: "#fed7aa", // Orange-200
+      border: "#fdba74", // Orange-300
+      blueGradientStart: "#ea580c", // Orange-600
+      blueGradientEnd: "#fb923c", // Orange-400
+      special: "#a855f7", // Purple-500
+      specialSecondary: "#1f2937", // Gray-800
+      specialAccent: "#fbbf24", // Amber-400
+    },
+    dark: {
+      background: "#0c0a09", // Stone-950
+      foreground: "#fafaf9", // Stone-50
+      primary: "#fb923c", // Orange-400
+      primaryDark: "#ea580c", // Orange-600
+      primaryLight: "#fed7aa", // Orange-200
+      secondary: "#a8a29e", // Stone-400
+      accent: "#dc2626", // Red-600
+      muted: "#292524", // Stone-800
+      border: "#57534e", // Stone-600
+      blueGradientStart: "#7c2d12", // Red-900
+      blueGradientEnd: "#ea580c", // Orange-600
+      special: "#c084fc", // Purple-400
+      specialSecondary: "#111827", // Gray-900
+      specialAccent: "#fcd34d", // Amber-300
+    },
   },
   dateRange: {
     start: { month: 10, day: 24 }, // October 24th (1 week before Halloween)
@@ -54,17 +72,32 @@ const defaultTheme: ThemeConfig = {
     en: "Default LondonLink theme with blue colors",
   },
   colors: {
-    background: "#0f172a",
-    foreground: "#f1f5f9",
-    primary: "#3b82f6",
-    primaryDark: "#2563eb",
-    primaryLight: "#60a5fa",
-    secondary: "#64748b",
-    accent: "#ef4444",
-    muted: "#1e293b",
-    border: "#334155",
-    blueGradientStart: "#1e40af",
-    blueGradientEnd: "#3b82f6",
+    light: {
+      background: "#ffffff",
+      foreground: "#171717",
+      primary: "#2563eb",
+      primaryDark: "#1d4ed8",
+      primaryLight: "#3b82f6",
+      secondary: "#64748b",
+      accent: "#ef4444",
+      muted: "#f8fafc",
+      border: "#e2e8f0",
+      blueGradientStart: "#1e40af",
+      blueGradientEnd: "#3b82f6",
+    },
+    dark: {
+      background: "#0f172a",
+      foreground: "#f1f5f9",
+      primary: "#3b82f6",
+      primaryDark: "#2563eb",
+      primaryLight: "#60a5fa",
+      secondary: "#64748b",
+      accent: "#ef4444",
+      muted: "#1e293b",
+      border: "#334155",
+      blueGradientStart: "#1e40af",
+      blueGradientEnd: "#3b82f6",
+    },
   },
   icon: "🌐",
 };
@@ -81,20 +114,38 @@ const christmasTheme: ThemeConfig = {
     en: "Festive Christmas theme with red and green colors",
   },
   colors: {
-    background: "#0f1419",
-    foreground: "#f9fafb",
-    primary: "#f87171",
-    primaryDark: "#dc2626",
-    primaryLight: "#fca5a5",
-    secondary: "#9ca3af",
-    accent: "#10b981",
-    muted: "#374151",
-    border: "#6b7280",
-    blueGradientStart: "#7f1d1d",
-    blueGradientEnd: "#065f46",
-    special: "#fcd34d",
-    specialSecondary: "#064e3b",
-    specialAccent: "#fbbf24",
+    light: {
+      background: "#fef2f2",
+      foreground: "#1f2937",
+      primary: "#dc2626",
+      primaryDark: "#b91c1c",
+      primaryLight: "#f87171",
+      secondary: "#6b7280",
+      accent: "#059669",
+      muted: "#fee2e2",
+      border: "#fca5a5",
+      blueGradientStart: "#dc2626",
+      blueGradientEnd: "#059669",
+      special: "#fbbf24",
+      specialSecondary: "#065f46",
+      specialAccent: "#fcd34d",
+    },
+    dark: {
+      background: "#0f1419",
+      foreground: "#f9fafb",
+      primary: "#f87171",
+      primaryDark: "#dc2626",
+      primaryLight: "#fca5a5",
+      secondary: "#9ca3af",
+      accent: "#10b981",
+      muted: "#374151",
+      border: "#6b7280",
+      blueGradientStart: "#7f1d1d",
+      blueGradientEnd: "#065f46",
+      special: "#fcd34d",
+      specialSecondary: "#064e3b",
+      specialAccent: "#fbbf24",
+    },
   },
   dateRange: {
     start: { month: 12, day: 15 }, // December 15th (10 days before Christmas)
@@ -116,20 +167,38 @@ const newYearTheme: ThemeConfig = {
     en: "Festive New Year theme with gold and silver colors",
   },
   colors: {
-    background: "#0c0a09",
-    foreground: "#fafaf9",
-    primary: "#f59e0b",
-    primaryDark: "#d97706",
-    primaryLight: "#fbbf24",
-    secondary: "#9ca3af",
-    accent: "#8b5cf6",
-    muted: "#451a03",
-    border: "#78716c",
-    blueGradientStart: "#92400e",
-    blueGradientEnd: "#5b21b6",
-    special: "#fbbf24",
-    specialSecondary: "#3730a3",
-    specialAccent: "#e5e7eb",
+    light: {
+      background: "#ffffff",
+      foreground: "#171717",
+      primary: "#d97706", // Amber/Gold
+      primaryDark: "#b45309",
+      primaryLight: "#f59e0b",
+      secondary: "#6b7280",
+      accent: "#6366f1", // Indigo/Purple
+      muted: "#fef3c7",
+      border: "#fbbf24",
+      blueGradientStart: "#d97706",
+      blueGradientEnd: "#6366f1",
+      special: "#eab308", // Gold
+      specialSecondary: "#4338ca",
+      specialAccent: "#f3f4f6", // Silver
+    },
+    dark: {
+      background: "#0c0a09",
+      foreground: "#fafaf9",
+      primary: "#f59e0b",
+      primaryDark: "#d97706",
+      primaryLight: "#fbbf24",
+      secondary: "#9ca3af",
+      accent: "#8b5cf6",
+      muted: "#451a03",
+      border: "#78716c",
+      blueGradientStart: "#92400e",
+      blueGradientEnd: "#5b21b6",
+      special: "#fbbf24",
+      specialSecondary: "#3730a3",
+      specialAccent: "#e5e7eb",
+    },
   },
   dateRange: {
     start: { month: 12, day: 31 }, // December 31st (New Year's Eve)
@@ -151,20 +220,38 @@ const valentineTheme: ThemeConfig = {
     en: "Romantic Valentine's Day theme with pink and red colors",
   },
   colors: {
-    background: "#1f1018",
-    foreground: "#fdf2f8",
-    primary: "#f43f5e",
-    primaryDark: "#e11d48",
-    primaryLight: "#fb7185",
-    secondary: "#9ca3af",
-    accent: "#f472b6",
-    muted: "#4c1d24",
-    border: "#9f1239",
-    blueGradientStart: "#881337",
-    blueGradientEnd: "#be185d",
-    special: "#f9a8d4",
-    specialSecondary: "#831843",
-    specialAccent: "#fce7f3",
+    light: {
+      background: "#ffffff",
+      foreground: "#171717",
+      primary: "#e11d48", // Rose/Pink
+      primaryDark: "#be185d",
+      primaryLight: "#f43f5e",
+      secondary: "#6b7280",
+      accent: "#ec4899", // Hot Pink
+      muted: "#fdf2f8",
+      border: "#f9a8d4",
+      blueGradientStart: "#e11d48",
+      blueGradientEnd: "#ec4899",
+      special: "#f472b6", // Pink
+      specialSecondary: "#be185d",
+      specialAccent: "#fce7f3", // Light Pink
+    },
+    dark: {
+      background: "#1f1018",
+      foreground: "#fdf2f8",
+      primary: "#f43f5e",
+      primaryDark: "#e11d48",
+      primaryLight: "#fb7185",
+      secondary: "#9ca3af",
+      accent: "#f472b6",
+      muted: "#4c1d24",
+      border: "#9f1239",
+      blueGradientStart: "#881337",
+      blueGradientEnd: "#be185d",
+      special: "#f9a8d4",
+      specialSecondary: "#831843",
+      specialAccent: "#fce7f3",
+    },
   },
   dateRange: {
     start: { month: 2, day: 14 }, // February 14th (Valentine's Day only)
@@ -186,20 +273,38 @@ const easterTheme: ThemeConfig = {
     en: "Easter theme with pastel colors and spring elements",
   },
   colors: {
-    background: "#0f1419",
-    foreground: "#f0fdf4",
-    primary: "#34d399",
-    primaryDark: "#10b981",
-    primaryLight: "#6ee7b7",
-    secondary: "#9ca3af",
-    accent: "#fbbf24",
-    muted: "#064e3b",
-    border: "#059669",
-    blueGradientStart: "#065f46",
-    blueGradientEnd: "#92400e",
-    special: "#fcd34d",
-    specialSecondary: "#451a03",
-    specialAccent: "#fef3c7",
+    light: {
+      background: "#ffffff",
+      foreground: "#171717",
+      primary: "#10b981", // Emerald/Green
+      primaryDark: "#059669",
+      primaryLight: "#34d399",
+      secondary: "#6b7280",
+      accent: "#f59e0b", // Amber/Yellow
+      muted: "#f0fdf4",
+      border: "#a7f3d0",
+      blueGradientStart: "#10b981",
+      blueGradientEnd: "#f59e0b",
+      special: "#fbbf24", // Yellow
+      specialSecondary: "#065f46",
+      specialAccent: "#fef3c7", // Light Yellow
+    },
+    dark: {
+      background: "#0f1419",
+      foreground: "#f0fdf4",
+      primary: "#34d399",
+      primaryDark: "#10b981",
+      primaryLight: "#6ee7b7",
+      secondary: "#9ca3af",
+      accent: "#fbbf24",
+      muted: "#064e3b",
+      border: "#059669",
+      blueGradientStart: "#065f46",
+      blueGradientEnd: "#92400e",
+      special: "#fcd34d",
+      specialSecondary: "#451a03",
+      specialAccent: "#fef3c7",
+    },
   },
   dateRange: undefined, // Uses dynamic dates instead
   dynamicDates: getCurrentEasterDates(),
@@ -219,20 +324,38 @@ const carnivalTheme: ThemeConfig = {
     en: "Vibrant Carnival theme with joyful colors and festive elements",
   },
   colors: {
-    background: "#0f0a19",
-    foreground: "#fff7ed",
-    primary: "#ff8c5a",
-    primaryDark: "#ff6b35",
-    primaryLight: "#ffad85",
-    secondary: "#9ca3af",
-    accent: "#fbbf24",
-    muted: "#451a03",
-    border: "#c41e3a",
-    blueGradientStart: "#451a03",
-    blueGradientEnd: "#7c2d12",
-    special: "#ef4444",
-    specialSecondary: "#059669",
-    specialAccent: "#a855f7",
+    light: {
+      background: "#ffffff",
+      foreground: "#171717",
+      primary: "#ff6b35", // Laranja vibrante
+      primaryDark: "#e55a2b",
+      primaryLight: "#ff8c5a",
+      secondary: "#6b7280",
+      accent: "#f7931e", // Amarelo dourado
+      muted: "#fff7ed",
+      border: "#fed7aa",
+      blueGradientStart: "#ff6b35",
+      blueGradientEnd: "#c41e3a",
+      special: "#c41e3a", // Vermelho intenso
+      specialSecondary: "#2e8b57", // Verde esmeralda
+      specialAccent: "#9932cc", // Roxo real
+    },
+    dark: {
+      background: "#0f0a19",
+      foreground: "#fff7ed",
+      primary: "#ff8c5a",
+      primaryDark: "#ff6b35",
+      primaryLight: "#ffad85",
+      secondary: "#9ca3af",
+      accent: "#fbbf24",
+      muted: "#451a03",
+      border: "#c41e3a",
+      blueGradientStart: "#451a03",
+      blueGradientEnd: "#7c2d12",
+      special: "#ef4444",
+      specialSecondary: "#059669",
+      specialAccent: "#a855f7",
+    },
   },
   dateRange: undefined, // Uses dynamic dates instead
   dynamicDates: getCurrentCarnivalDates(),

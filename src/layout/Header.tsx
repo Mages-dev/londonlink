@@ -8,6 +8,7 @@ import {
   SHARED_IMAGE_ALTS,
 } from "@/domain/shared";
 import { ThemeSelector } from "@/components/ui";
+import { useTheme } from "@/contexts/ThemeContext";
 
 // Navigation items with bilingual support
 const navigationItems: NavigationItem[] = [
@@ -68,6 +69,7 @@ export default function Header({
   const [activeSection, setActiveSection] = useState("home");
   const [windowWidth, setWindowWidth] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
+  const { mode, setMode } = useTheme();
 
   // Detect window width for responsive navigation
   useEffect(() => {
@@ -98,6 +100,11 @@ export default function Header({
     onLanguageChange?.(newLanguage);
   };
 
+  const handleThemeToggle = () => {
+    const newMode = mode === "dark" ? "light" : "dark";
+    setMode(newMode);
+  };
+
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -110,7 +117,7 @@ export default function Header({
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/75 backdrop-blur-sm border-b border-gray-200 dark:border-slate-700">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/75 backdrop-blur-sm border-b border-slate-700">
       <nav className="max-w-7xl mx-auto px-6 py-5">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -182,16 +189,55 @@ export default function Header({
             </div>
           </div>
 
-          {/* Theme Selector, Language Toggle & Mobile Menu */}
+          {/* Theme Selector, Theme Toggle, Language Toggle & Mobile Menu */}
           <div className="flex items-center space-x-4">
             {!disableThemeSelector &&
               process.env.NODE_ENV === "development" && (
                 <ThemeSelector currentLanguage={currentLanguage} />
               )}
 
+            {/* Theme Toggle Button - Shows current theme */}
+            <button
+              onClick={handleThemeToggle}
+              className="flex items-center justify-center p-3 rounded-lg bg-gray-800 hover:bg-gray-700 transition-all duration-200 shadow-sm hover:shadow-md"
+              aria-label={
+                mode === "dark"
+                  ? currentLanguage === "pt"
+                    ? "Tema escuro ativo - Clique para alternar"
+                    : "Dark theme active - Click to toggle"
+                  : currentLanguage === "pt"
+                  ? "Tema claro ativo - Clique para alternar"
+                  : "Light theme active - Click to toggle"
+              }
+            >
+              <div className="w-6 h-6 flex items-center justify-center">
+                <OptimizedImage
+                  src={
+                    mode === "dark"
+                      ? SHARED_IMAGES.icons.moon
+                      : SHARED_IMAGES.icons.sun
+                  }
+                  alt={
+                    mode === "dark"
+                      ? SHARED_IMAGE_ALTS.icons.moon
+                      : SHARED_IMAGE_ALTS.icons.sun
+                  }
+                  width={24}
+                  height={24}
+                  className="w-full h-full object-contain text-gray-300"
+                />
+              </div>
+            </button>
+
+            {/* Language Toggle Button */}
             <button
               onClick={handleLanguageToggle}
-              className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 shadow-sm hover:shadow-md"
+              className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-all duration-200 shadow-sm hover:shadow-md"
+              aria-label={
+                currentLanguage === "en"
+                  ? "Switch to Portuguese"
+                  : "Mudar para Inglês"
+              }
             >
               <div className="w-6 h-6 rounded-full overflow-hidden shadow-sm">
                 <OptimizedImage
@@ -210,14 +256,14 @@ export default function Header({
                   className="w-full h-full object-cover"
                 />
               </div>
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              <span className="text-sm font-medium text-gray-300">
                 {currentLanguage === "en" ? "EN" : "PT"}
               </span>
             </button>
 
             <button
               onClick={toggleMobileMenu}
-              className={`p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 ${
+              className={`p-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 ${
                 windowWidth < 817 ? "block" : "hidden"
               }`}
               aria-label="Toggle mobile menu"
@@ -225,17 +271,17 @@ export default function Header({
             >
               <div className="w-6 h-6 flex flex-col justify-center items-center">
                 <span
-                  className={`block w-5 h-0.5 bg-gray-600 dark:bg-gray-300 transition-all duration-300 ${
+                  className={`block w-5 h-0.5 bg-gray-300 transition-all duration-300 ${
                     isMobileMenuOpen ? "rotate-45 translate-y-1" : ""
                   }`}
                 />
                 <span
-                  className={`block w-5 h-0.5 bg-gray-600 dark:bg-gray-300 transition-all duration-300 mt-1 ${
+                  className={`block w-5 h-0.5 bg-gray-300 transition-all duration-300 mt-1 ${
                     isMobileMenuOpen ? "opacity-0" : ""
                   }`}
                 />
                 <span
-                  className={`block w-5 h-0.5 bg-gray-600 dark:bg-gray-300 transition-all duration-300 mt-1 ${
+                  className={`block w-5 h-0.5 bg-gray-300 transition-all duration-300 mt-1 ${
                     isMobileMenuOpen ? "-rotate-45 -translate-y-1" : ""
                   }`}
                 />
@@ -254,7 +300,7 @@ export default function Header({
               : "max-h-0 opacity-0 overflow-hidden"
           }`}
         >
-          <div className="py-6 space-y-2 border-t border-gray-200 dark:border-gray-700">
+          <div className="py-6 space-y-2 border-t border-slate-700">
             {navigationItems.map((item) => {
               const isActive = activeSection === item.href.replace("#", "");
               return (

@@ -1,21 +1,39 @@
 @import "tailwindcss";
 
+/* Tailwind v4 Dark Mode Configuration */
+@variant dark (&:where(.dark, .dark *));
+
 /* LondonLink Global Styles */
 
 :root {
-  /* Default to dark palette (light removed) */
-  --background: #0f172a;
-  --foreground: #f1f5f9;
+  /* Default to light palette */
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --primary-light: #3b82f6;
+  --secondary: #64748b;
+  --accent: #ef4444;
+  --muted: #f8fafc;
+  --border: #e2e8f0;
+  --blue-gradient-start: #1e40af;
+  --blue-gradient-end: #3b82f6;
+  --book-teal: #2190a3;
+}
+
+/* Light mode styles */
+.light {
+  --background: #ffffff;
+  --foreground: #0f172a;
   --primary: #3b82f6;
   --primary-dark: #2563eb;
   --primary-light: #60a5fa;
   --secondary: #64748b;
   --accent: #ef4444;
-  --muted: #1e293b;
-  --border: #334155;
-  --blue-gradient-start: #1e40af;
-  --blue-gradient-end: #3b82f6;
-  --book-teal: #2190a3;
+  --muted: #f1f5f9;
+  --border: #e2e8f0;
+  --blue-gradient-start: #3b82f6;
+  --blue-gradient-end: #60a5fa;
 }
 
 @theme inline {
@@ -105,13 +123,21 @@ body {
 
 /* Section Background Variations */
 
-/* Contact-style neutral background (default dark) */
+/* Contact-style neutral background */
 .section-bg-contact {
+  background: #f9fafb;
+}
+
+.dark .section-bg-contact {
   background: #0f172a;
 }
 
-/* Hero-style teal background (book-teal) - default dark */
+/* Hero-style teal background (book-teal) */
 .section-bg-hero {
+  background: linear-gradient(135deg, #1a7a8a 0%, #2190a3 50%, #2aa5b8 100%);
+}
+
+.dark .section-bg-hero {
   background: linear-gradient(135deg, #0f5a66 0%, #1a7a8a 50%, #2190a3 100%);
 }
 

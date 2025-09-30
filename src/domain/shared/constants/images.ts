@@ -9,6 +9,8 @@ export const SHARED_IMAGES = {
   icons: {
     ukFlag: "/icons/uk.svg",
     brFlag: "/icons/br.svg",
+    sun: "/icons/sun.svg",
+    moon: "/icons/moon.svg",
     // Other icons can be added here when available
   },
   backgrounds: {
@@ -28,6 +30,8 @@ export const SHARED_IMAGE_ALTS = {
   icons: {
     ukFlag: "United Kingdom flag",
     brFlag: "Brazil flag",
+    sun: "Light theme icon",
+    moon: "Dark theme icon",
     // Other icon alt texts can be added here when available
   },
 } as const;

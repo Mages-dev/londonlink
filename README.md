@@ -9,7 +9,7 @@ LondonLink is a comprehensive English learning platform designed specifically fo
 - **Next.js 15** - React framework with App Router
 - **React 19** - Latest React features
 - **TypeScript** - Type safety and better development experience
-- **Tailwind CSS** - Utility-first CSS framework
+- **Tailwind CSS v4** - Utility-first CSS framework
 - **ESLint** - Code linting and formatting
 
 ## 📁 Project Structure

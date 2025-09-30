@@ -33,7 +33,7 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [mode, setModeState] = useState<ThemeMode>("dark");
+  const [mode, setModeState] = useState<ThemeMode>("auto");
   const [commemorativeTheme, setCommemorativeThemeState] =
     useState<CommemorativeTheme>("default");
   const [mounted, setMounted] = useState(false);
@@ -49,7 +49,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       STORAGE_KEYS.COMMEMORATIVE
     ) as CommemorativeTheme;
 
-    if (savedMode && ["dark", "auto"].includes(savedMode)) {
+    if (savedMode && ["light", "dark", "auto"].includes(savedMode)) {
       setModeState(savedMode);
     }
 
@@ -125,8 +125,15 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     const root = document.documentElement;
     const body = document.body;
 
-    // Force dark mode; light mode removed
-    const actualMode = "dark" as const;
+    // Determine actual mode (support light, dark, and auto)
+    let actualMode: "light" | "dark" = mode === "light" ? "light" : "dark";
+
+    if (mode === "auto") {
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      actualMode = prefersDark ? "dark" : "light";
+    }
 
     // Remove existing theme classes
     root.classList.remove("light", "dark");
@@ -142,9 +149,9 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     // Apply commemorative theme class
     body.classList.add(`theme-${commemorativeTheme}`);
 
-    // Apply CSS variables (single dark palette)
+    // Apply CSS variables
     const config = getThemeConfig(commemorativeTheme);
-    const colors = config.colors;
+    const colors = config.colors[actualMode];
 
     Object.entries(colors).forEach(([key, value]) => {
       if (value) {
@@ -199,10 +206,18 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     }
   };
 
-  // Get current colors (light removed) - single palette
+  // Get current colors based on mode and commemorative theme
   const getCurrentColors = (): ThemeColors => {
     const config = getThemeConfig(commemorativeTheme);
-    return config.colors;
+    const actualMode =
+      mode === "auto"
+        ? typeof window !== "undefined" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light"
+        : mode;
+
+    return config.colors[actualMode];
   };
 
   // Check if commemorative theme is active (not default)
@@ -230,21 +245,21 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     return (
       <ThemeContext.Provider
         value={{
-          mode: "dark",
+          mode: "auto",
           commemorativeTheme: "default",
           setMode: () => {},
           setCommemorativeTheme: () => {},
           resetToAutomatic: () => {},
           currentColors: {
-            background: "#0f172a",
-            foreground: "#f1f5f9",
-            primary: "#3b82f6",
-            primaryDark: "#2563eb",
-            primaryLight: "#60a5fa",
+            background: "#ffffff",
+            foreground: "#171717",
+            primary: "#2563eb",
+            primaryDark: "#1d4ed8",
+            primaryLight: "#3b82f6",
             secondary: "#64748b",
             accent: "#ef4444",
-            muted: "#1e293b",
-            border: "#334155",
+            muted: "#f8fafc",
+            border: "#e2e8f0",
             blueGradientStart: "#1e40af",
             blueGradientEnd: "#3b82f6",
           },
