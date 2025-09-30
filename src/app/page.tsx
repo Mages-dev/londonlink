@@ -7,7 +7,7 @@ import {
   AboutSection,
   GoalsSection,
   BooksSection,
-  FeedbackSection,
+  FeedbackAlternatingSection,
   GallerySection,
   ContactSection,
 } from "@/domain/sections";
@@ -41,7 +41,7 @@ export default function Home() {
       <AboutSection currentLanguage={currentLanguage} />
       <GoalsSection currentLanguage={currentLanguage} />
       <BooksSection currentLanguage={currentLanguage} />
-      <FeedbackSection currentLanguage={currentLanguage} />
+      <FeedbackAlternatingSection currentLanguage={currentLanguage} />
       <GallerySection currentLanguage={currentLanguage} />
       <ContactSection currentLanguage={currentLanguage} />
       <Footer />

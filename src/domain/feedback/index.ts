@@ -1,5 +1,6 @@
 // Components
 export { FeedbackSection } from "./components/FeedbackSection";
+export { FeedbackAlternatingSection } from "./components/FeedbackAlternatingSection";
 
 // Constants
 export { FEEDBACK_IMAGES, FEEDBACK_IMAGE_ALTS } from "./constants/images";
