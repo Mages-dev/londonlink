@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { HeaderWithTheme, Footer } from "@/layout";
 import {
   HeroSection,
@@ -12,7 +11,6 @@ import {
   ContactSection,
 } from "@/domain/sections";
 import { WhatsAppFloat } from "@/components";
-import { Language } from "@/types";
 import {
   CarnivalEffects,
   ValentineEffects,
@@ -22,28 +20,25 @@ import {
   NewYearEffects,
 } from "@/components/ui";
 import ThemeDebug from "@/components/ui/ThemeDebug";
+import { useLanguage } from "@/contexts";
 
 export default function Home() {
-  const [currentLanguage, setCurrentLanguage] = useState<Language>("pt");
-
-  const handleLanguageChange = (language: Language) => {
-    setCurrentLanguage(language);
-  };
+  const { language, setLanguage } = useLanguage();
 
   return (
     <div className="min-h-screen flex flex-col section-bg-hero">
       <HeaderWithTheme
-        currentLanguage={currentLanguage}
-        onLanguageChange={handleLanguageChange}
+        currentLanguage={language}
+        onLanguageChange={setLanguage}
       />
 
-      <HeroSection currentLanguage={currentLanguage} />
-      <AboutSection currentLanguage={currentLanguage} />
-      <GoalsSection currentLanguage={currentLanguage} />
-      <BooksSection currentLanguage={currentLanguage} />
-      <FeedbackAlternatingSection currentLanguage={currentLanguage} />
-      <GallerySection currentLanguage={currentLanguage} />
-      <ContactSection currentLanguage={currentLanguage} />
+      <HeroSection currentLanguage={language} />
+      <AboutSection currentLanguage={language} />
+      <GoalsSection currentLanguage={language} />
+      <BooksSection currentLanguage={language} />
+      <FeedbackAlternatingSection currentLanguage={language} />
+      <GallerySection currentLanguage={language} />
+      <ContactSection currentLanguage={language} />
       <Footer />
 
       {/* Seasonal effects overlay */}
@@ -55,7 +50,7 @@ export default function Home() {
       <NewYearEffects />
 
       {/* WhatsApp Float Button */}
-      <WhatsAppFloat currentLanguage={currentLanguage} />
+      <WhatsAppFloat currentLanguage={language} />
 
       {/* Debug info - only in development */}
       {process.env.NODE_ENV === "development" && <ThemeDebug />}

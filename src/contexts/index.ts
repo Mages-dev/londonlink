@@ -8,3 +8,5 @@ export {
   useThemeSeason,
   useThemeSuggestions,
 } from "./ThemeContext";
+
+export { LanguageProvider, useLanguage } from "./LanguageContext";
