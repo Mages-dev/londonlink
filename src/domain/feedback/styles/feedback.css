@@ -10,6 +10,11 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
+/* Dark mode hover shadow */
+.dark .testimonial-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
 /* Star rating animations */
 .star-rating {
   display: flex;
@@ -18,7 +23,7 @@
 
 .star-icon {
   transition: all 0.2s ease-in-out;
-  color: #fbbf24;
+  color: var(--color-yellow-400, #fbbf24);
 }
 
 .star-icon:hover {
@@ -32,8 +37,14 @@
   top: -10px;
   left: -10px;
   font-size: 4rem;
-  color: #ffffff;
+  color: var(--foreground, #f1f5f9);
   z-index: 0;
+}
+
+/* Quote icon for light mode */
+.light .quote-icon {
+  color: var(--foreground, #171717);
+  opacity: 0.1;
 }
 
 /* Testimonial text styling */
@@ -56,11 +67,29 @@
 /* Statistics counter animation */
 .stat-number {
   font-weight: 700;
-  background: linear-gradient(135deg, #ffffff, #f0f9ff, #e0f2fe);
+  background: linear-gradient(
+    135deg,
+    var(--foreground, #f1f5f9),
+    var(--color-primary-light, #60a5fa),
+    var(--color-primary, #3b82f6)
+  );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: countUp 2s ease-out;
+}
+
+/* Light mode statistics */
+.light .stat-number {
+  background: linear-gradient(
+    135deg,
+    var(--foreground, #171717),
+    var(--color-primary-dark, #2563eb),
+    var(--color-primary, #3b82f6)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @keyframes countUp {
@@ -79,7 +108,11 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(
+    135deg,
+    var(--color-green-500, #10b981),
+    var(--color-green-600, #059669)
+  );
   color: white;
   padding: 4px 8px;
   border-radius: 12px;
@@ -92,8 +125,8 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
+  background: var(--background, rgba(255, 255, 255, 0.9));
+  border: 1px solid var(--border, rgba(226, 232, 240, 0.5));
   border-radius: 50%;
   width: 48px;
   height: 48px;
@@ -103,12 +136,26 @@
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 10;
+  color: var(--foreground, #171717);
 }
 
 .carousel-nav:hover {
-  background: rgba(255, 255, 255, 1);
+  background: var(--background, rgba(255, 255, 255, 1));
   transform: translateY(-50%) scale(1.1);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: var(--color-primary, #3b82f6);
+}
+
+/* Dark mode carousel navigation */
+.dark .carousel-nav {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: rgba(51, 65, 85, 0.5);
+  color: var(--foreground, #f1f5f9);
+}
+
+.dark .carousel-nav:hover {
+  background: rgba(30, 41, 59, 1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
 .carousel-nav.prev {

@@ -1,33 +1,19 @@
 /* Goals Section - Specific Styles */
 
-/* CSS Variables for Goals Section */
-:root {
-  --goals-card-icon-bg-color: #818181;
-  --goals-card-borders-color: #ffffff;
-  --goals-card-hover-border-color: #fbbf24;
-}
-
-/* Dark mode variables */
-.dark {
-  --goals-card-icon-bg-color: #818181;
-  --goals-card-borders-color: #ffffff;
-  --goals-card-hover-border-color: #fbbf24;
-}
-
-/* Goals section icon frame */
+/* Goals section icon frame - dark mode only */
 .goals-icon-frame {
   width: 60px;
   height: 60px;
-  background-color: var(--goals-card-icon-bg-color);
+  background-color: #818181;
   border-radius: 12px;
-  border: 4px solid var(--goals-card-borders-color);
+  border: 4px solid #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
 }
 
-/* Icon styling inside the frame */
+/* Icon styling inside the frame - inverted for contrast */
 .goals-icon-frame img,
 .goals-icon-frame svg {
   filter: brightness(0) saturate(100%) invert(100%);
@@ -40,6 +26,12 @@
 
 .goals-card:hover {
   transform: translateY(-2px);
+}
+
+/* Hover effect */
+.goals-card:hover .goals-icon-frame {
+  border-color: #fbbf24;
+  transform: scale(1.05);
 }
 
 /* Goals section specific utilities */
