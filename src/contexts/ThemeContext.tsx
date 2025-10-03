@@ -262,6 +262,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
             border: "#e2e8f0",
             blueGradientStart: "#1e40af",
             blueGradientEnd: "#3b82f6",
+            bookTeal: "#2190a3",
+            yellow400: "#fbbf24",
           },
           isCommemorativeThemeActive: false,
           suggestedTheme: undefined,
