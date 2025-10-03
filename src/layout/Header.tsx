@@ -9,6 +9,7 @@ import {
 } from "@/domain/shared";
 import { ThemeSelector } from "@/components/ui";
 import { useTheme } from "@/contexts/ThemeContext";
+import "./styles/header.css";
 
 // Navigation items with bilingual support
 const navigationItems: NavigationItem[] = [
@@ -148,9 +149,7 @@ export default function Header({
                   aria-label={`Navigate to ${item.label[currentLanguage]}`}
                 >
                   {item.label[currentLanguage]}
-                  {isActive && (
-                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-yellow-400 rounded-full"></span>
-                  )}
+                  {isActive && <span className="nav-active-indicator"></span>}
                 </button>
               );
             })}
@@ -174,14 +173,14 @@ export default function Header({
                     onClick={() => scrollToSection(item.href)}
                     className={`font-medium transition-all duration-200 text-sm cursor-pointer relative px-2 py-1 rounded ${
                       isActive
-                        ? "text-white font-semibold bg-yellow-400/20"
+                        ? "nav-tablet-active"
                         : "text-gray-300 hover:text-white hover:bg-gray-800/30"
                     }`}
                     aria-label={`Navigate to ${item.label[currentLanguage]}`}
                   >
                     {item.label[currentLanguage]}
                     {isActive && (
-                      <span className="absolute -bottom-0.5 left-1 right-1 h-0.5 bg-yellow-400 rounded-full"></span>
+                      <span className="nav-tablet-active-indicator"></span>
                     )}
                   </button>
                 );
@@ -309,7 +308,7 @@ export default function Header({
                   onClick={() => scrollToSection(item.href)}
                   className={`block w-full text-left px-6 py-3 rounded-lg font-medium transition-all duration-200 text-lg cursor-pointer relative ${
                     isActive
-                      ? "text-white font-semibold bg-yellow-400/20 border-l-4 border-yellow-400"
+                      ? "nav-mobile-active"
                       : "text-gray-300 hover:text-white hover:bg-gray-800/50"
                   }`}
                 >

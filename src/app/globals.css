@@ -6,22 +6,23 @@
 /* LondonLink Global Styles */
 
 :root {
-  /* Default to light palette */
+  /* Default to light palette - matches configs.ts default theme light */
   --background: #ffffff;
-  --foreground: #171717;
-  --primary: #2563eb;
-  --primary-dark: #1d4ed8;
-  --primary-light: #3b82f6;
+  --foreground: #0f172a;
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --primary-light: #60a5fa;
   --secondary: #64748b;
   --accent: #ef4444;
-  --muted: #f8fafc;
+  --muted: #f1f5f9;
   --border: #e2e8f0;
-  --blue-gradient-start: #1e40af;
-  --blue-gradient-end: #3b82f6;
+  --blue-gradient-start: #3b82f6;
+  --blue-gradient-end: #60a5fa;
   --book-teal: #2190a3;
+  --yellow-400: #fbbf24;
 }
 
-/* Light mode styles */
+/* Light mode styles - matches configs.ts default theme light */
 .light {
   --background: #ffffff;
   --foreground: #0f172a;
@@ -34,6 +35,8 @@
   --border: #e2e8f0;
   --blue-gradient-start: #3b82f6;
   --blue-gradient-end: #60a5fa;
+  --book-teal: #2190a3;
+  --yellow-400: #fbbf24;
 }
 
 @theme inline {
@@ -49,21 +52,26 @@
   --color-blue-gradient-start: var(--blue-gradient-start);
   --color-blue-gradient-end: var(--blue-gradient-end);
   --color-book-teal: var(--book-teal);
+  --color-yellow-400: var(--yellow-400);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-/* Dark mode styles - controlled by Tailwind's dark: prefix */
+/* Dark mode styles - matches configs.ts default theme dark */
 .dark {
   --background: #0f172a;
   --foreground: #f1f5f9;
   --primary: #3b82f6;
   --primary-dark: #2563eb;
   --primary-light: #60a5fa;
+  --secondary: #64748b;
+  --accent: #ef4444;
   --muted: #1e293b;
   --border: #334155;
   --blue-gradient-start: #1e40af;
   --blue-gradient-end: #3b82f6;
+  --book-teal: #2190a3;
+  --yellow-400: #fbbf24;
 }
 
 * {

@@ -29,6 +29,10 @@ export interface ThemeColors {
   blueGradientStart: string;
   blueGradientEnd: string;
 
+  // Specific colors
+  bookTeal: string;
+  yellow400: string; // Yellow highlight color (Tailwind yellow-400 equivalent)
+
   // Commemorative specific colors
   special?: string;
   specialSecondary?: string;

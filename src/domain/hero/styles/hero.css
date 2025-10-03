@@ -38,7 +38,7 @@
 
 /* Icon frame hover effect */
 .hero-card:hover .hero-icon-frame {
-  border-color: #fbbf24;
+  border-color: var(--color-yellow-400, #fbbf24);
   transform: scale(1.05);
 }
 

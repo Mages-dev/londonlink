@@ -1,0 +1,50 @@
+/* Header Navigation Styles */
+
+/* Desktop Navigation - Active indicator */
+.nav-active-indicator {
+  position: absolute;
+  bottom: -0.25rem;
+  left: 0;
+  right: 0;
+  height: 0.125rem;
+  background-color: var(--color-yellow-400, #fbbf24);
+  border-radius: 9999px;
+}
+
+/* Tablet Navigation - Active background */
+.nav-tablet-active {
+  color: white;
+  font-weight: 600;
+  background-color: color-mix(in srgb, var(--color-yellow-400, #fbbf24) 20%, transparent);
+}
+
+/* Tablet Navigation - Active indicator */
+.nav-tablet-active-indicator {
+  position: absolute;
+  bottom: -0.125rem;
+  left: 0.25rem;
+  right: 0.25rem;
+  height: 0.125rem;
+  background-color: var(--color-yellow-400, #fbbf24);
+  border-radius: 9999px;
+}
+
+/* Mobile Navigation - Active background and border */
+.nav-mobile-active {
+  color: white;
+  font-weight: 600;
+  background-color: color-mix(in srgb, var(--color-yellow-400, #fbbf24) 20%, transparent);
+  border-left: 4px solid var(--color-yellow-400, #fbbf24);
+}
+
+/* Fallback for browsers that don't support color-mix */
+@supports not (background-color: color-mix(in srgb, white 20%, transparent)) {
+  .nav-tablet-active {
+    background-color: rgba(251, 191, 36, 0.2);
+  }
+  
+  .nav-mobile-active {
+    background-color: rgba(251, 191, 36, 0.2);
+  }
+}
+

@@ -26,6 +26,8 @@ const halloweenTheme: ThemeConfig = {
       border: "#fdba74", // Orange-300
       blueGradientStart: "#ea580c", // Orange-600
       blueGradientEnd: "#fb923c", // Orange-400
+      bookTeal: "#ea580c", // Orange theme variant
+      yellow400: "#fbbf24", // Yellow highlight
       special: "#a855f7", // Purple-500
       specialSecondary: "#1f2937", // Gray-800
       specialAccent: "#fbbf24", // Amber-400
@@ -42,6 +44,8 @@ const halloweenTheme: ThemeConfig = {
       border: "#57534e", // Stone-600
       blueGradientStart: "#7c2d12", // Red-900
       blueGradientEnd: "#ea580c", // Orange-600
+      bookTeal: "#fb923c", // Orange theme variant
+      yellow400: "#fcd34d", // Yellow highlight (lighter for dark)
       special: "#c084fc", // Purple-400
       specialSecondary: "#111827", // Gray-900
       specialAccent: "#fcd34d", // Amber-300
@@ -74,16 +78,18 @@ const defaultTheme: ThemeConfig = {
   colors: {
     light: {
       background: "#ffffff",
-      foreground: "#171717",
-      primary: "#2563eb",
-      primaryDark: "#1d4ed8",
-      primaryLight: "#3b82f6",
+      foreground: "#0f172a", // Updated from globals.css .light
+      primary: "#3b82f6", // Updated from globals.css .light
+      primaryDark: "#2563eb", // Updated from globals.css .light
+      primaryLight: "#60a5fa", // Updated from globals.css .light
       secondary: "#64748b",
       accent: "#ef4444",
-      muted: "#f8fafc",
+      muted: "#f1f5f9", // Updated from globals.css .light
       border: "#e2e8f0",
-      blueGradientStart: "#1e40af",
-      blueGradientEnd: "#3b82f6",
+      blueGradientStart: "#3b82f6", // Updated from globals.css .light
+      blueGradientEnd: "#60a5fa", // Updated from globals.css .light
+      bookTeal: "#2190a3", // Added from globals.css
+      yellow400: "#fbbf24", // Yellow highlight (Tailwind yellow-400)
     },
     dark: {
       background: "#0f172a",
@@ -91,12 +97,14 @@ const defaultTheme: ThemeConfig = {
       primary: "#3b82f6",
       primaryDark: "#2563eb",
       primaryLight: "#60a5fa",
-      secondary: "#64748b",
-      accent: "#ef4444",
+      secondary: "#64748b", // Added from globals.css (was missing)
+      accent: "#ef4444", // Added from globals.css (was missing)
       muted: "#1e293b",
       border: "#334155",
       blueGradientStart: "#1e40af",
       blueGradientEnd: "#3b82f6",
+      bookTeal: "#2190a3", // Added from globals.css
+      yellow400: "#fbbf24", // Yellow highlight (Tailwind yellow-400)
     },
   },
   icon: "🌐",
@@ -126,6 +134,8 @@ const christmasTheme: ThemeConfig = {
       border: "#fca5a5",
       blueGradientStart: "#dc2626",
       blueGradientEnd: "#059669",
+      bookTeal: "#059669", // Green theme variant
+      yellow400: "#fbbf24", // Yellow highlight (gold)
       special: "#fbbf24",
       specialSecondary: "#065f46",
       specialAccent: "#fcd34d",
@@ -142,6 +152,8 @@ const christmasTheme: ThemeConfig = {
       border: "#6b7280",
       blueGradientStart: "#7f1d1d",
       blueGradientEnd: "#065f46",
+      bookTeal: "#10b981", // Green theme variant
+      yellow400: "#fcd34d", // Yellow highlight (lighter gold)
       special: "#fcd34d",
       specialSecondary: "#064e3b",
       specialAccent: "#fbbf24",
@@ -179,6 +191,8 @@ const newYearTheme: ThemeConfig = {
       border: "#fbbf24",
       blueGradientStart: "#d97706",
       blueGradientEnd: "#6366f1",
+      bookTeal: "#eab308", // Gold theme variant
+      yellow400: "#fbbf24", // Yellow highlight (gold)
       special: "#eab308", // Gold
       specialSecondary: "#4338ca",
       specialAccent: "#f3f4f6", // Silver
@@ -195,6 +209,8 @@ const newYearTheme: ThemeConfig = {
       border: "#78716c",
       blueGradientStart: "#92400e",
       blueGradientEnd: "#5b21b6",
+      bookTeal: "#fbbf24", // Gold theme variant
+      yellow400: "#fbbf24", // Yellow highlight (gold)
       special: "#fbbf24",
       specialSecondary: "#3730a3",
       specialAccent: "#e5e7eb",
@@ -232,6 +248,8 @@ const valentineTheme: ThemeConfig = {
       border: "#f9a8d4",
       blueGradientStart: "#e11d48",
       blueGradientEnd: "#ec4899",
+      bookTeal: "#ec4899", // Pink theme variant
+      yellow400: "#fbbf24", // Yellow highlight (contrast with pink)
       special: "#f472b6", // Pink
       specialSecondary: "#be185d",
       specialAccent: "#fce7f3", // Light Pink
@@ -248,6 +266,8 @@ const valentineTheme: ThemeConfig = {
       border: "#9f1239",
       blueGradientStart: "#881337",
       blueGradientEnd: "#be185d",
+      bookTeal: "#f472b6", // Pink theme variant
+      yellow400: "#fbbf24", // Yellow highlight (contrast with pink)
       special: "#f9a8d4",
       specialSecondary: "#831843",
       specialAccent: "#fce7f3",
@@ -285,6 +305,8 @@ const easterTheme: ThemeConfig = {
       border: "#a7f3d0",
       blueGradientStart: "#10b981",
       blueGradientEnd: "#f59e0b",
+      bookTeal: "#10b981", // Green theme variant
+      yellow400: "#fbbf24", // Yellow highlight (spring)
       special: "#fbbf24", // Yellow
       specialSecondary: "#065f46",
       specialAccent: "#fef3c7", // Light Yellow
@@ -301,6 +323,8 @@ const easterTheme: ThemeConfig = {
       border: "#059669",
       blueGradientStart: "#065f46",
       blueGradientEnd: "#92400e",
+      bookTeal: "#34d399", // Green theme variant
+      yellow400: "#fcd34d", // Yellow highlight (lighter spring)
       special: "#fcd34d",
       specialSecondary: "#451a03",
       specialAccent: "#fef3c7",
@@ -336,6 +360,8 @@ const carnivalTheme: ThemeConfig = {
       border: "#fed7aa",
       blueGradientStart: "#ff6b35",
       blueGradientEnd: "#c41e3a",
+      bookTeal: "#2e8b57", // Green carnival variant
+      yellow400: "#f7931e", // Yellow highlight (golden carnival)
       special: "#c41e3a", // Vermelho intenso
       specialSecondary: "#2e8b57", // Verde esmeralda
       specialAccent: "#9932cc", // Roxo real
@@ -352,6 +378,8 @@ const carnivalTheme: ThemeConfig = {
       border: "#c41e3a",
       blueGradientStart: "#451a03",
       blueGradientEnd: "#7c2d12",
+      bookTeal: "#059669", // Green carnival variant
+      yellow400: "#fbbf24", // Yellow highlight (golden carnival)
       special: "#ef4444",
       specialSecondary: "#059669",
       specialAccent: "#a855f7",
