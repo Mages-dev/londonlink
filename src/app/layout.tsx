@@ -7,7 +7,7 @@ import "../lib/themes/easter.css";
 import "../lib/themes/halloween.css";
 import "../lib/themes/christmas.css";
 import "../lib/themes/new-year.css";
-import { ThemeProvider } from "@/contexts";
+import { ThemeProvider, LanguageProvider } from "@/contexts";
 
 // Import test utilities in development
 if (process.env.NODE_ENV === "development") {
@@ -110,7 +110,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
         suppressHydrationWarning
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <LanguageProvider>{children}</LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

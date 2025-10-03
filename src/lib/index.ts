@@ -3,3 +3,6 @@
 
 // Theme utilities
 export * from "./themes/configs";
+
+// Version utilities
+export * from "./version";
