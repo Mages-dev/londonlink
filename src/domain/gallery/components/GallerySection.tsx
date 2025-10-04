@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Language } from "@/types";
 import { galleryTranslations } from "../translations";
 import { GALLERY_IMAGES } from "../constants/images";
+import { GalleryModal } from "./GalleryModal";
 // Import gallery styles
 import "../styles";
 
@@ -181,38 +182,43 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
         </div>
 
         {/* Modal/Popup para visualizar imagem completa */}
-        {selectedImage && (
-          <div
-            className="fixed inset-0 flex items-center justify-center z-50 p-4 bg-black bg-opacity-80 backdrop-blur-sm"
-            onClick={() => setSelectedImage(null)}
-          >
-            <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-2xl border-4 border-gray-200 dark:border-gray-600 p-4 max-w-4xl max-h-[90vh] overflow-hidden">
-              <button
-                className="absolute -top-3 -right-3 text-gray-700 dark:text-gray-300 text-2xl font-bold bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 transition-all z-10 shadow-lg"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelectedImage(null);
+        {selectedImage &&
+          (() => {
+            const currentImage = GALLERY_IMAGES.find(
+              (img) => img.id === selectedImage
+            );
+            const currentIndex = GALLERY_IMAGES.findIndex(
+              (img) => img.id === selectedImage
+            );
+
+            if (!currentImage) return null;
+
+            return (
+              <GalleryModal
+                image={currentImage}
+                currentIndex={currentIndex}
+                totalImages={GALLERY_IMAGES.length}
+                onClose={() => setSelectedImage(null)}
+                onPrevious={() => {
+                  const prevIndex =
+                    currentIndex > 0
+                      ? currentIndex - 1
+                      : GALLERY_IMAGES.length - 1;
+                  setSelectedImage(GALLERY_IMAGES[prevIndex].id);
                 }}
-              >
-                ×
-              </button>
-              <Image
-                src={
-                  GALLERY_IMAGES.find((img) => img.id === selectedImage)?.src ||
-                  ""
-                }
-                alt={
-                  GALLERY_IMAGES.find((img) => img.id === selectedImage)?.alt ||
-                  ""
-                }
-                width={1000}
-                height={600}
-                className="max-w-full max-h-[75vh] object-contain rounded"
-                priority
+                onNext={() => {
+                  const nextIndex =
+                    currentIndex < GALLERY_IMAGES.length - 1
+                      ? currentIndex + 1
+                      : 0;
+                  setSelectedImage(GALLERY_IMAGES[nextIndex].id);
+                }}
+                canGoPrevious={true}
+                canGoNext={true}
+                currentLanguage={currentLanguage}
               />
-            </div>
-          </div>
-        )}
+            );
+          })()}
       </div>
     </section>
   );

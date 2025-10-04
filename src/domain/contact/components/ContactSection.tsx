@@ -44,8 +44,8 @@ export function ContactSection({ currentLanguage }: ContactSectionProps) {
 
             {/* Contact Information */}
             <div className="w-full">
-              <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-12">
-                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-12">
+              <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 md:p-12">
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center md:text-left">
                   {t.getInTouch}
                 </h3>
 
@@ -62,7 +62,7 @@ export function ContactSection({ currentLanguage }: ContactSectionProps) {
                       />
                     </div>
                     <div>
-                      <p className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                      <p className="text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-2">
                         {t.whatsapp}
                       </p>
                       <a
@@ -71,7 +71,7 @@ export function ContactSection({ currentLanguage }: ContactSectionProps) {
                         }?text=${encodeURIComponent(t.whatsappMessage)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-2xl text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 transition-colors font-semibold"
+                        className="text-xl md:text-2xl text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 transition-colors font-semibold"
                       >
                         {CONTACT_INFO.phone.formatted}
                       </a>
@@ -90,14 +90,14 @@ export function ContactSection({ currentLanguage }: ContactSectionProps) {
                       />
                     </div>
                     <div>
-                      <p className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                      <p className="text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-2">
                         {t.instagram}
                       </p>
                       <a
                         href={CONTACT_INFO.social.instagram.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-2xl text-pink-600 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300 transition-colors font-semibold"
+                        className="text-xl md:text-2xl text-pink-600 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300 transition-colors font-semibold"
                       >
                         {CONTACT_INFO.social.instagram.handle}
                       </a>
@@ -110,10 +110,10 @@ export function ContactSection({ currentLanguage }: ContactSectionProps) {
                       <MapPin className="h-12 w-12 text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                      <p className="text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-2">
                         {t.address}
                       </p>
-                      <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                      <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
                         {CONTACT_INFO.address.street}
                         <br />
                         {CONTACT_INFO.address.city}
