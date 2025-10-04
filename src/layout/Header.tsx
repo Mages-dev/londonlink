@@ -295,7 +295,7 @@ export default function Header({
             windowWidth < 817 ? "block" : "hidden"
           } ${
             isMobileMenuOpen
-              ? "max-h-96 opacity-100 mt-6"
+              ? "max-h-screen opacity-100 mt-6"
               : "max-h-0 opacity-0 overflow-hidden"
           }`}
         >
