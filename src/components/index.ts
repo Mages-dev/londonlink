@@ -3,3 +3,4 @@
 
 // Global Components
 export { WhatsAppFloat } from "./WhatsAppFloat";
+export { LanguageSync } from "./LanguageSync";
