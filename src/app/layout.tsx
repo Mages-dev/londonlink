@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import "../lib/themes/carnival.css";
 import "../lib/themes/valentine.css";
@@ -8,6 +9,7 @@ import "../lib/themes/halloween.css";
 import "../lib/themes/christmas.css";
 import "../lib/themes/new-year.css";
 import { ThemeProvider, LanguageProvider } from "@/contexts";
+import { LanguageSync } from "@/components";
 
 // Import test utilities in development
 if (process.env.NODE_ENV === "development") {
@@ -80,8 +82,36 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="pt" className="scroll-smooth" suppressHydrationWarning>
       <head>
+        {/* Language initialization script - must be in head for SEO/accessibility */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var savedLanguage = localStorage.getItem('londonlink-language');
+                  var language = 'pt'; // default
+
+                  if (savedLanguage === 'en' || savedLanguage === 'pt') {
+                    language = savedLanguage;
+                  } else {
+                    // Detect browser language
+                    var browserLang = navigator.language.split('-')[0];
+                    if (browserLang === 'en' || browserLang === 'pt') {
+                      language = browserLang;
+                    }
+                  }
+
+                  document.documentElement.setAttribute('lang', language);
+                } catch (e) {
+                  console.error('Language initialization error:', e);
+                }
+              })();
+            `,
+          }}
+        />
+        {/* Theme initialization script - must be in head for no-flash */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -110,8 +140,25 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
         suppressHydrationWarning
       >
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-YMZJ7KR3SG"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-YMZJ7KR3SG');
+          `}
+        </Script>
+
         <ThemeProvider>
-          <LanguageProvider>{children}</LanguageProvider>
+          <LanguageProvider>
+            <LanguageSync />
+            {children}
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
