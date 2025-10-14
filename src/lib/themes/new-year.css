@@ -39,71 +39,34 @@
 
 /* New Year Special Effects */
 
-/* Sparkle Animation */
-@keyframes newyear-sparkle {
-  0%, 100% { 
-    opacity: 0.4; 
-    transform: scale(0.9) rotate(0deg);
-  }
-  25% { 
-    opacity: 1; 
-    transform: scale(1.3) rotate(90deg);
-  }
-  50% { 
-    opacity: 0.7; 
-    transform: scale(1.1) rotate(180deg);
-  }
-  75% { 
-    opacity: 1; 
-    transform: scale(1.2) rotate(270deg);
-  }
-}
-
-/* Fireworks Animation */
-@keyframes newyear-fireworks {
-  0% {
-    transform: translateY(0) scale(0.1);
-    opacity: 1;
-  }
-  15% {
-    transform: translateY(-50px) scale(0.5);
-    opacity: 1;
-  }
-  30% {
-    transform: translateY(-100px) scale(1);
-    opacity: 1;
+/* Simple fade animation for floating sparkles */
+@keyframes newyear-sparkle-fade {
+  0%,
+  100% {
+    opacity: 0.2;
   }
   50% {
-    transform: translateY(-120px) scale(1.2);
-    opacity: 0.8;
-  }
-  100% {
-    transform: translateY(-150px) scale(1.5);
-    opacity: 0;
+    opacity: 1;
   }
 }
 
 /* New Year Glow Animation */
 @keyframes newyear-glow {
-  0%, 100% {
-    box-shadow: 
-      0 0 5px var(--special),
-      0 0 10px var(--special),
-      0 0 15px var(--special),
-      0 0 20px var(--accent);
+  0%,
+  100% {
+    box-shadow: 0 0 5px var(--special), 0 0 10px var(--special),
+      0 0 15px var(--special), 0 0 20px var(--accent);
   }
   50% {
-    box-shadow: 
-      0 0 10px var(--special),
-      0 0 20px var(--special),
-      0 0 30px var(--special),
-      0 0 40px var(--accent);
+    box-shadow: 0 0 10px var(--special), 0 0 20px var(--special),
+      0 0 30px var(--special), 0 0 40px var(--accent);
   }
 }
 
 /* Countdown Pulse Animation */
 @keyframes newyear-countdown {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     filter: brightness(1);
   }
@@ -115,56 +78,6 @@
 
 /* New Year Component Classes */
 
-/* Sparkle Effect */
-.newyear-sparkle {
-  animation: newyear-sparkle 1.5s ease-in-out infinite;
-  position: relative;
-}
-
-.newyear-sparkle::before {
-  content: '✨';
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  font-size: 1.1em;
-  animation: newyear-sparkle 1.2s ease-in-out infinite reverse;
-}
-
-.newyear-sparkle::after {
-  content: '🌟';
-  position: absolute;
-  bottom: -8px;
-  left: -8px;
-  font-size: 0.9em;
-  animation: newyear-sparkle 1.8s ease-in-out infinite;
-}
-
-/* Fireworks Effect */
-.newyear-fireworks {
-  position: relative;
-  overflow: hidden;
-}
-
-.newyear-fireworks::before {
-  content: '🎆';
-  position: absolute;
-  top: 100%;
-  left: 20%;
-  font-size: 1.5em;
-  animation: newyear-fireworks 3s ease-out infinite;
-  animation-delay: 0s;
-}
-
-.newyear-fireworks::after {
-  content: '🎇';
-  position: absolute;
-  top: 100%;
-  right: 20%;
-  font-size: 1.3em;
-  animation: newyear-fireworks 3.5s ease-out infinite;
-  animation-delay: 1.5s;
-}
-
 /* New Year Glow */
 .newyear-glow {
   animation: newyear-glow 2.5s ease-in-out infinite;
@@ -173,41 +86,9 @@
 
 /* New Year Text Glow */
 .newyear-text-glow {
-  text-shadow: 
-    0 0 5px var(--special),
-    0 0 10px var(--special),
-    0 0 15px var(--special),
-    0 0 20px var(--accent);
+  text-shadow: 0 0 5px var(--special), 0 0 10px var(--special),
+    0 0 15px var(--special), 0 0 20px var(--accent);
   animation: newyear-countdown 1.5s ease-in-out infinite;
-}
-
-/* New Year Card */
-.newyear-card {
-  background: linear-gradient(135deg, 
-    rgba(217, 119, 6, 0.1) 0%, 
-    rgba(99, 102, 241, 0.1) 100%);
-  border: 2px solid var(--special);
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.newyear-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 
-    0 15px 30px rgba(217, 119, 6, 0.3),
-    0 0 25px var(--special);
-}
-
-.newyear-card::before {
-  content: '🎊';
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.5em;
-  opacity: 0.8;
-  animation: newyear-countdown 2s ease-in-out infinite;
 }
 
 /* New Year Button */
@@ -227,7 +108,7 @@
 }
 
 .newyear-button::before {
-  content: '🥂';
+  content: "🥂";
   position: absolute;
   top: 50%;
   left: -35px;
@@ -240,63 +121,32 @@
   left: 8px;
 }
 
-/* Countdown Animation */
-@keyframes newyear-countdown-bounce {
-  0%, 100% {
-    transform: translateY(0px) scale(1);
-  }
-  25% {
-    transform: translateY(-8px) scale(1.05);
-  }
-  50% {
-    transform: translateY(-4px) scale(1.02);
-  }
-  75% {
-    transform: translateY(-6px) scale(1.03);
-  }
-}
-
-.newyear-countdown {
-  animation: newyear-countdown-bounce 2s ease-in-out infinite;
-}
-
 /* New Year Background Pattern */
 .newyear-pattern {
-  background-image: 
-    radial-gradient(circle at 25% 25%, rgba(217, 119, 6, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 50% 10%, rgba(234, 179, 8, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 10% 90%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-}
-
-/* Confetti Effect */
-@keyframes newyear-confetti {
-  0% {
-    transform: translateY(-100vh) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(720deg);
-    opacity: 0;
-  }
-}
-
-.newyear-confetti {
-  position: absolute;
-  animation: newyear-confetti 3s linear infinite;
+  background-image: radial-gradient(
+      circle at 25% 25%,
+      rgba(217, 119, 6, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(99, 102, 241, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 10%,
+      rgba(234, 179, 8, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 10% 90%,
+      rgba(139, 92, 246, 0.1) 0%,
+      transparent 50%
+    );
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .newyear-sparkle::before,
-  .newyear-sparkle::after {
-    font-size: 0.9em;
-  }
-  
-  .newyear-card::before {
-    font-size: 1.2em;
-  }
-  
   .newyear-button::before {
     font-size: 1.1em;
   }
@@ -304,19 +154,11 @@
 
 /* Accessibility - Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .newyear-sparkle,
-  .newyear-sparkle::before,
-  .newyear-sparkle::after,
-  .newyear-fireworks::before,
-  .newyear-fireworks::after,
   .newyear-glow,
-  .newyear-text-glow,
-  .newyear-countdown,
-  .newyear-confetti {
+  .newyear-text-glow {
     animation: none;
   }
-  
-  .newyear-card:hover,
+
   .newyear-button:hover {
     transform: none;
   }

@@ -33,13 +33,24 @@ export default function NewYearEffects() {
 
   // New Year emojis for floating effects (memoized to prevent re-creation)
   const newYearEmojis = useMemo(
-    () => ["🎆", "🎇", "🥂", "🍾", "🎊", "🎉", "✨", "🌟", "💫", "🎈"],
+    () => ["🎆", "🎇", "🥂", "🍾", "🎊", "🎉", ""],
     []
   );
 
   // Confetti colors
   const confettiColors = useMemo(
     () => ["#d97706", "#f59e0b", "#eab308", "#6366f1", "#8b5cf6", "#f3f4f6"],
+    []
+  );
+
+  // Fixed positions for sparkles (memoized to prevent re-calculation)
+  const sparklePositions = useMemo(
+    () =>
+      Array.from({ length: 20 }, (_, i) => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        emoji: i % 3 === 0 ? "✨" : i % 3 === 1 ? "🌟" : "💫",
+      })),
     []
   );
 
@@ -64,7 +75,7 @@ export default function NewYearEffects() {
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
         size: Math.random() * 18 + 16, // 16-34px
-        speed: Math.random() * 1.5 + 0.8, // 0.8-2.3 speed
+        speed: Math.random() * 1 + 0.6, // 0.6-1.6 speed (mais rápido)
         rotation: Math.random() * 360,
       });
     }
@@ -123,7 +134,7 @@ export default function NewYearEffects() {
         prevElements.map((element) => ({
           ...element,
           y: element.y + element.speed,
-          rotation: element.rotation + 2,
+          rotation: element.rotation + 0.5,
           // Reset position when element goes off screen
           ...(element.y > window.innerHeight + 50 && {
             y: -50,
@@ -133,7 +144,7 @@ export default function NewYearEffects() {
       );
     };
 
-    const interval = setInterval(animateElements, 60); // ~16 FPS
+    const interval = setInterval(animateElements, 33); // 30 FPS
     return () => clearInterval(interval);
   }, [isNewYearTheme, elements.length]);
 
@@ -239,18 +250,18 @@ export default function NewYearEffects() {
 
       {/* Golden Sparkles */}
       <div className="fixed inset-0 pointer-events-none z-5">
-        {[...Array(12)].map((_, i) => (
+        {sparklePositions.map((pos, i) => (
           <div
             key={`sparkle-${i}`}
-            className="absolute text-yellow-400 animate-ping"
+            className="absolute text-yellow-400"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.2}s`,
-              animationDuration: "2.5s",
+              left: `${pos.left}%`,
+              top: `${pos.top}%`,
+              animation: `newyear-sparkle-fade 1.5s ease-in-out infinite`,
+              animationDelay: `${i * 0.1}s`,
             }}
           >
-            {i % 3 === 0 ? "✨" : i % 3 === 1 ? "🌟" : "💫"}
+            {pos.emoji}
           </div>
         ))}
       </div>

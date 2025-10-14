@@ -39,64 +39,57 @@
 
 /* Easter Special Effects */
 
-/* Sparkle Animation */
-@keyframes easter-sparkle {
-  0%, 100% { 
-    opacity: 0.6; 
-    transform: scale(0.9) rotate(0deg);
+/* Butterfly Float Animation */
+@keyframes easter-butterfly-float {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: translateY(0px) translateX(0px);
   }
-  25% { 
-    opacity: 1; 
-    transform: scale(1.2) rotate(90deg);
+  25% {
+    opacity: 0.8;
+    transform: translateY(-8px) translateX(4px);
   }
-  50% { 
-    opacity: 0.8; 
-    transform: scale(1.1) rotate(180deg);
+  50% {
+    opacity: 1;
+    transform: translateY(-4px) translateX(-2px);
   }
-  75% { 
-    opacity: 1; 
-    transform: scale(1.15) rotate(270deg);
+  75% {
+    opacity: 0.8;
+    transform: translateY(-6px) translateX(2px);
   }
 }
 
-/* Flowers Animation */
-@keyframes easter-flowers {
-  0% {
-    transform: translateY(100vh) rotate(0deg) scale(0.8);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
+/* Flower Bloom Animation */
+@keyframes easter-flower-bloom {
+  0%,
   100% {
-    transform: translateY(-50px) rotate(180deg) scale(1.1);
-    opacity: 0;
+    opacity: 0.3;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
   }
 }
 
 /* Easter Glow Animation */
 @keyframes easter-glow {
-  0%, 100% {
-    box-shadow: 
-      0 0 5px var(--special),
-      0 0 10px var(--special),
+  0%,
+  100% {
+    box-shadow: 0 0 5px var(--special), 0 0 10px var(--special),
       0 0 15px var(--primary);
   }
   50% {
-    box-shadow: 
-      0 0 10px var(--special),
-      0 0 20px var(--special),
-      0 0 30px var(--primary),
-      0 0 40px var(--accent);
+    box-shadow: 0 0 10px var(--special), 0 0 20px var(--special),
+      0 0 30px var(--primary), 0 0 40px var(--accent);
   }
 }
 
 /* Spring Bounce Animation */
 @keyframes easter-bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1) translateY(0px);
     filter: brightness(1);
   }
@@ -106,73 +99,7 @@
   }
 }
 
-/* Flower Bloom Animation */
-@keyframes easter-bloom {
-  0% {
-    transform: scale(0.3) rotate(-45deg);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.1) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
-  }
-}
-
 /* Easter Component Classes */
-
-/* Sparkle Effect */
-.easter-sparkle {
-  animation: easter-sparkle 2.2s ease-in-out infinite;
-  position: relative;
-}
-
-.easter-sparkle::before {
-  content: '🌸';
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  font-size: 1.1em;
-  animation: easter-sparkle 1.8s ease-in-out infinite reverse;
-}
-
-.easter-sparkle::after {
-  content: '✨';
-  position: absolute;
-  bottom: -8px;
-  left: -8px;
-  font-size: 0.9em;
-  animation: easter-sparkle 2.5s ease-in-out infinite;
-}
-
-/* Flowers Effect */
-.easter-flowers {
-  position: relative;
-  overflow: hidden;
-}
-
-.easter-flowers::before {
-  content: '🌷';
-  position: absolute;
-  bottom: 100%;
-  left: 25%;
-  font-size: 1.4em;
-  animation: easter-flowers 5s ease-out infinite;
-  animation-delay: 0s;
-}
-
-.easter-flowers::after {
-  content: '🌺';
-  position: absolute;
-  bottom: 100%;
-  right: 30%;
-  font-size: 1.2em;
-  animation: easter-flowers 5.5s ease-out infinite;
-  animation-delay: 2.5s;
-}
 
 /* Easter Glow */
 .easter-glow {
@@ -182,40 +109,9 @@
 
 /* Easter Text Glow */
 .easter-text-glow {
-  text-shadow: 
-    0 0 5px var(--special),
-    0 0 10px var(--special),
+  text-shadow: 0 0 5px var(--special), 0 0 10px var(--special),
     0 0 15px var(--primary);
   animation: easter-bounce 2.2s ease-in-out infinite;
-}
-
-/* Easter Card */
-.easter-card {
-  background: linear-gradient(135deg, 
-    rgba(16, 185, 129, 0.1) 0%, 
-    rgba(245, 158, 11, 0.1) 100%);
-  border: 2px solid var(--special);
-  border-radius: 16px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.easter-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 
-    0 15px 30px rgba(16, 185, 129, 0.2),
-    0 0 25px var(--special);
-}
-
-.easter-card::before {
-  content: '🥚';
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.5em;
-  opacity: 0.8;
-  animation: easter-bounce 2.8s ease-in-out infinite;
 }
 
 /* Easter Button */
@@ -236,7 +132,7 @@
 }
 
 .easter-button::before {
-  content: '🐰';
+  content: "🐰";
   position: absolute;
   top: 50%;
   left: -35px;
@@ -249,30 +145,28 @@
   left: 8px;
 }
 
-/* Spring Garden Effect */
-@keyframes easter-garden {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  25% {
-    transform: translateY(-5px) rotate(1deg);
-  }
-  75% {
-    transform: translateY(-3px) rotate(-1deg);
-  }
-}
-
-.easter-garden {
-  animation: easter-garden 4s ease-in-out infinite;
-}
-
 /* Easter Background Pattern */
 .easter-pattern {
-  background-image: 
-    radial-gradient(circle at 20% 30%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(251, 191, 36, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 60% 20%, rgba(52, 211, 153, 0.1) 0%, transparent 50%);
+  background-image: radial-gradient(
+      circle at 20% 30%,
+      rgba(16, 185, 129, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(245, 158, 11, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 80%,
+      rgba(251, 191, 36, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 60% 20%,
+      rgba(52, 211, 153, 0.1) 0%,
+      transparent 50%
+    );
 }
 
 /* Easter Egg Hunt Effect */
@@ -293,42 +187,8 @@
   }
 }
 
-.easter-egg-roll {
-  position: absolute;
-  animation: easter-egg-roll 8s linear infinite;
-}
-
-/* Butterfly Effect */
-@keyframes easter-butterfly {
-  0%, 100% {
-    transform: translateY(0px) translateX(0px) rotate(0deg);
-  }
-  25% {
-    transform: translateY(-10px) translateX(5px) rotate(5deg);
-  }
-  50% {
-    transform: translateY(-5px) translateX(-3px) rotate(-3deg);
-  }
-  75% {
-    transform: translateY(-8px) translateX(2px) rotate(2deg);
-  }
-}
-
-.easter-butterfly {
-  animation: easter-butterfly 3s ease-in-out infinite;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
-  .easter-sparkle::before,
-  .easter-sparkle::after {
-    font-size: 0.9em;
-  }
-  
-  .easter-card::before {
-    font-size: 1.2em;
-  }
-  
   .easter-button::before {
     font-size: 1.1em;
   }
@@ -336,20 +196,11 @@
 
 /* Accessibility - Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .easter-sparkle,
-  .easter-sparkle::before,
-  .easter-sparkle::after,
-  .easter-flowers::before,
-  .easter-flowers::after,
   .easter-glow,
-  .easter-text-glow,
-  .easter-garden,
-  .easter-egg-roll,
-  .easter-butterfly {
+  .easter-text-glow {
     animation: none;
   }
-  
-  .easter-card:hover,
+
   .easter-button:hover {
     transform: none;
   }

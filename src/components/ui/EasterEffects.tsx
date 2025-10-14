@@ -44,6 +44,28 @@ export default function EasterEffects() {
     []
   );
 
+  // Fixed positions for butterflies (memoized to prevent re-calculation)
+  const butterflyPositions = useMemo(
+    () =>
+      Array.from({ length: 12 }, () => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+      })),
+    []
+  );
+
+  // Fixed positions for garden flowers (memoized to prevent re-calculation)
+  const gardenFlowerPositions = useMemo(
+    () =>
+      Array.from({ length: 12 }, (_, i) => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        emoji:
+          i % 4 === 0 ? "🌷" : i % 4 === 1 ? "🌸" : i % 4 === 2 ? "🌺" : "🌼",
+      })),
+    []
+  );
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -65,7 +87,7 @@ export default function EasterEffects() {
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
         size: Math.random() * 16 + 18, // 18-34px
-        speed: Math.random() * 1.0 + 0.5, // 0.5-1.5 speed
+        speed: Math.random() * 1 + 0.6, // 0.6-1.6 speed (ajustado)
         rotation: Math.random() * 360,
       });
     }
@@ -124,7 +146,7 @@ export default function EasterEffects() {
         prevElements.map((element) => ({
           ...element,
           y: element.y + element.speed,
-          rotation: element.rotation + 1,
+          rotation: element.rotation + 0.5,
           // Reset position when element goes off screen
           ...(element.y > window.innerHeight + 50 && {
             y: -50,
@@ -134,7 +156,7 @@ export default function EasterEffects() {
       );
     };
 
-    const interval = setInterval(animateElements, 70); // ~14 FPS
+    const interval = setInterval(animateElements, 33); // 30 FPS
     return () => clearInterval(interval);
   }, [isEasterTheme, elements.length]);
 
@@ -243,39 +265,33 @@ export default function EasterEffects() {
 
       {/* Garden Flowers Effect */}
       <div className="fixed inset-0 pointer-events-none z-5">
-        {[...Array(8)].map((_, i) => (
+        {gardenFlowerPositions.map((pos, i) => (
           <div
             key={`flower-${i}`}
-            className="absolute text-green-400 animate-pulse"
+            className="absolute text-green-400"
             style={{
-              left: `${i * 12 + 8}%`,
-              top: `${Math.random() * 80 + 10}%`,
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: "3s",
+              left: `${pos.left}%`,
+              top: `${pos.top}%`,
+              animation: `easter-flower-bloom 3s ease-in-out infinite`,
+              animationDelay: `${i * 0.25}s`,
             }}
           >
-            {i % 4 === 0
-              ? "🌷"
-              : i % 4 === 1
-              ? "🌸"
-              : i % 4 === 2
-              ? "🌺"
-              : "🌼"}
+            {pos.emoji}
           </div>
         ))}
       </div>
 
       {/* Butterflies Effect */}
       <div className="fixed inset-0 pointer-events-none z-5">
-        {[...Array(6)].map((_, i) => (
+        {butterflyPositions.map((pos, i) => (
           <div
             key={`butterfly-${i}`}
-            className="absolute text-yellow-400 easter-butterfly"
+            className="absolute text-yellow-400"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.8}s`,
-              animationDuration: "3s",
+              left: `${pos.left}%`,
+              top: `${pos.top}%`,
+              animation: `easter-butterfly-float 4s ease-in-out infinite`,
+              animationDelay: `${i * 0.3}s`,
             }}
           >
             🦋
