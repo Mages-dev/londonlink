@@ -44,6 +44,17 @@ export default function ValentineEffects() {
     []
   );
 
+  // Fixed positions for love letters (memoized to prevent re-calculation)
+  const loveLetterPositions = useMemo(
+    () =>
+      Array.from({ length: 15 }, (_, i) => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        emoji: i % 2 === 0 ? "💌" : "💕",
+      })),
+    []
+  );
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -66,7 +77,7 @@ export default function ValentineEffects() {
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
         size: Math.random() * 16 + 18, // 18-34px
-        speed: Math.random() * 1.2 + 0.6, // 0.6-1.8 speed
+        speed: Math.random() * 1 + 0.6, // 0.6-1.6 speed (ajustado)
         rotation: Math.random() * 360,
       });
     }
@@ -125,7 +136,7 @@ export default function ValentineEffects() {
         prevElements.map((element) => ({
           ...element,
           y: element.y + element.speed,
-          rotation: element.rotation + 1.5,
+          rotation: element.rotation + 0.5,
           // Reset position when element goes off screen
           ...(element.y > window.innerHeight + 50 && {
             y: -50,
@@ -135,7 +146,7 @@ export default function ValentineEffects() {
       );
     };
 
-    const interval = setInterval(animateElements, 60); // ~16 FPS
+    const interval = setInterval(animateElements, 33); // 30 FPS
     return () => clearInterval(interval);
   }, [isValentineTheme, elements.length]);
 
@@ -244,36 +255,18 @@ export default function ValentineEffects() {
 
       {/* Love Letters Effect */}
       <div className="fixed inset-0 pointer-events-none z-5">
-        {[...Array(6)].map((_, i) => (
+        {loveLetterPositions.map((pos, i) => (
           <div
             key={`letter-${i}`}
-            className="absolute text-pink-400 animate-pulse"
+            className="absolute text-pink-400"
             style={{
-              left: `${i * 15 + 10}%`,
-              top: `${Math.random() * 80 + 10}%`,
-              animationDelay: `${i * 0.4}s`,
-              animationDuration: "3s",
+              left: `${pos.left}%`,
+              top: `${pos.top}%`,
+              animation: `valentine-letter-fade 2s ease-in-out infinite`,
+              animationDelay: `${i * 0.15}s`,
             }}
           >
-            {i % 2 === 0 ? "💌" : "💕"}
-          </div>
-        ))}
-      </div>
-
-      {/* Romantic Sparkles */}
-      <div className="fixed inset-0 pointer-events-none z-5">
-        {[...Array(10)].map((_, i) => (
-          <div
-            key={`sparkle-${i}`}
-            className="absolute text-pink-300 animate-ping"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.3}s`,
-              animationDuration: "2s",
-            }}
-          >
-            ✨
+            {pos.emoji}
           </div>
         ))}
       </div>

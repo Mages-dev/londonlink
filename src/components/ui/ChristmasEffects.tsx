@@ -26,6 +26,16 @@ export default function ChristmasEffects() {
     []
   );
 
+  // Fixed positions for sparkles (memoized to prevent re-calculation)
+  const sparklePositions = useMemo(
+    () =>
+      Array.from({ length: 25 }, () => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+      })),
+    []
+  );
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -48,7 +58,7 @@ export default function ChristmasEffects() {
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
         size: Math.random() * 20 + 15, // 15-35px
-        speed: Math.random() * 2 + 1, // 1-3 speed
+        speed: Math.random() * 1 + 0.6, // 0.6-1.6 speed (mais rápido)
         rotation: Math.random() * 360,
       });
     }
@@ -78,7 +88,7 @@ export default function ChristmasEffects() {
         prevElements.map((element) => ({
           ...element,
           y: element.y + element.speed,
-          rotation: element.rotation + 1,
+          rotation: element.rotation + 0.5, // Rotação mais suave (era +1)
           // Reset position when element goes off screen
           ...(element.y > window.innerHeight + 50 && {
             y: -50,
@@ -88,7 +98,7 @@ export default function ChristmasEffects() {
       );
     };
 
-    const interval = setInterval(animateElements, 50); // 20 FPS
+    const interval = setInterval(animateElements, 33); // 30 FPS (mais fluido, era 50ms/20 FPS)
     return () => clearInterval(interval);
   }, [isChristmasTheme, elements.length]);
 
@@ -139,14 +149,12 @@ export default function ChristmasEffects() {
         {[...Array(6)].map((_, i) => (
           <div
             key={`snow-${i}`}
-            className="absolute text-white/60 animate-bounce"
+            className="absolute text-white/60"
             style={{
               left: `${i * 15 + 10}%`,
-              top: "-20px",
+              animation: `christmas-snow ${8 + i * 2}s linear infinite`,
+              animationDelay: `${i * 1.5}s`,
               fontSize: "1.5rem",
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: `${3 + i * 0.5}s`,
-              animationIterationCount: "infinite",
             }}
           >
             ❄️
@@ -156,15 +164,15 @@ export default function ChristmasEffects() {
 
       {/* Christmas Sparkles */}
       <div className="fixed inset-0 pointer-events-none z-5">
-        {[...Array(8)].map((_, i) => (
+        {sparklePositions.map((pos, i) => (
           <div
             key={`sparkle-${i}`}
-            className="absolute text-yellow-400 animate-ping"
+            className="absolute text-yellow-400"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.3}s`,
-              animationDuration: "2s",
+              left: `${pos.left}%`,
+              top: `${pos.top}%`,
+              animation: `sparkle-fade 1s ease-in-out infinite`,
+              animationDelay: `${i * 0.7}s`,
             }}
           >
             ✨
