@@ -56,7 +56,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-block bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl ${
+              className={`inline-block bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl uppercase tracking-wide ${
                 isCarnivalTheme ? "carnival-button carnival-glow" : ""
               } ${isValentineTheme ? "valentine-button valentine-glow" : ""} ${
                 isEasterTheme ? "easter-button easter-glow" : ""
@@ -104,7 +104,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-block bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold py-4 px-10 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl text-lg ${
+              className={`inline-block bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold py-4 px-10 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl text-lg uppercase tracking-wide ${
                 isCarnivalTheme ? "carnival-button carnival-glow" : ""
               } ${isValentineTheme ? "valentine-button valentine-glow" : ""} ${
                 isEasterTheme ? "easter-button easter-glow" : ""

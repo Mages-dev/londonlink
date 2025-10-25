@@ -7,7 +7,7 @@
  * Current application version
  * Update this when releasing new versions
  */
-export const APP_VERSION = "2.1.1";
+export const APP_VERSION = "2.1.2";
 
 /**
  * Application name
