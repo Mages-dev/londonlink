@@ -2,9 +2,9 @@
 
 export const heroTranslationsEn = {
   // Main hero content
-  title: "Do you want to learn English?",
+  title: "Would you like to learn English?",
   subtitle: "Tell us what you need and we'll create a course just for you!",
-  ctaButton: "Preregistration",
+  ctaButton: "Pre-registration",
 
   // Legacy content (keeping for backward compatibility)
   welcome: "Welcome to",

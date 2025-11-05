@@ -41,23 +41,24 @@
 
 /* Sparkle Animation */
 @keyframes carnival-sparkle {
-  0%, 100% { 
-    opacity: 0.7; 
+  0%,
+  100% {
+    opacity: 0.7;
     transform: scale(0.8) rotate(0deg);
     filter: hue-rotate(0deg);
   }
-  25% { 
-    opacity: 1; 
+  25% {
+    opacity: 1;
     transform: scale(1.3) rotate(90deg);
     filter: hue-rotate(90deg);
   }
-  50% { 
-    opacity: 0.9; 
+  50% {
+    opacity: 0.9;
     transform: scale(1.1) rotate(180deg);
     filter: hue-rotate(180deg);
   }
-  75% { 
-    opacity: 1; 
+  75% {
+    opacity: 1;
     transform: scale(1.2) rotate(270deg);
     filter: hue-rotate(270deg);
   }
@@ -83,29 +84,25 @@
 
 /* Carnival Glow Animation */
 @keyframes carnival-glow {
-  0%, 100% {
-    box-shadow: 
-      0 0 8px var(--special),
-      0 0 16px var(--special),
+  0%,
+  100% {
+    box-shadow: 0 0 8px var(--special), 0 0 16px var(--special),
       0 0 24px var(--primary);
   }
   33% {
-    box-shadow: 
-      0 0 12px var(--accent),
-      0 0 24px var(--accent),
+    box-shadow: 0 0 12px var(--accent), 0 0 24px var(--accent),
       0 0 36px var(--special-secondary);
   }
   66% {
-    box-shadow: 
-      0 0 10px var(--special-accent),
-      0 0 20px var(--special-accent),
+    box-shadow: 0 0 10px var(--special-accent), 0 0 20px var(--special-accent),
       0 0 30px var(--special);
   }
 }
 
 /* Mask Dance Animation */
 @keyframes carnival-mask-dance {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(-10deg) scale(1) translateY(0px);
     filter: brightness(1);
   }
@@ -125,7 +122,8 @@
 
 /* Samba Dance Animation */
 @keyframes carnival-samba {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(0px) translateY(0px) rotate(0deg);
   }
   25% {
@@ -148,7 +146,7 @@
 }
 
 .carnival-sparkle::before {
-  content: '🎊';
+  content: "🎊";
   position: absolute;
   top: -12px;
   right: -12px;
@@ -157,7 +155,7 @@
 }
 
 .carnival-sparkle::after {
-  content: '✨';
+  content: "✨";
   position: absolute;
   bottom: -10px;
   left: -10px;
@@ -172,7 +170,7 @@
 }
 
 .carnival-confetti::before {
-  content: '🎉';
+  content: "🎉";
   position: absolute;
   bottom: 100%;
   left: 20%;
@@ -182,7 +180,7 @@
 }
 
 .carnival-confetti::after {
-  content: '🎊';
+  content: "🎊";
   position: absolute;
   bottom: 100%;
   right: 25%;
@@ -199,20 +197,19 @@
 
 /* Carnival Text Glow */
 .carnival-text-glow {
-  text-shadow: 
-    0 0 8px var(--special),
-    0 0 16px var(--special),
-    0 0 24px var(--primary),
-    0 0 32px var(--accent);
+  text-shadow: 0 0 8px var(--special), 0 0 16px var(--special),
+    0 0 24px var(--primary), 0 0 32px var(--accent);
   animation: carnival-samba 2.5s ease-in-out infinite;
 }
 
 /* Carnival Card */
 .carnival-card {
-  background: linear-gradient(135deg, 
-    rgba(255, 107, 53, 0.1) 0%, 
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 53, 0.1) 0%,
     rgba(196, 30, 58, 0.1) 50%,
-    rgba(153, 50, 204, 0.1) 100%);
+    rgba(153, 50, 204, 0.1) 100%
+  );
   border: 3px solid var(--special);
   border-radius: 20px;
   transition: all 0.3s ease;
@@ -222,13 +219,11 @@
 
 .carnival-card:hover {
   transform: translateY(-8px) scale(1.03);
-  box-shadow: 
-    0 20px 40px rgba(255, 107, 53, 0.3),
-    0 0 30px var(--special);
+  box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3), 0 0 30px var(--special);
 }
 
 .carnival-card::before {
-  content: '🎭';
+  content: "🎭";
   position: absolute;
   top: 15px;
   right: 15px;
@@ -239,7 +234,12 @@
 
 /* Carnival Button */
 .carnival-button {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--special) 50%, var(--special-accent) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    var(--special) 50%,
+    var(--special-accent) 100%
+  );
   border: 3px solid var(--accent);
   color: white;
   font-weight: 700;
@@ -247,7 +247,6 @@
   position: relative;
   overflow: hidden;
   border-radius: 15px;
-  text-transform: uppercase;
   letter-spacing: 1px;
 }
 
@@ -257,7 +256,7 @@
 }
 
 .carnival-button::before {
-  content: '🎪';
+  content: "🎪";
   position: absolute;
   top: 50%;
   left: -40px;
@@ -272,7 +271,8 @@
 
 /* Carnival Mask Effect */
 @keyframes carnival-mask-float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
@@ -309,12 +309,31 @@
 
 /* Carnival Background Pattern */
 .carnival-pattern {
-  background-image: 
-    radial-gradient(circle at 25% 25%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(196, 30, 58, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(247, 147, 30, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(153, 50, 204, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 20% 80%, rgba(46, 139, 87, 0.15) 0%, transparent 50%);
+  background-image: radial-gradient(
+      circle at 25% 25%,
+      rgba(255, 107, 53, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(196, 30, 58, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(247, 147, 30, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(153, 50, 204, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(46, 139, 87, 0.15) 0%,
+      transparent 50%
+    );
 }
 
 /* Carnival Parade Effect */
@@ -343,11 +362,11 @@
   .carnival-sparkle::after {
     font-size: 0.9em;
   }
-  
+
   .carnival-card::before {
     font-size: 1.4em;
   }
-  
+
   .carnival-button::before {
     font-size: 1.2em;
   }
@@ -367,7 +386,7 @@
   .carnival-parade {
     animation: none;
   }
-  
+
   .carnival-card:hover,
   .carnival-button:hover {
     transform: none;

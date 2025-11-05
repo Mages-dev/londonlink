@@ -53,10 +53,10 @@ export function BooksSection({ currentLanguage }: BooksSectionProps) {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-16">
         <div className="grid lg:grid-cols-[4fr_6fr] gap-8 lg:gap-16 items-center">
           {/* Left side - Author image */}
-          <div className="relative w-full h-full">
+          <div className="relative w-full">
             {/* Author image with decorative border - reduced size */}
-            <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-2xl w-full h-full max-lg:w-[65%] max-lg:mx-auto">
-              <div className="relative border-4 border-red-500 rounded-xl overflow-hidden w-full h-full">
+            <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-2xl w-full max-lg:w-[65%] max-lg:mx-auto">
+              <div className="relative border-4 border-red-500 rounded-xl overflow-hidden aspect-[4/5]">
                 <OptimizedImage
                   src={BOOKS_IMAGES.previews.author}
                   alt={BOOKS_IMAGE_ALTS.previews.author}
