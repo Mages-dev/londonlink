@@ -6,11 +6,13 @@ LondonLink is a comprehensive English learning platform designed specifically fo
 
 ## 🚀 Technologies
 
-- **Next.js 15** - React framework with App Router
-- **React 19** - Latest React features
-- **TypeScript** - Type safety and better development experience
-- **Tailwind CSS v4** - Utility-first CSS framework
-- **ESLint** - Code linting and formatting
+- **Next.js 16.0.7** - React framework with App Router (updated for Vercel compatibility)
+- **React 19.2.1** - Latest React features with performance improvements
+- **TypeScript 5** - Type safety and better development experience
+- **Tailwind CSS 4** - Utility-first CSS framework with modern features
+- **Lucide React 0.555.0** - Modern icon library
+- **ESLint 9** - Code linting and formatting
+- **Node.js 24** - Latest LTS runtime environment
 
 ## 📁 Project Structure
 
@@ -149,13 +151,13 @@ Supporting systems and utilities:
 - **Accessibility**: ARIA compliant components and semantic HTML
 - **Performance**: Optimized images, lazy loading, and code splitting
 - **Type Safety**: Full TypeScript implementation
-- **Modern React**: React 19 with Next.js 15 App Router
+- **Modern React**: React 19.2.1 with Next.js 16.0.7 App Router
 
 ## 🛠️ Development
 
 ### Prerequisites
 
-- Node.js 22.0.0 or higher
+- Node.js 24.0.0 or higher (LTS recommended)
 - npm, yarn, pnpm, or bun
 
 ### Getting Started
@@ -411,6 +413,20 @@ The project is optimized for deployment on:
 - **Netlify**
 - **AWS Amplify**
 - Any platform supporting Next.js
+
+## 📚 Documentation
+
+Additional documentation is available in the `docs/` directory:
+
+- **[Versioning Guide](docs/VERSIONING_GUIDE.md)** - Complete guide on version management, semantic versioning, and release process
+- **[User Preferences Guide](docs/USER_PREFERENCES_GUIDE.md)** - Documentation on theme and language persistence system
+
+For component-specific documentation, check the README.md files in each module:
+
+- `src/layout/README.md` - Layout components documentation
+- `src/components/WhatsAppFloat/README.md` - WhatsApp float component
+- `src/contexts/README.md` - Context system documentation
+- `src/domain/[section]/README.md` - Domain-specific documentation
 
 ## 📄 License
 
