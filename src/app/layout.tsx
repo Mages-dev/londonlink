@@ -31,7 +31,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "LondonLink - English Learning Platform",
   description:
-    "Learn English with LondonLink - A comprehensive English learning platform with Brazilian Portuguese focus. Improve your English skills with our interactive courses, books, and personalized learning experience.",
+    "A comprehensive English language learning platform which creates unique courses for your specific situation and requirements",
   keywords: [
     "English learning",
     "Portuguese",
@@ -51,17 +51,26 @@ export const metadata: Metadata = {
   openGraph: {
     title: "LondonLink - English Learning Platform",
     description:
-      "Learn English with LondonLink - A comprehensive English learning platform with Brazilian Portuguese focus.",
+      "A comprehensive English language learning platform which creates unique courses for your specific situation and requirements",
     url: "https://londonlink.com",
     siteName: "LondonLink",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/assets/images/shared/og/og-image.webp",
+        width: 1200,
+        height: 630,
+        alt: "LondonLink - English Learning Platform",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "LondonLink - English Learning Platform",
     description:
-      "Learn English with LondonLink - A comprehensive English learning platform with Brazilian Portuguese focus.",
+      "A comprehensive English language learning platform which creates unique courses for your specific situation and requirements",
+    images: ["/assets/images/shared/og/og-image.webp"],
   },
   robots: {
     index: true,
