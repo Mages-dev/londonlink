@@ -15,14 +15,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Progress tracking
 - Interactive exercises
 
-## [2.2.1] - 2025-02-09
+## [2.3.0] - 2025-02-09
+
+### 🔒 Security
+
+- **Next.js**: 16.0.10 → **16.1.6** - Fixes critical and high severity vulnerabilities:
+  - GHSA-9qr9-h5gf-34mp (Critical)
+  - GHSA-mwv6-3258-q52c (High)
+  - GHSA-h25m-26qc-wcjf (High) - HTTP request deserialization DoS
+  - GHSA-9g9p-9gw9-jx7f (High) - Image Optimizer DoS
+  - GHSA-5f7q-jpqc-wp7h (High) - Unbounded Memory Consumption via PPR
+- **eslint-config-next**: 16.0.10 → **16.1.6** - Aligned with Next.js
 
 ### 🐛 Fixed
 
 - Added missing Open Graph image configuration in metadata
 - Created dedicated OG image folder (`public/assets/images/shared/og/`) for better scalability
 - Configured `openGraph.images` and `twitter.images` in `layout.tsx` to prevent image cropping on Google, Facebook, LinkedIn and Twitter
-- Updated metadata description to: "A comprehensive English language learning platform which creates unique courses for your specific situation and requirements"
+- Updated metadata description
+
+### ℹ️ Notes
+
+- Vulnerabilities for `tar`, `lodash` reported by GitHub were from the old `londonlink-web` repository and do not exist in this project
+- `js-yaml` was already at the patched version 4.1.1
 
 ## [2.2.0] - 2025-01-04
 
