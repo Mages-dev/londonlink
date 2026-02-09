@@ -15,6 +15,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Progress tracking
 - Interactive exercises
 
+## [2.2.1] - 2025-02-09
+
+### 🐛 Fixed
+
+- Added missing Open Graph image configuration in metadata
+- Created dedicated OG image folder (`public/assets/images/shared/og/`) for better scalability
+- Configured `openGraph.images` and `twitter.images` in `layout.tsx` to prevent image cropping on Google, Facebook, LinkedIn and Twitter
+- Updated metadata description to: "A comprehensive English language learning platform which creates unique courses for your specific situation and requirements"
+
 ## [2.2.0] - 2025-01-04
 
 ### 🔄 Updated - Vercel Compatibility
