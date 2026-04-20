@@ -65,8 +65,8 @@ Entry flow: `index.html` → `src/main.tsx` → `ThemeProvider` → `LanguagePro
 
 ### Prerequisites
 
-- Node.js 20+ (24 LTS recommended)
-- pnpm 10+
+- Node.js 22+ (24 LTS recommended — see `.nvmrc`)
+- pnpm 10+ recommended (lockfile is `pnpm-lock.yaml`; other package managers work but aren't tested)
 
 ### Getting Started
 
