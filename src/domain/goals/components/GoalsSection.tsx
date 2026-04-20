@@ -1,6 +1,3 @@
-"use client";
-
-import Image from "next/image";
 import { Language } from "@/types";
 import { goalsTranslations } from "../translations";
 import {
@@ -45,7 +42,7 @@ export function GoalsSection({ currentLanguage }: GoalsSectionProps) {
                 <div className="flex gap-6 md:block">
                   {/* Icon */}
                   <div className="goals-icon-frame flex-shrink-0 mb-4">
-                    <Image
+                    <img
                       src={GOALS_ICONS[goal.icon as keyof typeof GOALS_ICONS]}
                       alt={
                         GOALS_ICON_ALTS[
@@ -54,6 +51,8 @@ export function GoalsSection({ currentLanguage }: GoalsSectionProps) {
                       }
                       width={29}
                       height={29}
+                      loading="lazy"
+                      decoding="async"
                       className="w-7 h-7"
                     />
                   </div>
@@ -82,13 +81,15 @@ export function GoalsSection({ currentLanguage }: GoalsSectionProps) {
             <div className="relative">
               <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-2xl transform hover:scale-105 transition-transform duration-300 max-lg:w-[50%] max-md:w-[65%] max-lg:mx-auto">
                 <div className="relative border-4 border-red-500 rounded-xl overflow-hidden">
-                  <Image
+                  <img
                     src={GOALS_IMAGES.goal1}
                     alt={GOALS_IMAGE_ALTS.goal1[currentLanguage]}
                     width={600}
                     height={400}
+                    loading="eager"
+                    decoding="sync"
+                    fetchPriority="high"
                     className="w-full h-auto object-cover"
-                    priority
                   />
                 </div>
               </div>

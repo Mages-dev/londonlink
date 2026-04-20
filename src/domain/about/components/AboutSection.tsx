@@ -1,6 +1,3 @@
-"use client";
-
-import Image from "next/image";
 import { Language } from "@/types";
 import { aboutTranslations } from "../translations";
 import { ABOUT_IMAGES, ABOUT_IMAGE_ALTS } from "../constants/images";
@@ -32,13 +29,15 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
             <div className="relative">
               <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-2xl transform hover:scale-105 transition-transform duration-300">
                 <div className="relative border-4 border-red-500 rounded-xl overflow-hidden">
-                  <Image
+                  <img
                     src={ABOUT_IMAGES.about1}
                     alt={ABOUT_IMAGE_ALTS.about1[currentLanguage]}
                     width={600}
                     height={400}
+                    loading="eager"
+                    decoding="sync"
+                    fetchPriority="high"
                     className="w-full h-auto object-cover"
-                    priority
                   />
                 </div>
               </div>
@@ -55,11 +54,13 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
             <div className="order-2 lg:order-1 lg:col-span-2">
               <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-xl transform hover:scale-105 transition-transform duration-300 sticky top-8">
                 <div className="relative border-4 border-red-500 rounded-xl overflow-hidden">
-                  <Image
+                  <img
                     src={ABOUT_IMAGES.about2}
                     alt={ABOUT_IMAGE_ALTS.about2[currentLanguage]}
                     width={600}
                     height={400}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-auto object-cover"
                   />
                 </div>
@@ -111,11 +112,13 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
             <div className="relative lg:col-span-2">
               <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-xl transform hover:scale-105 transition-transform duration-300 sticky top-8">
                 <div className="relative border-4 border-red-500 rounded-xl overflow-hidden">
-                  <Image
+                  <img
                     src={ABOUT_IMAGES.about3}
                     alt={ABOUT_IMAGE_ALTS.about3[currentLanguage]}
                     width={600}
                     height={400}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-auto object-cover"
                   />
                 </div>

@@ -1,6 +1,3 @@
-"use client";
-
-import Image from "next/image";
 import { Language } from "@/types";
 import { galleryTranslations } from "../translations";
 import type { GalleryImage } from "../hooks/useGallery";
@@ -116,13 +113,14 @@ export function GalleryModal({
         {/* Image Container */}
         <div className="relative bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-2xl">
           <div className="relative w-full h-[60vh] sm:h-[70vh] lg:h-[75vh] xl:h-[80vh]">
-            <Image
+            <img
               src={image.src}
               alt={image.alt}
-              fill
-              className="object-contain"
-              priority
+              loading="eager"
+              decoding="sync"
+              fetchPriority="high"
               sizes="(max-width: 640px) 95vw, (max-width: 1024px) 85vw, (max-width: 1280px) 80vw, 75vw"
+              className="absolute inset-0 w-full h-full object-contain"
             />
           </div>
 

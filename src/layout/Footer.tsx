@@ -1,6 +1,3 @@
-"use client";
-
-import Image from "next/image";
 import { getVersionString } from "@/lib/version";
 
 export function Footer() {
@@ -17,11 +14,13 @@ export function Footer() {
             rel="noopener noreferrer"
             className="transition-opacity hover:opacity-80"
           >
-            <Image
+            <img
               src="/assets/images/shared/logos/mages-dev-logo.webp"
               alt="Mages Dev Logo"
               width={138}
               height={46}
+              loading="lazy"
+              decoding="async"
               className="drop-shadow-sm"
             />
           </a>

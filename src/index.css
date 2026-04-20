@@ -1,7 +1,14 @@
 @import "tailwindcss";
+@config "../tailwind.config.ts";
 
 /* Tailwind v4 Dark Mode Configuration */
 @variant dark (&:where(.dark, .dark *));
+
+/* Fontsource variable fonts — wired to existing CSS vars so Tailwind config keeps working */
+:root {
+  --font-geist-sans: "Geist Variable", system-ui, sans-serif;
+  --font-geist-mono: "Geist Mono Variable", ui-monospace, monospace;
+}
 
 /* LondonLink Global Styles */
 

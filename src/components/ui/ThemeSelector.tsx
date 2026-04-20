@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { CommemorativeTheme } from "@/types/theme";
 import { THEME_CONFIGS } from "@/lib/themes/configs";

@@ -1,5 +1,3 @@
-"use client";
-
 import { HeaderWithTheme, Footer } from "@/layout";
 import {
   HeroSection,
@@ -22,7 +20,7 @@ import {
 import ThemeDebug from "@/components/ui/ThemeDebug";
 import { useLanguage } from "@/contexts";
 
-export default function Home() {
+export default function App() {
   const { language, setLanguage } = useLanguage();
 
   return (
@@ -53,7 +51,7 @@ export default function Home() {
       <WhatsAppFloat currentLanguage={language} />
 
       {/* Debug info - only in development */}
-      {process.env.NODE_ENV === "development" && <ThemeDebug />}
+      {import.meta.env.DEV && <ThemeDebug />}
     </div>
   );
 }

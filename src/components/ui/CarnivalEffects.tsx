@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 /**
@@ -240,7 +240,7 @@ export default function CarnivalEffects(): React.JSX.Element | null {
       </div>
 
       {/* CSS Animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes carnivalFloat {
           0% {
             transform: translateY(100vh) translateX(0px) rotate(0deg);

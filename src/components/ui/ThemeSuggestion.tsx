@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useThemeSuggestions } from "@/contexts/ThemeContext";
 import { THEME_CONFIGS } from "@/lib/themes/configs";
 import { Language } from "@/types";

@@ -1,8 +1,5 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
-import Image from "next/image";
 import { CONTACT_INFO } from "@/domain/shared/constants/contacts";
 import { contactTranslations } from "@/domain/contact/translations";
 import "./WhatsAppFloat.css";
@@ -77,11 +74,13 @@ export function WhatsAppFloat({ currentLanguage }: WhatsAppFloatProps) {
             : "Contact via WhatsApp"
         }
       >
-        <Image
+        <img
           src="/icons/whatsApp.svg"
           alt="WhatsApp"
           width={40}
           height={40}
+          loading="lazy"
+          decoding="async"
           className="whatsapp-float__icon"
         />
 

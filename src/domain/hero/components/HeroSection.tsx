@@ -1,6 +1,3 @@
-"use client";
-
-import Image from "next/image";
 import { Language } from "@/types";
 import { HERO_IMAGES, HERO_IMAGE_ALTS } from "../constants/images";
 import { heroTranslations } from "../translations";
@@ -70,14 +67,16 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
 
           {/* Image for mobile - Larger */}
           <div className="flex justify-center -mx-4">
-            <Image
+            <img
               src={HERO_IMAGES.backgrounds.main}
               alt={HERO_IMAGE_ALTS.backgrounds.main}
               width={800}
               height={600}
+              loading="eager"
+              decoding="sync"
+              fetchPriority="high"
               className="h-auto object-contain"
               style={{ width: "auto", maxWidth: "110%" }}
-              priority
             />
           </div>
         </div>
@@ -118,11 +117,14 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
 
           {/* Image container - Fills completely and overflows */}
           <div className="relative overflow-hidden h-full flex items-center justify-center">
-            <Image
+            <img
               src={HERO_IMAGES.backgrounds.main}
               alt={HERO_IMAGE_ALTS.backgrounds.main}
               width={700}
               height={625}
+              loading="eager"
+              decoding="sync"
+              fetchPriority="high"
               className="h-auto object-cover min-h-[357px]"
               style={{
                 width: "89%",
@@ -130,7 +132,6 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
                 minHeight: "357px",
                 objectFit: "cover",
               }}
-              priority
             />
           </div>
         </div>
@@ -159,7 +160,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
                 <div className="flex gap-4 md:block">
                   {/* Icon */}
                   <div className="hero-icon-frame flex-shrink-0">
-                    <Image
+                    <img
                       src={
                         HERO_IMAGES.advantages[
                           advantage.icon as keyof typeof HERO_IMAGES.advantages
@@ -172,6 +173,8 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
                       }
                       width={29}
                       height={29}
+                      loading="lazy"
+                      decoding="async"
                       className="w-7 h-7"
                     />
                   </div>
@@ -215,7 +218,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               >
                 {/* Image - Taller for mobile */}
                 <div className="relative h-44 sm:h-36">
-                  <Image
+                  <img
                     src={
                       HERO_IMAGES.courseObjectives[
                         objective.image as keyof typeof HERO_IMAGES.courseObjectives
@@ -228,6 +231,8 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
                     }
                     width={300}
                     height={200}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>

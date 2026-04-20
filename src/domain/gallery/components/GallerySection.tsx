@@ -1,6 +1,3 @@
-"use client";
-
-import Image from "next/image";
 import { useState } from "react";
 import { Language } from "@/types";
 import { galleryTranslations } from "../translations";
@@ -96,14 +93,15 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
                   onClick={() => setSelectedImage(image.id)}
                 >
                   <div className="absolute inset-0 overflow-hidden">
-                    <Image
+                    <img
                       src={image.src}
                       alt={image.alt}
-                      fill
-                      className={`object-cover transition-transform duration-300 ${
+                      loading="lazy"
+                      decoding="async"
+                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                      className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 ${
                         hoveredImage === image.id ? "scale-110" : "scale-100"
                       }`}
-                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                     />
                   </div>
 
@@ -158,14 +156,15 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
                   onClick={() => setSelectedImage(image.id)}
                 >
                   <div className="absolute inset-0 overflow-hidden">
-                    <Image
+                    <img
                       src={image.src}
                       alt={image.alt}
-                      fill
-                      className={`object-cover transition-transform duration-300 ${
+                      loading="lazy"
+                      decoding="async"
+                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                      className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 ${
                         hoveredImage === image.id ? "scale-110" : "scale-100"
                       }`}
-                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                     />
                   </div>
 

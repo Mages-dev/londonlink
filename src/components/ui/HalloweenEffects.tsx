@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface FloatingElement {

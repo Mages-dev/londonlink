@@ -1,6 +1,5 @@
 import { Language } from "@/types";
 import { MapPin } from "lucide-react";
-import Image from "next/image";
 import { CONTACT_INFO } from "@/domain/shared/constants/contacts";
 import { contactTranslations } from "@/domain/contact/translations";
 
@@ -53,11 +52,13 @@ export function ContactSection({ currentLanguage }: ContactSectionProps) {
                   {/* WhatsApp */}
                   <div className="flex items-center space-x-6">
                     <div className="flex-shrink-0">
-                      <Image
+                      <img
                         src={CONTACT_INFO.icons.whatsapp}
                         alt="WhatsApp"
                         width={48}
                         height={48}
+                        loading="lazy"
+                        decoding="async"
                         className="h-12 w-12"
                       />
                     </div>
@@ -81,11 +82,13 @@ export function ContactSection({ currentLanguage }: ContactSectionProps) {
                   {/* Instagram */}
                   <div className="flex items-center space-x-6">
                     <div className="flex-shrink-0">
-                      <Image
+                      <img
                         src={CONTACT_INFO.icons.instagram}
                         alt="Instagram"
                         width={48}
                         height={48}
+                        loading="lazy"
+                        decoding="async"
                         className="h-12 w-12"
                       />
                     </div>

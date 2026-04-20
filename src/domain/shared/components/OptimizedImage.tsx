@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useOptimizedImage } from "../hooks/useOptimizedImage";
 
 interface OptimizedImageProps {
@@ -32,7 +31,6 @@ export function OptimizedImage({
     isLoaded,
     isError,
     sizes: optimizedSizes,
-    priority: optimizedPriority,
   } = useOptimizedImage({
     src,
     alt,
@@ -41,21 +39,23 @@ export function OptimizedImage({
     priority,
   });
 
-  const imageProps = {
-    src: optimizedSrc,
-    alt: optimizedAlt,
-    className: `${className} ${
-      isLoaded ? "opacity-100" : "opacity-0"
-    } transition-opacity duration-300`,
-    sizes: optimizedSizes,
-    priority: optimizedPriority,
-    style: { objectFit },
-  };
+  const imgClassName = `${className} ${
+    isLoaded ? "opacity-100" : "opacity-0"
+  } transition-opacity duration-300`;
 
   if (fill) {
     return (
-      <div className="relative overflow-hidden">
-        <Image {...imageProps} fill alt={optimizedAlt} />
+      <div className="relative overflow-hidden w-full h-full">
+        <img
+          src={optimizedSrc}
+          alt={optimizedAlt}
+          sizes={optimizedSizes}
+          loading={priority ? "eager" : "lazy"}
+          decoding={priority ? "sync" : "async"}
+          fetchPriority={priority ? "high" : "auto"}
+          className={`absolute inset-0 w-full h-full ${imgClassName}`}
+          style={{ objectFit }}
+        />
         {!isLoaded && (
           <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse" />
         )}
@@ -65,7 +65,18 @@ export function OptimizedImage({
 
   return (
     <div className="relative">
-      <Image {...imageProps} width={width} height={height} alt={optimizedAlt} />
+      <img
+        src={optimizedSrc}
+        alt={optimizedAlt}
+        width={width}
+        height={height}
+        sizes={optimizedSizes}
+        loading={priority ? "eager" : "lazy"}
+        decoding={priority ? "sync" : "async"}
+        fetchPriority={priority ? "high" : "auto"}
+        className={imgClassName}
+        style={{ objectFit }}
+      />
       {!isLoaded && (
         <div
           className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"

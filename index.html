@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>LondonLink - English Learning Platform</title>
+    <meta
+      name="description"
+      content="A comprehensive English language learning platform which creates unique courses for your specific situation and requirements"
+    />
+    <meta
+      name="keywords"
+      content="English learning, Portuguese, Language courses, Online education, LondonLink"
+    />
+    <meta name="author" content="LondonLink Team" />
+    <meta name="creator" content="LondonLink" />
+    <meta name="publisher" content="LondonLink" />
+    <meta name="format-detection" content="telephone=no, address=no, email=no" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="LondonLink" />
+    <meta property="og:url" content="https://londonlink.com" />
+    <meta property="og:title" content="LondonLink - English Learning Platform" />
+    <meta
+      property="og:description"
+      content="A comprehensive English language learning platform which creates unique courses for your specific situation and requirements"
+    />
+    <meta
+      property="og:image"
+      content="https://londonlink.com/assets/images/shared/og/og-image.webp"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="LondonLink - English Learning Platform" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LondonLink - English Learning Platform" />
+    <meta
+      name="twitter:description"
+      content="A comprehensive English language learning platform which creates unique courses for your specific situation and requirements"
+    />
+    <meta
+      name="twitter:image"
+      content="https://londonlink.com/assets/images/shared/og/og-image.webp"
+    />
+
+    <script>
+      (function () {
+        try {
+          var savedLanguage = localStorage.getItem("londonlink-language");
+          var language = "pt";
+          if (savedLanguage === "en" || savedLanguage === "pt") {
+            language = savedLanguage;
+          } else {
+            var browserLang = navigator.language.split("-")[0];
+            if (browserLang === "en" || browserLang === "pt") {
+              language = browserLang;
+            }
+          }
+          document.documentElement.setAttribute("lang", language);
+        } catch (e) {
+          console.error("Language initialization error:", e);
+        }
+      })();
+    </script>
+    <script>
+      (function () {
+        try {
+          var mode = localStorage.getItem("londonlink-theme-mode") || "auto";
+          var theme = "dark";
+          if (mode === "auto") {
+            theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+          } else if (mode === "light" || mode === "dark") {
+            theme = mode;
+          }
+          document.documentElement.classList.remove("light", "dark");
+          document.documentElement.classList.add(theme);
+        } catch (e) {
+          console.error("Theme initialization error:", e);
+        }
+      })();
+    </script>
+
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-YMZJ7KR3SG"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-YMZJ7KR3SG");
+    </script>
+  </head>
+  <body class="font-sans antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
