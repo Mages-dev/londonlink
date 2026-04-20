@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface FloatingElement {
@@ -24,129 +22,118 @@ interface HeartPetal {
   drift: number;
 }
 
+const VALENTINE_EMOJIS = [
+  "💕",
+  "💖",
+  "💗",
+  "💘",
+  "💝",
+  "💞",
+  "💟",
+  "❤️",
+  "🌹",
+  "💐",
+] as const;
+
+const HEART_PETALS = [
+  "🌹",
+  "💐",
+  "🌺",
+  "🌸",
+  "💕",
+  "💖",
+  "💗",
+  "❤️",
+] as const;
+
+// Fixed positions for decorative love letters (computed once per page load)
+const LOVE_LETTER_POSITIONS = Array.from({ length: 15 }, (_, i) => ({
+  left: Math.random() * 100,
+  top: Math.random() * 100,
+  emoji: i % 2 === 0 ? "💌" : "💕",
+}));
+
+function createFloatingElements(): FloatingElement[] {
+  const count = window.innerWidth < 768 ? 8 : 15;
+  return Array.from({ length: count }, (_, i) => ({
+    id: i,
+    emoji:
+      VALENTINE_EMOJIS[Math.floor(Math.random() * VALENTINE_EMOJIS.length)],
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    size: Math.random() * 16 + 18,
+    speed: Math.random() * 1 + 0.6,
+    rotation: Math.random() * 360,
+  }));
+}
+
+function createHeartPetals(): HeartPetal[] {
+  const count = window.innerWidth < 768 ? 12 : 20;
+  return Array.from({ length: count }, (_, i) => ({
+    id: i,
+    x: Math.random() * window.innerWidth,
+    y: -20,
+    emoji: HEART_PETALS[Math.floor(Math.random() * HEART_PETALS.length)],
+    size: Math.random() * 12 + 8,
+    speed: Math.random() * 2 + 1,
+    rotation: Math.random() * 360,
+    drift: (Math.random() - 0.5) * 2,
+  }));
+}
+
 export default function ValentineEffects() {
   const { commemorativeTheme } = useTheme();
-  const [elements, setElements] = useState<FloatingElement[]>([]);
-  const [petals, setPetals] = useState<HeartPetal[]>([]);
-  const [mounted, setMounted] = useState(false);
-
   const isValentineTheme = commemorativeTheme === "valentine";
 
-  // Valentine emojis for floating effects (memoized to prevent re-creation)
-  const valentineEmojis = useMemo(
-    () => ["💕", "💖", "💗", "💘", "💝", "💞", "💟", "❤️", "🌹", "💐"],
-    []
+  const [elements, setElements] = useState<FloatingElement[]>(() =>
+    isValentineTheme ? createFloatingElements() : []
+  );
+  const [petals, setPetals] = useState<HeartPetal[]>(() =>
+    isValentineTheme ? createHeartPetals() : []
   );
 
-  // Heart petals and romantic elements
-  const heartPetals = useMemo(
-    () => ["🌹", "💐", "🌺", "🌸", "💕", "💖", "💗", "❤️"],
-    []
-  );
-
-  // Fixed positions for love letters (memoized to prevent re-calculation)
-  const loveLetterPositions = useMemo(
-    () =>
-      Array.from({ length: 15 }, (_, i) => ({
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-        emoji: i % 2 === 0 ? "💌" : "💕",
-      })),
-    []
-  );
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Create floating elements
-  const createElements = useCallback(() => {
+  const regenerate = useCallback(() => {
     if (!isValentineTheme) {
       setElements([]);
-      return;
-    }
-
-    const newElements: FloatingElement[] = [];
-    const elementCount = window.innerWidth < 768 ? 8 : 15; // Fewer on mobile
-
-    for (let i = 0; i < elementCount; i++) {
-      newElements.push({
-        id: i,
-        emoji:
-          valentineEmojis[Math.floor(Math.random() * valentineEmojis.length)],
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        size: Math.random() * 16 + 18, // 18-34px
-        speed: Math.random() * 1 + 0.6, // 0.6-1.6 speed (ajustado)
-        rotation: Math.random() * 360,
-      });
-    }
-
-    setElements(newElements);
-  }, [isValentineTheme, valentineEmojis]);
-
-  // Create heart petals
-  const createPetals = useCallback(() => {
-    if (!isValentineTheme) {
       setPetals([]);
       return;
     }
+    setElements(createFloatingElements());
+    setPetals(createHeartPetals());
+  }, [isValentineTheme]);
 
-    const newPetals: HeartPetal[] = [];
-    const petalCount = window.innerWidth < 768 ? 12 : 20;
-
-    for (let i = 0; i < petalCount; i++) {
-      newPetals.push({
-        id: i,
-        x: Math.random() * window.innerWidth,
-        y: -20,
-        emoji: heartPetals[Math.floor(Math.random() * heartPetals.length)],
-        size: Math.random() * 12 + 8, // 8-20px
-        speed: Math.random() * 2 + 1, // 1-3 speed
-        rotation: Math.random() * 360,
-        drift: (Math.random() - 0.5) * 2, // -1 to 1 horizontal drift
-      });
-    }
-
-    setPetals(newPetals);
-  }, [isValentineTheme, heartPetals]);
-
-  // Initialize and handle resize
   useEffect(() => {
-    if (!mounted || !isValentineTheme) return;
-
-    createElements();
-    createPetals();
-
-    const handleResize = () => {
-      createElements();
-      createPetals();
-    };
-
+    if (!isValentineTheme) return;
+    const handleResize = () => regenerate();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [mounted, isValentineTheme, createElements, createPetals]);
+  }, [isValentineTheme, regenerate]);
+
+  // React to theme toggling at runtime (derive state from props pattern)
+  const [prevTheme, setPrevTheme] = useState(isValentineTheme);
+  if (prevTheme !== isValentineTheme) {
+    setPrevTheme(isValentineTheme);
+    setElements(isValentineTheme ? createFloatingElements() : []);
+    setPetals(isValentineTheme ? createHeartPetals() : []);
+  }
 
   // Animate floating elements
   useEffect(() => {
     if (!isValentineTheme || elements.length === 0) return;
 
-    const animateElements = () => {
-      setElements((prevElements) =>
-        prevElements.map((element) => ({
-          ...element,
-          y: element.y + element.speed,
-          rotation: element.rotation + 0.5,
-          // Reset position when element goes off screen
-          ...(element.y > window.innerHeight + 50 && {
+    const interval = setInterval(() => {
+      setElements((prev) =>
+        prev.map((el) => ({
+          ...el,
+          y: el.y + el.speed,
+          rotation: el.rotation + 0.5,
+          ...(el.y > window.innerHeight + 50 && {
             y: -50,
             x: Math.random() * window.innerWidth,
           }),
         }))
       );
-    };
-
-    const interval = setInterval(animateElements, 33); // 30 FPS
+    }, 33);
     return () => clearInterval(interval);
   }, [isValentineTheme, elements.length]);
 
@@ -154,34 +141,27 @@ export default function ValentineEffects() {
   useEffect(() => {
     if (!isValentineTheme || petals.length === 0) return;
 
-    const animatePetals = () => {
-      setPetals((prevPetals) =>
-        prevPetals.map((petal) => ({
+    const interval = setInterval(() => {
+      setPetals((prev) =>
+        prev.map((petal) => ({
           ...petal,
           y: petal.y + petal.speed,
           x: petal.x + petal.drift * 0.5,
           rotation: petal.rotation + 3,
-          // Reset position when petal goes off screen
           ...(petal.y > window.innerHeight + 20 && {
             y: -20,
             x: Math.random() * window.innerWidth,
           }),
         }))
       );
-    };
-
-    const interval = setInterval(animatePetals, 50); // 20 FPS
+    }, 50);
     return () => clearInterval(interval);
   }, [isValentineTheme, petals.length]);
 
-  // Don't render anything if not mounted or not Valentine theme
-  if (!mounted || !isValentineTheme) {
-    return null;
-  }
+  if (!isValentineTheme) return null;
 
   return (
     <>
-      {/* Floating Valentine Elements */}
       <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">
         {elements.map((element) => (
           <div
@@ -200,7 +180,6 @@ export default function ValentineEffects() {
         ))}
       </div>
 
-      {/* Heart Petals Effect */}
       <div className="fixed inset-0 pointer-events-none z-15 overflow-hidden">
         {petals.map((petal) => (
           <div
@@ -219,21 +198,15 @@ export default function ValentineEffects() {
         ))}
       </div>
 
-      {/* Valentine Background Patterns */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        {/* Subtle Valentine pattern overlay */}
         <div className="absolute inset-0 valentine-pattern opacity-20" />
-
-        {/* Glowing orbs */}
         <div className="absolute top-1/4 left-1/4 w-36 h-36 bg-rose-500/10 rounded-full blur-xl animate-pulse" />
         <div className="absolute top-3/4 right-1/4 w-28 h-28 bg-pink-500/10 rounded-full blur-xl animate-pulse delay-1000" />
         <div className="absolute top-1/2 left-3/4 w-32 h-32 bg-red-500/10 rounded-full blur-xl animate-pulse delay-2000" />
         <div className="absolute bottom-1/4 left-1/2 w-24 h-24 bg-rose-400/10 rounded-full blur-xl animate-pulse delay-500" />
       </div>
 
-      {/* Cupid's Arrows Effect */}
       <div className="fixed inset-0 pointer-events-none z-5">
-        {/* Animated arrows */}
         {[...Array(3)].map((_, i) => (
           <div
             key={`arrow-${i}`}
@@ -253,9 +226,8 @@ export default function ValentineEffects() {
         ))}
       </div>
 
-      {/* Love Letters Effect */}
       <div className="fixed inset-0 pointer-events-none z-5">
-        {loveLetterPositions.map((pos, i) => (
+        {LOVE_LETTER_POSITIONS.map((pos, i) => (
           <div
             key={`letter-${i}`}
             className="absolute text-pink-400"
@@ -271,12 +243,10 @@ export default function ValentineEffects() {
         ))}
       </div>
 
-      {/* Love Birds Effect (decorative) */}
       <div className="fixed top-4 left-4 pointer-events-none z-10">
         <div className="text-3xl animate-bounce">🕊️💕</div>
       </div>
 
-      {/* Romantic Quote Bubble (decorative) */}
       <div className="fixed bottom-4 right-4 pointer-events-none z-10">
         <div className="text-2xl animate-pulse">💭💖</div>
       </div>

@@ -6,12 +6,7 @@ import { GoalsData, GoalsMetrics } from '../types';
 // Hook for managing goals data
 export function useGoalsData() {
   const [goals, setGoals] = useState<GoalsData[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Placeholder for future goals data fetching
-    setLoading(false);
-  }, []);
+  const loading = false;
 
   return { goals, loading, setGoals };
 }

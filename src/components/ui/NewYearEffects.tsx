@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface FloatingElement {
@@ -23,107 +21,92 @@ interface ConfettiPiece {
   rotation: number;
 }
 
+const NEW_YEAR_EMOJIS = ["🎆", "🎇", "🥂", "🍾", "🎊", "🎉", ""] as const;
+
+const CONFETTI_COLORS = [
+  "#d97706",
+  "#f59e0b",
+  "#eab308",
+  "#6366f1",
+  "#8b5cf6",
+  "#f3f4f6",
+] as const;
+
+// Fixed positions for sparkles (computed once per page load)
+const SPARKLE_POSITIONS = Array.from({ length: 20 }, (_, i) => ({
+  left: Math.random() * 100,
+  top: Math.random() * 100,
+  emoji: i % 3 === 0 ? "✨" : i % 3 === 1 ? "🌟" : "💫",
+}));
+
+// Fixed border radius for each confetti piece (computed once per page load)
+const CONFETTI_BORDER_RADIUS = Array.from({ length: 25 }, () =>
+  Math.random() > 0.5 ? "50%" : "0%"
+);
+
+function createFloatingElements(): FloatingElement[] {
+  const elementCount = window.innerWidth < 768 ? 6 : 12; // Fewer on mobile
+  return Array.from({ length: elementCount }, (_, i) => ({
+    id: i,
+    emoji:
+      NEW_YEAR_EMOJIS[Math.floor(Math.random() * NEW_YEAR_EMOJIS.length)],
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    size: Math.random() * 18 + 16, // 16-34px
+    speed: Math.random() * 1 + 0.6, // 0.6-1.6 speed (mais rápido)
+    rotation: Math.random() * 360,
+  }));
+}
+
+function createConfetti(): ConfettiPiece[] {
+  const confettiCount = window.innerWidth < 768 ? 15 : 25;
+  return Array.from({ length: confettiCount }, (_, i) => ({
+    id: i,
+    x: Math.random() * window.innerWidth,
+    y: -20,
+    color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+    size: Math.random() * 8 + 4, // 4-12px
+    speed: Math.random() * 3 + 2, // 2-5 speed
+    rotation: Math.random() * 360,
+  }));
+}
+
 export default function NewYearEffects() {
   const { commemorativeTheme } = useTheme();
-  const [elements, setElements] = useState<FloatingElement[]>([]);
-  const [confetti, setConfetti] = useState<ConfettiPiece[]>([]);
-  const [mounted, setMounted] = useState(false);
-
   const isNewYearTheme = commemorativeTheme === "new-year";
 
-  // New Year emojis for floating effects (memoized to prevent re-creation)
-  const newYearEmojis = useMemo(
-    () => ["🎆", "🎇", "🥂", "🍾", "🎊", "🎉", ""],
-    []
+  const [elements, setElements] = useState<FloatingElement[]>(() =>
+    isNewYearTheme ? createFloatingElements() : []
+  );
+  const [confetti, setConfetti] = useState<ConfettiPiece[]>(() =>
+    isNewYearTheme ? createConfetti() : []
   );
 
-  // Confetti colors
-  const confettiColors = useMemo(
-    () => ["#d97706", "#f59e0b", "#eab308", "#6366f1", "#8b5cf6", "#f3f4f6"],
-    []
-  );
-
-  // Fixed positions for sparkles (memoized to prevent re-calculation)
-  const sparklePositions = useMemo(
-    () =>
-      Array.from({ length: 20 }, (_, i) => ({
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-        emoji: i % 3 === 0 ? "✨" : i % 3 === 1 ? "🌟" : "💫",
-      })),
-    []
-  );
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Create floating elements
-  const createElements = useCallback(() => {
+  const regenerate = useCallback(() => {
     if (!isNewYearTheme) {
       setElements([]);
-      return;
-    }
-
-    const newElements: FloatingElement[] = [];
-    const elementCount = window.innerWidth < 768 ? 6 : 12; // Fewer on mobile
-
-    for (let i = 0; i < elementCount; i++) {
-      newElements.push({
-        id: i,
-        emoji: newYearEmojis[Math.floor(Math.random() * newYearEmojis.length)],
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        size: Math.random() * 18 + 16, // 16-34px
-        speed: Math.random() * 1 + 0.6, // 0.6-1.6 speed (mais rápido)
-        rotation: Math.random() * 360,
-      });
-    }
-
-    setElements(newElements);
-  }, [isNewYearTheme, newYearEmojis]);
-
-  // Create confetti pieces
-  const createConfetti = useCallback(() => {
-    if (!isNewYearTheme) {
       setConfetti([]);
       return;
     }
+    setElements(createFloatingElements());
+    setConfetti(createConfetti());
+  }, [isNewYearTheme]);
 
-    const newConfetti: ConfettiPiece[] = [];
-    const confettiCount = window.innerWidth < 768 ? 15 : 25;
-
-    for (let i = 0; i < confettiCount; i++) {
-      newConfetti.push({
-        id: i,
-        x: Math.random() * window.innerWidth,
-        y: -20,
-        color:
-          confettiColors[Math.floor(Math.random() * confettiColors.length)],
-        size: Math.random() * 8 + 4, // 4-12px
-        speed: Math.random() * 3 + 2, // 2-5 speed
-        rotation: Math.random() * 360,
-      });
-    }
-
-    setConfetti(newConfetti);
-  }, [isNewYearTheme, confettiColors]);
-
-  // Initialize and handle resize
+  // Handle resize
   useEffect(() => {
-    if (!mounted || !isNewYearTheme) return;
-
-    createElements();
-    createConfetti();
-
-    const handleResize = () => {
-      createElements();
-      createConfetti();
-    };
-
+    if (!isNewYearTheme) return;
+    const handleResize = () => regenerate();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [mounted, isNewYearTheme, createElements, createConfetti]);
+  }, [isNewYearTheme, regenerate]);
+
+  // React to theme toggling at runtime (derive state from props pattern)
+  const [prevTheme, setPrevTheme] = useState(isNewYearTheme);
+  if (prevTheme !== isNewYearTheme) {
+    setPrevTheme(isNewYearTheme);
+    setElements(isNewYearTheme ? createFloatingElements() : []);
+    setConfetti(isNewYearTheme ? createConfetti() : []);
+  }
 
   // Animate floating elements
   useEffect(() => {
@@ -171,8 +154,7 @@ export default function NewYearEffects() {
     return () => clearInterval(interval);
   }, [isNewYearTheme, confetti.length]);
 
-  // Don't render anything if not mounted or not New Year theme
-  if (!mounted || !isNewYearTheme) {
+  if (!isNewYearTheme) {
     return null;
   }
 
@@ -210,7 +192,7 @@ export default function NewYearEffects() {
               height: `${piece.size}px`,
               backgroundColor: piece.color,
               transform: `rotate(${piece.rotation}deg)`,
-              borderRadius: Math.random() > 0.5 ? "50%" : "0%",
+              borderRadius: CONFETTI_BORDER_RADIUS[piece.id],
             }}
           />
         ))}
@@ -250,7 +232,7 @@ export default function NewYearEffects() {
 
       {/* Golden Sparkles */}
       <div className="fixed inset-0 pointer-events-none z-5">
-        {sparklePositions.map((pos, i) => (
+        {SPARKLE_POSITIONS.map((pos, i) => (
           <div
             key={`sparkle-${i}`}
             className="absolute text-yellow-400"

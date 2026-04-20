@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface FloatingElement {
@@ -13,72 +11,69 @@ interface FloatingElement {
   rotation: number;
 }
 
+const CHRISTMAS_EMOJIS = [
+  "🎄",
+  "🎁",
+  "❄️",
+  "⭐",
+  "🔔",
+  "🎅",
+  "🤶",
+  "🦌",
+  "⛄",
+  "🕯️",
+] as const;
+
+// Fixed positions for sparkles (computed once per page load)
+const SPARKLE_POSITIONS = Array.from({ length: 25 }, () => ({
+  left: Math.random() * 100,
+  top: Math.random() * 100,
+}));
+
+function createFloatingElements(): FloatingElement[] {
+  const elementCount = window.innerWidth < 768 ? 8 : 15; // Fewer on mobile
+  return Array.from({ length: elementCount }, (_, i) => ({
+    id: i,
+    emoji:
+      CHRISTMAS_EMOJIS[Math.floor(Math.random() * CHRISTMAS_EMOJIS.length)],
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    size: Math.random() * 20 + 15, // 15-35px
+    speed: Math.random() * 1 + 0.6, // 0.6-1.6 speed (mais rápido)
+    rotation: Math.random() * 360,
+  }));
+}
+
 export default function ChristmasEffects() {
   const { commemorativeTheme } = useTheme();
-  const [elements, setElements] = useState<FloatingElement[]>([]);
-  const [mounted, setMounted] = useState(false);
-
   const isChristmasTheme = commemorativeTheme === "christmas";
 
-  // Christmas emojis for floating effects (memoized to prevent re-creation)
-  const christmasEmojis = useMemo(
-    () => ["🎄", "🎁", "❄️", "⭐", "🔔", "🎅", "🤶", "🦌", "⛄", "🕯️"],
-    []
+  const [elements, setElements] = useState<FloatingElement[]>(() =>
+    isChristmasTheme ? createFloatingElements() : []
   );
 
-  // Fixed positions for sparkles (memoized to prevent re-calculation)
-  const sparklePositions = useMemo(
-    () =>
-      Array.from({ length: 25 }, () => ({
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-      })),
-    []
-  );
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Create floating elements
-  const createElements = useCallback(() => {
+  const regenerate = useCallback(() => {
     if (!isChristmasTheme) {
       setElements([]);
       return;
     }
+    setElements(createFloatingElements());
+  }, [isChristmasTheme]);
 
-    const newElements: FloatingElement[] = [];
-    const elementCount = window.innerWidth < 768 ? 8 : 15; // Fewer on mobile
-
-    for (let i = 0; i < elementCount; i++) {
-      newElements.push({
-        id: i,
-        emoji:
-          christmasEmojis[Math.floor(Math.random() * christmasEmojis.length)],
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        size: Math.random() * 20 + 15, // 15-35px
-        speed: Math.random() * 1 + 0.6, // 0.6-1.6 speed (mais rápido)
-        rotation: Math.random() * 360,
-      });
-    }
-
-    setElements(newElements);
-  }, [isChristmasTheme, christmasEmojis]);
-
-  // Initialize and handle resize
+  // Handle resize
   useEffect(() => {
-    if (!mounted || !isChristmasTheme) return;
-
-    createElements();
-
-    const handleResize = () => {
-      createElements();
-    };
-
+    if (!isChristmasTheme) return;
+    const handleResize = () => regenerate();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [mounted, isChristmasTheme, createElements]);
+  }, [isChristmasTheme, regenerate]);
+
+  // React to theme toggling at runtime (derive state from props pattern)
+  const [prevTheme, setPrevTheme] = useState(isChristmasTheme);
+  if (prevTheme !== isChristmasTheme) {
+    setPrevTheme(isChristmasTheme);
+    setElements(isChristmasTheme ? createFloatingElements() : []);
+  }
 
   useEffect(() => {
     if (!isChristmasTheme || elements.length === 0) return;
@@ -102,8 +97,7 @@ export default function ChristmasEffects() {
     return () => clearInterval(interval);
   }, [isChristmasTheme, elements.length]);
 
-  // Don't render anything if not mounted or not Christmas theme
-  if (!mounted || !isChristmasTheme) {
+  if (!isChristmasTheme) {
     return null;
   }
 
@@ -164,7 +158,7 @@ export default function ChristmasEffects() {
 
       {/* Christmas Sparkles */}
       <div className="fixed inset-0 pointer-events-none z-5">
-        {sparklePositions.map((pos, i) => (
+        {SPARKLE_POSITIONS.map((pos, i) => (
           <div
             key={`sparkle-${i}`}
             className="absolute text-yellow-400"

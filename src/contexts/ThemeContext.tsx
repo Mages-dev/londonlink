@@ -33,53 +33,38 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [mode, setModeState] = useState<ThemeMode>("auto");
+  const [mode, setModeState] = useState<ThemeMode>(() => {
+    const saved = localStorage.getItem(STORAGE_KEYS.MODE) as ThemeMode | null;
+    if (saved && ["light", "dark", "auto"].includes(saved)) return saved;
+    return "auto";
+  });
+
+  const [manualOverride, setManualOverride] = useState<boolean>(
+    () => localStorage.getItem("londonlink-manual-override") === "true"
+  );
+
   const [commemorativeTheme, setCommemorativeThemeState] =
-    useState<CommemorativeTheme>("default");
-  const [mounted, setMounted] = useState(false);
-  const [manualOverride, setManualOverride] = useState(false);
+    useState<CommemorativeTheme>(() => {
+      const savedCommemorative = localStorage.getItem(
+        STORAGE_KEYS.COMMEMORATIVE
+      ) as CommemorativeTheme | null;
+      const savedOverride =
+        localStorage.getItem("londonlink-manual-override") === "true";
 
-  // Initialize theme from localStorage and system preferences
-  useEffect(() => {
-    setMounted(true);
-
-    // Load saved preferences
-    const savedMode = localStorage.getItem(STORAGE_KEYS.MODE) as ThemeMode;
-    const savedCommemorative = localStorage.getItem(
-      STORAGE_KEYS.COMMEMORATIVE
-    ) as CommemorativeTheme;
-
-    if (savedMode && ["light", "dark", "auto"].includes(savedMode)) {
-      setModeState(savedMode);
-    }
-
-    // Check if user has manually overridden theme
-    const savedOverride =
-      localStorage.getItem("londonlink-manual-override") === "true";
-    setManualOverride(savedOverride);
-
-    if (savedOverride && savedCommemorative) {
-      // User has manually set a theme, respect their choice
-      setCommemorativeThemeState(savedCommemorative);
-    } else {
-      // Apply automatic theme based on current date
-      const suggested = getSuggestedTheme();
-      if (suggested) {
-        // Automatically apply seasonal theme
-        setCommemorativeThemeState(suggested);
-      } else if (savedCommemorative && isThemeInSeason(savedCommemorative)) {
-        // Keep saved theme only if it's still in season
-        setCommemorativeThemeState(savedCommemorative);
-      } else {
-        // Reset to default if no seasonal theme and saved theme is out of season
-        setCommemorativeThemeState("default");
+      if (savedOverride && savedCommemorative) {
+        return savedCommemorative;
       }
-    }
-  }, []);
+      const suggested = getSuggestedTheme();
+      if (suggested) return suggested;
+      if (savedCommemorative && isThemeInSeason(savedCommemorative)) {
+        return savedCommemorative;
+      }
+      return "default";
+    });
 
   // Check for theme changes daily (only if not manually overridden)
   useEffect(() => {
-    if (!mounted || manualOverride) return;
+    if (manualOverride) return;
 
     const checkThemeDaily = () => {
       const suggested = getSuggestedTheme();
@@ -116,12 +101,10 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     }, msUntilMidnight);
 
     return () => clearTimeout(timeoutId);
-  }, [mounted, commemorativeTheme, manualOverride]);
+  }, [commemorativeTheme, manualOverride]);
 
   // Apply theme to document
   useEffect(() => {
-    if (!mounted) return;
-
     const root = document.documentElement;
     const body = document.body;
 
@@ -163,11 +146,11 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     // Save preferences
     localStorage.setItem(STORAGE_KEYS.MODE, mode);
     localStorage.setItem(STORAGE_KEYS.COMMEMORATIVE, commemorativeTheme);
-  }, [mode, commemorativeTheme, mounted]);
+  }, [mode, commemorativeTheme]);
 
   // Listen for system theme changes when in auto mode
   useEffect(() => {
-    if (!mounted || mode !== "auto") return;
+    if (mode !== "auto") return;
 
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handleChange = () => {
@@ -177,7 +160,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
     mediaQuery.addEventListener("change", handleChange);
     return () => mediaQuery.removeEventListener("change", handleChange);
-  }, [mode, mounted]);
+  }, [mode]);
 
   // Set mode with validation
   const setMode = (newMode: ThemeMode) => {
@@ -239,43 +222,6 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     getThemeConfig,
     isThemeInSeason,
   };
-
-  // Don't render until mounted to avoid hydration mismatch
-  if (!mounted) {
-    return (
-      <ThemeContext.Provider
-        value={{
-          mode: "auto",
-          commemorativeTheme: "default",
-          setMode: () => {},
-          setCommemorativeTheme: () => {},
-          resetToAutomatic: () => {},
-          currentColors: {
-            background: "#ffffff",
-            foreground: "#171717",
-            primary: "#2563eb",
-            primaryDark: "#1d4ed8",
-            primaryLight: "#3b82f6",
-            secondary: "#64748b",
-            accent: "#ef4444",
-            muted: "#f8fafc",
-            border: "#e2e8f0",
-            blueGradientStart: "#1e40af",
-            blueGradientEnd: "#3b82f6",
-            bookTeal: "#2190a3",
-            yellow400: "#fbbf24",
-          },
-          isCommemorativeThemeActive: false,
-          suggestedTheme: undefined,
-          manualOverride: false,
-          getThemeConfig,
-          isThemeInSeason,
-        }}
-      >
-        {children}
-      </ThemeContext.Provider>
-    );
-  }
 
   return (
     <ThemeContext.Provider value={contextValue}>

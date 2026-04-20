@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 /**
@@ -19,132 +17,142 @@ import { useTheme } from "@/contexts/ThemeContext";
  * - Brazilian Carnival theme with vibrant colors
  */
 
+interface FloatingElementData {
+  id: number;
+  emoji: string;
+  left: number;
+  animationDuration: number;
+  animationDelay: number;
+  size: number;
+}
+
+interface ConfettiPieceData {
+  id: number;
+  color: string;
+  left: number;
+  animationDuration: number;
+  animationDelay: number;
+  rotation: number;
+}
+
+interface SambaElementData {
+  id: number;
+  emoji: string;
+  left: number;
+  top: number;
+  animationDuration: number;
+  animationDelay: number;
+  size: number;
+}
+
+// Carnival emojis for floating effects
+const CARNIVAL_EMOJIS = [
+  "🎭",
+  "🎪",
+  "🎨",
+  "🎺",
+  "🥁",
+  "🎷",
+  "💃",
+  "🕺",
+  "🤹",
+  "🎊",
+  "🎉",
+  "🎈",
+] as const;
+
+// Samba and parade elements
+const SAMBA_EMOJIS = [
+  "💃",
+  "🕺",
+  "🥁",
+  "🎺",
+  "🎷",
+  "🎪",
+  "🎭",
+  "👑",
+  "💎",
+  "✨",
+] as const;
+
+// Confetti colors (Brazilian carnival inspired)
+const CONFETTI_COLORS = [
+  "#ff6b35",
+  "#f7931e",
+  "#c41e3a",
+  "#2e8b57",
+  "#9932cc",
+  "#ffd700",
+] as const;
+
+// Fixed animation directions per element (computed once per page load)
+const CARNIVAL_ANIMATION_DIRECTIONS = Array.from({ length: 15 }, () =>
+  Math.random() > 0.5 ? "normal" : "reverse"
+);
+
+// Fixed border radius toggles for confetti pieces (computed once per page load)
+const CONFETTI_BORDER_RADIUS = Array.from({ length: 25 }, () =>
+  Math.random() > 0.5 ? "50%" : "0%"
+);
+
+function createFloatingElements(): FloatingElementData[] {
+  return Array.from({ length: 15 }, (_, i) => ({
+    id: i,
+    emoji: CARNIVAL_EMOJIS[Math.floor(Math.random() * CARNIVAL_EMOJIS.length)],
+    left: Math.random() * 100,
+    animationDuration: 8 + Math.random() * 12, // 8-20 seconds
+    animationDelay: Math.random() * 5, // 0-5 seconds delay
+    size: 0.8 + Math.random() * 0.8, // 0.8-1.6 size multiplier
+  }));
+}
+
+function createConfetti(): ConfettiPieceData[] {
+  return Array.from({ length: 25 }, (_, i) => ({
+    id: i,
+    color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+    left: Math.random() * 100,
+    animationDuration: 3 + Math.random() * 4, // 3-7 seconds
+    animationDelay: Math.random() * 3, // 0-3 seconds delay
+    rotation: Math.random() * 360, // Random initial rotation
+  }));
+}
+
+function createSambaElements(): SambaElementData[] {
+  return Array.from({ length: 8 }, (_, i) => ({
+    id: i,
+    emoji: SAMBA_EMOJIS[Math.floor(Math.random() * SAMBA_EMOJIS.length)],
+    left: Math.random() * 100,
+    top: 60 + Math.random() * 30, // Lower part of screen
+    animationDuration: 12 + Math.random() * 8, // 12-20 seconds
+    animationDelay: Math.random() * 6, // 0-6 seconds delay
+    size: 1 + Math.random() * 0.5, // 1-1.5 size multiplier
+  }));
+}
+
 export default function CarnivalEffects(): React.JSX.Element | null {
   const { commemorativeTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
   const isCarnivalTheme = commemorativeTheme === "carnival";
 
-  // Carnival emojis for floating effects (memoized to prevent re-creation)
-  const carnivalEmojis = useMemo(
-    () => [
-      "🎭",
-      "🎪",
-      "🎨",
-      "🎺",
-      "🥁",
-      "🎷",
-      "💃",
-      "🕺",
-      "🤹",
-      "🎊",
-      "🎉",
-      "🎈",
-    ],
-    []
+  const [floatingElements, setFloatingElements] = useState<FloatingElementData[]>(
+    () => (isCarnivalTheme ? createFloatingElements() : [])
+  );
+  const [confettiPieces, setConfettiPieces] = useState<ConfettiPieceData[]>(() =>
+    isCarnivalTheme ? createConfetti() : []
+  );
+  const [sambaElements, setSambaElements] = useState<SambaElementData[]>(() =>
+    isCarnivalTheme ? createSambaElements() : []
   );
 
-  // Samba and parade elements
-  const sambaEmojis = useMemo(
-    () => ["💃", "🕺", "🥁", "🎺", "🎷", "🎪", "🎭", "👑", "💎", "✨"],
-    []
-  );
+  // React to theme toggling at runtime (derive state from props pattern)
+  const [prevTheme, setPrevTheme] = useState(isCarnivalTheme);
+  if (prevTheme !== isCarnivalTheme) {
+    setPrevTheme(isCarnivalTheme);
+    setFloatingElements(isCarnivalTheme ? createFloatingElements() : []);
+    setConfettiPieces(isCarnivalTheme ? createConfetti() : []);
+    setSambaElements(isCarnivalTheme ? createSambaElements() : []);
+  }
 
-  // Confetti colors (Brazilian carnival inspired)
-  const confettiColors = useMemo(
-    () => ["#ff6b35", "#f7931e", "#c41e3a", "#2e8b57", "#9932cc", "#ffd700"],
-    []
-  );
-
-  // Create floating carnival elements
-  const createElements = useCallback((): Array<{
-    id: number;
-    emoji: string;
-    left: number;
-    animationDuration: number;
-    animationDelay: number;
-    size: number;
-  }> => {
-    return Array.from({ length: 15 }, (_, i) => ({
-      id: i,
-      emoji: carnivalEmojis[Math.floor(Math.random() * carnivalEmojis.length)],
-      left: Math.random() * 100,
-      animationDuration: 8 + Math.random() * 12, // 8-20 seconds
-      animationDelay: Math.random() * 5, // 0-5 seconds delay
-      size: 0.8 + Math.random() * 0.8, // 0.8-1.6 size multiplier
-    }));
-  }, [carnivalEmojis]);
-
-  // Create confetti pieces
-  const createConfetti = useCallback((): Array<{
-    id: number;
-    color: string;
-    left: number;
-    animationDuration: number;
-    animationDelay: number;
-    rotation: number;
-  }> => {
-    return Array.from({ length: 25 }, (_, i) => ({
-      id: i,
-      color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
-      left: Math.random() * 100,
-      animationDuration: 3 + Math.random() * 4, // 3-7 seconds
-      animationDelay: Math.random() * 3, // 0-3 seconds delay
-      rotation: Math.random() * 360, // Random initial rotation
-    }));
-  }, [confettiColors]);
-
-  // Create samba parade elements
-  const createSambaElements = useCallback((): Array<{
-    id: number;
-    emoji: string;
-    left: number;
-    animationDuration: number;
-    animationDelay: number;
-    size: number;
-  }> => {
-    return Array.from({ length: 8 }, (_, i) => ({
-      id: i,
-      emoji: sambaEmojis[Math.floor(Math.random() * sambaEmojis.length)],
-      left: Math.random() * 100,
-      animationDuration: 12 + Math.random() * 8, // 12-20 seconds
-      animationDelay: Math.random() * 6, // 0-6 seconds delay
-      size: 1 + Math.random() * 0.5, // 1-1.5 size multiplier
-    }));
-  }, [sambaEmojis]);
-
-  // Memoize the element arrays to prevent unnecessary re-renders
-  const floatingElements = useMemo(() => createElements(), [createElements]);
-  const confettiPieces = useMemo(() => createConfetti(), [createConfetti]);
-  const sambaElements = useMemo(
-    () => createSambaElements(),
-    [createSambaElements]
-  );
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted || !isCarnivalTheme) return;
-
-    // Add carnival theme class to body
-    document.body.classList.add("theme-carnival");
-
-    // Cleanup function
-    return () => {
-      document.body.classList.remove("theme-carnival");
-    };
-  }, [
-    mounted,
-    isCarnivalTheme,
-    createElements,
-    createConfetti,
-    createSambaElements,
-  ]);
-
-  // Don't render on server or if not carnival theme
-  if (!mounted || !isCarnivalTheme) {
+  if (!isCarnivalTheme) {
     return null;
   }
 
@@ -161,7 +169,7 @@ export default function CarnivalEffects(): React.JSX.Element | null {
               fontSize: `${element.size * 2}rem`,
               animationDuration: `${element.animationDuration}s`,
               animationDelay: `${element.animationDelay}s`,
-              animationDirection: Math.random() > 0.5 ? "normal" : "reverse",
+              animationDirection: CARNIVAL_ANIMATION_DIRECTIONS[element.id],
               transform: `translateY(100vh)`,
               animation: `
                 carnivalFloat ${
@@ -187,7 +195,7 @@ export default function CarnivalEffects(): React.JSX.Element | null {
             style={{
               left: `${confetti.left}%`,
               backgroundColor: confetti.color,
-              borderRadius: Math.random() > 0.5 ? "50%" : "0%",
+              borderRadius: CONFETTI_BORDER_RADIUS[confetti.id],
               animationDuration: `${confetti.animationDuration}s`,
               animationDelay: `${confetti.animationDelay}s`,
               transform: `rotate(${confetti.rotation}deg) translateY(100vh)`,
@@ -205,7 +213,7 @@ export default function CarnivalEffects(): React.JSX.Element | null {
             className="absolute"
             style={{
               left: `${element.left}%`,
-              top: `${60 + Math.random() * 30}%`, // Lower part of screen
+              top: `${element.top}%`,
               fontSize: `${element.size * 2.5}rem`,
               animationDuration: `${element.animationDuration}s`,
               animationDelay: `${element.animationDelay}s`,

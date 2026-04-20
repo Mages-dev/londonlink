@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface FloatingElement {
@@ -24,118 +22,108 @@ interface SpringElement {
   drift: number;
 }
 
+const EASTER_EMOJIS = [
+  "🐰",
+  "🥚",
+  "🐣",
+  "🐤",
+  "🥕",
+  "🌷",
+  "🌸",
+  "🌺",
+  "🦋",
+  "🌿",
+  "🌱",
+] as const;
+
+const SPRING_EMOJIS = [
+  "🌸",
+  "🌷",
+  "🌺",
+  "🦋",
+  "🌿",
+  "🌱",
+  "🌼",
+  "🌻",
+] as const;
+
+// Fixed positions for butterflies (computed once per page load)
+const BUTTERFLY_POSITIONS = Array.from({ length: 12 }, () => ({
+  left: Math.random() * 100,
+  top: Math.random() * 100,
+}));
+
+// Fixed positions for garden flowers (computed once per page load)
+const GARDEN_FLOWER_POSITIONS = Array.from({ length: 12 }, (_, i) => ({
+  left: Math.random() * 100,
+  top: Math.random() * 100,
+  emoji:
+    i % 4 === 0 ? "🌷" : i % 4 === 1 ? "🌸" : i % 4 === 2 ? "🌺" : "🌼",
+}));
+
+function createFloatingElements(): FloatingElement[] {
+  const count = window.innerWidth < 768 ? 8 : 14; // Fewer on mobile
+  return Array.from({ length: count }, (_, i) => ({
+    id: i,
+    emoji: EASTER_EMOJIS[Math.floor(Math.random() * EASTER_EMOJIS.length)],
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    size: Math.random() * 16 + 18, // 18-34px
+    speed: Math.random() * 1 + 0.6, // 0.6-1.6 speed (ajustado)
+    rotation: Math.random() * 360,
+  }));
+}
+
+function createSpringElements(): SpringElement[] {
+  const count = window.innerWidth < 768 ? 10 : 18;
+  return Array.from({ length: count }, (_, i) => ({
+    id: i,
+    x: Math.random() * window.innerWidth,
+    y: -20,
+    emoji: SPRING_EMOJIS[Math.floor(Math.random() * SPRING_EMOJIS.length)],
+    size: Math.random() * 14 + 10, // 10-24px
+    speed: Math.random() * 1.8 + 0.8, // 0.8-2.6 speed
+    rotation: Math.random() * 360,
+    drift: (Math.random() - 0.5) * 1.5, // -0.75 to 0.75 horizontal drift
+  }));
+}
+
 export default function EasterEffects() {
   const { commemorativeTheme } = useTheme();
-  const [elements, setElements] = useState<FloatingElement[]>([]);
-  const [springElements, setSpringElements] = useState<SpringElement[]>([]);
-  const [mounted, setMounted] = useState(false);
-
   const isEasterTheme = commemorativeTheme === "easter";
 
-  // Easter emojis for floating effects (memoized to prevent re-creation)
-  const easterEmojis = useMemo(
-    () => ["🐰", "🥚", "🐣", "🐤", "🥕", "🌷", "🌸", "🌺", "🦋", "🌿", "🌱"],
-    []
+  const [elements, setElements] = useState<FloatingElement[]>(() =>
+    isEasterTheme ? createFloatingElements() : []
+  );
+  const [springElements, setSpringElements] = useState<SpringElement[]>(() =>
+    isEasterTheme ? createSpringElements() : []
   );
 
-  // Spring elements (flowers, butterflies, etc.)
-  const springEmojis = useMemo(
-    () => ["🌸", "🌷", "🌺", "🦋", "🌿", "🌱", "🌼", "🌻"],
-    []
-  );
-
-  // Fixed positions for butterflies (memoized to prevent re-calculation)
-  const butterflyPositions = useMemo(
-    () =>
-      Array.from({ length: 12 }, () => ({
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-      })),
-    []
-  );
-
-  // Fixed positions for garden flowers (memoized to prevent re-calculation)
-  const gardenFlowerPositions = useMemo(
-    () =>
-      Array.from({ length: 12 }, (_, i) => ({
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-        emoji:
-          i % 4 === 0 ? "🌷" : i % 4 === 1 ? "🌸" : i % 4 === 2 ? "🌺" : "🌼",
-      })),
-    []
-  );
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Create floating elements
-  const createElements = useCallback(() => {
+  const regenerate = useCallback(() => {
     if (!isEasterTheme) {
       setElements([]);
-      return;
-    }
-
-    const newElements: FloatingElement[] = [];
-    const elementCount = window.innerWidth < 768 ? 8 : 14; // Fewer on mobile
-
-    for (let i = 0; i < elementCount; i++) {
-      newElements.push({
-        id: i,
-        emoji: easterEmojis[Math.floor(Math.random() * easterEmojis.length)],
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        size: Math.random() * 16 + 18, // 18-34px
-        speed: Math.random() * 1 + 0.6, // 0.6-1.6 speed (ajustado)
-        rotation: Math.random() * 360,
-      });
-    }
-
-    setElements(newElements);
-  }, [isEasterTheme, easterEmojis]);
-
-  // Create spring elements
-  const createSpringElements = useCallback(() => {
-    if (!isEasterTheme) {
       setSpringElements([]);
       return;
     }
+    setElements(createFloatingElements());
+    setSpringElements(createSpringElements());
+  }, [isEasterTheme]);
 
-    const newSpringElements: SpringElement[] = [];
-    const springCount = window.innerWidth < 768 ? 10 : 18;
-
-    for (let i = 0; i < springCount; i++) {
-      newSpringElements.push({
-        id: i,
-        x: Math.random() * window.innerWidth,
-        y: -20,
-        emoji: springEmojis[Math.floor(Math.random() * springEmojis.length)],
-        size: Math.random() * 14 + 10, // 10-24px
-        speed: Math.random() * 1.8 + 0.8, // 0.8-2.6 speed
-        rotation: Math.random() * 360,
-        drift: (Math.random() - 0.5) * 1.5, // -0.75 to 0.75 horizontal drift
-      });
-    }
-
-    setSpringElements(newSpringElements);
-  }, [isEasterTheme, springEmojis]);
-
-  // Initialize and handle resize
+  // Handle resize
   useEffect(() => {
-    if (!mounted || !isEasterTheme) return;
-
-    createElements();
-    createSpringElements();
-
-    const handleResize = () => {
-      createElements();
-      createSpringElements();
-    };
-
+    if (!isEasterTheme) return;
+    const handleResize = () => regenerate();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [mounted, isEasterTheme, createElements, createSpringElements]);
+  }, [isEasterTheme, regenerate]);
+
+  // React to theme toggling at runtime (derive state from props pattern)
+  const [prevTheme, setPrevTheme] = useState(isEasterTheme);
+  if (prevTheme !== isEasterTheme) {
+    setPrevTheme(isEasterTheme);
+    setElements(isEasterTheme ? createFloatingElements() : []);
+    setSpringElements(isEasterTheme ? createSpringElements() : []);
+  }
 
   // Animate floating elements
   useEffect(() => {
@@ -184,8 +172,7 @@ export default function EasterEffects() {
     return () => clearInterval(interval);
   }, [isEasterTheme, springElements.length]);
 
-  // Don't render anything if not mounted or not Easter theme
-  if (!mounted || !isEasterTheme) {
+  if (!isEasterTheme) {
     return null;
   }
 
@@ -265,7 +252,7 @@ export default function EasterEffects() {
 
       {/* Garden Flowers Effect */}
       <div className="fixed inset-0 pointer-events-none z-5">
-        {gardenFlowerPositions.map((pos, i) => (
+        {GARDEN_FLOWER_POSITIONS.map((pos, i) => (
           <div
             key={`flower-${i}`}
             className="absolute text-green-400"
@@ -283,7 +270,7 @@ export default function EasterEffects() {
 
       {/* Butterflies Effect */}
       <div className="fixed inset-0 pointer-events-none z-5">
-        {butterflyPositions.map((pos, i) => (
+        {BUTTERFLY_POSITIONS.map((pos, i) => (
           <div
             key={`butterfly-${i}`}
             className="absolute text-yellow-400"

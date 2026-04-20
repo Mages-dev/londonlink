@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface FloatingElement {
@@ -14,60 +12,62 @@ interface FloatingElement {
   rotationSpeed: number;
 }
 
+const HALLOWEEN_EMOJIS = [
+  "🎃",
+  "👻",
+  "🦇",
+  "🕷️",
+  "🕸️",
+  "🌙",
+  "⭐",
+  "🍂",
+] as const;
+
+function createFloatingElements(): FloatingElement[] {
+  const elementCount = window.innerWidth < 768 ? 8 : 15; // Fewer on mobile
+  return Array.from({ length: elementCount }, (_, i) => ({
+    id: i,
+    emoji:
+      HALLOWEEN_EMOJIS[Math.floor(Math.random() * HALLOWEEN_EMOJIS.length)],
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    size: Math.random() * 20 + 15, // 15-35px
+    speed: Math.random() * 2 + 0.5, // 0.5-2.5 speed
+    rotation: Math.random() * 360,
+    rotationSpeed: (Math.random() - 0.5) * 2, // -1 to 1 rotation speed
+  }));
+}
+
 export default function HalloweenEffects() {
   const { commemorativeTheme } = useTheme();
-  const [elements, setElements] = useState<FloatingElement[]>([]);
-  const [mounted, setMounted] = useState(false);
-
   const isHalloweenTheme = commemorativeTheme === "halloween";
 
-  // Halloween emojis for floating effects (memoized to prevent re-creation)
-  const halloweenEmojis = useMemo(
-    () => ["🎃", "👻", "🦇", "🕷️", "🕸️", "🌙", "⭐", "🍂"],
-    []
+  const [elements, setElements] = useState<FloatingElement[]>(() =>
+    isHalloweenTheme ? createFloatingElements() : []
   );
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted || !isHalloweenTheme) {
+  const regenerate = useCallback(() => {
+    if (!isHalloweenTheme) {
       setElements([]);
       return;
     }
+    setElements(createFloatingElements());
+  }, [isHalloweenTheme]);
 
-    // Create floating elements
-    const createElements = () => {
-      const newElements: FloatingElement[] = [];
-      const elementCount = window.innerWidth < 768 ? 8 : 15; // Fewer on mobile
-
-      for (let i = 0; i < elementCount; i++) {
-        newElements.push({
-          id: i,
-          emoji:
-            halloweenEmojis[Math.floor(Math.random() * halloweenEmojis.length)],
-          x: Math.random() * window.innerWidth,
-          y: Math.random() * window.innerHeight,
-          size: Math.random() * 20 + 15, // 15-35px
-          speed: Math.random() * 2 + 0.5, // 0.5-2.5 speed
-          rotation: Math.random() * 360,
-          rotationSpeed: (Math.random() - 0.5) * 2, // -1 to 1 rotation speed
-        });
-      }
-      setElements(newElements);
-    };
-
-    createElements();
-
-    // Handle window resize
-    const handleResize = () => {
-      createElements();
-    };
-
+  // Handle resize
+  useEffect(() => {
+    if (!isHalloweenTheme) return;
+    const handleResize = () => regenerate();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [mounted, isHalloweenTheme, halloweenEmojis]);
+  }, [isHalloweenTheme, regenerate]);
+
+  // React to theme toggling at runtime (derive state from props pattern)
+  const [prevTheme, setPrevTheme] = useState(isHalloweenTheme);
+  if (prevTheme !== isHalloweenTheme) {
+    setPrevTheme(isHalloweenTheme);
+    setElements(isHalloweenTheme ? createFloatingElements() : []);
+  }
 
   useEffect(() => {
     if (!isHalloweenTheme || elements.length === 0) return;
@@ -91,7 +91,7 @@ export default function HalloweenEffects() {
     return () => clearInterval(interval);
   }, [isHalloweenTheme, elements.length]);
 
-  if (!mounted || !isHalloweenTheme) {
+  if (!isHalloweenTheme) {
     return null;
   }
 

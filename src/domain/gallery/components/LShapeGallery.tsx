@@ -41,7 +41,7 @@ export function LShapeGallery({
           const isLarge = index === 0 || index === 3; // First and fourth images are large
           const isMedium = index === 1 || index === 4; // Second and fifth are medium
 
-          let gridClasses = "";
+          let gridClasses: string;
 
           if (isLarge) {
             gridClasses = "col-span-2 row-span-2";
@@ -119,8 +119,8 @@ export function LShapeGallery({
           const actualIndex = index + 7; // Offset for animation delay
           const isMedium = index === 0 || index === 4; // First and last are medium
 
-          let gridClasses = "";
-          let rowStart = "";
+          let gridClasses: string;
+          let rowStart: string;
 
           if (index === 0) {
             // First vertical image - starts at row 3
