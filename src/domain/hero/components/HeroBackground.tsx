@@ -15,7 +15,7 @@ export function HeroBackground() {
       />
 
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/80 via-blue-700/80 to-blue-800/80" />
+      <div className="absolute inset-0 bg-linear-to-br from-blue-600/80 via-blue-700/80 to-blue-800/80" />
 
       {/* Floating illustration elements */}
       <div className="absolute top-10 right-10 hidden lg:block">

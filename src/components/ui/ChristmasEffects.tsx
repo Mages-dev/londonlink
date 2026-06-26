@@ -141,8 +141,8 @@ export default function ChristmasEffects() {
         <div className="absolute top-1/2 left-3/4 w-20 h-20 bg-yellow-500/10 rounded-full blur-xl animate-pulse delay-2000" />
 
         {/* Christmas lights effect */}
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-red-500/20 via-green-500/20 to-red-500/20 animate-pulse" />
-        <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-green-500/20 via-red-500/20 to-green-500/20 animate-pulse delay-500" />
+        <div className="absolute top-0 left-0 w-full h-2 bg-linear-to-r from-red-500/20 via-green-500/20 to-red-500/20 animate-pulse" />
+        <div className="absolute bottom-0 left-0 w-full h-2 bg-linear-to-r from-green-500/20 via-red-500/20 to-green-500/20 animate-pulse delay-500" />
       </div>
 
       {/* Christmas Snow Effect */}
