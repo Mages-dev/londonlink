@@ -224,6 +224,41 @@ touched code, and use the `a11y-architect` agent for audits. Target **WCAG 2.2 A
 - **Language:** `<html lang>` must reflect the active language (handled by
   `LanguageSync`); keep it correct when adding flows.
 
+### WCAG 2.2 new AA criteria (apply to this site)
+
+WCAG 2.2 (Oct 2023) added these AA criteria over 2.1 — the ones that bite a
+marketing SPA with floating buttons, a modal, and a carousel:
+
+- **2.4.11 Focus Not Obscured (AA):** a focused element must stay at least
+  partially visible — the sticky `Header`, `WhatsAppFloat`, and any modal must
+  not cover the element that currently has focus.
+- **2.5.7 Dragging Movements (AA):** any drag interaction (e.g. swipe-only
+  carousel) needs a single-pointer alternative (the arrow buttons satisfy this —
+  keep them).
+- **2.5.8 Target Size Minimum (AA):** interactive targets ≥ **24×24 CSS px**
+  (or 24px spacing). Audit icon-only controls — language/theme toggles, carousel
+  arrows, modal close, WhatsApp (already 48/56px, fine).
+- **3.2.6 Consistent Help (A):** keep the contact/WhatsApp entry point in the
+  same relative position across states.
+- Note: **4.1.1 Parsing was removed** in 2.2 — duplicate-id lint failures are no
+  longer a WCAG issue (still fix them for correctness).
+
+### References (authoritative — consult these, not blogs)
+
+- WCAG 2.2 spec: https://www.w3.org/TR/WCAG22/ — what's new:
+  https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/
+- WAI-ARIA Authoring Practices Guide (APG) — the reference implementations for
+  dialog, carousel, tabs, disclosure, menu, keyboard models:
+  https://www.w3.org/WAI/ARIA/apg/patterns/ (modal:
+  https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
+- MDN ARIA reference (roles/states/properties):
+  https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
+- First rule of ARIA: prefer native HTML; use ARIA only to fill gaps, and keep
+  ARIA state (`aria-expanded`, `aria-pressed`, `aria-modal`) in sync with React
+  state.
+- Lint: `eslint-plugin-jsx-a11y` ships via `eslint-config-next` — keep its rules
+  on; it catches missing `alt`, bad `aria-*`/`role`, and non-interactive handlers.
+
 ## Security
 
 A production CSP already exists; tighten the rest. Use the `/security-review`
