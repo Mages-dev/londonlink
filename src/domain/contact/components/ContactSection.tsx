@@ -42,7 +42,8 @@ export function ContactSection({ currentLanguage }: ContactSectionProps) {
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  sandbox="allow-scripts allow-same-origin allow-popups"
                   title={t.mapTitle}
                   className="w-full h-[600px]"
                 />
