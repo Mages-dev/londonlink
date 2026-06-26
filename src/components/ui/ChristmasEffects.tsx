@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface FloatingElement {
   id: number;
@@ -18,26 +18,28 @@ export default function ChristmasEffects() {
   const [elements, setElements] = useState<FloatingElement[]>([]);
   const [mounted, setMounted] = useState(false);
 
-  const isChristmasTheme = commemorativeTheme === "christmas";
+  const isChristmasTheme = commemorativeTheme === 'christmas';
 
   // Christmas emojis for floating effects (memoized to prevent re-creation)
   const christmasEmojis = useMemo(
-    () => ["🎄", "🎁", "❄️", "⭐", "🔔", "🎅", "🤶", "🦌", "⛄", "🕯️"],
-    []
+    () => ['🎄', '🎁', '❄️', '⭐', '🔔', '🎅', '🤶', '🦌', '⛄', '🕯️'],
+    [],
   );
 
-  // Fixed positions for sparkles (memoized to prevent re-calculation)
-  const sparklePositions = useMemo(
-    () =>
+  // Random sparkle positions, generated client-side after mount so render
+  // stays pure (react-hooks/purity) and SSR output is deterministic.
+  const [sparklePositions, setSparklePositions] = useState<
+    Array<{ left: number; top: number }>
+  >([]);
+
+  useEffect(() => {
+    setMounted(true);
+    setSparklePositions(
       Array.from({ length: 25 }, () => ({
         left: Math.random() * 100,
         top: Math.random() * 100,
       })),
-    []
-  );
-
-  useEffect(() => {
-    setMounted(true);
+    );
   }, []);
 
   // Create floating elements
@@ -76,8 +78,8 @@ export default function ChristmasEffects() {
       createElements();
     };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [mounted, isChristmasTheme, createElements]);
 
   useEffect(() => {
@@ -94,7 +96,7 @@ export default function ChristmasEffects() {
             y: -50,
             x: Math.random() * window.innerWidth,
           }),
-        }))
+        })),
       );
     };
 
@@ -120,7 +122,7 @@ export default function ChristmasEffects() {
               top: `${element.y}px`,
               fontSize: `${element.size}px`,
               transform: `rotate(${element.rotation}deg)`,
-              filter: "drop-shadow(0 0 3px rgba(220, 38, 38, 0.3))",
+              filter: 'drop-shadow(0 0 3px rgba(220, 38, 38, 0.3))',
             }}
           >
             {element.emoji}
@@ -154,7 +156,7 @@ export default function ChristmasEffects() {
               left: `${i * 15 + 10}%`,
               animation: `christmas-snow ${8 + i * 2}s linear infinite`,
               animationDelay: `${i * 1.5}s`,
-              fontSize: "1.5rem",
+              fontSize: '1.5rem',
             }}
           >
             ❄️
