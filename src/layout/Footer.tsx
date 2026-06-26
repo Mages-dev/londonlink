@@ -22,8 +22,9 @@ export function Footer() {
               src="/assets/images/shared/logos/mages-dev-logo.webp"
               alt="Mages Dev"
               width={138}
-              height={46}
+              height={32}
               className="drop-shadow-sm"
+              style={{ height: 'auto' }}
             />
           </a>
         </div>
