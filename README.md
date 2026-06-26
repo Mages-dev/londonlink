@@ -6,13 +6,15 @@ LondonLink is a comprehensive English learning platform designed specifically fo
 
 ## 🚀 Technologies
 
-- **Next.js 16.0.7** - React framework with App Router (updated for Vercel compatibility)
-- **React 19.2.1** - Latest React features with performance improvements
+- **Next.js 16.2.9** - React framework with App Router (Turbopack builds)
+- **React 19.2.7** - Latest React features with performance improvements
 - **TypeScript 5** - Type safety and better development experience
 - **Tailwind CSS 4** - Utility-first CSS framework with modern features
-- **Lucide React 0.555.0** - Modern icon library
-- **ESLint 9** - Code linting and formatting
-- **Node.js 24** - Latest LTS runtime environment
+- **Lucide React 1.21** - Modern icon library
+- **ESLint 9** - Code linting (flat config, `eslint-config-next`)
+- **Prettier 3** - Opinionated code formatting
+- **pnpm 11** - Package manager (pinned via `packageManager`)
+- **Node.js 24** - Runtime environment (`engines: node >=24`, see `.nvmrc`)
 
 ## 📁 Project Structure
 
@@ -26,16 +28,15 @@ src/
 │   ├── Header.tsx         # Main navigation header
 │   ├── HeaderWithTheme.tsx # Header with theme switching
 │   ├── Footer.tsx         # Application footer
-│   ├── index.ts           # Layout exports
-│   └── README.md          # Layout documentation
+│   └── index.ts           # Layout exports
 ├── components/            # Global React Components
 │   ├── WhatsAppFloat/     # WhatsApp floating button
 │   │   ├── WhatsAppFloat.tsx
 │   │   ├── WhatsAppFloat.css
-│   │   ├── index.ts
-│   │   └── README.md
-│   ├── ui/               # Reusable UI components
-│   ├── forms/            # Form components
+│   │   └── index.ts
+│   ├── LanguageSync/     # Syncs language state to <html lang>
+│   ├── ui/               # Reusable UI + seasonal theme effects
+│   ├── debug/            # Dev-only debug helpers
 │   └── index.ts          # Component exports
 ├── domain/                # Domain-Driven Architecture
 │   ├── hero/              # Hero section domain
@@ -51,9 +52,10 @@ src/
 │   ├── config.ts         # Language configuration
 │   ├── utils.ts          # Translation utilities
 │   └── index.ts          # Translation exports
-├── contexts/             # React contexts (Theme, etc.)
+├── contexts/             # React contexts (Theme, Language)
 ├── hooks/                # Global custom hooks
-├── lib/                  # Utility functions & themes
+├── lib/                  # Utility functions & theme CSS/configs
+├── styles/               # Shared global styles
 └── types/                # TypeScript definitions
 ```
 
@@ -151,14 +153,18 @@ Supporting systems and utilities:
 - **Accessibility**: ARIA compliant components and semantic HTML
 - **Performance**: Optimized images, lazy loading, and code splitting
 - **Type Safety**: Full TypeScript implementation
-- **Modern React**: React 19.2.1 with Next.js 16.0.7 App Router
+- **Modern React**: React 19.2.7 with Next.js 16.2.9 App Router
 
 ## 🛠️ Development
 
 ### Prerequisites
 
-- Node.js 24.0.0 or higher (LTS recommended)
-- npm, yarn, pnpm, or bun
+- Node.js >= 24 (see `.nvmrc`; run `nvm use`)
+- pnpm 11 (`corepack enable` activates the pinned version automatically)
+
+> This project uses **pnpm** exclusively. The `packageManager` field pins the
+> version and `pnpm-lock.yaml` is the single source of truth. Do not use npm or
+> yarn — they would create a conflicting lockfile.
 
 ### Getting Started
 
@@ -166,20 +172,13 @@ Supporting systems and utilities:
 2. Install dependencies:
 
 ```bash
-npm install
-# or
-yarn install
-# or
+corepack enable   # one-time, activates the pinned pnpm
 pnpm install
 ```
 
 3. Run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
 ```
 
@@ -187,10 +186,12 @@ pnpm dev
 
 ### Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
+- `pnpm dev` - Start development server (port 3000)
+- `pnpm build` - Build for production (Turbopack)
+- `pnpm start` - Start production server (port 3302)
+- `pnpm lint` - Run ESLint
+- `pnpm format` - Format the codebase with Prettier
+- `pnpm format:check` - Verify formatting without writing
 
 ### Working with the Architecture
 
@@ -379,8 +380,8 @@ LondonLink features a comprehensive bilingual system:
 
 ### Supported Languages
 
-- **English (en)** - Default language
-- **Portuguese (pt)** - Brazilian Portuguese
+- **Portuguese (pt)** - Brazilian Portuguese (default; see `DEFAULT_LANGUAGE`)
+- **English (en)** - Falls back to English when a translation is missing
 
 ### Translation Architecture
 
@@ -416,17 +417,10 @@ The project is optimized for deployment on:
 
 ## 📚 Documentation
 
-Additional documentation is available in the `docs/` directory:
-
-- **[Versioning Guide](docs/VERSIONING_GUIDE.md)** - Complete guide on version management, semantic versioning, and release process
-- **[User Preferences Guide](docs/USER_PREFERENCES_GUIDE.md)** - Documentation on theme and language persistence system
-
-For component-specific documentation, check the README.md files in each module:
-
-- `src/layout/README.md` - Layout components documentation
-- `src/components/WhatsAppFloat/README.md` - WhatsApp float component
-- `src/contexts/README.md` - Context system documentation
-- `src/domain/[section]/README.md` - Domain-specific documentation
+Engineering conventions, architecture, the theme/i18n systems, persistence keys,
+versioning, accessibility, and security guidance are consolidated in
+**[CLAUDE.md](CLAUDE.md)** — the single source of truth for contributors and AI
+agents. Release history lives in **[CHANGELOG.md](CHANGELOG.md)**.
 
 ## 📄 License
 
@@ -434,7 +428,8 @@ This project is private and proprietary to LondonLink.
 
 ## 🤝 Contributing
 
-This is a private project. For internal development guidelines, please refer to the project documentation.
+This is a private project. For internal development guidelines, conventions, and
+standards, see [CLAUDE.md](CLAUDE.md).
 
 ---
 
