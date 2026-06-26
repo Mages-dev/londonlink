@@ -261,26 +261,87 @@ marketing SPA with floating buttons, a modal, and a carousel:
 
 ## Security
 
-A production CSP already exists; tighten the rest. Use the `/security-review`
-skill / `security-reviewer` agent on auth, forms, or input-handling changes.
+A production CSP and the OWASP hardening headers already exist in
+`next.config.js`. Use the `/security-audit` skill (project) or the
+`/security-review` skill / `security-reviewer` agent on auth, forms, or
+input-handling changes.
 
-- **CSP** lives in `next.config.js` (`headers()`). It currently allows
-  `'unsafe-inline'`/`'unsafe-eval'` in `script-src` (needed by the inline
-  bootstrap + analytics) — prefer migrating to per-request **nonces** and drop
-  `unsafe-*`. Update CSP origins there when adding third-party services.
-- **Add the missing hardening headers** alongside the CSP:
+- **CSP `script-src` — `unsafe-*` is a documented accepted risk.** It still
+  allows `'unsafe-inline'` + `'unsafe-eval'`, needed by the two inline bootstrap
+  scripts in `layout.tsx` (lang/theme no-flash), the GA inline config, and the
+  framework's own App Router inline flight scripts (`__NEXT_F`). **Decision
+  (2026-06): keep them.** Rationale — this is a static, fully prerendered
+  marketing page with no auth and no user-controlled data rendered into the DOM,
+  so the reflected/stored-XSS vector `unsafe-inline` guards against is not
+  present; the practical exposure is low. The supported way to drop them on App
+  Router is a per-request **nonce** in `middleware.ts`, which **forces dynamic
+  rendering** and sacrifices the static prerender + CDN cacheability the page
+  relies on for performance — not worth that tradeoff for a brochure site.
+  Revisit if user input, a backend form, or auth is ever added (then do the nonce
+  migration in its own PR, verified on a deployed preview).
+  - **Cheap future tightening (no rendering tradeoff):** `'unsafe-eval'` is the
+    droppable half — nothing in _our_ origin uses `eval` (Maps is an iframe
+    running in Google's origin; GA4 `gtag.js` does not eval). It can be removed
+    independently of the nonce work after a quick browser smoke-test. Left in for
+    now per the keep-it-simple decision above.
+- Update CSP origins in `next.config.js` when adding third-party services.
+- **Hardening headers are set** alongside the CSP — keep them:
   `Strict-Transport-Security: max-age=31536000; includeSubDomains; preload`,
   `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`,
-  `Permissions-Policy: camera=(), microphone=(), geolocation=()`.
-  (`frame-ancestors 'none'`, `object-src 'none'`, `base-uri 'self'` are already set.)
+  `Permissions-Policy: camera=(), microphone=(), geolocation=()`, plus
+  `frame-ancestors 'none'`, `object-src 'none'`, `base-uri 'self'`.
+- **One Next config.** `next.config.js` is the only config (the empty
+  `next.config.ts` stub was removed). Do not reintroduce a second config file.
 - **No secrets in client code.** The GA measurement ID is public and fine;
   anything sensitive must be a server-side env var, validated at startup.
 - `dangerouslySetInnerHTML` is allowed **only** for the trusted bootstrap scripts
   in `layout.tsx`. Never inject user-derived HTML; sanitize if ever unavoidable.
-- **Forms (e.g. contact registration):** when wired to a backend, validate on
-  client and server, rate-limit the endpoint, and add a honeypot/light anti-abuse
-  control. Add CSRF protection for any state-changing request.
-- Keep dependencies patched; re-run a security review after dependency bumps.
+- **Forms (e.g. contact registration):** the contact section is currently
+  links + a Maps embed only. When wired to a backend, validate on client **and**
+  server (schema-based, e.g. Zod), rate-limit the endpoint, add a honeypot/light
+  anti-abuse control, never log PII, and add CSRF protection for any
+  state-changing request.
+- **Dependencies.** This project has a history of Next.js CVEs (the reason for
+  the v2.3.0 bump — see `CHANGELOG.md`). Keep Next.js patched within its minor
+  range. Transitive dev/build-tooling CVEs (ReDoS / prototype-pollution / XSS in
+  `minimatch`/`picomatch`/`flatted`/`brace-expansion`/`postcss`/`@babel/core`)
+  are pinned to patched versions via `overrides:` in `pnpm-workspace.yaml`
+  (pnpm 11 no longer reads `pnpm.overrides` from `package.json`). Keep
+  `pnpm audit` clean; re-run it after every dependency change and prune override
+  entries once parents pull the fixes on their own.
+
+### OWASP-aligned checklist (measure every change against this)
+
+- [ ] **A05 Misconfiguration / headers:** CSP present; HSTS, `nosniff`,
+      `Referrer-Policy`, `Permissions-Policy`, `frame-ancestors`, `object-src`,
+      `base-uri` all set in `next.config.js`.
+- [ ] **A05 / A03 — CSP `script-src`:** `'unsafe-inline'`/`'unsafe-eval'` are a
+      documented accepted risk for this static brochure site (see above);
+      third-party origins scoped to what's used.
+- [ ] **A03 Injection / XSS:** no user-derived `dangerouslySetInnerHTML`;
+      dynamic HTML sanitized; React escaping not bypassed.
+- [ ] **A07 — secrets:** nothing sensitive in client code; server secrets via
+      env vars, validated at startup.
+- [ ] **A01 / A04 — forms (when backend lands):** client+server validation,
+      rate limiting, CSRF protection, honeypot, no PII in logs.
+- [ ] **A06 — vulnerable deps:** `pnpm audit` clean; Next.js patched within minor.
+- [ ] **A08 — third-party integrity:** GA/Maps loaded intentionally; SRI where
+      served from a CDN.
+
+### Security references (authoritative — consult these, not blogs)
+
+- **OWASP** — [Top 10](https://owasp.org/www-project-top-ten/),
+  [Secure Headers Project](https://owasp.org/www-project-secure-headers/),
+  [CSP Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html)
+- **MDN** — [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP),
+  [HTTP security headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
+- **Next.js** — [CSP with nonces (App Router)](https://nextjs.org/docs/app/guides/content-security-policy),
+  [headers in `next.config`](https://nextjs.org/docs/app/api-reference/config/next-config-js/headers)
+- **Scanners** — [securityheaders.com](https://securityheaders.com),
+  [Google CSP Evaluator](https://csp-evaluator.withgoogle.com),
+  [Mozilla Observatory](https://developer.mozilla.org/en-US/observatory)
+- **Advisories** — `pnpm audit`, GitHub Dependabot,
+  [Next.js security advisories](https://github.com/vercel/next.js/security/advisories)
 
 ## Versioning & release
 
@@ -293,10 +354,9 @@ skill / `security-reviewer` agent on auth, forms, or input-handling changes.
 
 ## Known issues / gotchas
 
-- **Two Next config files exist:** `next.config.js` (active — contains the CSP)
-  and `next.config.ts` (an empty stub). Having both is fragile; the `.js` is the
-  real one. Consolidate to a single config and keep the CSP. Do not put config in
-  the `.ts` stub expecting it to win.
+- **Single Next config:** `next.config.js` (contains the CSP + hardening
+  headers). The old empty `next.config.ts` stub was removed — do not reintroduce
+  a second config file; `.js` is the real one.
 - `package.json` version and `src/lib/version.ts` drift easily — see Versioning.
 - `dist/` is build output and git-ignored; source lives in `src/`.
 
