@@ -88,18 +88,18 @@ Objeto contendo todas as URLs das imagens do feedback:
 ```typescript
 export const FEEDBACK_IMAGES = {
   testimonials: {
-    student1: "/assets/images/feedback/testimonials/student-1.jpg",
-    student2: "/assets/images/feedback/testimonials/student-2.jpg",
+    student1: '/assets/images/feedback/testimonials/student-1.jpg',
+    student2: '/assets/images/feedback/testimonials/student-2.jpg',
     // ... mais estudantes
   },
   backgrounds: {
-    feedbackHero: "/assets/images/feedback/backgrounds/feedback-hero.jpg",
-    testimonialsBg: "/assets/images/feedback/backgrounds/testimonials-bg.jpg",
+    feedbackHero: '/assets/images/feedback/backgrounds/feedback-hero.jpg',
+    testimonialsBg: '/assets/images/feedback/backgrounds/testimonials-bg.jpg',
   },
   icons: {
-    star: "/assets/images/feedback/icons/star.svg",
-    quote: "/assets/images/feedback/icons/quote.svg",
-    verified: "/assets/images/feedback/icons/verified.svg",
+    star: '/assets/images/feedback/icons/star.svg',
+    quote: '/assets/images/feedback/icons/quote.svg',
+    verified: '/assets/images/feedback/icons/verified.svg',
   },
 };
 ```
@@ -114,35 +114,35 @@ Textos alternativos para acessibilidade das imagens.
 
 ```typescript
 export const feedbackTranslationsEn = {
-  title: "What Our Students Say",
-  subtitle: "Real feedback from real students...",
+  title: 'What Our Students Say',
+  subtitle: 'Real feedback from real students...',
   testimonials: [
     {
-      id: "maria-silva",
-      name: "Maria Silva",
-      role: "Business Professional",
-      location: "São Paulo, Brazil",
+      id: 'maria-silva',
+      name: 'Maria Silva',
+      role: 'Business Professional',
+      location: 'São Paulo, Brazil',
       rating: 5,
-      text: "LondonLink transformed my English completely!",
-      achievement: "Advanced Business English in 8 months",
+      text: 'LondonLink transformed my English completely!',
+      achievement: 'Advanced Business English in 8 months',
     },
     // ... mais depoimentos
   ],
   stats: {
-    title: "Our Success Numbers",
+    title: 'Our Success Numbers',
     items: [
       {
-        number: "500+",
-        label: "Satisfied Students",
-        description: "Students who achieved their English goals",
+        number: '500+',
+        label: 'Satisfied Students',
+        description: 'Students who achieved their English goals',
       },
       // ... mais estatísticas
     ],
   },
   cta: {
-    title: "Ready to Join Our Success Stories?",
-    description: "Start your English journey today...",
-    button: "Start Learning Now",
+    title: 'Ready to Join Our Success Stories?',
+    description: 'Start your English journey today...',
+    button: 'Start Learning Now',
   },
 };
 ```

@@ -42,12 +42,12 @@ domain/
 
 ```typescript
 // Importar componente principal
-import { HeroSection } from "@/domain/hero";
+import { HeroSection } from '@/domain/hero';
 
 // Importar recursos específicos
-import { useHeroAnimations } from "@/domain/hero/hooks/useHeroAnimations";
-import { HERO_FEATURES } from "@/domain/hero/constants";
-import { heroTranslations } from "@/domain/hero/translations";
+import { useHeroAnimations } from '@/domain/hero/hooks/useHeroAnimations';
+import { HERO_FEATURES } from '@/domain/hero/constants';
+import { heroTranslations } from '@/domain/hero/translations';
 ```
 
 ## Benefícios

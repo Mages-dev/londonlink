@@ -1,5 +1,5 @@
-import { OptimizedImage } from "@/domain/shared";
-import { HERO_IMAGES, HERO_IMAGE_ALTS } from "../constants/images";
+import { OptimizedImage } from '@/domain/shared';
+import { HERO_IMAGES, HERO_IMAGE_ALTS } from '../constants/images';
 
 export function HeroBackground() {
   return (

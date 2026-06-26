@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { Language } from "@/types";
-import { OptimizedImage } from "@/domain/shared";
-import { CONTACT_INFO } from "@/domain/shared/constants/contacts";
-import { FEEDBACK_IMAGES, FEEDBACK_IMAGE_ALTS } from "../constants/images";
-import { feedbackTranslations } from "../translations";
+import { useState, useEffect } from 'react';
+import { Language } from '@/types';
+import { OptimizedImage } from '@/domain/shared';
+import { CONTACT_INFO } from '@/domain/shared/constants/contacts';
+import { FEEDBACK_IMAGES, FEEDBACK_IMAGE_ALTS } from '../constants/images';
+import { feedbackTranslations } from '../translations';
 
 interface FeedbackSectionProps {
   currentLanguage: Language;
@@ -30,7 +30,7 @@ export function FeedbackSection({ currentLanguage }: FeedbackSectionProps) {
 
   const prevTestimonial = () => {
     setCurrentTestimonial(
-      (prev) => (prev - 1 + t.testimonials.length) % t.testimonials.length
+      (prev) => (prev - 1 + t.testimonials.length) % t.testimonials.length,
     );
   };
 
@@ -43,7 +43,7 @@ export function FeedbackSection({ currentLanguage }: FeedbackSectionProps) {
       <span
         key={i}
         className={`star-icon text-4xl ${
-          i < rating ? "text-yellow-400" : "text-gray-300"
+          i < rating ? 'text-yellow-400' : 'text-gray-300'
         }`}
       >
         ★
@@ -175,8 +175,8 @@ export function FeedbackSection({ currentLanguage }: FeedbackSectionProps) {
                       onClick={() => goToTestimonial(index)}
                       className={`w-3 h-3 rounded-full transition-colors duration-200 cursor-pointer ${
                         index === currentTestimonial
-                          ? "bg-yellow-400"
-                          : "bg-white/40 hover:bg-white/60"
+                          ? 'bg-yellow-400'
+                          : 'bg-white/40 hover:bg-white/60'
                       }`}
                       aria-label={`Go to testimonial ${index + 1}`}
                     />

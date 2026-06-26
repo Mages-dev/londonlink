@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { Language } from "@/types";
-import { HERO_IMAGES, HERO_IMAGE_ALTS } from "../constants/images";
-import { heroTranslations } from "../translations";
-import "../styles";
-import { CONTACT_INFO } from "@/domain/shared/constants/contacts";
-import { contactTranslations } from "@/domain/contact/translations";
-import { useTheme } from "@/contexts";
+import Image from 'next/image';
+import { Language } from '@/types';
+import { HERO_IMAGES, HERO_IMAGE_ALTS } from '../constants/images';
+import { heroTranslations } from '../translations';
+import '../styles';
+import { CONTACT_INFO } from '@/domain/shared/constants/contacts';
+import { contactTranslations } from '@/domain/contact/translations';
+import { useTheme } from '@/contexts';
 
 interface HeroSectionProps {
   currentLanguage: Language;
@@ -19,12 +19,12 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
   const { commemorativeTheme } = useTheme();
 
   // Check if seasonal themes are active
-  const isCarnivalTheme = commemorativeTheme === "carnival";
-  const isValentineTheme = commemorativeTheme === "valentine";
-  const isEasterTheme = commemorativeTheme === "easter";
-  const isHalloweenTheme = commemorativeTheme === "halloween";
-  const isChristmasTheme = commemorativeTheme === "christmas";
-  const isNewYearTheme = commemorativeTheme === "new-year";
+  const isCarnivalTheme = commemorativeTheme === 'carnival';
+  const isValentineTheme = commemorativeTheme === 'valentine';
+  const isEasterTheme = commemorativeTheme === 'easter';
+  const isHalloweenTheme = commemorativeTheme === 'halloween';
+  const isChristmasTheme = commemorativeTheme === 'christmas';
+  const isNewYearTheme = commemorativeTheme === 'new-year';
 
   // WhatsApp configuration using shared constants
   const whatsappUrl = `${
@@ -40,12 +40,12 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
           <div className="text-center mb-12">
             <h1
               className={`text-3xl md:text-4xl font-bold text-white mb-4 ${
-                isCarnivalTheme ? "carnival-text-glow" : ""
-              } ${isValentineTheme ? "valentine-text-glow" : ""} ${
-                isEasterTheme ? "easter-text-glow" : ""
-              } ${isHalloweenTheme ? "halloween-text-glow" : ""} ${
-                isChristmasTheme ? "christmas-text-glow" : ""
-              } ${isNewYearTheme ? "newyear-text-glow" : ""}`}
+                isCarnivalTheme ? 'carnival-text-glow' : ''
+              } ${isValentineTheme ? 'valentine-text-glow' : ''} ${
+                isEasterTheme ? 'easter-text-glow' : ''
+              } ${isHalloweenTheme ? 'halloween-text-glow' : ''} ${
+                isChristmasTheme ? 'christmas-text-glow' : ''
+              } ${isNewYearTheme ? 'newyear-text-glow' : ''}`}
             >
               {t.title}
             </h1>
@@ -57,12 +57,12 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-block bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl tracking-wide ${
-                isCarnivalTheme ? "carnival-button carnival-glow" : ""
-              } ${isValentineTheme ? "valentine-button valentine-glow" : ""} ${
-                isEasterTheme ? "easter-button easter-glow" : ""
-              } ${isHalloweenTheme ? "halloween-button halloween-glow" : ""} ${
-                isChristmasTheme ? "christmas-button christmas-glow" : ""
-              } ${isNewYearTheme ? "newyear-button newyear-glow" : ""}`}
+                isCarnivalTheme ? 'carnival-button carnival-glow' : ''
+              } ${isValentineTheme ? 'valentine-button valentine-glow' : ''} ${
+                isEasterTheme ? 'easter-button easter-glow' : ''
+              } ${isHalloweenTheme ? 'halloween-button halloween-glow' : ''} ${
+                isChristmasTheme ? 'christmas-button christmas-glow' : ''
+              } ${isNewYearTheme ? 'newyear-button newyear-glow' : ''}`}
             >
               {t.ctaButton}
             </a>
@@ -76,7 +76,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               width={800}
               height={600}
               className="h-auto object-contain"
-              style={{ width: "auto", maxWidth: "110%" }}
+              style={{ width: 'auto', maxWidth: '110%' }}
               priority
             />
           </div>
@@ -88,12 +88,12 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
           <div className="text-left pr-8 z-10">
             <h1
               className={`text-4xl xl:text-5xl font-bold text-white mb-6 leading-tight ${
-                isCarnivalTheme ? "carnival-text-glow" : ""
-              } ${isValentineTheme ? "valentine-text-glow" : ""} ${
-                isEasterTheme ? "easter-text-glow" : ""
-              } ${isHalloweenTheme ? "halloween-text-glow" : ""} ${
-                isChristmasTheme ? "christmas-text-glow" : ""
-              } ${isNewYearTheme ? "newyear-text-glow" : ""}`}
+                isCarnivalTheme ? 'carnival-text-glow' : ''
+              } ${isValentineTheme ? 'valentine-text-glow' : ''} ${
+                isEasterTheme ? 'easter-text-glow' : ''
+              } ${isHalloweenTheme ? 'halloween-text-glow' : ''} ${
+                isChristmasTheme ? 'christmas-text-glow' : ''
+              } ${isNewYearTheme ? 'newyear-text-glow' : ''}`}
             >
               {t.title}
             </h1>
@@ -105,12 +105,12 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-block bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold py-4 px-10 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl text-lg tracking-wide ${
-                isCarnivalTheme ? "carnival-button carnival-glow" : ""
-              } ${isValentineTheme ? "valentine-button valentine-glow" : ""} ${
-                isEasterTheme ? "easter-button easter-glow" : ""
-              } ${isHalloweenTheme ? "halloween-button halloween-glow" : ""} ${
-                isChristmasTheme ? "christmas-button christmas-glow" : ""
-              } ${isNewYearTheme ? "newyear-button newyear-glow" : ""}`}
+                isCarnivalTheme ? 'carnival-button carnival-glow' : ''
+              } ${isValentineTheme ? 'valentine-button valentine-glow' : ''} ${
+                isEasterTheme ? 'easter-button easter-glow' : ''
+              } ${isHalloweenTheme ? 'halloween-button halloween-glow' : ''} ${
+                isChristmasTheme ? 'christmas-button christmas-glow' : ''
+              } ${isNewYearTheme ? 'newyear-button newyear-glow' : ''}`}
             >
               {t.ctaButton}
             </a>
@@ -125,10 +125,10 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               height={625}
               className="h-auto object-cover min-h-[357px]"
               style={{
-                width: "89%",
-                height: "auto",
-                minHeight: "357px",
-                objectFit: "cover",
+                width: '89%',
+                height: 'auto',
+                minHeight: '357px',
+                objectFit: 'cover',
               }}
               priority
             />
@@ -152,7 +152,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
               <div
                 key={index}
                 className={`hero-card rounded-2xl p-6 hover:scale-105 transition-all duration-300 ${
-                  isHalloweenTheme ? "halloween-card halloween-float" : ""
+                  isHalloweenTheme ? 'halloween-card halloween-float' : ''
                 }`}
               >
                 {/* Mobile Layout: Icon and text side by side, Desktop: stacked */}

@@ -1,15 +1,15 @@
 // Theme types for LondonLink
 
-export type ThemeMode = "light" | "dark" | "auto";
+export type ThemeMode = 'light' | 'dark' | 'auto';
 
 export type CommemorativeTheme =
-  | "default"
-  | "halloween"
-  | "christmas"
-  | "new-year"
-  | "valentine"
-  | "easter"
-  | "carnival";
+  | 'default'
+  | 'halloween'
+  | 'christmas'
+  | 'new-year'
+  | 'valentine'
+  | 'easter'
+  | 'carnival';
 
 export interface ThemeColors {
   // Base colors
@@ -94,7 +94,7 @@ export interface ThemeContextType {
 }
 
 // Theme transition animations
-export type ThemeTransition = "fade" | "slide" | "scale" | "none";
+export type ThemeTransition = 'fade' | 'slide' | 'scale' | 'none';
 
 export interface ThemeTransitionConfig {
   type: ThemeTransition;

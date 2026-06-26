@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { getVersionString } from "@/lib/version";
+import Image from 'next/image';
+import { getVersionString } from '@/lib/version';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();

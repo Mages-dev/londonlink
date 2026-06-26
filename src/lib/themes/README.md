@@ -117,19 +117,19 @@ O sistema aplica temas automaticamente baseado na data atual:
 ### Aplicando Tema em Componentes
 
 ```tsx
-import { useTheme } from "@/contexts";
+import { useTheme } from '@/contexts';
 
 function MeuComponente() {
   const { commemorativeTheme } = useTheme();
-  const isHalloween = commemorativeTheme === "halloween";
+  const isHalloween = commemorativeTheme === 'halloween';
 
   return (
     <div
       className={`meu-componente ${
-        isHalloween ? "halloween-card halloween-glow" : ""
+        isHalloween ? 'halloween-card halloween-glow' : ''
       }`}
     >
-      <h2 className={isHalloween ? "halloween-text-glow" : ""}>Título</h2>
+      <h2 className={isHalloween ? 'halloween-text-glow' : ''}>Título</h2>
     </div>
   );
 }
@@ -138,7 +138,7 @@ function MeuComponente() {
 ### Verificando Tema Ativo
 
 ```tsx
-import { useTheme } from "@/contexts";
+import { useTheme } from '@/contexts';
 
 function ComponenteCondicional() {
   const { isCommemorativeThemeActive, commemorativeTheme } = useTheme();
@@ -154,7 +154,7 @@ function ComponenteCondicional() {
 ### Acessando Cores do Tema
 
 ```tsx
-import { useThemeColors } from "@/contexts";
+import { useThemeColors } from '@/contexts';
 
 function ComponenteComCores() {
   const colors = useThemeColors();
@@ -236,7 +236,7 @@ const novoTema: ThemeConfig = {
 
 ```tsx
 // src/app/layout.tsx
-import "../lib/themes/novo-tema.css";
+import '../lib/themes/novo-tema.css';
 ```
 
 ### 4. Adicionar ao Seletor
@@ -244,9 +244,9 @@ import "../lib/themes/novo-tema.css";
 ```typescript
 // src/components/ui/ThemeSelector.tsx
 const availableThemes: CommemorativeTheme[] = [
-  "default",
-  "halloween",
-  "novo-tema",
+  'default',
+  'halloween',
+  'novo-tema',
 ];
 ```
 

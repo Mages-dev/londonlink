@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { Language } from "@/types";
-import { galleryTranslations } from "../translations";
-import type { GalleryImage } from "../hooks/useGallery";
-import "../styles/gallery.css";
+import Image from 'next/image';
+import { Language } from '@/types';
+import { galleryTranslations } from '../translations';
+import type { GalleryImage } from '../hooks/useGallery';
+import '../styles/gallery.css';
 
 interface GalleryModalProps {
   image: GalleryImage;
@@ -33,8 +33,8 @@ export function GalleryModal({
 
   // Format counter text
   const counterText = t.imageCounter
-    .replace("{current}", (currentIndex + 1).toString())
-    .replace("{total}", totalImages.toString());
+    .replace('{current}', (currentIndex + 1).toString())
+    .replace('{total}', totalImages.toString());
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 animate-fade-in">

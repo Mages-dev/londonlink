@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { HeaderWithTheme, Footer } from "@/layout";
+import { HeaderWithTheme, Footer } from '@/layout';
 import {
   HeroSection,
   AboutSection,
@@ -9,8 +9,8 @@ import {
   FeedbackAlternatingSection,
   GallerySection,
   ContactSection,
-} from "@/domain/sections";
-import { WhatsAppFloat } from "@/components";
+} from '@/domain/sections';
+import { WhatsAppFloat } from '@/components';
 import {
   CarnivalEffects,
   ValentineEffects,
@@ -18,9 +18,9 @@ import {
   HalloweenEffects,
   ChristmasEffects,
   NewYearEffects,
-} from "@/components/ui";
-import ThemeDebug from "@/components/ui/ThemeDebug";
-import { useLanguage } from "@/contexts";
+} from '@/components/ui';
+import ThemeDebug from '@/components/ui/ThemeDebug';
+import { useLanguage } from '@/contexts';
 
 export default function Home() {
   const { language, setLanguage } = useLanguage();
@@ -53,7 +53,7 @@ export default function Home() {
       <WhatsAppFloat currentLanguage={language} />
 
       {/* Debug info - only in development */}
-      {process.env.NODE_ENV === "development" && <ThemeDebug />}
+      {process.env.NODE_ENV === 'development' && <ThemeDebug />}
     </div>
   );
 }

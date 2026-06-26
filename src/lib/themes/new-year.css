@@ -54,12 +54,18 @@
 @keyframes newyear-glow {
   0%,
   100% {
-    box-shadow: 0 0 5px var(--special), 0 0 10px var(--special),
-      0 0 15px var(--special), 0 0 20px var(--accent);
+    box-shadow:
+      0 0 5px var(--special),
+      0 0 10px var(--special),
+      0 0 15px var(--special),
+      0 0 20px var(--accent);
   }
   50% {
-    box-shadow: 0 0 10px var(--special), 0 0 20px var(--special),
-      0 0 30px var(--special), 0 0 40px var(--accent);
+    box-shadow:
+      0 0 10px var(--special),
+      0 0 20px var(--special),
+      0 0 30px var(--special),
+      0 0 40px var(--accent);
   }
 }
 
@@ -86,8 +92,11 @@
 
 /* New Year Text Glow */
 .newyear-text-glow {
-  text-shadow: 0 0 5px var(--special), 0 0 10px var(--special),
-    0 0 15px var(--special), 0 0 20px var(--accent);
+  text-shadow:
+    0 0 5px var(--special),
+    0 0 10px var(--special),
+    0 0 15px var(--special),
+    0 0 20px var(--accent);
   animation: newyear-countdown 1.5s ease-in-out infinite;
 }
 
@@ -109,7 +118,7 @@
 }
 
 .newyear-button::before {
-  content: "🥂";
+  content: '🥂';
   position: absolute;
   top: 50%;
   left: -35px;
@@ -124,7 +133,8 @@
 
 /* New Year Background Pattern */
 .newyear-pattern {
-  background-image: radial-gradient(
+  background-image:
+    radial-gradient(
       circle at 25% 25%,
       rgba(217, 119, 6, 0.1) 0%,
       transparent 50%

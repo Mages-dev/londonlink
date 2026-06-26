@@ -18,7 +18,7 @@ A floating WhatsApp contact button that appears in the bottom-right corner of th
 ## 🔧 Usage
 
 ```tsx
-import { WhatsAppFloat } from "@/components";
+import { WhatsAppFloat } from '@/components';
 
 function App() {
   return (
@@ -32,9 +32,9 @@ function App() {
 
 ## 📋 Props
 
-| Prop | Type | Required | Description |
-|------|------|----------|-------------|
-| `currentLanguage` | `"en" \| "pt"` | ✅ | Language for tooltip and aria-label |
+| Prop              | Type           | Required | Description                         |
+| ----------------- | -------------- | -------- | ----------------------------------- |
+| `currentLanguage` | `"en" \| "pt"` | ✅       | Language for tooltip and aria-label |
 
 ## 🎨 Styling
 
@@ -56,21 +56,25 @@ The component uses its own CSS file (`WhatsAppFloat.css`) with:
 ## 🌐 Internationalization
 
 ### Portuguese (pt)
+
 - **Tooltip**: "Fale conosco no WhatsApp!"
 - **Aria-label**: "Contato via WhatsApp"
 
 ### English (en)
+
 - **Tooltip**: "Chat with us on WhatsApp!"
 - **Aria-label**: "Contact via WhatsApp"
 
 ## 📱 Responsive Behavior
 
 ### Desktop (> 768px)
+
 - **Size**: 56px × 56px
 - **Position**: 24px from bottom-right
 - **Icon**: 50px × 50px (90% of button)
 
 ### Mobile (≤ 768px)
+
 - **Size**: 48px × 48px
 - **Position**: 16px from bottom-right
 - **Smaller tooltip**: Reduced font size and padding

@@ -1,1 +1,1 @@
-export { WhatsAppFloat } from "./WhatsAppFloat";
+export { WhatsAppFloat } from './WhatsAppFloat';

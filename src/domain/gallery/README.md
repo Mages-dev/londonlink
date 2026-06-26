@@ -120,7 +120,7 @@ import {
   GALLERY_STYLE_CLASSES,
   GALLERY_ANIMATIONS,
   GALLERY_GRID_CONFIG,
-} from "@/domain/gallery";
+} from '@/domain/gallery';
 
 // Classes CSS
 GALLERY_STYLE_CLASSES.grid;
@@ -176,8 +176,8 @@ Facilmente extensível seguindo o padrão:
 ```typescript
 // gallery/translations/es.ts
 export const galleryTranslationsEs = {
-  title: "Galería",
-  subtitle: "Explora nuestro contenido visual...",
+  title: 'Galería',
+  subtitle: 'Explora nuestro contenido visual...',
   // ...
 };
 ```

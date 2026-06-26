@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { useOptimizedImage } from "../hooks/useOptimizedImage";
+import Image from 'next/image';
+import { useOptimizedImage } from '../hooks/useOptimizedImage';
 
 interface OptimizedImageProps {
   src: string;
@@ -11,7 +11,7 @@ interface OptimizedImageProps {
   sizes?: string;
   priority?: boolean;
   fill?: boolean;
-  objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
+  objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
 }
 
 export function OptimizedImage({
@@ -19,12 +19,12 @@ export function OptimizedImage({
   alt,
   width,
   height,
-  className = "",
+  className = '',
   placeholder,
   sizes,
   priority = false,
   fill = false,
-  objectFit = "cover",
+  objectFit = 'cover',
 }: OptimizedImageProps) {
   const {
     src: optimizedSrc,
@@ -45,7 +45,7 @@ export function OptimizedImage({
     src: optimizedSrc,
     alt: optimizedAlt,
     className: `${className} ${
-      isLoaded ? "opacity-100" : "opacity-0"
+      isLoaded ? 'opacity-100' : 'opacity-0'
     } transition-opacity duration-300`,
     sizes: optimizedSizes,
     priority: optimizedPriority,

@@ -30,7 +30,7 @@ Atualmente suportamos:
 ### 1. Importar traduções de um domínio específico
 
 ```typescript
-import { heroTranslations } from "@/domain/hero/translations";
+import { heroTranslations } from '@/domain/hero/translations';
 
 // Usar no componente
 const t = heroTranslations[currentLanguage];
@@ -40,20 +40,20 @@ console.log(t.title); // "Do you want to learn English?" ou "Você quer aprender
 ### 2. Importar todas as traduções centralizadas
 
 ```typescript
-import { getTranslations } from "@/translations";
+import { getTranslations } from '@/translations';
 
 // Obter todas as traduções para um idioma
-const translations = getTranslations("pt");
+const translations = getTranslations('pt');
 console.log(translations.hero.title); // "Você quer aprender inglês?"
 ```
 
 ### 3. Usar configurações de idioma
 
 ```typescript
-import { LANGUAGE_CONFIG, isValidLanguage } from "@/translations/config";
+import { LANGUAGE_CONFIG, isValidLanguage } from '@/translations/config';
 
 // Verificar se um idioma é válido
-if (isValidLanguage("pt")) {
+if (isValidLanguage('pt')) {
   const config = LANGUAGE_CONFIG.pt;
   console.log(config.nativeName); // "Português"
 }
@@ -74,14 +74,14 @@ src/domain/books/translations/index.ts
 ```typescript
 export const heroTranslations = {
   en: {
-    title: "Do you want to learn English?",
-    subtitle: "Tell us what you need...",
-    ctaButton: "Preregistration",
+    title: 'Do you want to learn English?',
+    subtitle: 'Tell us what you need...',
+    ctaButton: 'Preregistration',
   },
   pt: {
-    title: "Você quer aprender inglês?",
-    subtitle: "Nos diga o que você precisa...",
-    ctaButton: "Pré-cadastro",
+    title: 'Você quer aprender inglês?',
+    subtitle: 'Nos diga o que você precisa...',
+    ctaButton: 'Pré-cadastro',
   },
 } as const;
 ```
@@ -94,15 +94,15 @@ Para adicionar um novo idioma (ex: espanhol):
 
 ```typescript
 // src/translations/config.ts
-export const SUPPORTED_LANGUAGES = ["en", "pt", "es"] as const;
+export const SUPPORTED_LANGUAGES = ['en', 'pt', 'es'] as const;
 
 export const LANGUAGE_CONFIG = {
   // ... idiomas existentes
   es: {
-    name: "Spanish",
-    nativeName: "Español",
-    flag: "🇪🇸",
-    direction: "ltr" as const,
+    name: 'Spanish',
+    nativeName: 'Español',
+    flag: '🇪🇸',
+    direction: 'ltr' as const,
   },
 };
 ```
@@ -112,9 +112,9 @@ export const LANGUAGE_CONFIG = {
 ```typescript
 // src/domain/hero/translations/es.ts
 export const heroTranslationsEs = {
-  title: "¿Quieres aprender inglés?",
-  subtitle: "Dinos qué necesitas...",
-  ctaButton: "Preinscripción",
+  title: '¿Quieres aprender inglés?',
+  subtitle: 'Dinos qué necesitas...',
+  ctaButton: 'Preinscripción',
   // ... resto das traduções
 } as const;
 ```
@@ -123,7 +123,7 @@ export const heroTranslationsEs = {
 
 ```typescript
 // src/domain/hero/translations/index.ts
-import { heroTranslationsEs } from "./es";
+import { heroTranslationsEs } from './es';
 
 export const heroTranslations = {
   en: heroTranslationsEn,
@@ -131,7 +131,7 @@ export const heroTranslations = {
   es: heroTranslationsEs, // Adicionar aqui
 } as const;
 
-export { heroTranslationsEs } from "./es"; // Exportar também
+export { heroTranslationsEs } from './es'; // Exportar também
 ```
 
 ### 4. **Usar templates existentes:**

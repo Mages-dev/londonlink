@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { Language } from "@/types";
-import { goalsTranslations } from "../translations";
+import Image from 'next/image';
+import { Language } from '@/types';
+import { goalsTranslations } from '../translations';
 import {
   GOALS_ICONS,
   GOALS_ICON_ALTS,
   GOALS_IMAGES,
   GOALS_IMAGE_ALTS,
-} from "../constants/images";
-import { CONTACT_INFO } from "@/domain/shared/constants/contacts";
-import "../styles";
+} from '../constants/images';
+import { CONTACT_INFO } from '@/domain/shared/constants/contacts';
+import '../styles';
 
 interface GoalsSectionProps {
   currentLanguage: Language;

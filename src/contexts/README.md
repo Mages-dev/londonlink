@@ -11,6 +11,7 @@ This directory contains React Context providers for managing global application 
 Manages dark/light mode and commemorative themes with automatic persistence.
 
 #### Features:
+
 - ✅ **Dark/Light Mode**: Manual or automatic (system preference)
 - ✅ **Commemorative Themes**: Seasonal themes (Halloween, Christmas, etc.)
 - ✅ **Automatic Detection**: Detects system theme preference
@@ -21,14 +22,15 @@ Manages dark/light mode and commemorative themes with automatic persistence.
 #### Usage:
 
 ```tsx
-import { useTheme } from "@/contexts";
+import { useTheme } from '@/contexts';
 
 function MyComponent() {
-  const { mode, setMode, commemorativeTheme, setCommemorativeTheme } = useTheme();
+  const { mode, setMode, commemorativeTheme, setCommemorativeTheme } =
+    useTheme();
 
   return (
     <div>
-      <button onClick={() => setMode(mode === "dark" ? "light" : "dark")}>
+      <button onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}>
         Toggle Theme
       </button>
       <p>Current mode: {mode}</p>
@@ -39,6 +41,7 @@ function MyComponent() {
 ```
 
 #### Storage Keys:
+
 - `londonlink-theme-mode`: Stores theme mode (light/dark/auto)
 - `londonlink-commemorative-theme`: Stores commemorative theme
 - `londonlink-manual-override`: Tracks manual theme override
@@ -50,6 +53,7 @@ function MyComponent() {
 Manages application language with automatic persistence and browser detection.
 
 #### Features:
+
 - ✅ **Bilingual Support**: Portuguese (pt) and English (en)
 - ✅ **Browser Detection**: Auto-detects user's browser language
 - ✅ **Persistence**: Saves language preference to localStorage
@@ -59,7 +63,7 @@ Manages application language with automatic persistence and browser detection.
 #### Usage:
 
 ```tsx
-import { useLanguage } from "@/contexts";
+import { useLanguage } from '@/contexts';
 
 function MyComponent() {
   const { language, setLanguage, toggleLanguage } = useLanguage();
@@ -67,7 +71,7 @@ function MyComponent() {
   return (
     <div>
       <button onClick={toggleLanguage}>
-        Switch to {language === "en" ? "PT" : "EN"}
+        Switch to {language === 'en' ? 'PT' : 'EN'}
       </button>
       <p>Current language: {language}</p>
     </div>
@@ -76,6 +80,7 @@ function MyComponent() {
 ```
 
 #### Storage Key:
+
 - `londonlink-language`: Stores selected language (pt/en)
 
 ---
@@ -87,9 +92,7 @@ function MyComponent() {
 ```tsx
 // src/app/layout.tsx
 <ThemeProvider>
-  <LanguageProvider>
-    {children}
-  </LanguageProvider>
+  <LanguageProvider>{children}</LanguageProvider>
 </ThemeProvider>
 ```
 
@@ -104,11 +107,7 @@ Both contexts implement **hydration-safe patterns**:
 ```tsx
 // Don't render until mounted to avoid hydration mismatch
 if (!mounted) {
-  return (
-    <Context.Provider value={defaultValue}>
-      {children}
-    </Context.Provider>
-  );
+  return <Context.Provider value={defaultValue}>{children}</Context.Provider>;
 }
 ```
 
@@ -137,6 +136,7 @@ if (!mounted) {
 All keys follow the pattern: `londonlink-[feature]-[property]`
 
 Examples:
+
 - `londonlink-theme-mode`
 - `londonlink-language`
 - `londonlink-commemorative-theme`
@@ -168,7 +168,7 @@ Examples:
 const suggested = getSuggestedTheme(); // Returns theme for current date
 
 // User can override automatic themes
-setCommemorativeTheme("halloween"); // Manual override
+setCommemorativeTheme('halloween'); // Manual override
 resetToAutomatic(); // Return to automatic management
 ```
 
@@ -203,24 +203,24 @@ toggleLanguage(); // pt → en or en → pt
 ### Multiple Hooks
 
 ```tsx
-import { 
-  useTheme, 
-  useThemeColors, 
+import {
+  useTheme,
+  useThemeColors,
   useThemeSeason,
-  useLanguage 
-} from "@/contexts";
+  useLanguage,
+} from '@/contexts';
 
 function AdvancedComponent() {
   const { mode, setMode } = useTheme();
   const colors = useThemeColors();
-  const isHalloweenSeason = useThemeSeason("halloween");
+  const isHalloweenSeason = useThemeSeason('halloween');
   const { language, toggleLanguage } = useLanguage();
 
   return (
     <div style={{ backgroundColor: colors.background }}>
       <p>Mode: {mode}</p>
       <p>Language: {language}</p>
-      <p>Halloween season: {isHalloweenSeason ? "Yes" : "No"}</p>
+      <p>Halloween season: {isHalloweenSeason ? 'Yes' : 'No'}</p>
     </div>
   );
 }
@@ -229,14 +229,14 @@ function AdvancedComponent() {
 ### Theme Suggestions
 
 ```tsx
-import { useThemeSuggestions } from "@/contexts";
+import { useThemeSuggestions } from '@/contexts';
 
 function ThemeSuggestionBanner() {
-  const { 
-    suggestedTheme, 
-    shouldShowSuggestion, 
-    acceptSuggestion, 
-    dismissSuggestion 
+  const {
+    suggestedTheme,
+    shouldShowSuggestion,
+    acceptSuggestion,
+    dismissSuggestion,
   } = useThemeSuggestions();
 
   if (!shouldShowSuggestion) return null;
@@ -256,16 +256,19 @@ function ThemeSuggestionBanner() {
 ## 🚀 Benefits
 
 ### 1. **User Experience**
+
 - ✅ Preferences persist across sessions
 - ✅ No need to reconfigure on each visit
 - ✅ Smooth, consistent experience
 
 ### 2. **Developer Experience**
+
 - ✅ Simple, intuitive API
 - ✅ Type-safe with TypeScript
 - ✅ Automatic persistence (no manual localStorage calls)
 
 ### 3. **Performance**
+
 - ✅ Minimal bundle impact
 - ✅ Efficient re-renders
 - ✅ SSR-safe implementation
@@ -283,6 +286,7 @@ function ThemeSuggestionBanner() {
 ## 🔮 Future Enhancements
 
 Potential additions:
+
 - **User Preferences Context**: Font size, animations, etc.
 - **Analytics Context**: Track user interactions
 - **Notification Context**: Toast notifications

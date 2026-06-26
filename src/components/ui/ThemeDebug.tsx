@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useTheme } from "@/contexts/ThemeContext";
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function ThemeDebug() {
   const {
@@ -14,8 +14,8 @@ export default function ThemeDebug() {
     <div className="fixed bottom-4 left-4 bg-black/80 text-white p-2 rounded text-xs z-50">
       <div>Theme: {commemorativeTheme}</div>
       <div>Mode: {mode}</div>
-      <div>Active: {isCommemorativeThemeActive ? "Yes" : "No"}</div>
-      <div>Manual: {manualOverride ? "Yes" : "No"}</div>
+      <div>Active: {isCommemorativeThemeActive ? 'Yes' : 'No'}</div>
+      <div>Manual: {manualOverride ? 'Yes' : 'No'}</div>
     </div>
   );
 }

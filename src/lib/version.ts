@@ -7,31 +7,31 @@
  * Current application version
  * Update this when releasing new versions
  */
-export const APP_VERSION = "2.3.0";
+export const APP_VERSION = '2.3.0';
 
 /**
  * Application name
  */
-export const APP_NAME = "londonlink";
+export const APP_NAME = 'londonlink';
 
 /**
  * Application description
  */
 export const APP_DESCRIPTION =
-  "English Learning Platform with Brazilian Portuguese Focus";
+  'English Learning Platform with Brazilian Portuguese Focus';
 
 /**
  * Parse semantic version into components
  */
 export function parseVersion(version: string = APP_VERSION) {
-  const [major, minor, patch] = version.split(".").map(Number);
+  const [major, minor, patch] = version.split('.').map(Number);
   return { major, minor, patch };
 }
 
 /**
  * Get formatted version string
  */
-export function getVersionString(prefix: string = "v"): string {
+export function getVersionString(prefix: string = 'v'): string {
   return `${prefix}${APP_VERSION}`;
 }
 
@@ -39,7 +39,7 @@ export function getVersionString(prefix: string = "v"): string {
  * Get version with build date
  */
 export function getVersionWithDate(): string {
-  const buildDate = new Date().toISOString().split("T")[0];
+  const buildDate = new Date().toISOString().split('T')[0];
   return `${APP_VERSION} (${buildDate})`;
 }
 
@@ -57,9 +57,9 @@ export function isProductionVersion(): boolean {
 export function getVersionBadgeColor(): string {
   const { major } = parseVersion();
 
-  if (major === 0) return "yellow"; // Beta
-  if (major === 1) return "green"; // Stable
-  return "blue"; // Future versions
+  if (major === 0) return 'yellow'; // Beta
+  if (major === 1) return 'green'; // Stable
+  return 'blue'; // Future versions
 }
 
 /**

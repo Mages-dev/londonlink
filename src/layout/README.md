@@ -7,6 +7,7 @@ This directory contains all layout-related components that define the structural
 ## 🏗️ Architecture Philosophy
 
 Layout components are **structural elements** that:
+
 - Define the overall page structure
 - Handle navigation and routing
 - Provide consistent UI patterns across the application
@@ -17,16 +18,19 @@ This is why they are separated from domain-specific components and placed at the
 ## 📁 Components
 
 ### Header.tsx
+
 - Main navigation header
 - Logo and branding
 - Navigation menu
 
 ### HeaderWithTheme.tsx
+
 - Enhanced header with theme switching capabilities
 - Language selection
 - Commemorative theme integration
 
 ### Footer.tsx
+
 - Application footer
 - Copyright information
 - Simple, clean design
@@ -34,18 +38,18 @@ This is why they are separated from domain-specific components and placed at the
 ## 🔧 Usage
 
 ```tsx
-import { HeaderWithTheme, Footer } from "@/layout";
+import { HeaderWithTheme, Footer } from '@/layout';
 
 function App() {
   return (
     <div>
-      <HeaderWithTheme 
-        currentLanguage="pt" 
-        onLanguageChange={handleLanguageChange} 
+      <HeaderWithTheme
+        currentLanguage="pt"
+        onLanguageChange={handleLanguageChange}
       />
-      
+
       {/* Page content */}
-      
+
       <Footer />
     </div>
   );
@@ -55,16 +59,19 @@ function App() {
 ## 🎯 Design Principles
 
 ### 1. **Separation of Concerns**
+
 - Layout components handle structure
 - Domain components handle business logic
 - Shared components handle reusable utilities
 
 ### 2. **Consistency**
+
 - All layout components follow the same patterns
 - Consistent styling and behavior
 - Unified theming support
 
 ### 3. **Accessibility**
+
 - Semantic HTML structure
 - ARIA labels and roles
 - Keyboard navigation support
@@ -72,6 +79,7 @@ function App() {
 ## 📱 Responsive Design
 
 All layout components are designed to be:
+
 - **Mobile-first**: Optimized for mobile devices
 - **Responsive**: Adapt to different screen sizes
 - **Touch-friendly**: Appropriate touch targets
@@ -79,6 +87,7 @@ All layout components are designed to be:
 ## 🌐 Internationalization
 
 Layout components support:
+
 - **Bilingual content**: Portuguese and English
 - **RTL support**: Ready for right-to-left languages
 - **Locale-aware formatting**: Dates, numbers, etc.
@@ -86,6 +95,7 @@ Layout components support:
 ## 🎨 Theming
 
 Layout components integrate with:
+
 - **Dark/Light modes**: Automatic theme switching
 - **Commemorative themes**: Seasonal and special themes
 - **Brand consistency**: LondonLink color palette
@@ -107,6 +117,7 @@ Layout components integrate with:
 ## 🚀 Future Enhancements
 
 Potential additions:
+
 - **Breadcrumb navigation**
 - **Sidebar layouts**
 - **Modal containers**

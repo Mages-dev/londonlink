@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Language } from "@/types";
-import { OptimizedImage } from "@/domain/shared";
-import { FEEDBACK_IMAGES, FEEDBACK_IMAGE_ALTS } from "../constants/images";
-import { feedbackTranslations } from "../translations";
+import { Language } from '@/types';
+import { OptimizedImage } from '@/domain/shared';
+import { FEEDBACK_IMAGES, FEEDBACK_IMAGE_ALTS } from '../constants/images';
+import { feedbackTranslations } from '../translations';
 
 interface FeedbackAlternatingSectionProps {
   currentLanguage: Language;
@@ -19,7 +19,7 @@ export function FeedbackAlternatingSection({
       <span
         key={i}
         className={`star-icon text-2xl ${
-          i < rating ? "text-yellow-400" : "text-gray-300"
+          i < rating ? 'text-yellow-400' : 'text-gray-300'
         }`}
       >
         ★
@@ -56,7 +56,7 @@ export function FeedbackAlternatingSection({
               <div
                 key={testimonial.id}
                 className={`flex flex-col ${
-                  isEven ? "md:flex-row" : "md:flex-row-reverse"
+                  isEven ? 'md:flex-row' : 'md:flex-row-reverse'
                 } items-center gap-8 md:gap-12 bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-2xl transition-all duration-300 hover:bg-white/15 hover:shadow-3xl`}
               >
                 {/* Student Photo */}

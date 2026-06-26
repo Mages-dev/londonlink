@@ -23,26 +23,26 @@ export function useOptimizedImage({
   alt,
   placeholder = '/assets/images/shared/placeholder.jpg',
   sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
-  priority = false
+  priority = false,
 }: UseOptimizedImageProps): UseOptimizedImageReturn {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const img = new Image();
-    
+
     img.onload = () => {
       setIsLoaded(true);
       setIsError(false);
     };
-    
+
     img.onerror = () => {
       setIsError(true);
       setIsLoaded(false);
     };
-    
+
     img.src = src;
-    
+
     return () => {
       img.onload = null;
       img.onerror = null;
@@ -56,6 +56,6 @@ export function useOptimizedImage({
     isError,
     placeholder,
     sizes,
-    priority
+    priority,
   };
 }

@@ -2,16 +2,16 @@ name: Deploy to DigitalOcean
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: SSH
-      uses: webfactory/ssh-agent@v0.9.0
-      with:
-        ssh-private-key: ${{ secrets.YUSUKE_PK }}
-    - name: Deploy to Droplet
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.YUSUKE_USER }}@${{ secrets.YUSUKE_HOST }} "/home/${{ secrets.YUSUKE_USER }}/deploy-londonlink.sh"
+      - name: SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.YUSUKE_PK }}
+      - name: Deploy to Droplet
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.YUSUKE_USER }}@${{ secrets.YUSUKE_HOST }} "/home/${{ secrets.YUSUKE_USER }}/deploy-londonlink.sh"

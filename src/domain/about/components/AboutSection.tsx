@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { Language } from "@/types";
-import { aboutTranslations } from "../translations";
-import { ABOUT_IMAGES, ABOUT_IMAGE_ALTS } from "../constants/images";
+import Image from 'next/image';
+import { Language } from '@/types';
+import { aboutTranslations } from '../translations';
+import { ABOUT_IMAGES, ABOUT_IMAGE_ALTS } from '../constants/images';
 
 interface AboutSectionProps {
   currentLanguage: Language;

@@ -7,6 +7,6 @@ export {
   useThemeColors,
   useThemeSeason,
   useThemeSuggestions,
-} from "./ThemeContext";
+} from './ThemeContext';
 
-export { LanguageProvider, useLanguage } from "./LanguageContext";
+export { LanguageProvider, useLanguage } from './LanguageContext';

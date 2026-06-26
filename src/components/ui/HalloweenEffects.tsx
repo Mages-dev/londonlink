@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useMemo } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
+import React, { useEffect, useState, useMemo } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface FloatingElement {
   id: number;
@@ -19,12 +19,12 @@ export default function HalloweenEffects() {
   const [elements, setElements] = useState<FloatingElement[]>([]);
   const [mounted, setMounted] = useState(false);
 
-  const isHalloweenTheme = commemorativeTheme === "halloween";
+  const isHalloweenTheme = commemorativeTheme === 'halloween';
 
   // Halloween emojis for floating effects (memoized to prevent re-creation)
   const halloweenEmojis = useMemo(
-    () => ["🎃", "👻", "🦇", "🕷️", "🕸️", "🌙", "⭐", "🍂"],
-    []
+    () => ['🎃', '👻', '🦇', '🕷️', '🕸️', '🌙', '⭐', '🍂'],
+    [],
   );
 
   useEffect(() => {
@@ -65,8 +65,8 @@ export default function HalloweenEffects() {
       createElements();
     };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [mounted, isHalloweenTheme, halloweenEmojis]);
 
   useEffect(() => {
@@ -83,7 +83,7 @@ export default function HalloweenEffects() {
             y: window.innerHeight + 50,
             x: Math.random() * window.innerWidth,
           }),
-        }))
+        })),
       );
     };
 
@@ -107,8 +107,8 @@ export default function HalloweenEffects() {
             top: `${element.y}px`,
             fontSize: `${element.size}px`,
             transform: `rotate(${element.rotation}deg)`,
-            filter: "drop-shadow(0 0 8px rgba(251, 191, 36, 0.6))",
-            animation: "halloween-float 3s ease-in-out infinite",
+            filter: 'drop-shadow(0 0 8px rgba(251, 191, 36, 0.6))',
+            animation: 'halloween-float 3s ease-in-out infinite',
             animationDelay: `${element.id * 0.2}s`,
           }}
         >
@@ -123,11 +123,11 @@ export default function HalloweenEffects() {
       <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-purple-500/20 blur-xl animate-pulse" />
       <div
         className="absolute top-3/4 right-1/4 w-24 h-24 rounded-full bg-orange-500/20 blur-xl animate-pulse"
-        style={{ animationDelay: "1s" }}
+        style={{ animationDelay: '1s' }}
       />
       <div
         className="absolute top-1/2 left-3/4 w-20 h-20 rounded-full bg-yellow-500/20 blur-xl animate-pulse"
-        style={{ animationDelay: "2s" }}
+        style={{ animationDelay: '2s' }}
       />
 
       {/* Subtle spider web in corners */}

@@ -8,15 +8,15 @@ Este arquivo mostra exemplos práticos de como usar a nova estrutura de traduç�
 
 ```typescript
 // Método tradicional (ainda funciona)
-import { heroTranslations } from "@/domain/hero/translations";
+import { heroTranslations } from '@/domain/hero/translations';
 const t = heroTranslations[currentLanguage];
 
 // Método direto por idioma (novo)
 import {
   heroTranslationsEn,
   heroTranslationsPt,
-} from "@/domain/hero/translations";
-const t = currentLanguage === "en" ? heroTranslationsEn : heroTranslationsPt;
+} from '@/domain/hero/translations';
+const t = currentLanguage === 'en' ? heroTranslationsEn : heroTranslationsPt;
 ```
 
 ### 2. **Usar no componente React**
@@ -48,13 +48,13 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
 // src/pages/hero/translations/en.ts
 export const heroTranslationsEn = {
   // ... traduções existentes
-  newFeature: "New amazing feature!", // ← Nova chave
+  newFeature: 'New amazing feature!', // ← Nova chave
 } as const;
 
 // src/domain/hero/translations/pt.ts
 export const heroTranslationsPt = {
   // ... traduções existentes
-  newFeature: "Nova funcionalidade incrível!", // ← Nova chave
+  newFeature: 'Nova funcionalidade incrível!', // ← Nova chave
 } as const;
 ```
 
@@ -67,16 +67,16 @@ export const heroTranslationsPt = {
 ### **Verificando consistência**
 
 ```typescript
-import { validateTranslationKeys } from "@/translations/utils";
+import { validateTranslationKeys } from '@/translations/utils';
 import {
   heroTranslationsEn,
   heroTranslationsPt,
-} from "@/domain/hero/translations";
+} from '@/domain/hero/translations';
 
 // Verificar se PT tem todas as chaves do EN
 const isValid = validateTranslationKeys(heroTranslationsEn, heroTranslationsPt);
 if (!isValid) {
-  console.warn("Portuguese translations are missing some keys!");
+  console.warn('Portuguese translations are missing some keys!');
 }
 ```
 
@@ -88,15 +88,15 @@ if (!isValid) {
 
 ```typescript
 // src/translations/config.ts
-export const SUPPORTED_LANGUAGES = ["en", "pt", "es"] as const;
+export const SUPPORTED_LANGUAGES = ['en', 'pt', 'es'] as const;
 
 export const LANGUAGE_CONFIG = {
   // ... existentes
   es: {
-    name: "Spanish",
-    nativeName: "Español",
-    flag: "🇪🇸",
-    direction: "ltr" as const,
+    name: 'Spanish',
+    nativeName: 'Español',
+    flag: '🇪🇸',
+    direction: 'ltr' as const,
   },
 };
 ```
@@ -106,9 +106,9 @@ export const LANGUAGE_CONFIG = {
 ```typescript
 // src/pages/hero/translations/es.ts
 export const heroTranslationsEs = {
-  title: "¿Quieres aprender inglés?",
-  subtitle: "¡Dinos qué necesitas y crearemos un curso solo para ti!",
-  ctaButton: "Preinscripción",
+  title: '¿Quieres aprender inglés?',
+  subtitle: '¡Dinos qué necesitas y crearemos un curso solo para ti!',
+  ctaButton: 'Preinscripción',
   // ... resto das traduções
 } as const;
 ```
@@ -117,7 +117,7 @@ export const heroTranslationsEs = {
 
 ```typescript
 // src/pages/hero/translations/index.ts
-import { heroTranslationsEs } from "./es";
+import { heroTranslationsEs } from './es';
 
 export const heroTranslations = {
   en: heroTranslationsEn,
@@ -125,14 +125,14 @@ export const heroTranslations = {
   es: heroTranslationsEs, // ← Adicionar
 } as const;
 
-export { heroTranslationsEs } from "./es"; // ← Exportar
+export { heroTranslationsEs } from './es'; // ← Exportar
 ```
 
 4. **Atualizar tipos globais (se necessário):**
 
 ```typescript
 // src/types/index.ts - já está configurado para usar config centralizada
-export type { Language } from "@/translations/config";
+export type { Language } from '@/translations/config';
 ```
 
 ## 🎯 Benefícios da Nova Estrutura

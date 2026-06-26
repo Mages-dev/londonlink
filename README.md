@@ -275,21 +275,21 @@ The layered architecture enables clean import patterns:
 
 ```typescript
 // Structural components
-import { HeaderWithTheme, Footer } from "@/layout";
+import { HeaderWithTheme, Footer } from '@/layout';
 
 // Global functionality
-import { WhatsAppFloat } from "@/components";
+import { WhatsAppFloat } from '@/components';
 
 // Business logic
-import { HeroSection } from "@/domain/hero";
-import { ContactSection } from "@/domain/contact";
+import { HeroSection } from '@/domain/hero';
+import { ContactSection } from '@/domain/contact';
 
 // Shared utilities
-import { OptimizedImage } from "@/domain/shared";
+import { OptimizedImage } from '@/domain/shared';
 
 // Infrastructure
-import { useTheme } from "@/contexts";
-import { translations } from "@/translations";
+import { useTheme } from '@/contexts';
+import { translations } from '@/translations';
 ```
 
 ## 🖼️ Assets Organization
@@ -350,8 +350,8 @@ SVG icons for UI elements:
 ### Usage with Next.js Image
 
 ```tsx
-import { OptimizedImage } from "@/domain/shared";
-import { HERO_IMAGES } from "@/domain/hero/constants/images";
+import { OptimizedImage } from '@/domain/shared';
+import { HERO_IMAGES } from '@/domain/hero/constants/images';
 
 <OptimizedImage
   src={HERO_IMAGES.backgrounds.main}
@@ -392,7 +392,7 @@ LondonLink features a comprehensive bilingual system:
 ### Usage Example
 
 ```typescript
-import { heroTranslations } from "@/domain/hero/translations";
+import { heroTranslations } from '@/domain/hero/translations';
 
 const t = heroTranslations[currentLanguage];
 console.log(t.title); // "Do you want to learn English?" or "Você quer aprender inglês?"

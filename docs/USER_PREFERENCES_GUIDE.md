@@ -37,11 +37,13 @@ Next Visit:
 ### Storage Details
 
 **Storage Keys:**
+
 - `londonlink-theme-mode`: "light" | "dark" | "auto"
 - `londonlink-commemorative-theme`: "default" | "halloween" | "christmas" | etc.
 - `londonlink-manual-override`: "true" | null
 
 **Example localStorage:**
+
 ```json
 {
   "londonlink-theme-mode": "dark",
@@ -53,11 +55,13 @@ Next Visit:
 ### Automatic vs Manual Themes
 
 #### Automatic Mode (Default)
+
 - System automatically applies seasonal themes
 - Changes at midnight when new season starts
 - User sees relevant themes without action
 
 #### Manual Override
+
 - User explicitly selects a theme
 - System respects user choice
 - Seasonal auto-switching disabled
@@ -66,7 +70,7 @@ Next Visit:
 ### Code Example
 
 ```tsx
-import { useTheme } from "@/contexts";
+import { useTheme } from '@/contexts';
 
 function ThemeToggle() {
   const { mode, setMode, resetToAutomatic } = useTheme();
@@ -74,14 +78,12 @@ function ThemeToggle() {
   return (
     <div>
       {/* Toggle between light/dark */}
-      <button onClick={() => setMode(mode === "dark" ? "light" : "dark")}>
-        {mode === "dark" ? "☀️ Light" : "🌙 Dark"}
+      <button onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}>
+        {mode === 'dark' ? '☀️ Light' : '🌙 Dark'}
       </button>
 
       {/* Reset to automatic */}
-      <button onClick={resetToAutomatic}>
-        🔄 Auto
-      </button>
+      <button onClick={resetToAutomatic}>🔄 Auto</button>
     </div>
   );
 }
@@ -122,9 +124,11 @@ Next Visit:
 ### Storage Details
 
 **Storage Key:**
+
 - `londonlink-language`: "pt" | "en"
 
 **Example localStorage:**
+
 ```json
 {
   "londonlink-language": "pt"
@@ -145,14 +149,14 @@ navigator.language = "es-ES" → Language: "pt" (fallback)
 ### Code Example
 
 ```tsx
-import { useLanguage } from "@/contexts";
+import { useLanguage } from '@/contexts';
 
 function LanguageToggle() {
   const { language, toggleLanguage } = useLanguage();
 
   return (
     <button onClick={toggleLanguage}>
-      {language === "en" ? "🇧🇷 PT" : "🇬🇧 EN"}
+      {language === 'en' ? '🇧🇷 PT' : '🇬🇧 EN'}
     </button>
   );
 }
@@ -166,16 +170,14 @@ function LanguageToggle() {
 
 ```tsx
 // src/app/layout.tsx
-import { ThemeProvider, LanguageProvider } from "@/contexts";
+import { ThemeProvider, LanguageProvider } from '@/contexts';
 
 export default function RootLayout({ children }) {
   return (
     <html>
       <body>
         <ThemeProvider>
-          <LanguageProvider>
-            {children}
-          </LanguageProvider>
+          <LanguageProvider>{children}</LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
@@ -187,7 +189,7 @@ export default function RootLayout({ children }) {
 
 ```tsx
 // Any component in the app
-import { useTheme, useLanguage } from "@/contexts";
+import { useTheme, useLanguage } from '@/contexts';
 
 function MyComponent() {
   const { mode, setMode } = useTheme();
@@ -207,16 +209,19 @@ function MyComponent() {
 ## 🎨 User Experience Benefits
 
 ### 1. **Consistency**
+
 - User sees same theme/language on every visit
 - No need to reconfigure preferences
 - Seamless experience across sessions
 
 ### 2. **Personalization**
+
 - Site adapts to user preferences
 - Respects browser settings
 - Allows manual customization
 
 ### 3. **Performance**
+
 - No flash of wrong theme (FOUC prevention)
 - Instant preference application
 - Minimal loading delay
@@ -228,11 +233,13 @@ function MyComponent() {
 ### What We Store
 
 **Only user preferences:**
+
 - Theme mode (light/dark/auto)
 - Commemorative theme selection
 - Language preference (pt/en)
 
 **We DO NOT store:**
+
 - Personal information
 - Browsing history
 - Analytics data
@@ -270,11 +277,13 @@ Users can clear preferences by:
 ### Theme Not Persisting
 
 **Possible causes:**
+
 1. Browser blocking localStorage
 2. Private/Incognito mode
 3. Browser data cleared
 
 **Solutions:**
+
 1. Check browser settings
 2. Allow localStorage for site
 3. Disable private browsing
@@ -282,10 +291,12 @@ Users can clear preferences by:
 ### Language Reverting to Default
 
 **Possible causes:**
+
 1. localStorage cleared
 2. Browser cache issues
 
 **Solutions:**
+
 1. Change language again
 2. Clear browser cache
 3. Hard refresh (Ctrl+Shift+R)
@@ -293,10 +304,12 @@ Users can clear preferences by:
 ### Wrong Theme on Load
 
 **Possible causes:**
+
 1. Cached CSS
 2. Browser extension interference
 
 **Solutions:**
+
 1. Hard refresh page
 2. Disable browser extensions
 3. Clear cache
@@ -322,6 +335,7 @@ Users can clear preferences by:
 ## 🚀 Future Enhancements
 
 Planned features:
+
 - **Font Size Preference**: Accessibility option
 - **Animation Preference**: Reduce motion option
 - **Color Scheme Customization**: Custom brand colors
