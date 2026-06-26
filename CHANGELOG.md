@@ -15,6 +15,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Progress tracking
 - Interactive exercises
 
+## [2.4.0] - 2026-06-26
+
+### ✨ Added
+
+- **Accessibility (WCAG 2.2 AA)**: site-wide accessibility pass — semantic
+  landmarks, heading order, `aria-label`/`aria-pressed`/`aria-expanded` on
+  icon-only controls, keyboard operability, visible focus, and reduced-motion
+  handling across seasonal effects and theme CSS
+- **Security headers (OWASP)**: added hardening headers in `next.config.js` —
+  `Strict-Transport-Security`, `X-Content-Type-Options`, `Referrer-Policy`,
+  `Permissions-Policy`, `frame-ancestors 'none'`, `object-src 'none'`,
+  `base-uri 'self'`, and Cross-Origin-Opener-Policy; tightened CSP
+  `connect-src` and the Google Maps iframe origins
+- Project `a11y-audit` and `security-audit` skills; WCAG 2.2 AA and
+  OWASP references documented in `CLAUDE.md`
+
+### 🔄 Changed
+
+- **Tooling**: adopted **pnpm** (pinned via `packageManager`), upgraded
+  dependencies, migrated ESLint to flat config, adopted Prettier and
+  formatted the codebase
+- **Tailwind CSS v4**: migrated deprecated `bg-gradient-to-*` →
+  `bg-linear-to-*`, moved dead JS config to `@theme`, restored brand colors
+- **Docs**: consolidated scattered module/`docs` guidance into a single
+  `CLAUDE.md` source of truth; trimmed `README` to a pointer
+
+### 🐛 Fixed
+
+- Footer version text contrast (`text-gray-500` → `text-gray-400`) now meets
+  AA on the dark footer
+- Language and theme toggles: accessible names now contain their visible text
+  (WCAG 2.5.3 Label in Name)
+- Corrected Mages Dev footer logo aspect ratio
+- Removed empty `next.config.ts` stub (config drift; `next.config.js` is the
+  single config)
+
+### 🔒 Security
+
+- Pinned patched transitive dependencies via `pnpm-workspace.yaml`
+  `overrides` (ReDoS / prototype-pollution / XSS in
+  `minimatch`/`picomatch`/`flatted`/`brace-expansion`/`postcss`/`@babel/core`)
+
 ## [2.3.0] - 2025-02-09
 
 ### 🔒 Security
