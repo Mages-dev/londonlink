@@ -15,11 +15,12 @@ export function Footer() {
             href="https://mages.dev"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Mages Dev (opens in a new tab)"
             className="transition-opacity hover:opacity-80"
           >
             <Image
               src="/assets/images/shared/logos/mages-dev-logo.webp"
-              alt="Mages Dev Logo"
+              alt="Mages Dev"
               width={138}
               height={46}
               className="drop-shadow-sm"

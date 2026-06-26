@@ -32,7 +32,7 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
   }?text=${encodeURIComponent(contactT.whatsappMessage)}`;
 
   return (
-    <main id="home" className="flex-1 pt-32 lg:pb-16">
+    <section id="home" aria-label={t.title} className="flex-1 pt-32 lg:pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Mobile: Stack vertically */}
         <div className="lg:hidden">
@@ -279,6 +279,6 @@ export function HeroSection({ currentLanguage }: HeroSectionProps) {
           </div>
         </div>
       </div>
-    </main>
+    </section>
   );
 }

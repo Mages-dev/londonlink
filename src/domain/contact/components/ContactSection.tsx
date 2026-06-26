@@ -12,11 +12,18 @@ export function ContactSection({ currentLanguage }: ContactSectionProps) {
   const t = contactTranslations[currentLanguage];
 
   return (
-    <section id="contact" className="section-bg-hero py-16 flex flex-col">
+    <section
+      id="contact"
+      aria-labelledby="contact-heading"
+      className="section-bg-hero py-16 flex flex-col"
+    >
       <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto w-full">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
+            <h2
+              id="contact-heading"
+              className="text-4xl md:text-5xl font-bold text-white mb-8"
+            >
               {t.title}
             </h2>
             <p className="text-xl text-gray-200 max-w-4xl mx-auto">
@@ -107,17 +114,20 @@ export function ContactSection({ currentLanguage }: ContactSectionProps) {
                   {/* Address */}
                   <div className="flex items-start space-x-6">
                     <div className="flex-shrink-0 mt-2">
-                      <MapPin className="h-12 w-12 text-blue-600" />
+                      <MapPin
+                        aria-hidden="true"
+                        className="h-12 w-12 text-blue-600"
+                      />
                     </div>
                     <div>
                       <p className="text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-2">
                         {t.address}
                       </p>
-                      <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                      <address className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed not-italic">
                         {CONTACT_INFO.address.street}
                         <br />
                         {CONTACT_INFO.address.city}
-                      </p>
+                      </address>
                     </div>
                   </div>
                 </div>

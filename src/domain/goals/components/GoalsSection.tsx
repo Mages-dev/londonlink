@@ -20,13 +20,20 @@ export function GoalsSection({ currentLanguage }: GoalsSectionProps) {
   const t = goalsTranslations[currentLanguage];
 
   return (
-    <section id="goals" className="section-bg-hero relative overflow-hidden">
+    <section
+      id="goals"
+      aria-labelledby="goals-heading"
+      className="section-bg-hero relative overflow-hidden"
+    >
       {/* Main Goals Section - Uses parent background */}
       <div className="relative py-16">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Title */}
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight max-w-4xl mx-auto">
+            <h2
+              id="goals-heading"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight max-w-4xl mx-auto"
+            >
               {t.title}
             </h2>
             <p className="text-lg md:text-xl text-blue-100 leading-relaxed max-w-2xl mx-auto">

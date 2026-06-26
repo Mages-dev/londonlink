@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 import { Language } from '@/types';
 import { galleryTranslations } from '../translations';
 import type { GalleryImage } from '../hooks/useGallery';
@@ -30,27 +31,84 @@ export function GalleryModal({
   currentLanguage,
 }: GalleryModalProps) {
   const t = galleryTranslations[currentLanguage];
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   // Format counter text
   const counterText = t.imageCounter
     .replace('{current}', (currentIndex + 1).toString())
     .replace('{total}', totalImages.toString());
 
+  // Dialog behaviour: scroll lock, focus management, keyboard, focus trap.
+  // Self-contained so any caller gets an accessible modal (WCAG 2.1.2 / 4.1.2).
+  useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = 'hidden';
+
+    const dialog = dialogRef.current;
+    const getFocusable = () =>
+      Array.from(
+        dialog?.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        ) ?? [],
+      ).filter((el) => !el.hasAttribute('disabled'));
+
+    // Move focus into the dialog on open.
+    getFocusable()[0]?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        onClose();
+        return;
+      }
+      if (event.key === 'ArrowLeft' && canGoPrevious) {
+        onPrevious();
+        return;
+      }
+      if (event.key === 'ArrowRight' && canGoNext) {
+        onNext();
+        return;
+      }
+      if (event.key === 'Tab') {
+        const focusable = getFocusable();
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+      previouslyFocused?.focus();
+    };
+  }, [onClose, onPrevious, onNext, canGoPrevious, canGoNext]);
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 animate-fade-in">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 cursor-pointer"
-        onClick={onClose}
-        aria-label={t.closeGallery}
-      />
+      {/* Backdrop (click to close; keyboard users use Esc / close button) */}
+      <div className="absolute inset-0 cursor-pointer" onClick={onClose} />
 
       {/* Modal Content */}
-      <div className="relative w-full min-w-[320px] max-w-[95vw] lg:max-w-[85vw] xl:max-w-7xl max-h-full mx-2 sm:mx-4 animate-scale-in">
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="gallery-modal-title"
+        className="relative w-full min-w-[320px] max-w-[95vw] lg:max-w-[85vw] xl:max-w-7xl max-h-full mx-2 sm:mx-4 animate-scale-in"
+      >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 z-20 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full p-3 shadow-xl border-2 border-gray-200 dark:border-gray-600 transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-500"
+          className="absolute top-2 right-2 z-20 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full p-3 shadow-xl border-2 border-gray-200 dark:border-gray-600 transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary"
           aria-label={t.closeGallery}
         >
           <svg
@@ -130,7 +188,10 @@ export function GalleryModal({
           <div className="p-4 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                <h3
+                  id="gallery-modal-title"
+                  className="text-lg font-semibold text-gray-900 dark:text-white"
+                >
                   {image.title}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">

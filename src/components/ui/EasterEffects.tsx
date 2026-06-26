@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useReducedMotion } from '@/hooks';
 
 interface FloatingElement {
   id: number;
@@ -26,6 +27,7 @@ interface SpringElement {
 
 export default function EasterEffects() {
   const { commemorativeTheme } = useTheme();
+  const prefersReducedMotion = useReducedMotion();
   const [elements, setElements] = useState<FloatingElement[]>([]);
   const [springElements, setSpringElements] = useState<SpringElement[]>([]);
   const [mounted, setMounted] = useState(false);
@@ -140,7 +142,7 @@ export default function EasterEffects() {
 
   // Animate floating elements
   useEffect(() => {
-    if (!isEasterTheme || elements.length === 0) return;
+    if (!isEasterTheme || elements.length === 0 || prefersReducedMotion) return;
 
     const animateElements = () => {
       setElements((prevElements) =>
@@ -159,11 +161,12 @@ export default function EasterEffects() {
 
     const interval = setInterval(animateElements, 33); // 30 FPS
     return () => clearInterval(interval);
-  }, [isEasterTheme, elements.length]);
+  }, [isEasterTheme, elements.length, prefersReducedMotion]);
 
   // Animate spring elements
   useEffect(() => {
-    if (!isEasterTheme || springElements.length === 0) return;
+    if (!isEasterTheme || springElements.length === 0 || prefersReducedMotion)
+      return;
 
     const animateSpringElements = () => {
       setSpringElements((prevElements) =>
@@ -183,7 +186,7 @@ export default function EasterEffects() {
 
     const interval = setInterval(animateSpringElements, 60); // ~16 FPS
     return () => clearInterval(interval);
-  }, [isEasterTheme, springElements.length]);
+  }, [isEasterTheme, springElements.length, prefersReducedMotion]);
 
   // Don't render anything if not mounted or not Easter theme
   if (!mounted || !isEasterTheme) {

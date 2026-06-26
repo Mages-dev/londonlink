@@ -23,11 +23,18 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
   const horizontalImages = GALLERY_IMAGES.slice(8, 12); // Bottom horizontal part of L (base)
 
   return (
-    <section id="gallery" className="section-bg-contact py-16 pb-16">
+    <section
+      id="gallery"
+      aria-labelledby="gallery-heading"
+      className="section-bg-contact py-16 pb-16"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Community Header - Showcasing student success stories and transformations */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2
+            id="gallery-heading"
+            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
+          >
             {t.title}
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -88,9 +95,11 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
               };
 
               return (
-                <div
+                <button
                   key={image.id}
-                  className={`${getGridPosition()} ${getBorderClass()} relative cursor-pointer group animate-fade-in-up`}
+                  type="button"
+                  aria-label={image.alt}
+                  className={`${getGridPosition()} ${getBorderClass()} relative cursor-pointer group animate-fade-in-up focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`}
                   onMouseEnter={() => setHoveredImage(image.id)}
                   onMouseLeave={() => setHoveredImage(null)}
                   onClick={() => setSelectedImage(image.id)}
@@ -113,7 +122,7 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
                       hoveredImage === image.id ? 'opacity-20' : 'opacity-0'
                     }`}
                   />
-                </div>
+                </button>
               );
             })}
 
@@ -150,9 +159,11 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
               };
 
               return (
-                <div
+                <button
                   key={image.id}
-                  className={`${getGridPosition()} ${getBorderClass()} relative cursor-pointer group animate-fade-in-up`}
+                  type="button"
+                  aria-label={image.alt}
+                  className={`${getGridPosition()} ${getBorderClass()} relative cursor-pointer group animate-fade-in-up focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`}
                   onMouseEnter={() => setHoveredImage(image.id)}
                   onMouseLeave={() => setHoveredImage(null)}
                   onClick={() => setSelectedImage(image.id)}
@@ -175,7 +186,7 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
                       hoveredImage === image.id ? 'opacity-20' : 'opacity-0'
                     }`}
                   />
-                </div>
+                </button>
               );
             })}
           </div>

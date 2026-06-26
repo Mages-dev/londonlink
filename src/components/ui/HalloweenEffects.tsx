@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useMemo } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useReducedMotion } from '@/hooks';
 
 interface FloatingElement {
   id: number;
@@ -16,6 +17,7 @@ interface FloatingElement {
 
 export default function HalloweenEffects() {
   const { commemorativeTheme } = useTheme();
+  const prefersReducedMotion = useReducedMotion();
   const [elements, setElements] = useState<FloatingElement[]>([]);
   const [mounted, setMounted] = useState(false);
 
@@ -70,7 +72,8 @@ export default function HalloweenEffects() {
   }, [mounted, isHalloweenTheme, halloweenEmojis]);
 
   useEffect(() => {
-    if (!isHalloweenTheme || elements.length === 0) return;
+    if (!isHalloweenTheme || elements.length === 0 || prefersReducedMotion)
+      return;
 
     const animateElements = () => {
       setElements((prevElements) =>
@@ -89,7 +92,7 @@ export default function HalloweenEffects() {
 
     const interval = setInterval(animateElements, 50); // 20 FPS
     return () => clearInterval(interval);
-  }, [isHalloweenTheme, elements.length]);
+  }, [isHalloweenTheme, elements.length, prefersReducedMotion]);
 
   if (!mounted || !isHalloweenTheme) {
     return null;

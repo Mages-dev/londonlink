@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useReducedMotion } from '@/hooks';
 
 interface FloatingElement {
   id: number;
@@ -26,6 +27,7 @@ interface HeartPetal {
 
 export default function ValentineEffects() {
   const { commemorativeTheme } = useTheme();
+  const prefersReducedMotion = useReducedMotion();
   const [elements, setElements] = useState<FloatingElement[]>([]);
   const [petals, setPetals] = useState<HeartPetal[]>([]);
   const [mounted, setMounted] = useState(false);
@@ -131,7 +133,8 @@ export default function ValentineEffects() {
 
   // Animate floating elements
   useEffect(() => {
-    if (!isValentineTheme || elements.length === 0) return;
+    if (!isValentineTheme || elements.length === 0 || prefersReducedMotion)
+      return;
 
     const animateElements = () => {
       setElements((prevElements) =>
@@ -150,11 +153,12 @@ export default function ValentineEffects() {
 
     const interval = setInterval(animateElements, 33); // 30 FPS
     return () => clearInterval(interval);
-  }, [isValentineTheme, elements.length]);
+  }, [isValentineTheme, elements.length, prefersReducedMotion]);
 
   // Animate heart petals
   useEffect(() => {
-    if (!isValentineTheme || petals.length === 0) return;
+    if (!isValentineTheme || petals.length === 0 || prefersReducedMotion)
+      return;
 
     const animatePetals = () => {
       setPetals((prevPetals) =>
@@ -174,7 +178,7 @@ export default function ValentineEffects() {
 
     const interval = setInterval(animatePetals, 50); // 20 FPS
     return () => clearInterval(interval);
-  }, [isValentineTheme, petals.length]);
+  }, [isValentineTheme, petals.length, prefersReducedMotion]);
 
   // Don't render anything if not mounted or not Valentine theme
   if (!mounted || !isValentineTheme) {

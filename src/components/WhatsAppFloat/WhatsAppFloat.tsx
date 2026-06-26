@@ -57,8 +57,13 @@ export function WhatsAppFloat({ currentLanguage }: WhatsAppFloatProps) {
           <button
             onClick={() => setShowTooltip(false)}
             className="whatsapp-float__tooltip-close"
+            aria-label={
+              currentLanguage === 'pt'
+                ? 'Fechar notificação'
+                : 'Close notification'
+            }
           >
-            <X size={14} />
+            <X size={14} aria-hidden="true" />
           </button>
           {/* Arrow */}
           <div className="whatsapp-float__tooltip-arrow"></div>

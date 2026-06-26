@@ -9,7 +9,7 @@ import '../lib/themes/halloween.css';
 import '../lib/themes/christmas.css';
 import '../lib/themes/new-year.css';
 import { ThemeProvider, LanguageProvider } from '@/contexts';
-import { LanguageSync } from '@/components';
+import { LanguageSync, SkipLink } from '@/components';
 
 // Import test utilities in development
 if (process.env.NODE_ENV === 'development') {
@@ -166,6 +166,7 @@ export default function RootLayout({
         <ThemeProvider>
           <LanguageProvider>
             <LanguageSync />
+            <SkipLink />
             {children}
           </LanguageProvider>
         </ThemeProvider>

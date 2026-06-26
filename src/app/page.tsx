@@ -32,13 +32,15 @@ export default function Home() {
         onLanguageChange={setLanguage}
       />
 
-      <HeroSection currentLanguage={language} />
-      <AboutSection currentLanguage={language} />
-      <GoalsSection currentLanguage={language} />
-      <BooksSection currentLanguage={language} />
-      <FeedbackAlternatingSection currentLanguage={language} />
-      <GallerySection currentLanguage={language} />
-      <ContactSection currentLanguage={language} />
+      <main id="main-content" className="flex-1 flex flex-col">
+        <HeroSection currentLanguage={language} />
+        <AboutSection currentLanguage={language} />
+        <GoalsSection currentLanguage={language} />
+        <BooksSection currentLanguage={language} />
+        <FeedbackAlternatingSection currentLanguage={language} />
+        <GallerySection currentLanguage={language} />
+        <ContactSection currentLanguage={language} />
+      </main>
       <Footer />
 
       {/* Seasonal effects overlay */}

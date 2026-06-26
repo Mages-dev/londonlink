@@ -57,7 +57,10 @@ export function OptimizedImage({
       <div className="relative overflow-hidden">
         <Image {...imageProps} fill alt={optimizedAlt} />
         {!isLoaded && (
-          <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse" />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"
+          />
         )}
       </div>
     );
@@ -68,12 +71,16 @@ export function OptimizedImage({
       <Image {...imageProps} width={width} height={height} alt={optimizedAlt} />
       {!isLoaded && (
         <div
+          aria-hidden="true"
           className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"
           style={{ width, height }}
         />
       )}
       {isError && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800">
+        <div
+          role="alert"
+          className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800"
+        >
           <span className="text-gray-500 text-sm">Failed to load image</span>
         </div>
       )}

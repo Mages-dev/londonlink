@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useReducedMotion } from '@/hooks';
 
 interface FloatingElement {
   id: number;
@@ -26,6 +27,7 @@ interface ConfettiPiece {
 
 export default function NewYearEffects() {
   const { commemorativeTheme } = useTheme();
+  const prefersReducedMotion = useReducedMotion();
   const [elements, setElements] = useState<FloatingElement[]>([]);
   const [confetti, setConfetti] = useState<ConfettiPiece[]>([]);
   const [mounted, setMounted] = useState(false);
@@ -131,7 +133,8 @@ export default function NewYearEffects() {
 
   // Animate floating elements
   useEffect(() => {
-    if (!isNewYearTheme || elements.length === 0) return;
+    if (!isNewYearTheme || elements.length === 0 || prefersReducedMotion)
+      return;
 
     const animateElements = () => {
       setElements((prevElements) =>
@@ -150,11 +153,12 @@ export default function NewYearEffects() {
 
     const interval = setInterval(animateElements, 33); // 30 FPS
     return () => clearInterval(interval);
-  }, [isNewYearTheme, elements.length]);
+  }, [isNewYearTheme, elements.length, prefersReducedMotion]);
 
   // Animate confetti
   useEffect(() => {
-    if (!isNewYearTheme || confetti.length === 0) return;
+    if (!isNewYearTheme || confetti.length === 0 || prefersReducedMotion)
+      return;
 
     const animateConfetti = () => {
       setConfetti((prevConfetti) =>
@@ -173,7 +177,7 @@ export default function NewYearEffects() {
 
     const interval = setInterval(animateConfetti, 50); // 20 FPS
     return () => clearInterval(interval);
-  }, [isNewYearTheme, confetti.length]);
+  }, [isNewYearTheme, confetti.length, prefersReducedMotion]);
 
   // Don't render anything if not mounted or not New Year theme
   if (!mounted || !isNewYearTheme) {

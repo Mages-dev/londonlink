@@ -15,24 +15,40 @@ export function FeedbackAlternatingSection({
   const t = feedbackTranslations[currentLanguage];
 
   const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <span
-        key={i}
-        className={`star-icon text-2xl ${
-          i < rating ? 'text-yellow-400' : 'text-gray-300'
-        }`}
-      >
-        ★
+    const label =
+      currentLanguage === 'pt'
+        ? `${rating} de 5 estrelas`
+        : `${rating} out of 5 stars`;
+    return (
+      <span role="img" aria-label={label}>
+        {Array.from({ length: 5 }, (_, i) => (
+          <span
+            key={i}
+            aria-hidden="true"
+            className={`star-icon text-2xl ${
+              i < rating ? 'text-yellow-400' : 'text-gray-300'
+            }`}
+          >
+            ★
+          </span>
+        ))}
       </span>
-    ));
+    );
   };
 
   return (
-    <section id="feedback" className="relative py-16 section-bg-hero">
+    <section
+      id="feedback"
+      aria-labelledby="feedback-heading"
+      className="relative py-16 section-bg-hero"
+    >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 lg:mb-6 leading-tight">
+          <h2
+            id="feedback-heading"
+            className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 lg:mb-6 leading-tight"
+          >
             {t.title}
           </h2>
           <p className="text-lg md:text-xl lg:text-2xl text-white font-light mb-4">
@@ -72,6 +88,7 @@ export function FeedbackAlternatingSection({
                   ) : (
                     <div className="w-full max-w-[203px] sm:max-w-[270px] md:max-w-[230px] h-[300px] sm:h-[400px] md:h-[340px] bg-gray-500 rounded-lg shadow-lg border-4 border-white transition-all duration-500 ease-in-out flex items-center justify-center">
                       <svg
+                        aria-hidden="true"
                         className="w-24 sm:w-32 md:w-28 h-24 sm:h-32 md:h-28 text-white"
                         fill="currentColor"
                         viewBox="0 0 20 20"

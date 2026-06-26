@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useReducedMotion } from '@/hooks';
 
 interface FloatingElement {
   id: number;
@@ -15,6 +16,7 @@ interface FloatingElement {
 
 export default function ChristmasEffects() {
   const { commemorativeTheme } = useTheme();
+  const prefersReducedMotion = useReducedMotion();
   const [elements, setElements] = useState<FloatingElement[]>([]);
   const [mounted, setMounted] = useState(false);
 
@@ -83,7 +85,8 @@ export default function ChristmasEffects() {
   }, [mounted, isChristmasTheme, createElements]);
 
   useEffect(() => {
-    if (!isChristmasTheme || elements.length === 0) return;
+    if (!isChristmasTheme || elements.length === 0 || prefersReducedMotion)
+      return;
 
     const animateElements = () => {
       setElements((prevElements) =>
@@ -102,7 +105,7 @@ export default function ChristmasEffects() {
 
     const interval = setInterval(animateElements, 33); // 30 FPS (mais fluido, era 50ms/20 FPS)
     return () => clearInterval(interval);
-  }, [isChristmasTheme, elements.length]);
+  }, [isChristmasTheme, elements.length, prefersReducedMotion]);
 
   // Don't render anything if not mounted or not Christmas theme
   if (!mounted || !isChristmasTheme) {
