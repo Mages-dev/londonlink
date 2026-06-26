@@ -54,7 +54,9 @@ export default function ThemeSelector({
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 shadow-sm hover:shadow-md"
         aria-label={
-          currentLanguage === 'pt' ? 'Seletor de tema' : 'Theme selector'
+          currentLanguage === 'pt'
+            ? `${currentConfig.displayName.pt} — seletor de tema`
+            : `${currentConfig.displayName.en} — theme selector`
         }
         aria-expanded={isOpen}
       >

@@ -241,8 +241,8 @@ export default function Header({
               className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-all duration-200 shadow-sm hover:shadow-md"
               aria-label={
                 currentLanguage === 'en'
-                  ? 'Switch to Portuguese'
-                  : 'Mudar para Inglês'
+                  ? 'EN — switch to Portuguese'
+                  : 'PT — mudar para inglês'
               }
             >
               <div className="w-6 h-6 rounded-full overflow-hidden shadow-sm">

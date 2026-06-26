@@ -30,7 +30,7 @@ export function Footer() {
         </div>
         <div className="text-gray-400 text-md space-y-1">
           <p>© {currentYear} LondonLink. All rights reserved.</p>
-          <p className="text-gray-500 text-sm">{version}</p>
+          <p className="text-gray-400 text-sm">{version}</p>
         </div>
       </div>
     </footer>
