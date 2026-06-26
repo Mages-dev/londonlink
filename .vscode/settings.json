@@ -1,0 +1,7 @@
+{
+  // Tailwind CSS IntelliSense — keep correctness lints (cssConflict, invalid*),
+  // but silence the canonical-class style nag. We intentionally use explicit
+  // arbitrary pixel values (e.g. h-[600px]) for readability over their scale
+  // equivalents (h-150). This is a suggestion, not an error.
+  "tailwindCSS.lint.suggestCanonicalClasses": "ignore"
+}
