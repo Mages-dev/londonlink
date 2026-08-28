@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useState } from "react";
-import { Language } from "@/types";
-import { galleryTranslations } from "../translations";
-import { GALLERY_IMAGES } from "../constants/images";
-import { GalleryModal } from "./GalleryModal";
+import Image from 'next/image';
+import { useState } from 'react';
+import { Language } from '@/types';
+import { galleryTranslations } from '../translations';
+import { GALLERY_IMAGES } from '../constants/images';
+import { GalleryModal } from './GalleryModal';
 // Import gallery styles
-import "../styles";
+import '../styles';
 
 interface GallerySectionProps {
   currentLanguage: Language;
@@ -23,11 +23,18 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
   const horizontalImages = GALLERY_IMAGES.slice(8, 12); // Bottom horizontal part of L (base)
 
   return (
-    <section id="gallery" className="section-bg-contact py-16 pb-16">
+    <section
+      id="gallery"
+      aria-labelledby="gallery-heading"
+      className="section-bg-contact py-16 pb-16"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Community Header - Showcasing student success stories and transformations */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2
+            id="gallery-heading"
+            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
+          >
             {t.title}
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -44,53 +51,55 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
               const getGridPosition = () => {
                 switch (index) {
                   case 0:
-                    return "col-span-1 row-span-1 col-start-1 row-start-1";
+                    return 'col-span-1 row-span-1 col-start-1 row-start-1';
                   case 1:
-                    return "col-span-1 row-span-1 col-start-2 row-start-1";
+                    return 'col-span-1 row-span-1 col-start-2 row-start-1';
                   case 2:
-                    return "col-span-1 row-span-1 col-start-1 row-start-2";
+                    return 'col-span-1 row-span-1 col-start-1 row-start-2';
                   case 3:
-                    return "col-span-1 row-span-1 col-start-2 row-start-2";
+                    return 'col-span-1 row-span-1 col-start-2 row-start-2';
                   case 4:
-                    return "col-span-1 row-span-1 col-start-1 row-start-3";
+                    return 'col-span-1 row-span-1 col-start-1 row-start-3';
                   case 5:
-                    return "col-span-1 row-span-1 col-start-2 row-start-3";
+                    return 'col-span-1 row-span-1 col-start-2 row-start-3';
                   case 6:
-                    return "col-span-1 row-span-1 col-start-1 row-start-4";
+                    return 'col-span-1 row-span-1 col-start-1 row-start-4';
                   case 7:
-                    return "col-span-1 row-span-1 col-start-2 row-start-4";
+                    return 'col-span-1 row-span-1 col-start-2 row-start-4';
                   default:
-                    return "";
+                    return '';
                 }
               };
 
               const getBorderClass = () => {
                 switch (index) {
                   case 0: // Imagem 1: topo + esquerda
-                    return "l-border-top-left";
+                    return 'l-border-top-left';
                   case 1: // Imagem 2: topo + direita
-                    return "l-border-top-right";
+                    return 'l-border-top-right';
                   case 2: // Imagem 3: esquerda
-                    return "l-border-left";
+                    return 'l-border-left';
                   case 3: // Imagem 4: direita
-                    return "l-border-right";
+                    return 'l-border-right';
                   case 4: // Imagem 5: esquerda
-                    return "l-border-left";
+                    return 'l-border-left';
                   case 5: // Imagem 6: direita
-                    return "l-border-right";
+                    return 'l-border-right';
                   case 6: // Imagem 7: esquerda
-                    return "l-border-left";
+                    return 'l-border-left';
                   case 7: // Imagem 8: direita
-                    return "l-border-right";
+                    return 'l-border-right';
                   default:
-                    return "";
+                    return '';
                 }
               };
 
               return (
-                <div
+                <button
                   key={image.id}
-                  className={`${getGridPosition()} ${getBorderClass()} relative cursor-pointer group animate-fade-in-up`}
+                  type="button"
+                  aria-label={image.alt}
+                  className={`${getGridPosition()} ${getBorderClass()} relative cursor-pointer group animate-fade-in-up focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`}
                   onMouseEnter={() => setHoveredImage(image.id)}
                   onMouseLeave={() => setHoveredImage(null)}
                   onClick={() => setSelectedImage(image.id)}
@@ -101,7 +110,7 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
                       alt={image.alt}
                       fill
                       className={`object-cover transition-transform duration-300 ${
-                        hoveredImage === image.id ? "scale-110" : "scale-100"
+                        hoveredImage === image.id ? 'scale-110' : 'scale-100'
                       }`}
                       sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                     />
@@ -110,10 +119,10 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
                   {/* Overlay */}
                   <div
                     className={`absolute inset-0 bg-black transition-opacity duration-300 ${
-                      hoveredImage === image.id ? "opacity-20" : "opacity-0"
+                      hoveredImage === image.id ? 'opacity-20' : 'opacity-0'
                     }`}
                   />
-                </div>
+                </button>
               );
             })}
 
@@ -122,37 +131,39 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
               const getGridPosition = () => {
                 switch (index) {
                   case 0:
-                    return "col-span-1 row-span-1 col-start-1 row-start-5";
+                    return 'col-span-1 row-span-1 col-start-1 row-start-5';
                   case 1:
-                    return "col-span-1 row-span-1 col-start-2 row-start-5";
+                    return 'col-span-1 row-span-1 col-start-2 row-start-5';
                   case 2:
-                    return "col-span-1 row-span-1 col-start-3 row-start-5";
+                    return 'col-span-1 row-span-1 col-start-3 row-start-5';
                   case 3:
-                    return "col-span-1 row-span-1 col-start-4 row-start-5";
+                    return 'col-span-1 row-span-1 col-start-4 row-start-5';
                   default:
-                    return "";
+                    return '';
                 }
               };
 
               const getBorderClass = () => {
                 switch (index) {
                   case 0: // Imagem 9: esquerda + fundo
-                    return "l-border-left-bottom";
+                    return 'l-border-left-bottom';
                   case 1: // Imagem 10: fundo
-                    return "l-border-bottom";
+                    return 'l-border-bottom';
                   case 2: // Imagem 11: topo + fundo
-                    return "l-border-top-bottom";
+                    return 'l-border-top-bottom';
                   case 3: // Imagem 12: topo + direita + fundo
-                    return "l-border-top-right-bottom";
+                    return 'l-border-top-right-bottom';
                   default:
-                    return "";
+                    return '';
                 }
               };
 
               return (
-                <div
+                <button
                   key={image.id}
-                  className={`${getGridPosition()} ${getBorderClass()} relative cursor-pointer group animate-fade-in-up`}
+                  type="button"
+                  aria-label={image.alt}
+                  className={`${getGridPosition()} ${getBorderClass()} relative cursor-pointer group animate-fade-in-up focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`}
                   onMouseEnter={() => setHoveredImage(image.id)}
                   onMouseLeave={() => setHoveredImage(null)}
                   onClick={() => setSelectedImage(image.id)}
@@ -163,7 +174,7 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
                       alt={image.alt}
                       fill
                       className={`object-cover transition-transform duration-300 ${
-                        hoveredImage === image.id ? "scale-110" : "scale-100"
+                        hoveredImage === image.id ? 'scale-110' : 'scale-100'
                       }`}
                       sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                     />
@@ -172,10 +183,10 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
                   {/* Overlay */}
                   <div
                     className={`absolute inset-0 bg-black transition-opacity duration-300 ${
-                      hoveredImage === image.id ? "opacity-20" : "opacity-0"
+                      hoveredImage === image.id ? 'opacity-20' : 'opacity-0'
                     }`}
                   />
-                </div>
+                </button>
               );
             })}
           </div>
@@ -185,10 +196,10 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
         {selectedImage &&
           (() => {
             const currentImage = GALLERY_IMAGES.find(
-              (img) => img.id === selectedImage
+              (img) => img.id === selectedImage,
             );
             const currentIndex = GALLERY_IMAGES.findIndex(
-              (img) => img.id === selectedImage
+              (img) => img.id === selectedImage,
             );
 
             if (!currentImage) return null;

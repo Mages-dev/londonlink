@@ -41,8 +41,11 @@
 
 /* Glowing effect for Halloween elements */
 .halloween-glow {
-  box-shadow: 0 0 5px var(--special-accent), 0 0 10px var(--special-accent),
-    0 0 15px var(--special-accent), 0 0 20px var(--special-accent);
+  box-shadow:
+    0 0 5px var(--special-accent),
+    0 0 10px var(--special-accent),
+    0 0 15px var(--special-accent),
+    0 0 20px var(--special-accent);
   animation: halloween-pulse 2s ease-in-out infinite alternate;
 }
 
@@ -58,8 +61,10 @@
 
 /* Spooky shadow effect */
 .halloween-shadow {
-  box-shadow: 0 4px 8px rgba(124, 45, 18, 0.3),
-    0 8px 16px rgba(168, 85, 247, 0.2), inset 0 1px 0 rgba(251, 191, 36, 0.1);
+  box-shadow:
+    0 4px 8px rgba(124, 45, 18, 0.3),
+    0 8px 16px rgba(168, 85, 247, 0.2),
+    inset 0 1px 0 rgba(251, 191, 36, 0.1);
 }
 
 /* Halloween Animations */
@@ -103,12 +108,17 @@
 @keyframes halloween-spooky-glow {
   0%,
   100% {
-    box-shadow: 0 0 5px var(--special), 0 0 10px var(--special),
+    box-shadow:
+      0 0 5px var(--special),
+      0 0 10px var(--special),
       0 0 15px var(--special);
   }
   50% {
-    box-shadow: 0 0 10px var(--special), 0 0 20px var(--special),
-      0 0 30px var(--special), 0 0 40px var(--special);
+    box-shadow:
+      0 0 10px var(--special),
+      0 0 20px var(--special),
+      0 0 30px var(--special),
+      0 0 40px var(--special);
   }
 }
 
@@ -126,13 +136,14 @@
 }
 
 .theme-halloween .header-halloween::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at 20% 80%,
       rgba(168, 85, 247, 0.3) 0%,
       transparent 50%
@@ -159,7 +170,7 @@
 }
 
 .theme-halloween .halloween-card::before {
-  content: "";
+  content: '';
   position: absolute;
   top: -50%;
   left: -50%;
@@ -183,7 +194,8 @@
 
 .theme-halloween .halloween-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(168, 85, 247, 0.5),
+  box-shadow:
+    0 20px 40px rgba(168, 85, 247, 0.5),
     0 0 30px rgba(251, 191, 36, 0.4);
 }
 
@@ -207,14 +219,17 @@
 /* Halloween Text Effects */
 .theme-halloween .halloween-text-glow {
   color: var(--special-accent);
-  text-shadow: 0 0 5px var(--special-accent), 0 0 10px var(--special-accent),
+  text-shadow:
+    0 0 5px var(--special-accent),
+    0 0 10px var(--special-accent),
     0 0 15px var(--special-accent);
   animation: halloween-flicker 2s ease-in-out infinite;
 }
 
 /* Halloween Background Patterns */
 .theme-halloween .halloween-bg-pattern {
-  background-image: radial-gradient(
+  background-image:
+    radial-gradient(
       circle at 25% 25%,
       rgba(168, 85, 247, 0.1) 0%,
       transparent 50%
@@ -238,7 +253,7 @@
 }
 
 .theme-halloween .halloween-nav-item.active::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -4px;
   left: 0;
@@ -265,7 +280,9 @@
 /* Responsive Halloween adjustments */
 @media (max-width: 768px) {
   .halloween-glow {
-    box-shadow: 0 0 3px var(--special-accent), 0 0 6px var(--special-accent);
+    box-shadow:
+      0 0 3px var(--special-accent),
+      0 0 6px var(--special-accent);
   }
 
   .theme-halloween .halloween-card:hover {

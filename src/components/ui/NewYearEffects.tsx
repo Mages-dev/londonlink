@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useReducedMotion } from '@/hooks';
 
 interface FloatingElement {
   id: number;
@@ -21,41 +22,45 @@ interface ConfettiPiece {
   size: number;
   speed: number;
   rotation: number;
+  borderRadius: string;
 }
 
 export default function NewYearEffects() {
   const { commemorativeTheme } = useTheme();
+  const prefersReducedMotion = useReducedMotion();
   const [elements, setElements] = useState<FloatingElement[]>([]);
   const [confetti, setConfetti] = useState<ConfettiPiece[]>([]);
   const [mounted, setMounted] = useState(false);
 
-  const isNewYearTheme = commemorativeTheme === "new-year";
+  const isNewYearTheme = commemorativeTheme === 'new-year';
 
   // New Year emojis for floating effects (memoized to prevent re-creation)
   const newYearEmojis = useMemo(
-    () => ["🎆", "🎇", "🥂", "🍾", "🎊", "🎉", ""],
-    []
+    () => ['🎆', '🎇', '🥂', '🍾', '🎊', '🎉', ''],
+    [],
   );
 
   // Confetti colors
   const confettiColors = useMemo(
-    () => ["#d97706", "#f59e0b", "#eab308", "#6366f1", "#8b5cf6", "#f3f4f6"],
-    []
+    () => ['#d97706', '#f59e0b', '#eab308', '#6366f1', '#8b5cf6', '#f3f4f6'],
+    [],
   );
 
-  // Fixed positions for sparkles (memoized to prevent re-calculation)
-  const sparklePositions = useMemo(
-    () =>
-      Array.from({ length: 20 }, (_, i) => ({
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-        emoji: i % 3 === 0 ? "✨" : i % 3 === 1 ? "🌟" : "💫",
-      })),
-    []
-  );
+  // Random sparkle positions, generated client-side after mount so render
+  // stays pure (react-hooks/purity) and SSR output is deterministic.
+  const [sparklePositions, setSparklePositions] = useState<
+    Array<{ left: number; top: number; emoji: string }>
+  >([]);
 
   useEffect(() => {
     setMounted(true);
+    setSparklePositions(
+      Array.from({ length: 20 }, (_, i) => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        emoji: i % 3 === 0 ? '✨' : i % 3 === 1 ? '🌟' : '💫',
+      })),
+    );
   }, []);
 
   // Create floating elements
@@ -103,6 +108,7 @@ export default function NewYearEffects() {
         size: Math.random() * 8 + 4, // 4-12px
         speed: Math.random() * 3 + 2, // 2-5 speed
         rotation: Math.random() * 360,
+        borderRadius: Math.random() > 0.5 ? '50%' : '0%',
       });
     }
 
@@ -121,13 +127,14 @@ export default function NewYearEffects() {
       createConfetti();
     };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [mounted, isNewYearTheme, createElements, createConfetti]);
 
   // Animate floating elements
   useEffect(() => {
-    if (!isNewYearTheme || elements.length === 0) return;
+    if (!isNewYearTheme || elements.length === 0 || prefersReducedMotion)
+      return;
 
     const animateElements = () => {
       setElements((prevElements) =>
@@ -140,17 +147,18 @@ export default function NewYearEffects() {
             y: -50,
             x: Math.random() * window.innerWidth,
           }),
-        }))
+        })),
       );
     };
 
     const interval = setInterval(animateElements, 33); // 30 FPS
     return () => clearInterval(interval);
-  }, [isNewYearTheme, elements.length]);
+  }, [isNewYearTheme, elements.length, prefersReducedMotion]);
 
   // Animate confetti
   useEffect(() => {
-    if (!isNewYearTheme || confetti.length === 0) return;
+    if (!isNewYearTheme || confetti.length === 0 || prefersReducedMotion)
+      return;
 
     const animateConfetti = () => {
       setConfetti((prevConfetti) =>
@@ -163,13 +171,13 @@ export default function NewYearEffects() {
             y: -20,
             x: Math.random() * window.innerWidth,
           }),
-        }))
+        })),
       );
     };
 
     const interval = setInterval(animateConfetti, 50); // 20 FPS
     return () => clearInterval(interval);
-  }, [isNewYearTheme, confetti.length]);
+  }, [isNewYearTheme, confetti.length, prefersReducedMotion]);
 
   // Don't render anything if not mounted or not New Year theme
   if (!mounted || !isNewYearTheme) {
@@ -189,7 +197,7 @@ export default function NewYearEffects() {
               top: `${element.y}px`,
               fontSize: `${element.size}px`,
               transform: `rotate(${element.rotation}deg)`,
-              filter: "drop-shadow(0 0 4px rgba(217, 119, 6, 0.4))",
+              filter: 'drop-shadow(0 0 4px rgba(217, 119, 6, 0.4))',
             }}
           >
             {element.emoji}
@@ -210,7 +218,7 @@ export default function NewYearEffects() {
               height: `${piece.size}px`,
               backgroundColor: piece.color,
               transform: `rotate(${piece.rotation}deg)`,
-              borderRadius: Math.random() > 0.5 ? "50%" : "0%",
+              borderRadius: piece.borderRadius,
             }}
           />
         ))}
@@ -237,13 +245,13 @@ export default function NewYearEffects() {
             className="absolute text-2xl animate-bounce"
             style={{
               left: `${i * 20 + 15}%`,
-              bottom: "10px",
+              bottom: '10px',
               animationDelay: `${i * 0.8}s`,
               animationDuration: `${2 + i * 0.3}s`,
-              animationIterationCount: "infinite",
+              animationIterationCount: 'infinite',
             }}
           >
-            {i % 2 === 0 ? "🎆" : "🎇"}
+            {i % 2 === 0 ? '🎆' : '🎇'}
           </div>
         ))}
       </div>

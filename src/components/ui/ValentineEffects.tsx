@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useReducedMotion } from '@/hooks';
 
 interface FloatingElement {
   id: number;
@@ -26,37 +27,40 @@ interface HeartPetal {
 
 export default function ValentineEffects() {
   const { commemorativeTheme } = useTheme();
+  const prefersReducedMotion = useReducedMotion();
   const [elements, setElements] = useState<FloatingElement[]>([]);
   const [petals, setPetals] = useState<HeartPetal[]>([]);
   const [mounted, setMounted] = useState(false);
 
-  const isValentineTheme = commemorativeTheme === "valentine";
+  const isValentineTheme = commemorativeTheme === 'valentine';
 
   // Valentine emojis for floating effects (memoized to prevent re-creation)
   const valentineEmojis = useMemo(
-    () => ["💕", "💖", "💗", "💘", "💝", "💞", "💟", "❤️", "🌹", "💐"],
-    []
+    () => ['💕', '💖', '💗', '💘', '💝', '💞', '💟', '❤️', '🌹', '💐'],
+    [],
   );
 
   // Heart petals and romantic elements
   const heartPetals = useMemo(
-    () => ["🌹", "💐", "🌺", "🌸", "💕", "💖", "💗", "❤️"],
-    []
+    () => ['🌹', '💐', '🌺', '🌸', '💕', '💖', '💗', '❤️'],
+    [],
   );
 
-  // Fixed positions for love letters (memoized to prevent re-calculation)
-  const loveLetterPositions = useMemo(
-    () =>
-      Array.from({ length: 15 }, (_, i) => ({
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-        emoji: i % 2 === 0 ? "💌" : "💕",
-      })),
-    []
-  );
+  // Random love-letter positions, generated client-side after mount so render
+  // stays pure (react-hooks/purity) and SSR output is deterministic.
+  const [loveLetterPositions, setLoveLetterPositions] = useState<
+    Array<{ left: number; top: number; emoji: string }>
+  >([]);
 
   useEffect(() => {
     setMounted(true);
+    setLoveLetterPositions(
+      Array.from({ length: 15 }, (_, i) => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        emoji: i % 2 === 0 ? '💌' : '💕',
+      })),
+    );
   }, []);
 
   // Create floating elements
@@ -123,13 +127,14 @@ export default function ValentineEffects() {
       createPetals();
     };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [mounted, isValentineTheme, createElements, createPetals]);
 
   // Animate floating elements
   useEffect(() => {
-    if (!isValentineTheme || elements.length === 0) return;
+    if (!isValentineTheme || elements.length === 0 || prefersReducedMotion)
+      return;
 
     const animateElements = () => {
       setElements((prevElements) =>
@@ -142,17 +147,18 @@ export default function ValentineEffects() {
             y: -50,
             x: Math.random() * window.innerWidth,
           }),
-        }))
+        })),
       );
     };
 
     const interval = setInterval(animateElements, 33); // 30 FPS
     return () => clearInterval(interval);
-  }, [isValentineTheme, elements.length]);
+  }, [isValentineTheme, elements.length, prefersReducedMotion]);
 
   // Animate heart petals
   useEffect(() => {
-    if (!isValentineTheme || petals.length === 0) return;
+    if (!isValentineTheme || petals.length === 0 || prefersReducedMotion)
+      return;
 
     const animatePetals = () => {
       setPetals((prevPetals) =>
@@ -166,13 +172,13 @@ export default function ValentineEffects() {
             y: -20,
             x: Math.random() * window.innerWidth,
           }),
-        }))
+        })),
       );
     };
 
     const interval = setInterval(animatePetals, 50); // 20 FPS
     return () => clearInterval(interval);
-  }, [isValentineTheme, petals.length]);
+  }, [isValentineTheme, petals.length, prefersReducedMotion]);
 
   // Don't render anything if not mounted or not Valentine theme
   if (!mounted || !isValentineTheme) {
@@ -192,7 +198,7 @@ export default function ValentineEffects() {
               top: `${element.y}px`,
               fontSize: `${element.size}px`,
               transform: `rotate(${element.rotation}deg)`,
-              filter: "drop-shadow(0 0 3px rgba(225, 29, 72, 0.4))",
+              filter: 'drop-shadow(0 0 3px rgba(225, 29, 72, 0.4))',
             }}
           >
             {element.emoji}
@@ -211,7 +217,7 @@ export default function ValentineEffects() {
               top: `${petal.y}px`,
               fontSize: `${petal.size}px`,
               transform: `rotate(${petal.rotation}deg)`,
-              filter: "drop-shadow(0 0 2px rgba(236, 72, 153, 0.3))",
+              filter: 'drop-shadow(0 0 2px rgba(236, 72, 153, 0.3))',
             }}
           >
             {petal.emoji}
@@ -240,12 +246,12 @@ export default function ValentineEffects() {
             className="absolute text-2xl"
             style={{
               top: `${20 + i * 30}%`,
-              left: "-50px",
-              animationName: "valentine-arrow",
+              left: '-50px',
+              animationName: 'valentine-arrow',
               animationDuration: `${8 + i * 2}s`,
               animationDelay: `${i * 3}s`,
-              animationIterationCount: "infinite",
-              animationTimingFunction: "linear",
+              animationIterationCount: 'infinite',
+              animationTimingFunction: 'linear',
             }}
           >
             💘

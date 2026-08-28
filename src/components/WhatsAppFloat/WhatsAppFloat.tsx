@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { X } from "lucide-react";
-import Image from "next/image";
-import { CONTACT_INFO } from "@/domain/shared/constants/contacts";
-import { contactTranslations } from "@/domain/contact/translations";
-import "./WhatsAppFloat.css";
+import { useState, useEffect } from 'react';
+import { X } from 'lucide-react';
+import Image from 'next/image';
+import { CONTACT_INFO } from '@/domain/shared/constants/contacts';
+import { contactTranslations } from '@/domain/contact/translations';
+import './WhatsAppFloat.css';
 
 interface WhatsAppFloatProps {
-  currentLanguage: "en" | "pt";
+  currentLanguage: 'en' | 'pt';
 }
 
 export function WhatsAppFloat({ currentLanguage }: WhatsAppFloatProps) {
@@ -51,14 +51,19 @@ export function WhatsAppFloat({ currentLanguage }: WhatsAppFloatProps) {
       {/* Tooltip */}
       {showTooltip && (
         <div className="whatsapp-float__tooltip">
-          {currentLanguage === "pt"
-            ? "Fale conosco no WhatsApp!"
-            : "Chat with us on WhatsApp!"}
+          {currentLanguage === 'pt'
+            ? 'Fale conosco no WhatsApp!'
+            : 'Chat with us on WhatsApp!'}
           <button
             onClick={() => setShowTooltip(false)}
             className="whatsapp-float__tooltip-close"
+            aria-label={
+              currentLanguage === 'pt'
+                ? 'Fechar notificação'
+                : 'Close notification'
+            }
           >
-            <X size={14} />
+            <X size={14} aria-hidden="true" />
           </button>
           {/* Arrow */}
           <div className="whatsapp-float__tooltip-arrow"></div>
@@ -72,9 +77,9 @@ export function WhatsAppFloat({ currentLanguage }: WhatsAppFloatProps) {
         rel="noopener noreferrer"
         className="whatsapp-float__button"
         aria-label={
-          currentLanguage === "pt"
-            ? "Contato via WhatsApp"
-            : "Contact via WhatsApp"
+          currentLanguage === 'pt'
+            ? 'Contato via WhatsApp'
+            : 'Contact via WhatsApp'
         }
       >
         <Image

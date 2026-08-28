@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useReducedMotion } from '@/hooks';
 
 interface FloatingElement {
   id: number;
@@ -26,48 +27,50 @@ interface SpringElement {
 
 export default function EasterEffects() {
   const { commemorativeTheme } = useTheme();
+  const prefersReducedMotion = useReducedMotion();
   const [elements, setElements] = useState<FloatingElement[]>([]);
   const [springElements, setSpringElements] = useState<SpringElement[]>([]);
   const [mounted, setMounted] = useState(false);
 
-  const isEasterTheme = commemorativeTheme === "easter";
+  const isEasterTheme = commemorativeTheme === 'easter';
 
   // Easter emojis for floating effects (memoized to prevent re-creation)
   const easterEmojis = useMemo(
-    () => ["🐰", "🥚", "🐣", "🐤", "🥕", "🌷", "🌸", "🌺", "🦋", "🌿", "🌱"],
-    []
+    () => ['🐰', '🥚', '🐣', '🐤', '🥕', '🌷', '🌸', '🌺', '🦋', '🌿', '🌱'],
+    [],
   );
 
   // Spring elements (flowers, butterflies, etc.)
   const springEmojis = useMemo(
-    () => ["🌸", "🌷", "🌺", "🦋", "🌿", "🌱", "🌼", "🌻"],
-    []
+    () => ['🌸', '🌷', '🌺', '🦋', '🌿', '🌱', '🌼', '🌻'],
+    [],
   );
 
-  // Fixed positions for butterflies (memoized to prevent re-calculation)
-  const butterflyPositions = useMemo(
-    () =>
+  // Random decorative positions, generated client-side after mount so render
+  // stays pure (react-hooks/purity) and SSR output is deterministic.
+  const [butterflyPositions, setButterflyPositions] = useState<
+    Array<{ left: number; top: number }>
+  >([]);
+  const [gardenFlowerPositions, setGardenFlowerPositions] = useState<
+    Array<{ left: number; top: number; emoji: string }>
+  >([]);
+
+  useEffect(() => {
+    setMounted(true);
+    setButterflyPositions(
       Array.from({ length: 12 }, () => ({
         left: Math.random() * 100,
         top: Math.random() * 100,
       })),
-    []
-  );
-
-  // Fixed positions for garden flowers (memoized to prevent re-calculation)
-  const gardenFlowerPositions = useMemo(
-    () =>
+    );
+    setGardenFlowerPositions(
       Array.from({ length: 12 }, (_, i) => ({
         left: Math.random() * 100,
         top: Math.random() * 100,
         emoji:
-          i % 4 === 0 ? "🌷" : i % 4 === 1 ? "🌸" : i % 4 === 2 ? "🌺" : "🌼",
+          i % 4 === 0 ? '🌷' : i % 4 === 1 ? '🌸' : i % 4 === 2 ? '🌺' : '🌼',
       })),
-    []
-  );
-
-  useEffect(() => {
-    setMounted(true);
+    );
   }, []);
 
   // Create floating elements
@@ -133,13 +136,13 @@ export default function EasterEffects() {
       createSpringElements();
     };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [mounted, isEasterTheme, createElements, createSpringElements]);
 
   // Animate floating elements
   useEffect(() => {
-    if (!isEasterTheme || elements.length === 0) return;
+    if (!isEasterTheme || elements.length === 0 || prefersReducedMotion) return;
 
     const animateElements = () => {
       setElements((prevElements) =>
@@ -152,17 +155,18 @@ export default function EasterEffects() {
             y: -50,
             x: Math.random() * window.innerWidth,
           }),
-        }))
+        })),
       );
     };
 
     const interval = setInterval(animateElements, 33); // 30 FPS
     return () => clearInterval(interval);
-  }, [isEasterTheme, elements.length]);
+  }, [isEasterTheme, elements.length, prefersReducedMotion]);
 
   // Animate spring elements
   useEffect(() => {
-    if (!isEasterTheme || springElements.length === 0) return;
+    if (!isEasterTheme || springElements.length === 0 || prefersReducedMotion)
+      return;
 
     const animateSpringElements = () => {
       setSpringElements((prevElements) =>
@@ -176,13 +180,13 @@ export default function EasterEffects() {
             y: -20,
             x: Math.random() * window.innerWidth,
           }),
-        }))
+        })),
       );
     };
 
     const interval = setInterval(animateSpringElements, 60); // ~16 FPS
     return () => clearInterval(interval);
-  }, [isEasterTheme, springElements.length]);
+  }, [isEasterTheme, springElements.length, prefersReducedMotion]);
 
   // Don't render anything if not mounted or not Easter theme
   if (!mounted || !isEasterTheme) {
@@ -202,7 +206,7 @@ export default function EasterEffects() {
               top: `${element.y}px`,
               fontSize: `${element.size}px`,
               transform: `rotate(${element.rotation}deg)`,
-              filter: "drop-shadow(0 0 3px rgba(16, 185, 129, 0.3))",
+              filter: 'drop-shadow(0 0 3px rgba(16, 185, 129, 0.3))',
             }}
           >
             {element.emoji}
@@ -221,7 +225,7 @@ export default function EasterEffects() {
               top: `${element.y}px`,
               fontSize: `${element.size}px`,
               transform: `rotate(${element.rotation}deg)`,
-              filter: "drop-shadow(0 0 2px rgba(245, 158, 11, 0.3))",
+              filter: 'drop-shadow(0 0 2px rgba(245, 158, 11, 0.3))',
             }}
           >
             {element.emoji}
@@ -250,12 +254,12 @@ export default function EasterEffects() {
             className="absolute text-2xl"
             style={{
               top: `${30 + i * 25}%`,
-              left: "-50px",
-              animationName: "easter-egg-roll",
+              left: '-50px',
+              animationName: 'easter-egg-roll',
               animationDuration: `${10 + i * 2}s`,
               animationDelay: `${i * 4}s`,
-              animationIterationCount: "infinite",
-              animationTimingFunction: "linear",
+              animationIterationCount: 'infinite',
+              animationTimingFunction: 'linear',
             }}
           >
             🥚

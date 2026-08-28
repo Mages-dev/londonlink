@@ -2,5 +2,6 @@
 // This file will be updated as components are added
 
 // Global Components
-export { WhatsAppFloat } from "./WhatsAppFloat";
-export { LanguageSync } from "./LanguageSync";
+export { WhatsAppFloat } from './WhatsAppFloat';
+export { LanguageSync } from './LanguageSync';
+export { SkipLink } from './SkipLink';

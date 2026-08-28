@@ -34,7 +34,7 @@ function calculateEaster(year: number): { month: number; day: number } {
  */
 export function generateEasterDates(
   startYear: number,
-  yearsAhead: number = 10
+  yearsAhead: number = 10,
 ): Record<
   number,
   {
@@ -52,11 +52,11 @@ export function generateEasterDates(
 
   for (let year = startYear; year < startYear + yearsAhead; year++) {
     const easter = calculateEaster(year);
-    
+
     // Calculate start date (2 days before Easter Sunday)
     let startDay = easter.day - 2;
     let startMonth = easter.month;
-    
+
     // Handle month boundary (if Easter is on 1st or 2nd of month)
     if (startDay <= 0) {
       startMonth = easter.month - 1;
@@ -102,7 +102,7 @@ export function getCurrentEasterDates(): Record<
 export function shouldUpdateEasterDates(): boolean {
   const today = new Date();
   const isFirstMarch = today.getMonth() === 2 && today.getDate() === 1; // March = 2
-  
+
   // For now, always return false since we generate dates on-demand
   // This could be enhanced later for automatic yearly updates
   return isFirstMarch;
@@ -111,7 +111,11 @@ export function shouldUpdateEasterDates(): boolean {
 /**
  * Validate calculated Easter date (for testing)
  */
-export function validateEasterDate(year: number, expectedMonth: number, expectedDay: number): boolean {
+export function validateEasterDate(
+  year: number,
+  expectedMonth: number,
+  expectedDay: number,
+): boolean {
   const calculated = calculateEaster(year);
   return calculated.month === expectedMonth && calculated.day === expectedDay;
 }

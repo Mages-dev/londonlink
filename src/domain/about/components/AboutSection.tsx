@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { Language } from "@/types";
-import { aboutTranslations } from "../translations";
-import { ABOUT_IMAGES, ABOUT_IMAGE_ALTS } from "../constants/images";
+import Image from 'next/image';
+import { Language } from '@/types';
+import { aboutTranslations } from '../translations';
+import { ABOUT_IMAGES, ABOUT_IMAGE_ALTS } from '../constants/images';
 
 interface AboutSectionProps {
   currentLanguage: Language;
@@ -13,14 +13,21 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
   const t = aboutTranslations[currentLanguage];
 
   return (
-    <section id="about" className="section-bg-contact overflow-hidden">
+    <section
+      id="about"
+      aria-labelledby="about-heading"
+      className="section-bg-contact overflow-hidden"
+    >
       {/* Section 1 - Main Introduction */}
       <div className="relative py-16">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Text Content */}
             <div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight text-gray-900 dark:text-white">
+              <h2
+                id="about-heading"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight text-gray-900 dark:text-white"
+              >
                 {t.section1.title}
               </h2>
               <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
@@ -68,9 +75,9 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
 
             {/* Text Content - Right side on desktop */}
             <div className="order-1 lg:order-2 lg:col-span-3">
-              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8">
                 {t.section2.title}
-              </h3>
+              </h2>
               <div className="space-y-6">
                 {t.section2.paragraphs.map((paragraph, index) => (
                   <p
@@ -92,9 +99,9 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
           <div className="grid lg:grid-cols-5 gap-12 items-start">
             {/* Text Content */}
             <div className="lg:col-span-3">
-              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8">
                 {t.section3.title}
-              </h3>
+              </h2>
               <div className="space-y-6">
                 {t.section3.paragraphs.map((paragraph, index) => (
                   <p

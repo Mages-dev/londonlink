@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { useThemeSuggestions } from "@/contexts/ThemeContext";
-import { THEME_CONFIGS } from "@/lib/themes/configs";
-import { Language } from "@/types";
+import React, { useState, useEffect } from 'react';
+import { useThemeSuggestions } from '@/contexts/ThemeContext';
+import { THEME_CONFIGS } from '@/lib/themes/configs';
+import { Language } from '@/types';
 
 interface ThemeSuggestionProps {
   currentLanguage: Language;
@@ -60,16 +60,16 @@ export default function ThemeSuggestion({
     pt: {
       title: `Que tal experimentar o tema ${themeConfig.displayName.pt}?`,
       description: themeConfig.description.pt,
-      accept: "Ativar tema",
-      dismiss: "Não, obrigado",
-      seasonal: "Tema sazonal disponível!",
+      accept: 'Ativar tema',
+      dismiss: 'Não, obrigado',
+      seasonal: 'Tema sazonal disponível!',
     },
     en: {
       title: `How about trying the ${themeConfig.displayName.en} theme?`,
       description: themeConfig.description.en,
-      accept: "Activate theme",
-      dismiss: "No, thanks",
-      seasonal: "Seasonal theme available!",
+      accept: 'Activate theme',
+      dismiss: 'No, thanks',
+      seasonal: 'Seasonal theme available!',
     },
   };
 
@@ -80,12 +80,12 @@ export default function ThemeSuggestion({
       <div
         className={`max-w-sm bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 ${
           isAnimating
-            ? "transform translate-x-0 opacity-100 scale-100"
-            : "transform translate-x-full opacity-0 scale-95"
+            ? 'transform translate-x-0 opacity-100 scale-100'
+            : 'transform translate-x-full opacity-0 scale-95'
         }`}
       >
         {/* Header with seasonal indicator */}
-        <div className="bg-gradient-to-r from-orange-400 to-purple-500 px-4 py-2">
+        <div className="bg-linear-to-r from-orange-400 to-purple-500 px-4 py-2">
           <div className="flex items-center space-x-2">
             <span className="text-lg">{themeConfig.icon}</span>
             <span className="text-white text-sm font-medium">
@@ -145,7 +145,7 @@ export default function ThemeSuggestion({
         <button
           onClick={handleDismiss}
           className="absolute top-2 right-2 p-1 text-white hover:bg-white/20 rounded-full transition-colors duration-200"
-          aria-label={currentLanguage === "pt" ? "Fechar" : "Close"}
+          aria-label={currentLanguage === 'pt' ? 'Fechar' : 'Close'}
         >
           <svg
             className="w-4 h-4"

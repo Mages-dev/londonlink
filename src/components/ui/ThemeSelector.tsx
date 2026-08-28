@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
-import { CommemorativeTheme } from "@/types/theme";
-import { THEME_CONFIGS } from "@/lib/themes/configs";
-import { Language } from "@/types";
+import React, { useState } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
+import { CommemorativeTheme } from '@/types/theme';
+import { THEME_CONFIGS } from '@/lib/themes/configs';
+import { Language } from '@/types';
 
 interface ThemeSelectorProps {
   currentLanguage: Language;
@@ -13,7 +13,7 @@ interface ThemeSelectorProps {
 
 export default function ThemeSelector({
   currentLanguage,
-  className = "",
+  className = '',
 }: ThemeSelectorProps) {
   const {
     commemorativeTheme,
@@ -27,13 +27,13 @@ export default function ThemeSelector({
   const [isOpen, setIsOpen] = useState(false);
 
   const availableThemes: CommemorativeTheme[] = [
-    "default",
-    "carnival",
-    "valentine",
-    "easter",
-    "halloween",
-    "christmas",
-    "new-year",
+    'default',
+    'carnival',
+    'valentine',
+    'easter',
+    'halloween',
+    'christmas',
+    'new-year',
   ];
 
   const handleThemeChange = (theme: CommemorativeTheme) => {
@@ -54,7 +54,9 @@ export default function ThemeSelector({
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 shadow-sm hover:shadow-md"
         aria-label={
-          currentLanguage === "pt" ? "Seletor de tema" : "Theme selector"
+          currentLanguage === 'pt'
+            ? `${currentConfig.displayName.pt} — seletor de tema`
+            : `${currentConfig.displayName.en} — theme selector`
         }
         aria-expanded={isOpen}
       >
@@ -64,7 +66,7 @@ export default function ThemeSelector({
         </span>
         <svg
           className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
-            isOpen ? "rotate-180" : ""
+            isOpen ? 'rotate-180' : ''
           }`}
           fill="none"
           stroke="currentColor"
@@ -89,21 +91,21 @@ export default function ThemeSelector({
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
-                      {currentLanguage === "pt"
-                        ? "Modo Manual Ativo"
-                        : "Manual Mode Active"}
+                      {currentLanguage === 'pt'
+                        ? 'Modo Manual Ativo'
+                        : 'Manual Mode Active'}
                     </p>
                     <p className="text-xs text-yellow-600 dark:text-yellow-400">
-                      {currentLanguage === "pt"
-                        ? "Temas automáticos desabilitados"
-                        : "Automatic themes disabled"}
+                      {currentLanguage === 'pt'
+                        ? 'Temas automáticos desabilitados'
+                        : 'Automatic themes disabled'}
                     </p>
                   </div>
                   <button
                     onClick={resetToAutomatic}
                     className="text-xs px-2 py-1 bg-yellow-600 hover:bg-yellow-700 text-white rounded"
                   >
-                    {currentLanguage === "pt" ? "Auto" : "Auto"}
+                    {currentLanguage === 'pt' ? 'Auto' : 'Auto'}
                   </button>
                 </div>
               </div>
@@ -112,9 +114,9 @@ export default function ThemeSelector({
             {/* Commemorative Theme Selection */}
             <div>
               <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                {currentLanguage === "pt"
-                  ? "Tema Comemorativo"
-                  : "Commemorative Theme"}
+                {currentLanguage === 'pt'
+                  ? 'Tema Comemorativo'
+                  : 'Commemorative Theme'}
               </h3>
               <div className="space-y-2">
                 {availableThemes.map((theme) => {
@@ -128,8 +130,8 @@ export default function ThemeSelector({
                       onClick={() => handleThemeChange(theme)}
                       className={`w-full flex items-center justify-between p-3 rounded-lg transition-all duration-200 ${
                         isActive
-                          ? "bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-500"
-                          : "bg-gray-50 dark:bg-gray-700 border-2 border-transparent hover:bg-gray-100 dark:hover:bg-gray-600"
+                          ? 'bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-500'
+                          : 'bg-gray-50 dark:bg-gray-700 border-2 border-transparent hover:bg-gray-100 dark:hover:bg-gray-600'
                       }`}
                     >
                       <div className="flex items-center space-x-3">
@@ -147,11 +149,11 @@ export default function ThemeSelector({
                         {isActive && (
                           <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                         )}
-                        {inSeason && theme !== "default" && (
+                        {inSeason && theme !== 'default' && (
                           <span className="text-xs px-2 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-full">
-                            {currentLanguage === "pt"
-                              ? "Em temporada"
-                              : "In season"}
+                            {currentLanguage === 'pt'
+                              ? 'Em temporada'
+                              : 'In season'}
                           </span>
                         )}
                       </div>

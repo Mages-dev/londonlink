@@ -2,26 +2,26 @@
 // This file exports all domain-specific translations for easy access
 
 // Import translations from domains
-import { heroTranslations } from "@/domain/hero/translations";
-import { aboutTranslations } from "@/domain/about/translations";
-import { galleryTranslations } from "@/domain/gallery/translations";
-import { contactTranslations } from "@/domain/contact/translations";
+import { heroTranslations } from '@/domain/hero/translations';
+import { aboutTranslations } from '@/domain/about/translations';
+import { galleryTranslations } from '@/domain/gallery/translations';
+import { contactTranslations } from '@/domain/contact/translations';
 
 // Import types and config
-import type { Language } from "@/translations/config";
+import type { Language } from '@/translations/config';
 
 // Re-export everything for external use
-export { heroTranslations } from "@/domain/hero/translations";
-export { aboutTranslations } from "@/domain/about/translations";
-export { galleryTranslations } from "@/domain/gallery/translations";
-export { contactTranslations } from "@/domain/contact/translations";
+export { heroTranslations } from '@/domain/hero/translations';
+export { aboutTranslations } from '@/domain/about/translations';
+export { galleryTranslations } from '@/domain/gallery/translations';
+export { contactTranslations } from '@/domain/contact/translations';
 
 // Future domain translations can be added here:
 // export { booksTranslations } from "@/domain/books/translations";
 
 // Re-export types and config
-export type { Language } from "@/translations/config";
-export { SUPPORTED_LANGUAGES, LANGUAGE_CONFIG } from "@/translations/config";
+export type { Language } from '@/translations/config';
+export { SUPPORTED_LANGUAGES, LANGUAGE_CONFIG } from '@/translations/config';
 
 // Helper function to get translations for a specific language
 export function getTranslations(language: Language) {

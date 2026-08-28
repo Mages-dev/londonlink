@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useState } from "react";
-import { Language } from "@/types";
-import { galleryTranslations } from "../translations";
-import type { GalleryImage } from "../hooks/useGallery";
-import { ANIMATION_DELAYS } from "../constants/images";
+import Image from 'next/image';
+import { useState } from 'react';
+import { Language } from '@/types';
+import { galleryTranslations } from '../translations';
+import type { GalleryImage } from '../hooks/useGallery';
+import { ANIMATION_DELAYS } from '../constants/images';
 
 interface LShapeGalleryProps {
   images: GalleryImage[];
@@ -44,14 +44,14 @@ export function LShapeGallery({
           const isLarge = index === 0 || index === 3; // First and fourth images are large
           const isMedium = index === 1 || index === 4; // Second and fifth are medium
 
-          let gridClasses = "";
+          let gridClasses = '';
 
           if (isLarge) {
-            gridClasses = "col-span-2 row-span-2";
+            gridClasses = 'col-span-2 row-span-2';
           } else if (isMedium) {
-            gridClasses = "col-span-1 row-span-2";
+            gridClasses = 'col-span-1 row-span-2';
           } else {
-            gridClasses = "col-span-1 row-span-1";
+            gridClasses = 'col-span-1 row-span-1';
           }
 
           return (
@@ -86,7 +86,7 @@ export function LShapeGallery({
                 alt={image.alt}
                 fill
                 className={`object-cover transition-transform duration-300 ${
-                  hoveredImage === image.id ? "scale-110" : "scale-100"
+                  hoveredImage === image.id ? 'scale-110' : 'scale-100'
                 }`}
                 onLoadStart={() => onImageLoadStart(image.id)}
                 onLoad={() => onImageLoad(image.id)}
@@ -97,14 +97,14 @@ export function LShapeGallery({
               {/* Overlay */}
               <div
                 className={`absolute inset-0 bg-black transition-opacity duration-300 ${
-                  hoveredImage === image.id ? "opacity-20" : "opacity-0"
+                  hoveredImage === image.id ? 'opacity-20' : 'opacity-0'
                 }`}
               />
 
               {/* Hover Content */}
               <div
                 className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
-                  hoveredImage === image.id ? "opacity-100" : "opacity-0"
+                  hoveredImage === image.id ? 'opacity-100' : 'opacity-0'
                 }`}
               >
                 <div className="text-white text-center p-2">
@@ -121,31 +121,31 @@ export function LShapeGallery({
           const actualIndex = index + 7; // Offset for animation delay
           const isMedium = index === 0 || index === 4; // First and last are medium
 
-          let gridClasses = "";
-          let rowStart = "";
+          let gridClasses = '';
+          let rowStart = '';
 
           if (index === 0) {
             // First vertical image - starts at row 3
             gridClasses = isMedium
-              ? "col-span-1 row-span-2"
-              : "col-span-1 row-span-1";
-            rowStart = "row-start-3";
+              ? 'col-span-1 row-span-2'
+              : 'col-span-1 row-span-1';
+            rowStart = 'row-start-3';
           } else if (index === 1) {
             // Second vertical image
-            gridClasses = "col-span-1 row-span-1";
-            rowStart = "row-start-5";
+            gridClasses = 'col-span-1 row-span-1';
+            rowStart = 'row-start-5';
           } else if (index === 2) {
             // Third vertical image - large
-            gridClasses = "col-span-1 row-span-2";
-            rowStart = "row-start-6";
+            gridClasses = 'col-span-1 row-span-2';
+            rowStart = 'row-start-6';
           } else if (index === 3) {
             // Fourth vertical image
-            gridClasses = "col-span-1 row-span-1";
-            rowStart = "row-start-4";
+            gridClasses = 'col-span-1 row-span-1';
+            rowStart = 'row-start-4';
           } else {
             // Fifth vertical image
-            gridClasses = "col-span-1 row-span-1";
-            rowStart = "row-start-6";
+            gridClasses = 'col-span-1 row-span-1';
+            rowStart = 'row-start-6';
           }
 
           return (
@@ -180,7 +180,7 @@ export function LShapeGallery({
                 alt={image.alt}
                 fill
                 className={`object-cover transition-transform duration-300 ${
-                  hoveredImage === image.id ? "scale-110" : "scale-100"
+                  hoveredImage === image.id ? 'scale-110' : 'scale-100'
                 }`}
                 onLoadStart={() => onImageLoadStart(image.id)}
                 onLoad={() => onImageLoad(image.id)}
@@ -191,14 +191,14 @@ export function LShapeGallery({
               {/* Overlay */}
               <div
                 className={`absolute inset-0 bg-black transition-opacity duration-300 ${
-                  hoveredImage === image.id ? "opacity-20" : "opacity-0"
+                  hoveredImage === image.id ? 'opacity-20' : 'opacity-0'
                 }`}
               />
 
               {/* Hover Content */}
               <div
                 className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
-                  hoveredImage === image.id ? "opacity-100" : "opacity-0"
+                  hoveredImage === image.id ? 'opacity-100' : 'opacity-0'
                 }`}
               >
                 <div className="text-white text-center p-2">
@@ -217,9 +217,9 @@ export function LShapeGallery({
           LONDON<span className="text-gray-400">LINK</span>
         </div>
         <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          {currentLanguage === "en"
-            ? "L-Shape Gallery"
-            : "Galeria em Formato L"}
+          {currentLanguage === 'en'
+            ? 'L-Shape Gallery'
+            : 'Galeria em Formato L'}
         </div>
       </div>
     </div>

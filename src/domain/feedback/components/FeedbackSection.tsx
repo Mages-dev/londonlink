@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { Language } from "@/types";
-import { OptimizedImage } from "@/domain/shared";
-import { CONTACT_INFO } from "@/domain/shared/constants/contacts";
-import { FEEDBACK_IMAGES, FEEDBACK_IMAGE_ALTS } from "../constants/images";
-import { feedbackTranslations } from "../translations";
+import { useState, useEffect } from 'react';
+import { Language } from '@/types';
+import { OptimizedImage } from '@/domain/shared';
+import { CONTACT_INFO } from '@/domain/shared/constants/contacts';
+import { FEEDBACK_IMAGES, FEEDBACK_IMAGE_ALTS } from '../constants/images';
+import { feedbackTranslations } from '../translations';
 
 interface FeedbackSectionProps {
   currentLanguage: Language;
@@ -14,15 +14,25 @@ interface FeedbackSectionProps {
 export function FeedbackSection({ currentLanguage }: FeedbackSectionProps) {
   const t = feedbackTranslations[currentLanguage];
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-rotate testimonials every 8 seconds
+  // Auto-rotate testimonials every 8s. Pause on user request and honor
+  // prefers-reduced-motion (WCAG 2.2.2 Pause, Stop, Hide).
   useEffect(() => {
+    if (isPaused) return;
+    if (
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+
     const interval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % t.testimonials.length);
     }, 8000);
 
     return () => clearInterval(interval);
-  }, [t.testimonials.length]);
+  }, [t.testimonials.length, isPaused]);
 
   const nextTestimonial = () => {
     setCurrentTestimonial((prev) => (prev + 1) % t.testimonials.length);
@@ -30,7 +40,7 @@ export function FeedbackSection({ currentLanguage }: FeedbackSectionProps) {
 
   const prevTestimonial = () => {
     setCurrentTestimonial(
-      (prev) => (prev - 1 + t.testimonials.length) % t.testimonials.length
+      (prev) => (prev - 1 + t.testimonials.length) % t.testimonials.length,
     );
   };
 
@@ -39,21 +49,44 @@ export function FeedbackSection({ currentLanguage }: FeedbackSectionProps) {
   };
 
   const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <span
-        key={i}
-        className={`star-icon text-4xl ${
-          i < rating ? "text-yellow-400" : "text-gray-300"
-        }`}
-      >
-        ★
+    const label =
+      currentLanguage === 'pt'
+        ? `${rating} de 5 estrelas`
+        : `${rating} out of 5 stars`;
+    return (
+      <span role="img" aria-label={label}>
+        {Array.from({ length: 5 }, (_, i) => (
+          <span
+            key={i}
+            aria-hidden="true"
+            className={`star-icon text-4xl ${
+              i < rating ? 'text-yellow-400' : 'text-gray-300'
+            }`}
+          >
+            ★
+          </span>
+        ))}
       </span>
-    ));
+    );
   };
+
+  const pauseLabel =
+    currentLanguage === 'pt'
+      ? isPaused
+        ? 'Retomar rotação automática'
+        : 'Pausar rotação automática'
+      : isPaused
+        ? 'Resume auto-rotation'
+        : 'Pause auto-rotation';
+  const navLabels =
+    currentLanguage === 'pt'
+      ? { prev: 'Depoimento anterior', next: 'Próximo depoimento' }
+      : { prev: 'Previous testimonial', next: 'Next testimonial' };
 
   return (
     <section
       id="feedback"
+      aria-labelledby="feedback-heading"
       className="section-bg-hero relative overflow-hidden py-16"
     >
       {/* Uses parent background - no additional gradient needed */}
@@ -61,7 +94,10 @@ export function FeedbackSection({ currentLanguage }: FeedbackSectionProps) {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 lg:mb-6 leading-tight">
+          <h2
+            id="feedback-heading"
+            className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 lg:mb-6 leading-tight"
+          >
             {t.title}
           </h2>
           <p className="text-lg md:text-xl lg:text-2xl text-teal-100 font-light mb-4">
@@ -79,7 +115,11 @@ export function FeedbackSection({ currentLanguage }: FeedbackSectionProps) {
             <div className="quote-icon">&ldquo;</div>
 
             {/* Current Testimonial */}
-            <div className="testimonial-text flex-1 flex items-center py-4">
+            <div
+              aria-live="polite"
+              aria-atomic="true"
+              className="testimonial-text flex-1 flex items-center py-4"
+            >
               <div className="flex flex-col md:flex-row items-center md:items-center gap-8 w-full">
                 {/* Student Photo - Left Side on desktop, centered on mobile */}
                 <div className="w-full md:w-auto flex justify-center md:min-w-[162px]">
@@ -106,6 +146,7 @@ export function FeedbackSection({ currentLanguage }: FeedbackSectionProps) {
                       return (
                         <div className="w-[162px] h-60 bg-gray-500 rounded-lg shadow-lg border-4 border-white transition-all duration-500 ease-in-out flex items-center justify-center">
                           <svg
+                            aria-hidden="true"
                             className="w-32 h-32 text-white"
                             fill="currentColor"
                             viewBox="0 0 20 20"
@@ -150,7 +191,7 @@ export function FeedbackSection({ currentLanguage }: FeedbackSectionProps) {
                 <button
                   onClick={prevTestimonial}
                   className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors duration-200 cursor-pointer"
-                  aria-label="Previous testimonial"
+                  aria-label={navLabels.prev}
                 >
                   <svg
                     className="w-5 h-5 text-white"
@@ -175,8 +216,8 @@ export function FeedbackSection({ currentLanguage }: FeedbackSectionProps) {
                       onClick={() => goToTestimonial(index)}
                       className={`w-3 h-3 rounded-full transition-colors duration-200 cursor-pointer ${
                         index === currentTestimonial
-                          ? "bg-yellow-400"
-                          : "bg-white/40 hover:bg-white/60"
+                          ? 'bg-yellow-400'
+                          : 'bg-white/40 hover:bg-white/60'
                       }`}
                       aria-label={`Go to testimonial ${index + 1}`}
                     />
@@ -187,7 +228,7 @@ export function FeedbackSection({ currentLanguage }: FeedbackSectionProps) {
                 <button
                   onClick={nextTestimonial}
                   className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors duration-200 cursor-pointer"
-                  aria-label="Next testimonial"
+                  aria-label={navLabels.next}
                 >
                   <svg
                     className="w-5 h-5 text-white"
@@ -201,6 +242,27 @@ export function FeedbackSection({ currentLanguage }: FeedbackSectionProps) {
                       strokeWidth={2}
                       d="M9 5l7 7-7 7"
                     />
+                  </svg>
+                </button>
+
+                {/* Pause / Resume auto-rotation */}
+                <button
+                  onClick={() => setIsPaused((prev) => !prev)}
+                  className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors duration-200 cursor-pointer"
+                  aria-label={pauseLabel}
+                  aria-pressed={isPaused}
+                >
+                  <svg
+                    className="w-5 h-5 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    {isPaused ? (
+                      <path d="M8 5v14l11-7z" />
+                    ) : (
+                      <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+                    )}
                   </svg>
                 </button>
               </div>

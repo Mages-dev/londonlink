@@ -3,19 +3,17 @@
  * Carnival period: Extended from traditional Friday-Tuesday to include full weeks
  */
 
-import { calculateEaster } from "./easter-calculator";
+import { calculateEaster } from './easter-calculator';
 
 /**
  * Calculate Carnival dates for a given year
  * Traditional Carnival: Friday before Ash Wednesday to Tuesday before Ash Wednesday
  * Extended Carnival: One week before traditional start to Sunday after traditional end
- * 
+ *
  * @param year - Year to calculate Carnival for
  * @returns Object with start and end dates for extended Carnival period
  */
-export function calculateCarnival(
-  year: number
-): {
+export function calculateCarnival(year: number): {
   start: { month: number; day: number };
   end: { month: number; day: number };
 } {
@@ -44,7 +42,9 @@ export function calculateCarnival(
   // Calculate days until next Sunday
   const dayOfWeek = traditionalCarnivalTuesday.getDay(); // 0 = Sunday, 1 = Monday, ..., 2 = Tuesday
   const daysUntilSunday = dayOfWeek === 0 ? 0 : 7 - dayOfWeek; // If already Sunday, stay; otherwise go to next Sunday
-  extendedCarnivalEnd.setDate(traditionalCarnivalTuesday.getDate() + daysUntilSunday);
+  extendedCarnivalEnd.setDate(
+    traditionalCarnivalTuesday.getDate() + daysUntilSunday,
+  );
 
   return {
     start: {
@@ -66,7 +66,7 @@ export function calculateCarnival(
  */
 export function generateCarnivalDates(
   startYear: number,
-  yearsAhead: number = 10
+  yearsAhead: number = 10,
 ): Record<
   number,
   {
@@ -146,7 +146,7 @@ export function validateCarnivalDate(
   expectedStartMonth: number,
   expectedStartDay: number,
   expectedEndMonth: number,
-  expectedEndDay: number
+  expectedEndDay: number,
 ): boolean {
   const calculated = calculateCarnival(year);
   return (
@@ -169,17 +169,24 @@ export function getCarnivalInfo(year: number): {
 } {
   const easter = calculateEaster(year);
   const easterDate = new Date(year, easter.month - 1, easter.day);
-  
+
   const ashWednesday = new Date(easterDate);
   ashWednesday.setDate(easterDate.getDate() - 46);
-  
+
   const traditional = getTraditionalCarnivalDates(year);
   const extended = calculateCarnival(year);
-  
-  const startDate = new Date(year, extended.start.month - 1, extended.start.day);
+
+  const startDate = new Date(
+    year,
+    extended.start.month - 1,
+    extended.start.day,
+  );
   const endDate = new Date(year, extended.end.month - 1, extended.end.day);
-  const duration = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
-  
+  const duration =
+    Math.ceil(
+      (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24),
+    ) + 1;
+
   return {
     easter,
     ashWednesday: ashWednesday.toLocaleDateString('pt-BR'),

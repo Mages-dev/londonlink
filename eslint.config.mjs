@@ -1,25 +1,32 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+import coreWebVitals from 'eslint-config-next/core-web-vitals';
+import typescript from 'eslint-config-next/typescript';
+import prettier from 'eslint-config-prettier';
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...coreWebVitals,
+  ...typescript,
   {
     ignores: [
-      "node_modules/**",
-      ".next/**",
-      "out/**",
-      "build/**",
-      "next-env.d.ts",
+      'node_modules/**',
+      '.next/**',
+      'out/**',
+      'build/**',
+      'dist/**',
+      'scripts/**',
+      'next-env.d.ts',
     ],
   },
+  {
+    rules: {
+      // Mount-guard + localStorage init on hydration is the idiomatic
+      // React pattern (`useEffect(() => setMounted(true), [])`). The
+      // react-hooks v6 rule flags it but it is intentional here.
+      'react-hooks/set-state-in-effect': 'off',
+    },
+  },
+  // Must stay last: turns off ESLint stylistic rules that conflict with
+  // Prettier so formatting is owned solely by Prettier.
+  prettier,
 ];
 
 export default eslintConfig;

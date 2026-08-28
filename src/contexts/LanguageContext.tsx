@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, {
   createContext,
@@ -6,13 +6,13 @@ import React, {
   useEffect,
   useState,
   ReactNode,
-} from "react";
-import { Language } from "@/types";
+} from 'react';
+import { Language } from '@/types';
 import {
   DEFAULT_LANGUAGE,
   isValidLanguage,
   detectBrowserLanguage,
-} from "@/translations/config";
+} from '@/translations/config';
 
 // Language Context Type
 interface LanguageContextType {
@@ -23,11 +23,11 @@ interface LanguageContextType {
 
 // Create the context
 const LanguageContext = createContext<LanguageContextType | undefined>(
-  undefined
+  undefined,
 );
 
 // Local storage key
-const STORAGE_KEY = "londonlink-language";
+const STORAGE_KEY = 'londonlink-language';
 
 interface LanguageProviderProps {
   children: ReactNode;
@@ -71,7 +71,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
 
   // Toggle between available languages
   const toggleLanguage = () => {
-    const newLanguage: Language = language === "en" ? "pt" : "en";
+    const newLanguage: Language = language === 'en' ? 'pt' : 'en';
     setLanguage(newLanguage);
   };
 
@@ -107,8 +107,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
 export function useLanguage(): LanguageContextType {
   const context = useContext(LanguageContext);
   if (context === undefined) {
-    throw new Error("useLanguage must be used within a LanguageProvider");
+    throw new Error('useLanguage must be used within a LanguageProvider');
   }
   return context;
 }
-

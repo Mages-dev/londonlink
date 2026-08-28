@@ -54,12 +54,17 @@
 @keyframes valentine-glow {
   0%,
   100% {
-    box-shadow: 0 0 5px var(--special), 0 0 10px var(--special),
+    box-shadow:
+      0 0 5px var(--special),
+      0 0 10px var(--special),
       0 0 15px var(--primary);
   }
   50% {
-    box-shadow: 0 0 10px var(--special), 0 0 20px var(--special),
-      0 0 30px var(--primary), 0 0 40px var(--accent);
+    box-shadow:
+      0 0 10px var(--special),
+      0 0 20px var(--special),
+      0 0 30px var(--primary),
+      0 0 40px var(--accent);
   }
 }
 
@@ -86,7 +91,9 @@
 
 /* Valentine Text Glow */
 .valentine-text-glow {
-  text-shadow: 0 0 5px var(--special), 0 0 10px var(--special),
+  text-shadow:
+    0 0 5px var(--special),
+    0 0 10px var(--special),
     0 0 15px var(--primary);
   animation: valentine-pulse 2s ease-in-out infinite;
 }
@@ -110,7 +117,7 @@
 }
 
 .valentine-button::before {
-  content: "💘";
+  content: '💘';
   position: absolute;
   top: 50%;
   left: -35px;
@@ -125,7 +132,8 @@
 
 /* Valentine Background Pattern */
 .valentine-pattern {
-  background-image: radial-gradient(
+  background-image:
+    radial-gradient(
       circle at 20% 30%,
       rgba(225, 29, 72, 0.1) 0%,
       transparent 50%

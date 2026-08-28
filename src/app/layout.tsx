@@ -1,76 +1,76 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
-import "./globals.css";
-import "../lib/themes/carnival.css";
-import "../lib/themes/valentine.css";
-import "../lib/themes/easter.css";
-import "../lib/themes/halloween.css";
-import "../lib/themes/christmas.css";
-import "../lib/themes/new-year.css";
-import { ThemeProvider, LanguageProvider } from "@/contexts";
-import { LanguageSync } from "@/components";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import Script from 'next/script';
+import './globals.css';
+import '../lib/themes/carnival.css';
+import '../lib/themes/valentine.css';
+import '../lib/themes/easter.css';
+import '../lib/themes/halloween.css';
+import '../lib/themes/christmas.css';
+import '../lib/themes/new-year.css';
+import { ThemeProvider, LanguageProvider } from '@/contexts';
+import { LanguageSync, SkipLink } from '@/components';
 
 // Import test utilities in development
-if (process.env.NODE_ENV === "development") {
-  import("../lib/themes/test-theme");
+if (process.env.NODE_ENV === 'development') {
+  import('../lib/themes/test-theme');
 }
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: "swap",
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: "LondonLink - English Learning Platform",
+  title: 'LondonLink - English Learning Platform',
   description:
-    "A comprehensive English language learning platform which creates unique courses for your specific situation and requirements",
+    'A comprehensive English language learning platform which creates unique courses for your specific situation and requirements',
   keywords: [
-    "English learning",
-    "Portuguese",
-    "Language courses",
-    "Online education",
-    "LondonLink",
+    'English learning',
+    'Portuguese',
+    'Language courses',
+    'Online education',
+    'LondonLink',
   ],
-  authors: [{ name: "LondonLink Team" }],
-  creator: "LondonLink",
-  publisher: "LondonLink",
+  authors: [{ name: 'LondonLink Team' }],
+  creator: 'LondonLink',
+  publisher: 'LondonLink',
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://londonlink.com"),
+  metadataBase: new URL('https://londonlink.com'),
   openGraph: {
-    title: "LondonLink - English Learning Platform",
+    title: 'LondonLink - English Learning Platform',
     description:
-      "A comprehensive English language learning platform which creates unique courses for your specific situation and requirements",
-    url: "https://londonlink.com",
-    siteName: "LondonLink",
-    locale: "en_US",
-    type: "website",
+      'A comprehensive English language learning platform which creates unique courses for your specific situation and requirements',
+    url: 'https://londonlink.com',
+    siteName: 'LondonLink',
+    locale: 'en_US',
+    type: 'website',
     images: [
       {
-        url: "/assets/images/shared/og/og-image.webp",
+        url: '/assets/images/shared/og/og-image.webp',
         width: 1200,
         height: 630,
-        alt: "LondonLink - English Learning Platform",
+        alt: 'LondonLink - English Learning Platform',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "LondonLink - English Learning Platform",
+    card: 'summary_large_image',
+    title: 'LondonLink - English Learning Platform',
     description:
-      "A comprehensive English language learning platform which creates unique courses for your specific situation and requirements",
-    images: ["/assets/images/shared/og/og-image.webp"],
+      'A comprehensive English language learning platform which creates unique courses for your specific situation and requirements',
+    images: ['/assets/images/shared/og/og-image.webp'],
   },
   robots: {
     index: true,
@@ -78,9 +78,9 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   },
 };
@@ -166,6 +166,7 @@ export default function RootLayout({
         <ThemeProvider>
           <LanguageProvider>
             <LanguageSync />
+            <SkipLink />
             {children}
           </LanguageProvider>
         </ThemeProvider>

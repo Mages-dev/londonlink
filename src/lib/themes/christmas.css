@@ -72,11 +72,15 @@
 @keyframes christmas-glow {
   0%,
   100% {
-    box-shadow: 0 0 5px var(--special), 0 0 10px var(--special),
+    box-shadow:
+      0 0 5px var(--special),
+      0 0 10px var(--special),
       0 0 15px var(--special);
   }
   50% {
-    box-shadow: 0 0 10px var(--special), 0 0 20px var(--special),
+    box-shadow:
+      0 0 10px var(--special),
+      0 0 20px var(--special),
       0 0 30px var(--special);
   }
 }
@@ -104,7 +108,9 @@
 
 /* Christmas Text Glow */
 .christmas-text-glow {
-  text-shadow: 0 0 5px var(--special), 0 0 10px var(--special),
+  text-shadow:
+    0 0 5px var(--special),
+    0 0 10px var(--special),
     0 0 15px var(--special);
   animation: christmas-pulse 2s ease-in-out infinite;
 }
@@ -127,7 +133,7 @@
 }
 
 .christmas-button::before {
-  content: "🎁";
+  content: '🎁';
   position: absolute;
   top: 50%;
   left: -30px;
@@ -142,7 +148,8 @@
 
 /* Christmas Background Pattern */
 .christmas-pattern {
-  background-image: radial-gradient(
+  background-image:
+    radial-gradient(
       circle at 20% 20%,
       rgba(220, 38, 38, 0.1) 0%,
       transparent 50%
