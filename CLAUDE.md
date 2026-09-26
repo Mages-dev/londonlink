@@ -85,10 +85,12 @@ Layered + domain-driven:
   `DEFAULT_LANGUAGE`) and utilities.
 - `src/lib/themes/` — theme CSS, `configs.ts`, calculators.
 - `src/styles/`, `src/hooks/`, `src/types/` — shared globals.
-- `scripts/` — Node utilities and the check scripts; ignored by ESLint.
+- `scripts/` — the check scripts (`copy:check`, `text:*`, `visual:*`,
+  `csp:check`); plain Node ESM, ignored by ESLint.
 - Path alias `@/*` → `src/*`; import through barrels (`@/layout`,
   `@/components`, `@/contexts`, `@/domain/sections`, `@/domain/<section>`).
-- `dist/` and `.next/` are build output (git-ignored).
+- `.next/` is the build output (git-ignored). A local `dist/` is left over from
+  the `migration/vite` branch, not this app's output.
 
 ## State, contexts & persistence
 

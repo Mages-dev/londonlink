@@ -74,10 +74,25 @@ release note. That is how the site ran without Geist until 2026-09-26; check
 
 ## Prettier
 
-- `.prettierrc.mjs` owns layout; `pnpm format` / `pnpm format:check`.
-- `*.md` is in `.prettierignore`: Prettier pads Markdown table columns, which
+- `.prettierrc.mjs` owns layout (`pnpm format` / `pnpm format:check`); its
+  header explains each choice. Stock Prettier except `printWidth: 100` and
+  `singleQuote`; the removed options were all Prettier 3 defaults (proven: a
+  config with only the differences left every file unchanged).
+- `prettier-plugin-tailwindcss` sorts `className` classes into canonical order
+  and removes duplicates/extra whitespace. Tailwind 4 has no JS config, so it
+  needs `tailwindStylesheet: './src/app/globals.css'`. No `clsx`/`cn` helpers
+  exist today; if one is added, list it in `tailwindFunctions`. Class order
+  does not change the CSS: the mass sort left the built CSS rule set, the
+  rendered text and every screenshot identical.
+- Prettier 3 also reads `.gitignore`, so `.prettierignore` lists only tracked
+  files that are not ours to format: `pnpm-lock.yaml`, `public/` and `*.md`.
+  Check an ignore change with `pnpm exec prettier --file-info <file>` on one
+  file per entry, before and after.
+- `*.md` stays unformatted: Prettier pads Markdown table columns, which
   inflates `CLAUDE.md` and skills that agents read every session. Keep tables
   unpadded when editing them by hand.
+- A mass reformat (new option or plugin) goes in its own `style:` commit, after
+  the pending work is committed, with `text:diff` and `visual:diff` unchanged.
 
 ## Pre-commit hook
 

@@ -15,6 +15,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Progress tracking
 - Interactive exercises
 
+### 🔄 Changed
+
+- Prettier: `printWidth` 100 and Tailwind class sorting
+  (`prettier-plugin-tailwindcss`); config trimmed to the options that differ
+  from Prettier's defaults. Codebase reformatted — built CSS, rendered text and
+  screenshots unchanged
+- README rewritten as a product overview
+- Deploy workflow: `webfactory/ssh-agent` v0.10 (runs on Node 24)
+- VS Code: stylesheets validated by ESLint instead of the built-in CSS
+  validator (which misreports Tailwind 4 at-rules)
+
+### 🗑️ Removed
+
+- Unused `scripts/create-placeholder-images.js`
+- Windows `Zone.Identifier` metadata files committed under `public/`
+- Template leftovers in `.gitignore` (yarn, `.pnp`, Vercel) and redundant
+  `.prettierignore` entries (Prettier already reads `.gitignore`)
+
 ## [2.5.0] - 2026-09-26
 
 ### 🔒 Security
