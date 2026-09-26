@@ -16,7 +16,13 @@
     "start": "PORT=3302 next start",
     "lint": "eslint --max-warnings=0",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "copy:check": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/copy-check.mjs",
+    "text:save": "node scripts/rendered-text.mjs save",
+    "text:diff": "node scripts/rendered-text.mjs diff",
+    "visual:save": "node scripts/visual-check.mjs save",
+    "visual:diff": "node scripts/visual-check.mjs diff",
+    "csp:check": "node scripts/csp-check.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.48.0",
