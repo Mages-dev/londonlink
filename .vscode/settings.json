@@ -3,5 +3,17 @@
   // but silence the canonical-class style nag. We intentionally use explicit
   // arbitrary pixel values (e.g. h-[600px]) for readability over their scale
   // equivalents (h-150). This is a suggestion, not an error.
-  "tailwindCSS.lint.suggestCanonicalClasses": "ignore"
+  "tailwindCSS.lint.suggestCanonicalClasses": "ignore",
+
+  // Stylesheets are linted by ESLint (@eslint/css with Tailwind 4 syntax). The
+  // built-in CSS validator does not know @theme/@custom-variant and reports
+  // false "Unknown at rule" errors, so ESLint takes over .css files.
+  "css.validate": false,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "css"
+  ]
 }
