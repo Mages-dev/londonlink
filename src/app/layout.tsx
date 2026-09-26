@@ -47,12 +47,12 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://londonlink.com'),
+  metadataBase: new URL('https://www.londonlink.com.br'),
   openGraph: {
     title: 'LondonLink - English Learning Platform',
     description:
       'A comprehensive English language learning platform which creates unique courses for your specific situation and requirements',
-    url: 'https://londonlink.com',
+    url: '/',
     siteName: 'LondonLink',
     locale: 'en_US',
     type: 'website',

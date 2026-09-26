@@ -26,6 +26,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - VS Code: stylesheets validated by ESLint instead of the built-in CSS
   validator (which misreports Tailwind 4 at-rules)
 
+### 🐛 Fixed
+
+- Link previews and social cards: `metadataBase` and `og:url` pointed at
+  `londonlink.com`, a domain with no DNS; they now use the production domain,
+  `https://www.londonlink.com.br`
+
 ### 🗑️ Removed
 
 - Unused `scripts/create-placeholder-images.js`
