@@ -91,7 +91,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt" className="scroll-smooth" suppressHydrationWarning>
+    <html
+      lang="pt"
+      // The font variables live on <html> so the :root theme tokens
+      // (--font-sans: var(--font-geist-sans)) can resolve them.
+      className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}
+      suppressHydrationWarning
+    >
       <head>
         {/* Language initialization script - must be in head for SEO/accessibility */}
         <script
@@ -145,10 +151,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
-        suppressHydrationWarning
-      >
+      <body className="font-sans antialiased" suppressHydrationWarning>
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-YMZJ7KR3SG"
