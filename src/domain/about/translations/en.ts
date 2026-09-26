@@ -34,13 +34,4 @@ export const aboutTranslationsEn = {
       'As more students joined, it became necessary to form a brilliant team of teachers to meet the demand, and today we have about 100 students.',
     ],
   },
-
-  // Legacy content for backward compatibility
-  mission: 'Our mission is to bridge language barriers',
-  vision: 'Creating a world where language learning is accessible to everyone',
-  values: {
-    quality: 'Quality education for all',
-    innovation: 'Innovative learning methods',
-    community: 'Building a supportive learning community',
-  },
 } as const;

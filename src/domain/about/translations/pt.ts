@@ -34,14 +34,4 @@ export const aboutTranslationsPt = {
       'À medida que mais alunos se juntaram, tornou-se necessário formar uma equipe brilhante de professores para atender à demanda, e hoje temos cerca de 100 alunos.',
     ],
   },
-
-  // Legacy content for backward compatibility
-  mission: 'Nossa missão é quebrar barreiras linguísticas',
-  vision:
-    'Criando um mundo onde o aprendizado de idiomas seja acessível a todos',
-  values: {
-    quality: 'Educação de qualidade para todos',
-    innovation: 'Métodos inovadores de aprendizado',
-    community: 'Construindo uma comunidade de aprendizado solidária',
-  },
 } as const;

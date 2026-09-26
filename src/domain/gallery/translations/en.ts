@@ -5,14 +5,6 @@ export const galleryTranslationsEn = {
   subtitle:
     'See how our student community is transforming their lives through English. Each image tells a story of success and personal growth.',
 
-  // Image descriptions for accessibility
-  imageAlts: {
-    screenshot: 'LondonLink community student in learning moment',
-    feature: 'Student achievement on English learning platform',
-    interface: 'Community member success experience',
-    lesson: 'Personal transformation through English learning',
-  },
-
   // Interactive elements
   viewMore: 'View More',
   closeGallery: 'Close Gallery',

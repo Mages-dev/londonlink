@@ -6,27 +6,6 @@ export const heroTranslationsEn = {
   subtitle: "Tell us what you need and we'll create a course just for you!",
   ctaButton: 'Pre-registration',
 
-  // Legacy content (keeping for backward compatibility)
-  welcome: 'Welcome to',
-  startLearning: 'Start Learning',
-  learnMore: 'Learn More',
-
-  // Features section
-  features: {
-    interactiveBooks: {
-      title: 'Interactive Books',
-      description: 'Interactive books for practical learning',
-    },
-    personalizedLearning: {
-      title: 'Personalized Learning',
-      description: 'Personalized learning for your level',
-    },
-    progressTracking: {
-      title: 'Progress Tracking',
-      description: 'Track your progress in real time',
-    },
-  },
-
   // Advantages section
   advantages: {
     title: 'Some of your advantages as a student include:',
