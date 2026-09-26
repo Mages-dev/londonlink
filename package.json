@@ -22,7 +22,8 @@
     "text:diff": "node scripts/rendered-text.mjs diff",
     "visual:save": "node scripts/visual-check.mjs save",
     "visual:diff": "node scripts/visual-check.mjs diff",
-    "csp:check": "node scripts/csp-check.mjs"
+    "csp:check": "node scripts/csp-check.mjs",
+    "prepare": "husky"
   },
   "dependencies": {
     "lucide-react": "^1.48.0",
