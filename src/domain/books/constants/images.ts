@@ -7,7 +7,7 @@ export const BOOKS_IMAGES = {
   },
   previews: {
     threeLionsTrilogy: '/assets/images/books/previews/three-lions-trilogy.jpg',
-    author: '/assets/images/books/previews/author.jpg',
+    author: '/assets/images/books/previews/author.webp',
     students: '/assets/images/books/previews/students.jpg',
   },
   thumbnails: {
