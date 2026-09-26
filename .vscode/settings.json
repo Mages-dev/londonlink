@@ -9,11 +9,5 @@
   // built-in CSS validator does not know @theme/@custom-variant and reports
   // false "Unknown at rule" errors, so ESLint takes over .css files.
   "css.validate": false,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "css"
-  ]
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "css"]
 }
