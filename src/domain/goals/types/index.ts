@@ -20,12 +20,7 @@ export interface GoalsData {
 }
 
 export type GoalIconType =
-  | 'travel'
-  | 'business'
-  | 'exam'
-  | 'conversation'
-  | 'career'
-  | 'deadline';
+  'travel' | 'business' | 'exam' | 'conversation' | 'career' | 'deadline';
 
 export interface GoalsMetrics {
   studentsHelped: number;
