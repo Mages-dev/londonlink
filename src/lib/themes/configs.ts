@@ -55,12 +55,7 @@ const halloweenTheme: ThemeConfig = {
     start: { month: 10, day: 24 }, // October 24th (1 week before Halloween)
     end: { month: 10, day: 31 }, // October 31st (Halloween day)
   },
-  customClasses: [
-    'halloween-glow',
-    'halloween-float',
-    'halloween-pulse',
-    'halloween-shadow',
-  ],
+  customClasses: ['halloween-glow', 'halloween-float', 'halloween-pulse', 'halloween-shadow'],
   icon: '🎃',
 };
 
@@ -422,12 +417,7 @@ export const isThemeInSeason = (theme: CommemorativeTheme): boolean => {
     const currentMonth = now.getMonth() + 1;
     const currentDay = now.getDate();
 
-    return isDateInRange(
-      currentMonth,
-      currentDay,
-      yearData.start,
-      yearData.end,
-    );
+    return isDateInRange(currentMonth, currentDay, yearData.start, yearData.end);
   }
 
   // Check fixed date range

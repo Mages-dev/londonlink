@@ -11,10 +11,7 @@ export {
   feedbackTranslationsEn,
   feedbackTranslationsPt,
 } from './translations';
-export type {
-  FeedbackTranslationKeys,
-  FeedbackTranslations,
-} from './translations';
+export type { FeedbackTranslationKeys, FeedbackTranslations } from './translations';
 
 // Styles
 export { FEEDBACK_STYLE_CLASSES } from './styles';

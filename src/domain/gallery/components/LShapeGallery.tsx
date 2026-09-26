@@ -36,9 +36,9 @@ export function LShapeGallery({
   const verticalImages = images.slice(7, 12); // Right vertical part of L
 
   return (
-    <div className="relative max-w-6xl mx-auto">
+    <div className="relative mx-auto max-w-6xl">
       {/* L-Shape Container */}
-      <div className="grid grid-cols-8 grid-rows-6 gap-2 md:gap-4 h-[600px] md:h-[800px] lg:h-[900px]">
+      <div className="grid h-[600px] grid-cols-8 grid-rows-6 gap-2 md:h-[800px] md:gap-4 lg:h-[900px]">
         {/* HORIZONTAL PART OF L - Top Row */}
         {horizontalImages.map((image, index) => {
           const isLarge = index === 0 || index === 3; // First and fourth images are large
@@ -57,24 +57,22 @@ export function LShapeGallery({
           return (
             <div
               key={image.id}
-              className={`${gridClasses} relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group animate-fade-in-up ${ANIMATION_DELAYS[index]}`}
+              className={`${gridClasses} group relative animate-fade-in-up cursor-pointer overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl ${ANIMATION_DELAYS[index]}`}
               onMouseEnter={() => setHoveredImage(image.id)}
               onMouseLeave={() => setHoveredImage(null)}
               onClick={() => onImageClick(image)}
             >
               {/* Loading State */}
               {isLoading[image.id] && (
-                <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse flex items-center justify-center">
-                  <div className="text-gray-500 dark:text-gray-400 text-sm">
-                    {t.loading}
-                  </div>
+                <div className="absolute inset-0 flex animate-pulse items-center justify-center bg-gray-200 dark:bg-gray-700">
+                  <div className="text-sm text-gray-500 dark:text-gray-400">{t.loading}</div>
                 </div>
               )}
 
               {/* Error State */}
               {loadErrors[image.id] && (
-                <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                  <div className="text-gray-500 dark:text-gray-400 text-sm text-center p-2">
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800">
+                  <div className="p-2 text-center text-sm text-gray-500 dark:text-gray-400">
                     {t.loadError}
                   </div>
                 </div>
@@ -107,9 +105,9 @@ export function LShapeGallery({
                   hoveredImage === image.id ? 'opacity-100' : 'opacity-0'
                 }`}
               >
-                <div className="text-white text-center p-2">
+                <div className="p-2 text-center text-white">
                   <div className="text-sm font-medium">{image.title}</div>
-                  <div className="text-xs mt-1 opacity-80">{t.viewMore}</div>
+                  <div className="mt-1 text-xs opacity-80">{t.viewMore}</div>
                 </div>
               </div>
             </div>
@@ -126,9 +124,7 @@ export function LShapeGallery({
 
           if (index === 0) {
             // First vertical image - starts at row 3
-            gridClasses = isMedium
-              ? 'col-span-1 row-span-2'
-              : 'col-span-1 row-span-1';
+            gridClasses = isMedium ? 'col-span-1 row-span-2' : 'col-span-1 row-span-1';
             rowStart = 'row-start-3';
           } else if (index === 1) {
             // Second vertical image
@@ -151,24 +147,22 @@ export function LShapeGallery({
           return (
             <div
               key={image.id}
-              className={`${gridClasses} ${rowStart} col-start-8 relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group animate-fade-in-up ${ANIMATION_DELAYS[actualIndex]}`}
+              className={`${gridClasses} ${rowStart} group relative col-start-8 animate-fade-in-up cursor-pointer overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl ${ANIMATION_DELAYS[actualIndex]}`}
               onMouseEnter={() => setHoveredImage(image.id)}
               onMouseLeave={() => setHoveredImage(null)}
               onClick={() => onImageClick(image)}
             >
               {/* Loading State */}
               {isLoading[image.id] && (
-                <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse flex items-center justify-center">
-                  <div className="text-gray-500 dark:text-gray-400 text-sm">
-                    {t.loading}
-                  </div>
+                <div className="absolute inset-0 flex animate-pulse items-center justify-center bg-gray-200 dark:bg-gray-700">
+                  <div className="text-sm text-gray-500 dark:text-gray-400">{t.loading}</div>
                 </div>
               )}
 
               {/* Error State */}
               {loadErrors[image.id] && (
-                <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                  <div className="text-gray-500 dark:text-gray-400 text-sm text-center p-2">
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800">
+                  <div className="p-2 text-center text-sm text-gray-500 dark:text-gray-400">
                     {t.loadError}
                   </div>
                 </div>
@@ -201,9 +195,9 @@ export function LShapeGallery({
                   hoveredImage === image.id ? 'opacity-100' : 'opacity-0'
                 }`}
               >
-                <div className="text-white text-center p-2">
+                <div className="p-2 text-center text-white">
                   <div className="text-sm font-medium">{image.title}</div>
-                  <div className="text-xs mt-1 opacity-80">{t.viewMore}</div>
+                  <div className="mt-1 text-xs opacity-80">{t.viewMore}</div>
                 </div>
               </div>
             </div>
@@ -212,14 +206,12 @@ export function LShapeGallery({
       </div>
 
       {/* L-Shape Indicator */}
-      <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-center">
-        <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 tracking-wider">
+      <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 transform text-center">
+        <div className="text-2xl font-bold tracking-wider text-blue-600 dark:text-blue-400">
           LONDON<span className="text-gray-400">LINK</span>
         </div>
-        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          {currentLanguage === 'en'
-            ? 'L-Shape Gallery'
-            : 'Galeria em Formato L'}
+        <div className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          {currentLanguage === 'en' ? 'L-Shape Gallery' : 'Galeria em Formato L'}
         </div>
       </div>
     </div>

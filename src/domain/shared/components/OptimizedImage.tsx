@@ -59,7 +59,7 @@ export function OptimizedImage({
         {!isLoaded && (
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"
+            className="absolute inset-0 animate-pulse bg-gray-200 dark:bg-gray-700"
           />
         )}
       </div>
@@ -72,7 +72,7 @@ export function OptimizedImage({
       {!isLoaded && (
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"
+          className="absolute inset-0 animate-pulse bg-gray-200 dark:bg-gray-700"
           style={{ width, height }}
         />
       )}
@@ -81,7 +81,7 @@ export function OptimizedImage({
           role="alert"
           className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800"
         >
-          <span className="text-gray-500 text-sm">Failed to load image</span>
+          <span className="text-sm text-gray-500">Failed to load image</span>
         </div>
       )}
     </div>

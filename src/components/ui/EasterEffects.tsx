@@ -41,10 +41,7 @@ export default function EasterEffects() {
   );
 
   // Spring elements (flowers, butterflies, etc.)
-  const springEmojis = useMemo(
-    () => ['🌸', '🌷', '🌺', '🦋', '🌿', '🌱', '🌼', '🌻'],
-    [],
-  );
+  const springEmojis = useMemo(() => ['🌸', '🌷', '🌺', '🦋', '🌿', '🌱', '🌼', '🌻'], []);
 
   // Random decorative positions, generated client-side after mount so render
   // stays pure (react-hooks/purity) and SSR output is deterministic.
@@ -67,8 +64,7 @@ export default function EasterEffects() {
       Array.from({ length: 12 }, (_, i) => ({
         left: Math.random() * 100,
         top: Math.random() * 100,
-        emoji:
-          i % 4 === 0 ? '🌷' : i % 4 === 1 ? '🌸' : i % 4 === 2 ? '🌺' : '🌼',
+        emoji: i % 4 === 0 ? '🌷' : i % 4 === 1 ? '🌸' : i % 4 === 2 ? '🌺' : '🌼',
       })),
     );
   }, []);
@@ -165,8 +161,7 @@ export default function EasterEffects() {
 
   // Animate spring elements
   useEffect(() => {
-    if (!isEasterTheme || springElements.length === 0 || prefersReducedMotion)
-      return;
+    if (!isEasterTheme || springElements.length === 0 || prefersReducedMotion) return;
 
     const animateSpringElements = () => {
       setSpringElements((prevElements) =>
@@ -196,7 +191,7 @@ export default function EasterEffects() {
   return (
     <>
       {/* Floating Easter Elements */}
-      <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">
+      <div className="pointer-events-none fixed inset-0 z-10 overflow-hidden">
         {elements.map((element) => (
           <div
             key={element.id}
@@ -215,7 +210,7 @@ export default function EasterEffects() {
       </div>
 
       {/* Spring Elements Effect */}
-      <div className="fixed inset-0 pointer-events-none z-15 overflow-hidden">
+      <div className="pointer-events-none fixed inset-0 z-15 overflow-hidden">
         {springElements.map((element) => (
           <div
             key={element.id}
@@ -234,19 +229,19 @@ export default function EasterEffects() {
       </div>
 
       {/* Easter Background Patterns */}
-      <div className="fixed inset-0 pointer-events-none z-0">
+      <div className="pointer-events-none fixed inset-0 z-0">
         {/* Subtle Easter pattern overlay */}
-        <div className="absolute inset-0 easter-pattern opacity-20" />
+        <div className="easter-pattern absolute inset-0 opacity-20" />
 
         {/* Glowing orbs */}
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-emerald-500/10 rounded-full blur-xl animate-pulse" />
-        <div className="absolute top-3/4 right-1/4 w-28 h-28 bg-yellow-500/10 rounded-full blur-xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-3/4 w-24 h-24 bg-green-500/10 rounded-full blur-xl animate-pulse delay-2000" />
-        <div className="absolute bottom-1/4 left-1/2 w-36 h-36 bg-amber-500/10 rounded-full blur-xl animate-pulse delay-500" />
+        <div className="absolute top-1/4 left-1/4 h-32 w-32 animate-pulse rounded-full bg-emerald-500/10 blur-xl" />
+        <div className="absolute top-3/4 right-1/4 h-28 w-28 animate-pulse rounded-full bg-yellow-500/10 blur-xl delay-1000" />
+        <div className="absolute top-1/2 left-3/4 h-24 w-24 animate-pulse rounded-full bg-green-500/10 blur-xl delay-2000" />
+        <div className="absolute bottom-1/4 left-1/2 h-36 w-36 animate-pulse rounded-full bg-amber-500/10 blur-xl delay-500" />
       </div>
 
       {/* Easter Egg Hunt Effect */}
-      <div className="fixed inset-0 pointer-events-none z-5">
+      <div className="pointer-events-none fixed inset-0 z-5">
         {/* Animated rolling eggs */}
         {[...Array(3)].map((_, i) => (
           <div
@@ -268,7 +263,7 @@ export default function EasterEffects() {
       </div>
 
       {/* Garden Flowers Effect */}
-      <div className="fixed inset-0 pointer-events-none z-5">
+      <div className="pointer-events-none fixed inset-0 z-5">
         {gardenFlowerPositions.map((pos, i) => (
           <div
             key={`flower-${i}`}
@@ -286,7 +281,7 @@ export default function EasterEffects() {
       </div>
 
       {/* Butterflies Effect */}
-      <div className="fixed inset-0 pointer-events-none z-5">
+      <div className="pointer-events-none fixed inset-0 z-5">
         {butterflyPositions.map((pos, i) => (
           <div
             key={`butterfly-${i}`}
@@ -304,13 +299,13 @@ export default function EasterEffects() {
       </div>
 
       {/* Easter Bunny (decorative) */}
-      <div className="fixed top-4 left-4 pointer-events-none z-10">
-        <div className="text-3xl animate-bounce">🐰🥕</div>
+      <div className="pointer-events-none fixed top-4 left-4 z-10">
+        <div className="animate-bounce text-3xl">🐰🥕</div>
       </div>
 
       {/* Spring Garden (decorative) */}
-      <div className="fixed bottom-4 right-4 pointer-events-none z-10">
-        <div className="text-2xl animate-pulse">🥕🌱</div>
+      <div className="pointer-events-none fixed right-4 bottom-4 z-10">
+        <div className="animate-pulse text-2xl">🥕🌱</div>
       </div>
     </>
   );

@@ -17,8 +17,7 @@ export const APP_NAME = 'londonlink';
 /**
  * Application description
  */
-export const APP_DESCRIPTION =
-  'English Learning Platform with Brazilian Portuguese Focus';
+export const APP_DESCRIPTION = 'English Learning Platform with Brazilian Portuguese Focus';
 
 /**
  * Parse semantic version into components

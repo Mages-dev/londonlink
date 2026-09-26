@@ -6,9 +6,4 @@ export { BooksSection } from './books';
 export { FeedbackSection, FeedbackAlternatingSection } from './feedback';
 export { GallerySection } from './gallery';
 export { ContactSection } from './contact';
-export {
-  OptimizedImage,
-  SHARED_IMAGES,
-  SHARED_IMAGE_ALTS,
-  useOptimizedImage,
-} from './shared';
+export { OptimizedImage, SHARED_IMAGES, SHARED_IMAGE_ALTS, useOptimizedImage } from './shared';

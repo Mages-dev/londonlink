@@ -2,34 +2,29 @@
 
 export const goalsTranslationsEn = {
   title: 'What are your needs and goals with the English language?',
-  description:
-    'Choose your learning path based on your specific needs and objectives.',
+  description: 'Choose your learning path based on your specific needs and objectives.',
 
   // Goals cards
   goals: [
     {
       icon: 'travel',
       title: 'Maybe an unexpected trip to an English-speaking country?',
-      description:
-        'Prepare for travel with practical English skills for real-world situations.',
+      description: 'Prepare for travel with practical English skills for real-world situations.',
     },
     {
       icon: 'business',
       title: 'A business trip to London, New York or Sydney or Cape Town?',
-      description:
-        'Professional English for international business communications.',
+      description: 'Professional English for international business communications.',
     },
     {
       icon: 'exam',
       title: 'Studying for IELTS, TOEFL, FCE, CAE, CPE or some other exam?',
-      description:
-        'Specialized preparation for English proficiency examinations.',
+      description: 'Specialized preparation for English proficiency examinations.',
     },
     {
       icon: 'conversation',
       title: 'Already know English, but need more conversation practice?',
-      description:
-        'Improve fluency and confidence through conversation practice.',
+      description: 'Improve fluency and confidence through conversation practice.',
     },
     {
       icon: 'career',
@@ -39,8 +34,7 @@ export const goalsTranslationsEn = {
     {
       icon: 'deadline',
       title: 'Want to start from scratch, but have a tight deadline?',
-      description:
-        'Intensive English courses for beginners with time constraints.',
+      description: 'Intensive English courses for beginners with time constraints.',
     },
   ],
 

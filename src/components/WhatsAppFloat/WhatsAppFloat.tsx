@@ -51,17 +51,11 @@ export function WhatsAppFloat({ currentLanguage }: WhatsAppFloatProps) {
       {/* Tooltip */}
       {showTooltip && (
         <div className="whatsapp-float__tooltip">
-          {currentLanguage === 'pt'
-            ? 'Fale conosco no WhatsApp!'
-            : 'Chat with us on WhatsApp!'}
+          {currentLanguage === 'pt' ? 'Fale conosco no WhatsApp!' : 'Chat with us on WhatsApp!'}
           <button
             onClick={() => setShowTooltip(false)}
             className="whatsapp-float__tooltip-close"
-            aria-label={
-              currentLanguage === 'pt'
-                ? 'Fechar notificação'
-                : 'Close notification'
-            }
+            aria-label={currentLanguage === 'pt' ? 'Fechar notificação' : 'Close notification'}
           >
             <X size={14} aria-hidden="true" />
           </button>
@@ -76,11 +70,7 @@ export function WhatsAppFloat({ currentLanguage }: WhatsAppFloatProps) {
         target="_blank"
         rel="noopener noreferrer"
         className="whatsapp-float__button"
-        aria-label={
-          currentLanguage === 'pt'
-            ? 'Contato via WhatsApp'
-            : 'Contact via WhatsApp'
-        }
+        aria-label={currentLanguage === 'pt' ? 'Contato via WhatsApp' : 'Contact via WhatsApp'}
       >
         <Image
           src="/icons/whatsApp.svg"

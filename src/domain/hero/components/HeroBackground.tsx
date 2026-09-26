@@ -24,7 +24,7 @@ export function HeroBackground() {
           alt={HERO_IMAGE_ALTS.illustrations.floatingElements}
           width={200}
           height={200}
-          className="opacity-20 animate-pulse"
+          className="animate-pulse opacity-20"
         />
       </div>
     </div>

@@ -45,9 +45,7 @@ export function generateLanguageTemplate(
   const capitalizedDomain = domain.charAt(0).toUpperCase() + domain.slice(1);
   const capitalizedLang = language.toUpperCase();
 
-  return `// ${capitalizedDomain} section - ${getLanguageName(
-    language,
-  )} translations
+  return `// ${capitalizedDomain} section - ${getLanguageName(language)} translations
 
 export const ${domain}Translations${
     capitalizedLang.charAt(0) + language.slice(1)
@@ -84,9 +82,7 @@ export function validateTranslationKeys<T extends Record<string, any>>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function checkKeys(base: any, target: any, path = ''): boolean {
     if (typeof base !== typeof target) {
-      console.warn(
-        `Type mismatch at ${path}: expected ${typeof base}, got ${typeof target}`,
-      );
+      console.warn(`Type mismatch at ${path}: expected ${typeof base}, got ${typeof target}`);
       return false;
     }
 

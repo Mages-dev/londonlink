@@ -126,12 +126,7 @@
 
 /* Halloween Header */
 .theme-halloween .header-halloween {
-  background: linear-gradient(
-    135deg,
-    var(--primary) 0%,
-    var(--accent) 50%,
-    var(--special) 100%
-  );
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--special) 100%);
   position: relative;
 }
 
@@ -143,26 +138,14 @@
   right: 0;
   bottom: 0;
   background:
-    radial-gradient(
-      circle at 20% 80%,
-      rgba(168, 85, 247, 0.3) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 80% 20%,
-      rgba(251, 191, 36, 0.3) 0%,
-      transparent 50%
-    );
+    radial-gradient(circle at 20% 80%, rgba(168, 85, 247, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(251, 191, 36, 0.3) 0%, transparent 50%);
   pointer-events: none;
 }
 
 /* Halloween Cards */
 .theme-halloween .halloween-card {
-  background: linear-gradient(
-    145deg,
-    rgba(31, 41, 55, 0.95) 0%,
-    rgba(55, 48, 163, 0.85) 100%
-  );
+  background: linear-gradient(145deg, rgba(31, 41, 55, 0.95) 0%, rgba(55, 48, 163, 0.85) 100%);
   border: 2px solid var(--special);
   transition: all 0.3s ease;
   position: relative;
@@ -229,16 +212,8 @@
 /* Halloween Background Patterns */
 .theme-halloween .halloween-bg-pattern {
   background-image:
-    radial-gradient(
-      circle at 25% 25%,
-      rgba(168, 85, 247, 0.1) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 75% 75%,
-      rgba(251, 191, 36, 0.1) 0%,
-      transparent 50%
-    );
+    radial-gradient(circle at 25% 25%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(251, 191, 36, 0.1) 0%, transparent 50%);
 }
 
 /* Halloween Navigation */
@@ -259,21 +234,13 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(
-    90deg,
-    var(--special-accent) 0%,
-    var(--special) 100%
-  );
+  background: linear-gradient(90deg, var(--special-accent) 0%, var(--special) 100%);
   box-shadow: 0 0 8px var(--special-accent);
 }
 
 /* Halloween Footer */
 .theme-halloween .halloween-footer {
-  background: linear-gradient(
-    180deg,
-    rgba(12, 10, 9, 0.9) 0%,
-    rgba(31, 41, 55, 0.95) 100%
-  );
+  background: linear-gradient(180deg, rgba(12, 10, 9, 0.9) 0%, rgba(31, 41, 55, 0.95) 100%);
   border-top: 2px solid var(--special);
 }
 

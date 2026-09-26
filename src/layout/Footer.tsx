@@ -8,9 +8,9 @@ export function Footer() {
   const version = getVersionString();
 
   return (
-    <footer className="mt-auto bg-gray-800 border-t border-gray-700 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
-        <div className="flex justify-center items-center">
+    <footer className="mt-auto border-t border-gray-700 bg-gray-800 py-8">
+      <div className="mx-auto max-w-7xl space-y-3 px-4 text-center sm:px-6 lg:px-8">
+        <div className="flex items-center justify-center">
           <a
             href="https://mages.dev"
             target="_blank"
@@ -28,9 +28,9 @@ export function Footer() {
             />
           </a>
         </div>
-        <div className="text-gray-400 text-md space-y-1">
+        <div className="text-md space-y-1 text-gray-400">
           <p>© {currentYear} LondonLink. All rights reserved.</p>
-          <p className="text-gray-400 text-sm">{version}</p>
+          <p className="text-sm text-gray-400">{version}</p>
         </div>
       </div>
     </footer>

@@ -21,9 +21,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 try {
   await fetch(URL_TO_CHECK);
 } catch {
-  console.error(
-    `Nothing answers at ${URL_TO_CHECK}. Run \`pnpm build && pnpm start\` first.`,
-  );
+  console.error(`Nothing answers at ${URL_TO_CHECK}. Run \`pnpm build && pnpm start\` first.`);
   process.exit(2);
 }
 
@@ -76,8 +74,7 @@ const send = (method, params = {}) =>
     ws.send(JSON.stringify({ id: current, method, params }));
   });
 const evaluate = async (expression) =>
-  (await send('Runtime.evaluate', { expression, returnByValue: true })).result
-    .value;
+  (await send('Runtime.evaluate', { expression, returnByValue: true })).result.value;
 
 try {
   await send('Log.enable');
@@ -104,18 +101,12 @@ try {
 }
 
 const messages = events
-  .filter((event) =>
-    ['Log.entryAdded', 'Runtime.consoleAPICalled'].includes(event.method),
-  )
+  .filter((event) => ['Log.entryAdded', 'Runtime.consoleAPICalled'].includes(event.method))
   .map(
     (event) =>
-      event.params.entry?.text ??
-      event.params.args?.map((arg) => arg.value).join(' ') ??
-      '',
+      event.params.entry?.text ?? event.params.args?.map((arg) => arg.value).join(' ') ?? '',
   );
-const violations = messages.filter((text) =>
-  /Content Security Policy/i.test(text),
-);
+const violations = messages.filter((text) => /Content Security Policy/i.test(text));
 const thirdParty = [
   ...new Set(
     events

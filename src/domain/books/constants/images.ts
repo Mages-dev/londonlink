@@ -11,12 +11,9 @@ export const BOOKS_IMAGES = {
     students: '/assets/images/books/previews/students.jpg',
   },
   thumbnails: {
-    threeLionsPart1Thumb:
-      '/assets/images/books/thumbnails/three-lions-part-1-thumb.jpg',
-    threeLionsPart2Thumb:
-      '/assets/images/books/thumbnails/three-lions-part-2-thumb.jpg',
-    threeLionsPart3Thumb:
-      '/assets/images/books/thumbnails/three-lions-part-3-thumb.jpg',
+    threeLionsPart1Thumb: '/assets/images/books/thumbnails/three-lions-part-1-thumb.jpg',
+    threeLionsPart2Thumb: '/assets/images/books/thumbnails/three-lions-part-2-thumb.jpg',
+    threeLionsPart3Thumb: '/assets/images/books/thumbnails/three-lions-part-3-thumb.jpg',
   },
 } as const;
 

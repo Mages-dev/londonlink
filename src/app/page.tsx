@@ -26,13 +26,10 @@ export default function Home() {
   const { language, setLanguage } = useLanguage();
 
   return (
-    <div className="min-h-screen flex flex-col section-bg-hero">
-      <HeaderWithTheme
-        currentLanguage={language}
-        onLanguageChange={setLanguage}
-      />
+    <div className="section-bg-hero flex min-h-screen flex-col">
+      <HeaderWithTheme currentLanguage={language} onLanguageChange={setLanguage} />
 
-      <main id="main-content" className="flex-1 flex flex-col">
+      <main id="main-content" className="flex flex-1 flex-col">
         <HeroSection currentLanguage={language} />
         <AboutSection currentLanguage={language} />
         <GoalsSection currentLanguage={language} />

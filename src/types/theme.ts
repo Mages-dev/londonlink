@@ -3,13 +3,7 @@
 export type ThemeMode = 'light' | 'dark' | 'auto';
 
 export type CommemorativeTheme =
-  | 'default'
-  | 'halloween'
-  | 'christmas'
-  | 'new-year'
-  | 'valentine'
-  | 'easter'
-  | 'carnival';
+  'default' | 'halloween' | 'christmas' | 'new-year' | 'valentine' | 'easter' | 'carnival';
 
 export interface ThemeColors {
   // Base colors

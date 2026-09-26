@@ -93,7 +93,7 @@ export function GalleryModal({
   }, [onClose, onPrevious, onNext, canGoPrevious, canGoNext]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 animate-fade-in">
+    <div className="fixed inset-0 z-50 flex animate-fade-in items-center justify-center bg-black/90">
       {/* Backdrop (click to close; keyboard users use Esc / close button) */}
       <div className="absolute inset-0 cursor-pointer" onClick={onClose} />
 
@@ -103,20 +103,15 @@ export function GalleryModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby="gallery-modal-title"
-        className="relative w-full min-w-[320px] max-w-[95vw] lg:max-w-[85vw] xl:max-w-7xl max-h-full mx-2 sm:mx-4 animate-scale-in"
+        className="relative mx-2 max-h-full w-full max-w-[95vw] min-w-[320px] animate-scale-in sm:mx-4 lg:max-w-[85vw] xl:max-w-7xl"
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 z-20 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full p-3 shadow-xl border-2 border-gray-200 dark:border-gray-600 transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary"
+          className="absolute top-2 right-2 z-20 rounded-full border-2 border-gray-200 bg-white p-3 text-gray-700 shadow-xl transition-all duration-200 hover:scale-110 hover:bg-gray-100 focus:ring-2 focus:ring-primary focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
           aria-label={t.closeGallery}
         >
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
+          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -130,15 +125,10 @@ export function GalleryModal({
         {canGoPrevious && (
           <button
             onClick={onPrevious}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white rounded-full p-3 transition-all duration-200 hover:scale-110"
+            className="absolute top-1/2 left-4 z-10 -translate-y-1/2 rounded-full bg-black/50 p-3 text-white transition-all duration-200 hover:scale-110 hover:bg-black/70"
             aria-label={t.previousImage}
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -152,28 +142,18 @@ export function GalleryModal({
         {canGoNext && (
           <button
             onClick={onNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white rounded-full p-3 transition-all duration-200 hover:scale-110"
+            className="absolute top-1/2 right-4 z-10 -translate-y-1/2 rounded-full bg-black/50 p-3 text-white transition-all duration-200 hover:scale-110 hover:bg-black/70"
             aria-label={t.nextImage}
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
         )}
 
         {/* Image Container */}
-        <div className="relative bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-2xl">
-          <div className="relative w-full h-[60vh] sm:h-[70vh] lg:h-[75vh] xl:h-[80vh]">
+        <div className="relative overflow-hidden rounded-lg bg-white shadow-2xl dark:bg-gray-900">
+          <div className="relative h-[60vh] w-full sm:h-[70vh] lg:h-[75vh] xl:h-[80vh]">
             <Image
               src={image.src}
               alt={image.alt}
@@ -185,7 +165,7 @@ export function GalleryModal({
           </div>
 
           {/* Image Info */}
-          <div className="p-4 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+          <div className="border-t border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-900">
             <div className="flex items-center justify-between">
               <div>
                 <h3
@@ -194,27 +174,19 @@ export function GalleryModal({
                 >
                   {image.title}
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                  {image.alt}
-                </p>
+                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">{image.alt}</p>
               </div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">
-                {counterText}
-              </div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">{counterText}</div>
             </div>
           </div>
         </div>
 
         {/* Keyboard Hints */}
         <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 text-center">
-          <div className="text-white text-sm opacity-70">
-            <span className="inline-block mx-2">ESC: {t.closeGallery}</span>
-            {canGoPrevious && (
-              <span className="inline-block mx-2">←: {t.previousImage}</span>
-            )}
-            {canGoNext && (
-              <span className="inline-block mx-2">→: {t.nextImage}</span>
-            )}
+          <div className="text-sm text-white opacity-70">
+            <span className="mx-2 inline-block">ESC: {t.closeGallery}</span>
+            {canGoPrevious && <span className="mx-2 inline-block">←: {t.previousImage}</span>}
+            {canGoNext && <span className="mx-2 inline-block">→: {t.nextImage}</span>}
           </div>
         </div>
       </div>

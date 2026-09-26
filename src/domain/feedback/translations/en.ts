@@ -82,8 +82,7 @@ export const feedbackTranslationsEn = {
   // Call to action
   cta: {
     title: 'Ready to Join Our Success Stories?',
-    description:
-      'Start your English journey today and become our next success story!',
+    description: 'Start your English journey today and become our next success story!',
     button: 'Start Learning Now',
   },
 } as const;

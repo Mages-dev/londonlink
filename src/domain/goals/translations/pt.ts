@@ -15,34 +15,28 @@ export const goalsTranslationsPt = {
     },
     {
       icon: 'business',
-      title:
-        'Uma viagem de negócios para Londres, Nova York, Sydney ou Cidade do Cabo?',
-      description:
-        'Inglês profissional para comunicações empresariais internacionais.',
+      title: 'Uma viagem de negócios para Londres, Nova York, Sydney ou Cidade do Cabo?',
+      description: 'Inglês profissional para comunicações empresariais internacionais.',
     },
     {
       icon: 'exam',
       title: 'Estudando para IELTS, TOEFL, FCE, CAE, CPE ou algum outro exame?',
-      description:
-        'Preparação especializada para exames de proficiência em inglês.',
+      description: 'Preparação especializada para exames de proficiência em inglês.',
     },
     {
       icon: 'conversation',
       title: 'Já sabe inglês, mas precisa de mais prática de conversação?',
-      description:
-        'Melhore a fluência e confiança através da prática de conversação.',
+      description: 'Melhore a fluência e confiança através da prática de conversação.',
     },
     {
       icon: 'career',
       title: 'Aulas de inglês para negócios adaptadas à sua carreira?',
-      description:
-        'Treinamento de inglês específico para o setor para avanço na carreira.',
+      description: 'Treinamento de inglês específico para o setor para avanço na carreira.',
     },
     {
       icon: 'deadline',
       title: 'Quer começar do zero, mas tem um prazo apertado?',
-      description:
-        'Cursos intensivos de inglês para iniciantes com restrições de tempo.',
+      description: 'Cursos intensivos de inglês para iniciantes com restrições de tempo.',
     },
   ],
 

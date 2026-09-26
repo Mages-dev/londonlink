@@ -13,14 +13,12 @@ export const heroTranslationsPt = {
       {
         icon: 'home-ap',
         title: 'Aulas Personalizadas',
-        description:
-          'Estude de acordo com suas necessidades pessoais e objetivos.',
+        description: 'Estude de acordo com suas necessidades pessoais e objetivos.',
       },
       {
         icon: 'home-cp',
         title: 'Forme Seu Grupo',
-        description:
-          'Aulas em duplas, trios, grupos ou sessões individuais. Você escolhe.',
+        description: 'Aulas em duplas, trios, grupos ou sessões individuais. Você escolhe.',
       },
       {
         icon: 'home-er',

@@ -78,8 +78,7 @@ const connect = async (webSocketUrl) => {
       ws.send(JSON.stringify({ id: current, method, params }));
     });
   const evaluate = async (expression) =>
-    (await send('Runtime.evaluate', { expression, returnByValue: true })).result
-      .value;
+    (await send('Runtime.evaluate', { expression, returnByValue: true })).result.value;
   return { ws, send, evaluate };
 };
 
@@ -133,9 +132,7 @@ const run = async (outDir) => {
   try {
     await fetch(URL_TO_CHECK);
   } catch {
-    console.error(
-      `Nothing answers at ${URL_TO_CHECK}. Run \`pnpm build && pnpm start\` first.`,
-    );
+    console.error(`Nothing answers at ${URL_TO_CHECK}. Run \`pnpm build && pnpm start\` first.`);
     process.exit(2);
   }
   const { chrome, page } = await startChrome();
@@ -146,9 +143,7 @@ const run = async (outDir) => {
     for (const combination of combinations) {
       const { png, text, lang } = await capture(client, combination);
       if (lang !== combination.language) {
-        throw new Error(
-          `${nameOf(combination)}: <html lang> is "${lang}", preset did not apply`,
-        );
+        throw new Error(`${nameOf(combination)}: <html lang> is "${lang}", preset did not apply`);
       }
       await writeFile(path.join(outDir, `${nameOf(combination)}.png`), png);
       await writeFile(path.join(outDir, `${nameOf(combination)}.txt`), text);
@@ -162,9 +157,7 @@ const run = async (outDir) => {
 const save = async () => {
   const dir = path.join(baseDir, 'baseline');
   await run(dir);
-  console.log(
-    `Baseline saved: ${combinations.length} shots → ${path.relative(root, dir)}`,
-  );
+  console.log(`Baseline saved: ${combinations.length} shots → ${path.relative(root, dir)}`);
 };
 
 const diff = async () => {

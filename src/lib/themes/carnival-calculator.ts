@@ -42,9 +42,7 @@ export function calculateCarnival(year: number): {
   // Calculate days until next Sunday
   const dayOfWeek = traditionalCarnivalTuesday.getDay(); // 0 = Sunday, 1 = Monday, ..., 2 = Tuesday
   const daysUntilSunday = dayOfWeek === 0 ? 0 : 7 - dayOfWeek; // If already Sunday, stay; otherwise go to next Sunday
-  extendedCarnivalEnd.setDate(
-    traditionalCarnivalTuesday.getDate() + daysUntilSunday,
-  );
+  extendedCarnivalEnd.setDate(traditionalCarnivalTuesday.getDate() + daysUntilSunday);
 
   return {
     start: {
@@ -176,16 +174,9 @@ export function getCarnivalInfo(year: number): {
   const traditional = getTraditionalCarnivalDates(year);
   const extended = calculateCarnival(year);
 
-  const startDate = new Date(
-    year,
-    extended.start.month - 1,
-    extended.start.day,
-  );
+  const startDate = new Date(year, extended.start.month - 1, extended.start.day);
   const endDate = new Date(year, extended.end.month - 1, extended.end.day);
-  const duration =
-    Math.ceil(
-      (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24),
-    ) + 1;
+  const duration = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
 
   return {
     easter,

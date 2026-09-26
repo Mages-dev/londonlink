@@ -9,9 +9,7 @@ import { tailwind4 } from 'tailwind-csstree';
 // eslint-plugin-react's version 'detect' (the Next preset's setting) calls
 // context.getFilename(), which ESLint 10 removed; pass the installed React
 // version instead.
-const reactVersion = createRequire(import.meta.url)(
-  'react/package.json',
-).version;
+const reactVersion = createRequire(import.meta.url)('react/package.json').version;
 
 const eslintConfig = defineConfig([
   ...coreWebVitals,

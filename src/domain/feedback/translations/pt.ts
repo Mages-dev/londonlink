@@ -2,8 +2,7 @@
 
 export const feedbackTranslationsPt = {
   title: 'O Que Nossos Alunos Dizem',
-  subtitle:
-    'Feedback real de alunos reais que alcançaram seus objetivos no inglês',
+  subtitle: 'Feedback real de alunos reais que alcançaram seus objetivos no inglês',
   description:
     'Descubra como nossa abordagem personalizada ajudou alunos de todas as origens a alcançar fluência e confiança no inglês.',
 
@@ -83,8 +82,7 @@ export const feedbackTranslationsPt = {
   // Call to action
   cta: {
     title: 'Pronto para Se Juntar às Nossas Histórias de Sucesso?',
-    description:
-      'Comece sua jornada no inglês hoje e torne-se nossa próxima história de sucesso!',
+    description: 'Comece sua jornada no inglês hoje e torne-se nossa próxima história de sucesso!',
     button: 'Começar a Aprender Agora',
   },
 } as const;

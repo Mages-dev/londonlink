@@ -261,11 +261,7 @@ export function forceNewYearTheme() {
   console.log('🎆 Forcing New Year theme...');
 
   // Add theme class to body
-  document.body.classList.remove(
-    'theme-halloween',
-    'theme-christmas',
-    'theme-valentine',
-  );
+  document.body.classList.remove('theme-halloween', 'theme-christmas', 'theme-valentine');
   document.body.classList.add('theme-new-year');
 
   // Apply New Year CSS variables
@@ -285,11 +281,7 @@ export function forceValentineTheme() {
   console.log('💕 Forcing Valentine theme...');
 
   // Add theme class to body
-  document.body.classList.remove(
-    'theme-halloween',
-    'theme-christmas',
-    'theme-new-year',
-  );
+  document.body.classList.remove('theme-halloween', 'theme-christmas', 'theme-new-year');
   document.body.classList.add('theme-valentine');
 
   // Apply Valentine CSS variables

@@ -1,23 +1,8 @@
 'use client';
 
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  ReactNode,
-} from 'react';
-import {
-  ThemeMode,
-  CommemorativeTheme,
-  ThemeContextType,
-  ThemeColors,
-} from '@/types/theme';
-import {
-  getThemeConfig,
-  isThemeInSeason,
-  getSuggestedTheme,
-} from '@/lib/themes/configs';
+import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { ThemeMode, CommemorativeTheme, ThemeContextType, ThemeColors } from '@/types/theme';
+import { getThemeConfig, isThemeInSeason, getSuggestedTheme } from '@/lib/themes/configs';
 
 // Create the context
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -34,8 +19,7 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [mode, setModeState] = useState<ThemeMode>('auto');
-  const [commemorativeTheme, setCommemorativeThemeState] =
-    useState<CommemorativeTheme>('default');
+  const [commemorativeTheme, setCommemorativeThemeState] = useState<CommemorativeTheme>('default');
   const [mounted, setMounted] = useState(false);
   const [manualOverride, setManualOverride] = useState(false);
 
@@ -54,8 +38,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     }
 
     // Check if user has manually overridden theme
-    const savedOverride =
-      localStorage.getItem('londonlink-manual-override') === 'true';
+    const savedOverride = localStorage.getItem('londonlink-manual-override') === 'true';
     setManualOverride(savedOverride);
 
     if (savedOverride && savedCommemorative) {
@@ -129,19 +112,13 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     let actualMode: 'light' | 'dark' = mode === 'light' ? 'light' : 'dark';
 
     if (mode === 'auto') {
-      const prefersDark = window.matchMedia(
-        '(prefers-color-scheme: dark)',
-      ).matches;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       actualMode = prefersDark ? 'dark' : 'light';
     }
 
     // Remove existing theme classes
     root.classList.remove('light', 'dark');
-    body.classList.remove(
-      'theme-default',
-      'theme-halloween',
-      'theme-christmas',
-    );
+    body.classList.remove('theme-default', 'theme-halloween', 'theme-christmas');
 
     // Apply mode class
     root.classList.add(actualMode);
@@ -211,8 +188,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     const config = getThemeConfig(commemorativeTheme);
     const actualMode =
       mode === 'auto'
-        ? typeof window !== 'undefined' &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
           ? 'dark'
           : 'light'
         : mode;
@@ -277,11 +253,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     );
   }
 
-  return (
-    <ThemeContext.Provider value={contextValue}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={contextValue}>{children}</ThemeContext.Provider>;
 }
 
 // Custom hook to use theme context
@@ -306,8 +278,7 @@ export function useThemeSeason(theme: CommemorativeTheme) {
 
 // Hook to get theme suggestions
 export function useThemeSuggestions() {
-  const { suggestedTheme, commemorativeTheme, setCommemorativeTheme } =
-    useTheme();
+  const { suggestedTheme, commemorativeTheme, setCommemorativeTheme } = useTheme();
 
   const acceptSuggestion = () => {
     if (suggestedTheme) {
@@ -318,17 +289,12 @@ export function useThemeSuggestions() {
   const dismissSuggestion = () => {
     // Store dismissal in localStorage to avoid showing again
     if (suggestedTheme) {
-      localStorage.setItem(
-        `dismissed-${suggestedTheme}-${new Date().getFullYear()}`,
-        'true',
-      );
+      localStorage.setItem(`dismissed-${suggestedTheme}-${new Date().getFullYear()}`, 'true');
     }
   };
 
   const isDismissed = suggestedTheme
-    ? localStorage.getItem(
-        `dismissed-${suggestedTheme}-${new Date().getFullYear()}`,
-      ) === 'true'
+    ? localStorage.getItem(`dismissed-${suggestedTheme}-${new Date().getFullYear()}`) === 'true'
     : false;
 
   const shouldShowSuggestion =

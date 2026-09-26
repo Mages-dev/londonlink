@@ -1,18 +1,8 @@
 'use client';
 
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  ReactNode,
-} from 'react';
+import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { Language } from '@/types';
-import {
-  DEFAULT_LANGUAGE,
-  isValidLanguage,
-  detectBrowserLanguage,
-} from '@/translations/config';
+import { DEFAULT_LANGUAGE, isValidLanguage, detectBrowserLanguage } from '@/translations/config';
 
 // Language Context Type
 interface LanguageContextType {
@@ -22,9 +12,7 @@ interface LanguageContextType {
 }
 
 // Create the context
-const LanguageContext = createContext<LanguageContextType | undefined>(
-  undefined,
-);
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 // Local storage key
 const STORAGE_KEY = 'londonlink-language';
@@ -96,11 +84,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     );
   }
 
-  return (
-    <LanguageContext.Provider value={contextValue}>
-      {children}
-    </LanguageContext.Provider>
-  );
+  return <LanguageContext.Provider value={contextValue}>{children}</LanguageContext.Provider>;
 }
 
 // Custom hook to use language context

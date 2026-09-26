@@ -21,8 +21,7 @@ const SOURCE_DIR = path.join(root, 'src');
 const DOMAIN_DIR = path.join(SOURCE_DIR, 'domain');
 const LOCALES = ['en', 'pt'];
 
-const isObject = (value) =>
-  value !== null && typeof value === 'object' && !Array.isArray(value);
+const isObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
 
 const loadLocale = async (file) => {
   const module = await import(pathToFileURL(file).href);
@@ -86,21 +85,15 @@ const escape = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 const isRead = (key, sources) => {
   const k = escape(key);
-  return new RegExp(
-    `\\.${k}\\b|\\[\\s*['"\`]${k}['"\`]\\s*\\]|['"\`]${k}['"\`]`,
-  ).test(sources);
+  return new RegExp(`\\.${k}\\b|\\[\\s*['"\`]${k}['"\`]\\s*\\]|['"\`]${k}['"\`]`).test(sources);
 };
 
 const parityProblems = (domain, en, pt) => {
   const enPaths = new Set(shape(en));
   const ptPaths = new Set(shape(pt));
   return [
-    ...[...enPaths]
-      .filter((p) => !ptPaths.has(p))
-      .map((p) => `${domain}: only in en: ${p}`),
-    ...[...ptPaths]
-      .filter((p) => !enPaths.has(p))
-      .map((p) => `${domain}: only in pt: ${p}`),
+    ...[...enPaths].filter((p) => !ptPaths.has(p)).map((p) => `${domain}: only in en: ${p}`),
+    ...[...ptPaths].filter((p) => !enPaths.has(p)).map((p) => `${domain}: only in pt: ${p}`),
   ];
 };
 
@@ -111,25 +104,18 @@ const orphanProblems = (domain, en, sources) =>
 
 const domains = await listDomains();
 const files = await listSources();
-const sources = (
-  await Promise.all(files.map((file) => readFile(file, 'utf8')))
-).join('\n');
+const sources = (await Promise.all(files.map((file) => readFile(file, 'utf8')))).join('\n');
 
 const problems = [];
 for (const { name, dir } of domains) {
   const [en, pt] = await Promise.all(
     LOCALES.map((locale) => loadLocale(path.join(dir, `${locale}.ts`))),
   );
-  problems.push(
-    ...parityProblems(name, en, pt),
-    ...orphanProblems(name, en, sources),
-  );
+  problems.push(...parityProblems(name, en, pt), ...orphanProblems(name, en, sources));
 }
 
 if (problems.length === 0) {
-  console.log(
-    `Locales in parity across ${domains.length} domains; every dictionary key is read.`,
-  );
+  console.log(`Locales in parity across ${domains.length} domains; every dictionary key is read.`);
 } else {
   for (const problem of problems) console.log(`  ✗ ${problem}`);
   console.log(`\n${problems.length} problem(s).`);

@@ -3,15 +3,10 @@
 import { useTheme } from '@/contexts/ThemeContext';
 
 export default function ThemeDebug() {
-  const {
-    commemorativeTheme,
-    mode,
-    isCommemorativeThemeActive,
-    manualOverride,
-  } = useTheme();
+  const { commemorativeTheme, mode, isCommemorativeThemeActive, manualOverride } = useTheme();
 
   return (
-    <div className="fixed bottom-4 left-4 bg-black/80 text-white p-2 rounded text-xs z-50">
+    <div className="fixed bottom-4 left-4 z-50 rounded bg-black/80 p-2 text-xs text-white">
       <div>Theme: {commemorativeTheme}</div>
       <div>Mode: {mode}</div>
       <div>Active: {isCommemorativeThemeActive ? 'Yes' : 'No'}</div>

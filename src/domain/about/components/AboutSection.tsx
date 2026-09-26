@@ -20,31 +20,31 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
     >
       {/* Section 1 - Main Introduction */}
       <div className="relative py-16">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Text Content */}
             <div>
               <h2
                 id="about-heading"
-                className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight text-gray-900 dark:text-white"
+                className="mb-6 text-3xl leading-tight font-bold text-gray-900 md:text-4xl lg:text-5xl dark:text-white"
               >
                 {t.section1.title}
               </h2>
-              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p className="text-lg leading-relaxed text-gray-600 md:text-xl dark:text-gray-300">
                 {t.section1.description}
               </p>
             </div>
 
             {/* Image */}
             <div className="relative">
-              <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-2xl transform hover:scale-105 transition-transform duration-300">
-                <div className="relative border-4 border-red-500 rounded-xl overflow-hidden">
+              <div className="relative transform rounded-2xl bg-white/10 p-2 shadow-2xl backdrop-blur-sm transition-transform duration-300 hover:scale-105">
+                <div className="relative overflow-hidden rounded-xl border-4 border-red-500">
                   <Image
                     src={ABOUT_IMAGES.about1}
                     alt={ABOUT_IMAGE_ALTS.about1[currentLanguage]}
                     width={600}
                     height={400}
-                    className="w-full h-auto object-cover"
+                    className="h-auto w-full object-cover"
                     priority
                   />
                 </div>
@@ -56,18 +56,18 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
 
       {/* Section 2 - Philosophy */}
       <div className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-5 gap-12 items-start">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-start gap-12 lg:grid-cols-5">
             {/* Image - Left side on desktop */}
             <div className="order-2 lg:order-1 lg:col-span-2">
-              <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-xl transform hover:scale-105 transition-transform duration-300 sticky top-8">
-                <div className="relative border-4 border-red-500 rounded-xl overflow-hidden">
+              <div className="relative sticky top-8 transform rounded-2xl bg-white/10 p-2 shadow-xl backdrop-blur-sm transition-transform duration-300 hover:scale-105">
+                <div className="relative overflow-hidden rounded-xl border-4 border-red-500">
                   <Image
                     src={ABOUT_IMAGES.about2}
                     alt={ABOUT_IMAGE_ALTS.about2[currentLanguage]}
                     width={600}
                     height={400}
-                    className="w-full h-auto object-cover"
+                    className="h-auto w-full object-cover"
                   />
                 </div>
               </div>
@@ -75,14 +75,14 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
 
             {/* Text Content - Right side on desktop */}
             <div className="order-1 lg:order-2 lg:col-span-3">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8">
+              <h2 className="mb-8 text-3xl font-bold text-gray-900 md:text-4xl dark:text-white">
                 {t.section2.title}
               </h2>
               <div className="space-y-6">
                 {t.section2.paragraphs.map((paragraph, index) => (
                   <p
                     key={index}
-                    className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed"
+                    className="text-lg leading-relaxed text-gray-600 md:text-xl dark:text-gray-300"
                   >
                     {paragraph}
                   </p>
@@ -95,18 +95,18 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
 
       {/* Section 3 - History */}
       <div className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-5 gap-12 items-start">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-start gap-12 lg:grid-cols-5">
             {/* Text Content */}
             <div className="lg:col-span-3">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8">
+              <h2 className="mb-8 text-3xl font-bold text-gray-900 md:text-4xl dark:text-white">
                 {t.section3.title}
               </h2>
               <div className="space-y-6">
                 {t.section3.paragraphs.map((paragraph, index) => (
                   <p
                     key={index}
-                    className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed"
+                    className="text-lg leading-relaxed text-gray-600 md:text-xl dark:text-gray-300"
                   >
                     {paragraph}
                   </p>
@@ -116,14 +116,14 @@ export function AboutSection({ currentLanguage }: AboutSectionProps) {
 
             {/* Image */}
             <div className="relative lg:col-span-2">
-              <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-xl transform hover:scale-105 transition-transform duration-300 sticky top-8">
-                <div className="relative border-4 border-red-500 rounded-xl overflow-hidden">
+              <div className="relative sticky top-8 transform rounded-2xl bg-white/10 p-2 shadow-xl backdrop-blur-sm transition-transform duration-300 hover:scale-105">
+                <div className="relative overflow-hidden rounded-xl border-4 border-red-500">
                   <Image
                     src={ABOUT_IMAGES.about3}
                     alt={ABOUT_IMAGE_ALTS.about3[currentLanguage]}
                     width={600}
                     height={400}
-                    className="w-full h-auto object-cover"
+                    className="h-auto w-full object-cover"
                   />
                 </div>
               </div>

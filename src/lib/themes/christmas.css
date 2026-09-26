@@ -149,21 +149,9 @@
 /* Christmas Background Pattern */
 .christmas-pattern {
   background-image:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(220, 38, 38, 0.1) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(5, 150, 105, 0.1) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 40% 60%,
-      rgba(251, 191, 36, 0.1) 0%,
-      transparent 50%
-    );
+    radial-gradient(circle at 20% 20%, rgba(220, 38, 38, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(5, 150, 105, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(251, 191, 36, 0.1) 0%, transparent 50%);
 }
 
 /* Responsive Design */

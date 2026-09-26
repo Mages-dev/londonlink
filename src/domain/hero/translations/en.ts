@@ -18,8 +18,7 @@ export const heroTranslationsEn = {
       {
         icon: 'home-cp',
         title: 'Form Your Group',
-        description:
-          'Classes in pairs, trios, groups, or individual sessions. You choose.',
+        description: 'Classes in pairs, trios, groups, or individual sessions. You choose.',
       },
       {
         icon: 'home-er',
@@ -43,8 +42,7 @@ export const heroTranslationsEn = {
   courseObjectives: {
     title: "Tell us exactly what your objectives are and we'll",
     subtitle: 'create a course just for you!',
-    description:
-      "We're ready to design a course fully focused on your specific needs!",
+    description: "We're ready to design a course fully focused on your specific needs!",
     cards: [
       {
         image: 'home-2',

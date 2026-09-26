@@ -57,8 +57,7 @@ export const HERO_IMAGE_ALTS = {
   },
   courseObjectives: {
     'home-2': 'Starting from scratch - beginner English learning illustration',
-    'home-3':
-      'Conversation practice - speaking skills development illustration',
+    'home-3': 'Conversation practice - speaking skills development illustration',
     'home-4': 'Business English - professional communication illustration',
     'home-5': 'Travel English - tourism and travel communication illustration',
     'home-6': 'Exam preparation - test and certification study illustration',

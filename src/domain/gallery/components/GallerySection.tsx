@@ -28,22 +28,22 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
       aria-labelledby="gallery-heading"
       className="section-bg-contact py-16 pb-16"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Community Header - Showcasing student success stories and transformations */}
-        <div className="text-center mb-12">
+        <div className="mb-12 text-center">
           <h2
             id="gallery-heading"
-            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
+            className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl dark:text-white"
           >
             {t.title}
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-600 dark:text-gray-300">
             {t.subtitle}
           </p>
         </div>
 
         {/* L-Shape Gallery */}
-        <div className="relative max-w-4xl mx-auto p-4">
+        <div className="relative mx-auto max-w-4xl p-4">
           {/* L-Shape Container */}
           <div className="gallery-grid">
             {/* VERTICAL PART OF L - Left Columns (Haste do L - 2 colunas) */}
@@ -99,7 +99,7 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
                   key={image.id}
                   type="button"
                   aria-label={image.alt}
-                  className={`${getGridPosition()} ${getBorderClass()} relative cursor-pointer group animate-fade-in-up focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`}
+                  className={`${getGridPosition()} ${getBorderClass()} group relative animate-fade-in-up cursor-pointer focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:outline-none`}
                   onMouseEnter={() => setHoveredImage(image.id)}
                   onMouseLeave={() => setHoveredImage(null)}
                   onClick={() => setSelectedImage(image.id)}
@@ -163,7 +163,7 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
                   key={image.id}
                   type="button"
                   aria-label={image.alt}
-                  className={`${getGridPosition()} ${getBorderClass()} relative cursor-pointer group animate-fade-in-up focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`}
+                  className={`${getGridPosition()} ${getBorderClass()} group relative animate-fade-in-up cursor-pointer focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:outline-none`}
                   onMouseEnter={() => setHoveredImage(image.id)}
                   onMouseLeave={() => setHoveredImage(null)}
                   onClick={() => setSelectedImage(image.id)}
@@ -195,12 +195,8 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
         {/* Modal/Popup para visualizar imagem completa */}
         {selectedImage &&
           (() => {
-            const currentImage = GALLERY_IMAGES.find(
-              (img) => img.id === selectedImage,
-            );
-            const currentIndex = GALLERY_IMAGES.findIndex(
-              (img) => img.id === selectedImage,
-            );
+            const currentImage = GALLERY_IMAGES.find((img) => img.id === selectedImage);
+            const currentIndex = GALLERY_IMAGES.findIndex((img) => img.id === selectedImage);
 
             if (!currentImage) return null;
 
@@ -211,17 +207,11 @@ export function GallerySection({ currentLanguage }: GallerySectionProps) {
                 totalImages={GALLERY_IMAGES.length}
                 onClose={() => setSelectedImage(null)}
                 onPrevious={() => {
-                  const prevIndex =
-                    currentIndex > 0
-                      ? currentIndex - 1
-                      : GALLERY_IMAGES.length - 1;
+                  const prevIndex = currentIndex > 0 ? currentIndex - 1 : GALLERY_IMAGES.length - 1;
                   setSelectedImage(GALLERY_IMAGES[prevIndex].id);
                 }}
                 onNext={() => {
-                  const nextIndex =
-                    currentIndex < GALLERY_IMAGES.length - 1
-                      ? currentIndex + 1
-                      : 0;
+                  const nextIndex = currentIndex < GALLERY_IMAGES.length - 1 ? currentIndex + 1 : 0;
                   setSelectedImage(GALLERY_IMAGES[nextIndex].id);
                 }}
                 canGoPrevious={true}
