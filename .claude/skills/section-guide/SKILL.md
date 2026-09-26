@@ -91,3 +91,10 @@ unified.
 - Render with `OptimizedImage` (`@/domain/shared`): `src`, `alt`, `width`,
   `height`, `priority` only above the fold, `sizes`.
 - Naming: kebab-case, descriptive. WebP/AVIF for photos, SVG for icons/logos.
+- **Replacing an image: give it a new file name**, never overwrite in place.
+  The `next/image` optimizer cache (`.next/cache/images`) survives
+  `pnpm build`, is keyed per output format, and the response carries
+  `max-age=14400` (Next 16.3 default `minimumCacheTTL`): an overwritten file
+  keeps serving the old picture for up to 4h, server and browser — and
+  `visual:diff` can report "unchanged". Verified 2026-09-26 on the books
+  author photo.
