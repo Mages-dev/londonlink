@@ -1,12 +1,14 @@
 ---
 name: a11y-audit
 description: >
-  Accessibility audit and remediation for the LondonLink Next.js marketing SPA,
-  targeting WCAG 2.2 AA. Walks a deterministic checklist over landmarks,
-  headings, images, icon-only controls, keyboard operability (gallery modal +
-  feedback carousel), visible focus, target size, reduced-motion, contrast, and
-  the contact form, then applies minimal fixes. Use when auditing accessibility,
-  fixing ARIA, adding keyboard support, or reviewing a11y before commit.
+  Use before editing any UI in this repo — components, markup, images/alt text,
+  interactive controls (toggles, gallery modal, feedback carousel, forms), CSS,
+  theme CSS or seasonal *Effects — and when auditing accessibility, fixing ARIA,
+  adding keyboard support, or reviewing a11y before commit. WCAG 2.2 AA
+  checklist for the LondonLink Next.js marketing SPA (landmarks, headings,
+  images, icon-only controls, keyboard, visible focus, target size,
+  reduced-motion, contrast, language) plus the audit → report → fix → verify
+  flow.
 version: 1.0.0
 metadata:
   author: johnson
@@ -18,10 +20,14 @@ metadata:
 Project-scoped a11y checklist + remediation flow. Authoritative sources, not
 blogs: [WCAG 2.2](https://www.w3.org/TR/WCAG22/),
 [what's new in 2.2](https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/),
-[WAI-ARIA APG patterns](https://www.w3.org/WAI/ARIA/apg/patterns/),
+[WAI-ARIA APG patterns](https://www.w3.org/WAI/ARIA/apg/patterns/) (modal:
+[dialog-modal](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)),
 [MDN ARIA](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA).
 First rule of ARIA: prefer native HTML; use ARIA only to fill gaps and keep its
-state in sync with React state.
+state (`aria-expanded`, `aria-pressed`, `aria-modal`) in sync with React state.
+
+Status: a site-wide WCAG 2.2 AA pass shipped in v2.4.0 (see `CHANGELOG.md`).
+Apply this checklist to every new or touched UI so it stays there.
 
 ## When to use
 
@@ -38,8 +44,13 @@ state in sync with React state.
    with `file:line` + WCAG criterion + concrete fix.
 4. **Fix.** Apply minimal, reviewable diffs. Prefer native HTML over ARIA. Add
    copy to **both** `en.ts` and `pt.ts` for any user-facing string (labels too).
-5. **Verify.** `pnpm lint` (jsx-a11y via eslint-config-next), `pnpm build`, and
-   manual keyboard pass. A change is done only when lint + format:check + build pass.
+5. **Verify.** `pnpm lint` (`eslint-plugin-jsx-a11y` ships via
+   `eslint-config-next` — keep its rules on; it catches missing `alt`, bad
+   `aria-*`/`role`, non-interactive handlers), `pnpm build`, a manual
+   keyboard pass, and `pnpm text:diff` / `pnpm visual:diff` against a baseline
+   saved before the fix — every drift must be one the fix intended (alt and
+   aria-label text show in `text:diff`; English and dark mode only in
+   `visual:diff`). A change is done only when lint + format:check + build pass.
 
 ## Checklist
 
@@ -60,7 +71,8 @@ state in sync with React state.
 - [ ] Icon-only controls (language/theme toggle, theme selector, WhatsApp float,
       modal close, carousel arrows) have `aria-label`.
 - [ ] Stateful toggles expose `aria-pressed` / `aria-expanded` synced to state.
-- [ ] **Target size ≥ 24×24 CSS px** (WCAG 2.2 SC 2.5.8) — audit icon buttons.
+- [ ] **Target size ≥ 24×24 CSS px** (or 24px spacing; WCAG 2.2 SC 2.5.8) —
+      audit icon buttons. `WhatsAppFloat` (48/56px) already passes.
 
 ### Keyboard (WCAG 2.1.1 / 2.4.3 / 2.4.11)
 
@@ -100,7 +112,8 @@ state in sync with React state.
 
 - **2.4.11 Focus Not Obscured (AA)** — sticky `Header` / `WhatsAppFloat` / modal
   must not fully hide the focused element.
-- **2.5.7 Dragging Movements (AA)** — swipe-only needs a button alternative.
+- **2.5.7 Dragging Movements (AA)** — swipe-only needs a button alternative
+  (the carousel arrow buttons satisfy this — keep them).
 - **2.5.8 Target Size Minimum (AA)** — interactive targets ≥ 24×24 px.
 - **3.2.6 Consistent Help (A)** — keep contact/WhatsApp entry in a consistent spot.
 - **4.1.1 Parsing was removed** — duplicate-id is no longer a WCAG failure (still

@@ -1,13 +1,14 @@
 ---
 name: security-audit
 description: >
-  Security audit and remediation for the LondonLink Next.js marketing SPA,
-  targeting OWASP-aligned production-grade HTTP headers and a CSP without
-  unsafe-*. Walks a deterministic checklist over security headers, CSP,
-  inline-script policy, secrets, the (future) contact form, dependency CVEs, and
-  third-party integrations, then applies minimal fixes. Use when auditing
-  security, hardening headers/CSP, reviewing a dependency bump, or before
-  committing input-handling/form/config changes.
+  Use before editing next.config.js (headers/CSP), the inline scripts in
+  src/app/layout.tsx, any third-party script or embed (GA, Maps), any form or
+  input handling, or package.json / pnpm-workspace.yaml (adding, bumping or
+  overriding a dependency) — and when auditing security or reviewing a
+  dependency bump. OWASP-aligned checklist for the LondonLink Next.js marketing
+  SPA: hardening headers, the CSP and its documented unsafe-* accepted risk,
+  inline-script policy, secrets, the future contact form, dependency CVEs and
+  third-party integrity, plus the audit → report → fix → verify flow.
 version: 1.0.0
 metadata:
   author: johnson
@@ -22,7 +23,14 @@ Authoritative sources, not blogs:
 [OWASP Secure Headers](https://owasp.org/www-project-secure-headers/),
 [OWASP CSP Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html),
 [MDN CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP),
-[Next.js CSP with nonces](https://nextjs.org/docs/app/guides/content-security-policy).
+[MDN HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers),
+[Next.js CSP with nonces](https://nextjs.org/docs/app/guides/content-security-policy),
+[`headers` in next.config](https://nextjs.org/docs/app/api-reference/config/next-config-js/headers).
+Scanners: [securityheaders.com](https://securityheaders.com),
+[CSP Evaluator](https://csp-evaluator.withgoogle.com),
+[Mozilla Observatory](https://developer.mozilla.org/en-US/observatory).
+Advisories: `pnpm audit`, GitHub Dependabot,
+[Next.js security advisories](https://github.com/vercel/next.js/security/advisories).
 
 Scope reality: a fully client-rendered Next.js 16 App Router marketing SPA — no
 auth, no DB (yet). The real attack surface is **headers / CSP, the inline
@@ -32,7 +40,7 @@ form, and dependency CVEs**.
 ## When to use
 
 - Auditing the site (or a touched surface) for security.
-- Hardening headers / CSP, or migrating the CSP off `unsafe-*`.
+- Hardening headers / CSP, or revisiting the CSP `unsafe-*` accepted risk.
 - Reviewing a dependency bump (`pnpm audit` after every change).
 - Pre-commit pass on config, forms, or any input handling.
 
@@ -48,8 +56,9 @@ form, and dependency CVEs**.
 4. **Fix.** Apply minimal, reviewable diffs. Add any user-facing copy (e.g. form
    error strings) to **both** `en.ts` and `pt.ts`.
 5. **Verify.** `pnpm build`, `pnpm lint`, `pnpm audit`, plus an external
-   `securityheaders.com` / CSP Evaluator scan of a deployed preview and a browser
-   console check (no CSP violations across themes/langs). A change is done only
+   `securityheaders.com` / CSP Evaluator scan of a deployed preview, and
+   `pnpm csp:check` against `pnpm build && pnpm start` (fails on any CSP
+   violation; lists the GA and Maps responses). A change is done only
    when lint + format:check + build pass and audit is clean.
 
 ## Severity → action
@@ -70,20 +79,38 @@ form, and dependency CVEs**.
 - [ ] `X-Content-Type-Options: nosniff`.
 - [ ] `Referrer-Policy: strict-origin-when-cross-origin`.
 - [ ] `Permissions-Policy: camera=(), microphone=(), geolocation=()`.
+- [ ] `Cross-Origin-Opener-Policy: same-origin`.
 - [ ] `frame-ancestors 'none'`, `object-src 'none'`, `base-uri 'self'` set in CSP.
 
 ### CSP `script-src` (OWASP A03/A05)
 
-- [ ] No `'unsafe-inline'` / `'unsafe-eval'` (open item — nonce migration).
-- [ ] Third-party origins scoped to what's actually used (GA loader; Maps is an
-      iframe embed, so Maps JS origins aren't needed in `script-src`).
-- [ ] **Nonce migration** (the hard one): generate a per-request nonce in
-      `middleware.ts`, propagate to the framework's own inline flight scripts +
-      the `layout.tsx` bootstraps + GA `<Script>`. This **forces dynamic
-      rendering** — confirm that tradeoff is acceptable and document it; isolate
-      in its own PR. Hash-based CSP is not a clean fit (Next emits per-render
-      inline scripts that can't be hashed ahead of time). Validate with CSP
-      Evaluator + a real browser console.
+**`'unsafe-inline'` + `'unsafe-eval'` are a documented accepted risk.** They
+serve the two inline bootstrap scripts in `layout.tsx` (lang/theme no-flash),
+the GA inline config, and the framework's own App Router inline flight scripts
+(`__NEXT_F`). **Decision (2026-06): keep them.** This is a static, fully
+prerendered marketing page with no auth and no user-controlled data rendered
+into the DOM, so the reflected/stored-XSS vector `unsafe-inline` guards against
+is not present. Dropping them on App Router needs a per-request nonce, which
+forces dynamic rendering and gives up the static prerender + CDN cacheability —
+not worth it for a brochure site.
+
+- [ ] Accepted risk still holds: no user input, backend form, or auth added. If
+      one was, the nonce migration below becomes required.
+- [ ] Third-party origins scoped to what's actually used: GA in `script-src`
+      and `connect-src`; Maps is an iframe embed, so it needs only
+      `frame-src https://www.google.com` (its JS origins were removed from
+      `script-src`/`connect-src` 2026-09, verified with `csp:check`).
+- [ ] **Cheap tightening, no rendering tradeoff:** `'unsafe-eval'` is the
+      droppable half — nothing in _our_ origin uses `eval` (Maps runs in
+      Google's origin; GA4 `gtag.js` does not eval). Removable independently
+      after a browser smoke-test. Left in for now (keep-it-simple decision).
+- [ ] **Nonce migration** (only when the accepted risk is revisited): generate a
+      per-request nonce in `middleware.ts`, propagate to the framework's inline
+      flight scripts + the `layout.tsx` bootstraps + GA `<Script>`. Forces
+      dynamic rendering; isolate in its own PR, verified on a deployed preview.
+      Hash-based CSP is not a clean fit (Next emits per-render inline scripts
+      that can't be hashed ahead of time). Validate with CSP Evaluator + a real
+      browser console.
 
 ### Inline scripts / XSS (OWASP A03)
 
@@ -115,15 +142,18 @@ Currently links + a Maps embed iframe only
 
 - [ ] `pnpm audit` clean. Next.js patched within its minor range (CVE history —
       see `CHANGELOG.md`).
-- [ ] Transitive CVEs pinned via `overrides:` in `pnpm-workspace.yaml`
-      (pnpm 11 ignores `pnpm.overrides` in `package.json`). Range-scope each
-      override so a major line is patched without an API-breaking bump.
-- [ ] Re-run `pnpm audit` after every dependency change; prune overrides once
-      parents pull the fixes.
+- [ ] Transitive CVEs: refresh within the parent's range first (`pnpm update`);
+      an `overrides:` entry in `pnpm-workspace.yaml` only for what the parent's
+      range cannot reach (pnpm ignores `pnpm.overrides` in `package.json`),
+      range-scoped per major line, pruned once the parent pulls the fix
+      (`tooling-guide` → pnpm and supply chain).
+- [ ] Re-run `pnpm audit` after every dependency change.
 
 ### Third-party (OWASP A08)
 
 - [ ] GA loaded via `next/script` `afterInteractive`; Maps via iframe embed only.
+- [ ] New third-party service → its origins added to the CSP in
+      `next.config.js`, scoped to the directive that needs them.
 - [ ] SRI used where assets are served from a CDN.
 
 ## Verification
@@ -132,4 +162,5 @@ Currently links + a Maps embed iframe only
 - [ ] `pnpm audit` — no high/critical.
 - [ ] External scan of a deployed preview: `securityheaders.com` grade **A**,
       CSP Evaluator no high-severity, Mozilla Observatory pass.
-- [ ] Browser console: zero CSP violations across themes and languages.
+- [ ] `pnpm csp:check` on the running build: zero CSP violations, GA and Maps
+      responses present. The CSP is baked in at build time — rebuild first.
