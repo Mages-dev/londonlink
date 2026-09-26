@@ -27,25 +27,25 @@
 /* Responsive container adjustments */
 @media (max-width: 640px) {
   .gallery-grid {
-    height: 420px !important;
+    height: 420px;
   }
 }
 
 @media (min-width: 641px) and (max-width: 768px) {
   .gallery-grid {
-    height: 520px !important;
+    height: 520px;
   }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .gallery-grid {
-    height: 650px !important;
+    height: 650px;
   }
 }
 
 @media (min-width: 1025px) {
   .gallery-grid {
-    height: 780px !important;
+    height: 780px;
   }
 }
 
