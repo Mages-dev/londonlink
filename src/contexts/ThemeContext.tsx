@@ -1,31 +1,16 @@
-"use client";
+'use client';
 
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  ReactNode,
-} from "react";
-import {
-  ThemeMode,
-  CommemorativeTheme,
-  ThemeContextType,
-  ThemeColors,
-} from "@/types/theme";
-import {
-  getThemeConfig,
-  isThemeInSeason,
-  getSuggestedTheme,
-} from "@/lib/themes/configs";
+import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { ThemeMode, CommemorativeTheme, ThemeContextType, ThemeColors } from '@/types/theme';
+import { getThemeConfig, isThemeInSeason, getSuggestedTheme } from '@/lib/themes/configs';
 
 // Create the context
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 // Local storage keys
 const STORAGE_KEYS = {
-  MODE: "londonlink-theme-mode",
-  COMMEMORATIVE: "londonlink-commemorative-theme",
+  MODE: 'londonlink-theme-mode',
+  COMMEMORATIVE: 'londonlink-commemorative-theme',
 } as const;
 
 interface ThemeProviderProps {
@@ -33,9 +18,8 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [mode, setModeState] = useState<ThemeMode>("auto");
-  const [commemorativeTheme, setCommemorativeThemeState] =
-    useState<CommemorativeTheme>("default");
+  const [mode, setModeState] = useState<ThemeMode>('auto');
+  const [commemorativeTheme, setCommemorativeThemeState] = useState<CommemorativeTheme>('default');
   const [mounted, setMounted] = useState(false);
   const [manualOverride, setManualOverride] = useState(false);
 
@@ -46,16 +30,15 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     // Load saved preferences
     const savedMode = localStorage.getItem(STORAGE_KEYS.MODE) as ThemeMode;
     const savedCommemorative = localStorage.getItem(
-      STORAGE_KEYS.COMMEMORATIVE
+      STORAGE_KEYS.COMMEMORATIVE,
     ) as CommemorativeTheme;
 
-    if (savedMode && ["light", "dark", "auto"].includes(savedMode)) {
+    if (savedMode && ['light', 'dark', 'auto'].includes(savedMode)) {
       setModeState(savedMode);
     }
 
     // Check if user has manually overridden theme
-    const savedOverride =
-      localStorage.getItem("londonlink-manual-override") === "true";
+    const savedOverride = localStorage.getItem('londonlink-manual-override') === 'true';
     setManualOverride(savedOverride);
 
     if (savedOverride && savedCommemorative) {
@@ -72,7 +55,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
         setCommemorativeThemeState(savedCommemorative);
       } else {
         // Reset to default if no seasonal theme and saved theme is out of season
-        setCommemorativeThemeState("default");
+        setCommemorativeThemeState('default');
       }
     }
   }, []);
@@ -90,8 +73,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
         setCommemorativeThemeState(suggested);
       }
       // If current theme is no longer in season, reset to default
-      else if (currentTheme !== "default" && !isThemeInSeason(currentTheme)) {
-        setCommemorativeThemeState("default");
+      else if (currentTheme !== 'default' && !isThemeInSeason(currentTheme)) {
+        setCommemorativeThemeState('default');
       }
     };
 
@@ -126,22 +109,16 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     const body = document.body;
 
     // Determine actual mode (support light, dark, and auto)
-    let actualMode: "light" | "dark" = mode === "light" ? "light" : "dark";
+    let actualMode: 'light' | 'dark' = mode === 'light' ? 'light' : 'dark';
 
-    if (mode === "auto") {
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      actualMode = prefersDark ? "dark" : "light";
+    if (mode === 'auto') {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      actualMode = prefersDark ? 'dark' : 'light';
     }
 
     // Remove existing theme classes
-    root.classList.remove("light", "dark");
-    body.classList.remove(
-      "theme-default",
-      "theme-halloween",
-      "theme-christmas"
-    );
+    root.classList.remove('light', 'dark');
+    body.classList.remove('theme-default', 'theme-halloween', 'theme-christmas');
 
     // Apply mode class
     root.classList.add(actualMode);
@@ -155,7 +132,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
     Object.entries(colors).forEach(([key, value]) => {
       if (value) {
-        const cssVar = `--${key.replace(/([A-Z])/g, "-$1").toLowerCase()}`;
+        const cssVar = `--${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
         root.style.setProperty(cssVar, value);
       }
     });
@@ -167,16 +144,16 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   // Listen for system theme changes when in auto mode
   useEffect(() => {
-    if (!mounted || mode !== "auto") return;
+    if (!mounted || mode !== 'auto') return;
 
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => {
       // Trigger re-application of theme
-      setModeState("auto");
+      setModeState('auto');
     };
 
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
   }, [mode, mounted]);
 
   // Set mode with validation
@@ -189,20 +166,20 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     setCommemorativeThemeState(theme);
     // Mark as manual override when user explicitly changes theme
     setManualOverride(true);
-    localStorage.setItem("londonlink-manual-override", "true");
+    localStorage.setItem('londonlink-manual-override', 'true');
   };
 
   // Reset to automatic theme management
   const resetToAutomatic = () => {
     setManualOverride(false);
-    localStorage.removeItem("londonlink-manual-override");
+    localStorage.removeItem('londonlink-manual-override');
 
     // Apply automatic theme based on current date
     const suggested = getSuggestedTheme();
     if (suggested) {
       setCommemorativeThemeState(suggested);
     } else {
-      setCommemorativeThemeState("default");
+      setCommemorativeThemeState('default');
     }
   };
 
@@ -210,18 +187,17 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   const getCurrentColors = (): ThemeColors => {
     const config = getThemeConfig(commemorativeTheme);
     const actualMode =
-      mode === "auto"
-        ? typeof window !== "undefined" &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light"
+      mode === 'auto'
+        ? typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light'
         : mode;
 
     return config.colors[actualMode];
   };
 
   // Check if commemorative theme is active (not default)
-  const isCommemorativeThemeActive = commemorativeTheme !== "default";
+  const isCommemorativeThemeActive = commemorativeTheme !== 'default';
 
   // Get suggested theme for current date
   const suggestedTheme = getSuggestedTheme();
@@ -245,25 +221,25 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     return (
       <ThemeContext.Provider
         value={{
-          mode: "auto",
-          commemorativeTheme: "default",
+          mode: 'auto',
+          commemorativeTheme: 'default',
           setMode: () => {},
           setCommemorativeTheme: () => {},
           resetToAutomatic: () => {},
           currentColors: {
-            background: "#ffffff",
-            foreground: "#171717",
-            primary: "#2563eb",
-            primaryDark: "#1d4ed8",
-            primaryLight: "#3b82f6",
-            secondary: "#64748b",
-            accent: "#ef4444",
-            muted: "#f8fafc",
-            border: "#e2e8f0",
-            blueGradientStart: "#1e40af",
-            blueGradientEnd: "#3b82f6",
-            bookTeal: "#2190a3",
-            yellow400: "#fbbf24",
+            background: '#ffffff',
+            foreground: '#171717',
+            primary: '#2563eb',
+            primaryDark: '#1d4ed8',
+            primaryLight: '#3b82f6',
+            secondary: '#64748b',
+            accent: '#ef4444',
+            muted: '#f8fafc',
+            border: '#e2e8f0',
+            blueGradientStart: '#1e40af',
+            blueGradientEnd: '#3b82f6',
+            bookTeal: '#2190a3',
+            yellow400: '#fbbf24',
           },
           isCommemorativeThemeActive: false,
           suggestedTheme: undefined,
@@ -277,18 +253,14 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     );
   }
 
-  return (
-    <ThemeContext.Provider value={contextValue}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={contextValue}>{children}</ThemeContext.Provider>;
 }
 
 // Custom hook to use theme context
 export function useTheme(): ThemeContextType {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+    throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
 }
@@ -306,8 +278,7 @@ export function useThemeSeason(theme: CommemorativeTheme) {
 
 // Hook to get theme suggestions
 export function useThemeSuggestions() {
-  const { suggestedTheme, commemorativeTheme, setCommemorativeTheme } =
-    useTheme();
+  const { suggestedTheme, commemorativeTheme, setCommemorativeTheme } = useTheme();
 
   const acceptSuggestion = () => {
     if (suggestedTheme) {
@@ -318,17 +289,12 @@ export function useThemeSuggestions() {
   const dismissSuggestion = () => {
     // Store dismissal in localStorage to avoid showing again
     if (suggestedTheme) {
-      localStorage.setItem(
-        `dismissed-${suggestedTheme}-${new Date().getFullYear()}`,
-        "true"
-      );
+      localStorage.setItem(`dismissed-${suggestedTheme}-${new Date().getFullYear()}`, 'true');
     }
   };
 
   const isDismissed = suggestedTheme
-    ? localStorage.getItem(
-        `dismissed-${suggestedTheme}-${new Date().getFullYear()}`
-      ) === "true"
+    ? localStorage.getItem(`dismissed-${suggestedTheme}-${new Date().getFullYear()}`) === 'true'
     : false;
 
   const shouldShowSuggestion =

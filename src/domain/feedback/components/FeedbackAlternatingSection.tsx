@@ -1,53 +1,57 @@
-"use client";
+'use client';
 
-import { Language } from "@/types";
-import { OptimizedImage } from "@/domain/shared";
-import { FEEDBACK_IMAGES, FEEDBACK_IMAGE_ALTS } from "../constants/images";
-import { feedbackTranslations } from "../translations";
+import { Language } from '@/types';
+import { OptimizedImage } from '@/domain/shared';
+import { FEEDBACK_IMAGES, FEEDBACK_IMAGE_ALTS } from '../constants/images';
+import { feedbackTranslations } from '../translations';
 
 interface FeedbackAlternatingSectionProps {
   currentLanguage: Language;
 }
 
-export function FeedbackAlternatingSection({
-  currentLanguage,
-}: FeedbackAlternatingSectionProps) {
+export function FeedbackAlternatingSection({ currentLanguage }: FeedbackAlternatingSectionProps) {
   const t = feedbackTranslations[currentLanguage];
 
   const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <span
-        key={i}
-        className={`star-icon text-2xl ${
-          i < rating ? "text-yellow-400" : "text-gray-300"
-        }`}
-      >
-        ★
+    const label = currentLanguage === 'pt' ? `${rating} de 5 estrelas` : `${rating} out of 5 stars`;
+    return (
+      <span role="img" aria-label={label}>
+        {Array.from({ length: 5 }, (_, i) => (
+          <span
+            key={i}
+            aria-hidden="true"
+            className={`star-icon text-2xl ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`}
+          >
+            ★
+          </span>
+        ))}
       </span>
-    ));
+    );
   };
 
   return (
-    <section id="feedback" className="relative py-16 section-bg-hero">
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="feedback"
+      aria-labelledby="feedback-heading"
+      className="section-bg-hero relative py-16"
+    >
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 lg:mb-6 leading-tight">
+        <div className="mb-16 text-center">
+          <h2
+            id="feedback-heading"
+            className="mb-4 text-3xl leading-tight font-bold text-white md:text-4xl lg:mb-6 lg:text-5xl xl:text-6xl"
+          >
             {t.title}
           </h2>
-          <p className="text-lg md:text-xl lg:text-2xl text-white font-light mb-4">
-            {t.subtitle}
-          </p>
-          <p className="text-base md:text-lg text-white max-w-3xl mx-auto">
-            {t.description}
-          </p>
+          <p className="mb-4 text-lg font-light text-white md:text-xl lg:text-2xl">{t.subtitle}</p>
+          <p className="mx-auto max-w-3xl text-base text-white md:text-lg">{t.description}</p>
         </div>
 
         {/* Alternating Testimonials */}
         <div className="space-y-16">
           {t.testimonials.map((testimonial, index) => {
-            const imageKey =
-              testimonial.id as keyof typeof FEEDBACK_IMAGES.testimonials;
+            const imageKey = testimonial.id as keyof typeof FEEDBACK_IMAGES.testimonials;
             const currentImage = FEEDBACK_IMAGES.testimonials[imageKey];
             const currentAlt = FEEDBACK_IMAGE_ALTS.testimonials[imageKey];
             const isEven = index % 2 === 0;
@@ -56,23 +60,24 @@ export function FeedbackAlternatingSection({
               <div
                 key={testimonial.id}
                 className={`flex flex-col ${
-                  isEven ? "md:flex-row" : "md:flex-row-reverse"
-                } items-center gap-8 md:gap-12 bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-2xl transition-all duration-300 hover:bg-white/15 hover:shadow-3xl`}
+                  isEven ? 'md:flex-row' : 'md:flex-row-reverse'
+                } hover:shadow-3xl items-center gap-8 rounded-2xl bg-white/10 p-8 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:bg-white/15 md:gap-12`}
               >
                 {/* Student Photo */}
-                <div className="w-full md:w-auto flex justify-center md:min-w-[300px]">
+                <div className="flex w-full justify-center md:w-auto md:min-w-[300px]">
                   {currentImage ? (
                     <OptimizedImage
                       src={currentImage}
                       alt={currentAlt}
                       width={300}
                       height={400}
-                      className="w-full max-w-[225px] sm:max-w-[300px] md:max-w-[255px] h-[300px] sm:h-[400px] md:h-[340px] object-cover rounded-lg shadow-lg border-4 border-red-500 transition-all duration-500 ease-in-out"
+                      className="h-[300px] w-full max-w-[225px] rounded-lg border-4 border-red-500 object-cover shadow-lg transition-all duration-500 ease-in-out sm:h-[400px] sm:max-w-[300px] md:h-[340px] md:max-w-[255px]"
                     />
                   ) : (
-                    <div className="w-full max-w-[203px] sm:max-w-[270px] md:max-w-[230px] h-[300px] sm:h-[400px] md:h-[340px] bg-gray-500 rounded-lg shadow-lg border-4 border-white transition-all duration-500 ease-in-out flex items-center justify-center">
+                    <div className="flex h-[300px] w-full max-w-[203px] items-center justify-center rounded-lg border-4 border-white bg-gray-500 shadow-lg transition-all duration-500 ease-in-out sm:h-[400px] sm:max-w-[270px] md:h-[340px] md:max-w-[230px]">
                       <svg
-                        className="w-24 sm:w-32 md:w-28 h-24 sm:h-32 md:h-28 text-white"
+                        aria-hidden="true"
+                        className="h-24 w-24 text-white sm:h-32 sm:w-32 md:h-28 md:w-28"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -87,10 +92,10 @@ export function FeedbackAlternatingSection({
                 </div>
 
                 {/* Testimonial Content */}
-                <div className="flex-1 w-full text-center md:text-left">
+                <div className="w-full flex-1 text-center md:text-left">
                   {/* Name and Stars */}
                   <div className="mb-4">
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                    <h3 className="mb-2 text-2xl font-bold text-white md:text-3xl">
                       {testimonial.name}
                     </h3>
                     <div className="star-rating flex justify-center md:justify-start">
@@ -99,14 +104,10 @@ export function FeedbackAlternatingSection({
                   </div>
 
                   {/* Testimonial Text */}
-                  <blockquote className="text-base md:text-lg lg:text-xl text-white italic leading-relaxed">
-                    <span className="text-4xl text-white leading-none">
-                      &ldquo;
-                    </span>
+                  <blockquote className="text-base leading-relaxed text-white italic md:text-lg lg:text-xl">
+                    <span className="text-4xl leading-none text-white">&ldquo;</span>
                     {testimonial.text}
-                    <span className="text-4xl text-white leading-none">
-                      &rdquo;
-                    </span>
+                    <span className="text-4xl leading-none text-white">&rdquo;</span>
                   </blockquote>
                 </div>
               </div>

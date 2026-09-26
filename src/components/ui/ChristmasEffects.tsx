@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useReducedMotion } from '@/hooks';
 
 interface FloatingElement {
   id: number;
@@ -15,29 +16,32 @@ interface FloatingElement {
 
 export default function ChristmasEffects() {
   const { commemorativeTheme } = useTheme();
+  const prefersReducedMotion = useReducedMotion();
   const [elements, setElements] = useState<FloatingElement[]>([]);
   const [mounted, setMounted] = useState(false);
 
-  const isChristmasTheme = commemorativeTheme === "christmas";
+  const isChristmasTheme = commemorativeTheme === 'christmas';
 
   // Christmas emojis for floating effects (memoized to prevent re-creation)
   const christmasEmojis = useMemo(
-    () => ["🎄", "🎁", "❄️", "⭐", "🔔", "🎅", "🤶", "🦌", "⛄", "🕯️"],
-    []
+    () => ['🎄', '🎁', '❄️', '⭐', '🔔', '🎅', '🤶', '🦌', '⛄', '🕯️'],
+    [],
   );
 
-  // Fixed positions for sparkles (memoized to prevent re-calculation)
-  const sparklePositions = useMemo(
-    () =>
-      Array.from({ length: 25 }, () => ({
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-      })),
-    []
+  // Random sparkle positions, generated client-side after mount so render
+  // stays pure (react-hooks/purity) and SSR output is deterministic.
+  const [sparklePositions, setSparklePositions] = useState<Array<{ left: number; top: number }>>(
+    [],
   );
 
   useEffect(() => {
     setMounted(true);
+    setSparklePositions(
+      Array.from({ length: 25 }, () => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+      })),
+    );
   }, []);
 
   // Create floating elements
@@ -53,8 +57,7 @@ export default function ChristmasEffects() {
     for (let i = 0; i < elementCount; i++) {
       newElements.push({
         id: i,
-        emoji:
-          christmasEmojis[Math.floor(Math.random() * christmasEmojis.length)],
+        emoji: christmasEmojis[Math.floor(Math.random() * christmasEmojis.length)],
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
         size: Math.random() * 20 + 15, // 15-35px
@@ -76,12 +79,12 @@ export default function ChristmasEffects() {
       createElements();
     };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [mounted, isChristmasTheme, createElements]);
 
   useEffect(() => {
-    if (!isChristmasTheme || elements.length === 0) return;
+    if (!isChristmasTheme || elements.length === 0 || prefersReducedMotion) return;
 
     const animateElements = () => {
       setElements((prevElements) =>
@@ -94,13 +97,13 @@ export default function ChristmasEffects() {
             y: -50,
             x: Math.random() * window.innerWidth,
           }),
-        }))
+        })),
       );
     };
 
     const interval = setInterval(animateElements, 33); // 30 FPS (mais fluido, era 50ms/20 FPS)
     return () => clearInterval(interval);
-  }, [isChristmasTheme, elements.length]);
+  }, [isChristmasTheme, elements.length, prefersReducedMotion]);
 
   // Don't render anything if not mounted or not Christmas theme
   if (!mounted || !isChristmasTheme) {
@@ -110,7 +113,7 @@ export default function ChristmasEffects() {
   return (
     <>
       {/* Floating Christmas Elements */}
-      <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">
+      <div className="pointer-events-none fixed inset-0 z-10 overflow-hidden">
         {elements.map((element) => (
           <div
             key={element.id}
@@ -120,7 +123,7 @@ export default function ChristmasEffects() {
               top: `${element.y}px`,
               fontSize: `${element.size}px`,
               transform: `rotate(${element.rotation}deg)`,
-              filter: "drop-shadow(0 0 3px rgba(220, 38, 38, 0.3))",
+              filter: 'drop-shadow(0 0 3px rgba(220, 38, 38, 0.3))',
             }}
           >
             {element.emoji}
@@ -129,22 +132,22 @@ export default function ChristmasEffects() {
       </div>
 
       {/* Christmas Background Patterns */}
-      <div className="fixed inset-0 pointer-events-none z-0">
+      <div className="pointer-events-none fixed inset-0 z-0">
         {/* Subtle Christmas pattern overlay */}
-        <div className="absolute inset-0 christmas-pattern opacity-30" />
+        <div className="christmas-pattern absolute inset-0 opacity-30" />
 
         {/* Glowing orbs */}
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-red-500/10 rounded-full blur-xl animate-pulse" />
-        <div className="absolute top-3/4 right-1/4 w-24 h-24 bg-green-500/10 rounded-full blur-xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-3/4 w-20 h-20 bg-yellow-500/10 rounded-full blur-xl animate-pulse delay-2000" />
+        <div className="absolute top-1/4 left-1/4 h-32 w-32 animate-pulse rounded-full bg-red-500/10 blur-xl" />
+        <div className="absolute top-3/4 right-1/4 h-24 w-24 animate-pulse rounded-full bg-green-500/10 blur-xl delay-1000" />
+        <div className="absolute top-1/2 left-3/4 h-20 w-20 animate-pulse rounded-full bg-yellow-500/10 blur-xl delay-2000" />
 
         {/* Christmas lights effect */}
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-red-500/20 via-green-500/20 to-red-500/20 animate-pulse" />
-        <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-green-500/20 via-red-500/20 to-green-500/20 animate-pulse delay-500" />
+        <div className="absolute top-0 left-0 h-2 w-full animate-pulse bg-linear-to-r from-red-500/20 via-green-500/20 to-red-500/20" />
+        <div className="absolute bottom-0 left-0 h-2 w-full animate-pulse bg-linear-to-r from-green-500/20 via-red-500/20 to-green-500/20 delay-500" />
       </div>
 
       {/* Christmas Snow Effect */}
-      <div className="fixed inset-0 pointer-events-none z-5">
+      <div className="pointer-events-none fixed inset-0 z-5">
         {/* Animated snowflakes */}
         {[...Array(6)].map((_, i) => (
           <div
@@ -154,7 +157,7 @@ export default function ChristmasEffects() {
               left: `${i * 15 + 10}%`,
               animation: `christmas-snow ${8 + i * 2}s linear infinite`,
               animationDelay: `${i * 1.5}s`,
-              fontSize: "1.5rem",
+              fontSize: '1.5rem',
             }}
           >
             ❄️
@@ -163,7 +166,7 @@ export default function ChristmasEffects() {
       </div>
 
       {/* Christmas Sparkles */}
-      <div className="fixed inset-0 pointer-events-none z-5">
+      <div className="pointer-events-none fixed inset-0 z-5">
         {sparklePositions.map((pos, i) => (
           <div
             key={`sparkle-${i}`}

@@ -15,6 +15,116 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Progress tracking
 - Interactive exercises
 
+### 🔄 Changed
+
+- Prettier: `printWidth` 100 and Tailwind class sorting
+  (`prettier-plugin-tailwindcss`); config trimmed to the options that differ
+  from Prettier's defaults. Codebase reformatted — built CSS, rendered text and
+  screenshots unchanged
+- README rewritten as a product overview
+- Deploy workflow: `webfactory/ssh-agent` v0.10 (runs on Node 24)
+- VS Code: stylesheets validated by ESLint instead of the built-in CSS
+  validator (which misreports Tailwind 4 at-rules)
+
+### 🐛 Fixed
+
+- Link previews and social cards: `metadataBase` and `og:url` pointed at
+  `londonlink.com`, a domain with no DNS; they now use the production domain,
+  `https://www.londonlink.com.br`
+
+### 🗑️ Removed
+
+- Unused `scripts/create-placeholder-images.js`
+- Windows `Zone.Identifier` metadata files committed under `public/`
+- Template leftovers in `.gitignore` (yarn, `.pnp`, Vercel) and redundant
+  `.prettierignore` entries (Prettier already reads `.gitignore`)
+
+## [2.5.0] - 2026-09-26
+
+### 🔒 Security
+
+- **Next.js 16.3.6**: fixes two critical unauthenticated remote code execution
+  advisories in 16.2.x (Image Optimization API, fixed only in 16.3.3; Windows
+  hosts), the 16.2.11 advisory set, and RCE in `next/og` (16.3.6)
+- Transitive advisories (postcss, nanoid, browserslist, js-yaml,
+  brace-expansion, …) fixed within the parents' ranges; `pnpm audit` clean and
+  all old `overrides:` removed
+- CSP: dropped the unused Maps origins from `script-src`/`connect-src` (Maps is
+  an iframe embed)
+- `minimumReleaseAge` (1 day) written out in `pnpm-workspace.yaml`
+
+### ✨ Added
+
+- Checks for a site without tests: `copy:check` (en/pt dictionary parity and
+  unused keys), `text:save`/`text:diff` (rendered text), `visual:save`/
+  `visual:diff` (screenshots in both languages, modes and widths),
+  `csp:check` (CSP violations on the running build)
+- Stylesheet lint (`@eslint/css` with Tailwind 4 syntax); `pnpm lint` fails on
+  warnings
+- Pre-commit hook (husky + lint-staged): Prettier, ESLint, `tsc` and
+  `copy:check` on staged files
+- CI workflow on pull requests: format, lint, dictionaries, build, audit
+- Project skills and pipelines for Claude Code (`/section-pipeline`,
+  `/deps-update`) with read-only auditor and reviewer agents
+
+### 🔄 Changed
+
+- Dependencies: React 19.3, Tailwind CSS 4.3, TypeScript 6, ESLint 10,
+  Prettier 3.9, lucide-react 1.48; pnpm 12.6
+- Node: always the latest LTS (`.nvmrc` → `lts/*`)
+- `CLAUDE.md` reorganized around a change → skill routing table
+
+### 🐛 Fixed
+
+- **Geist font now applies**: the `next/font` variable sat on `<body>`,
+  unreachable from the `:root` theme token, so the page had always rendered in
+  Tailwind's fallback stack (whose change in 4.3 widened word spacing). The
+  page now renders in Geist as intended
+- Removed 18 unused dictionary keys and a needless `!important` on the gallery
+  grid; CSS lint findings cleared
+
+## [2.4.0] - 2026-06-26
+
+### ✨ Added
+
+- **Accessibility (WCAG 2.2 AA)**: site-wide accessibility pass — semantic
+  landmarks, heading order, `aria-label`/`aria-pressed`/`aria-expanded` on
+  icon-only controls, keyboard operability, visible focus, and reduced-motion
+  handling across seasonal effects and theme CSS
+- **Security headers (OWASP)**: added hardening headers in `next.config.js` —
+  `Strict-Transport-Security`, `X-Content-Type-Options`, `Referrer-Policy`,
+  `Permissions-Policy`, `frame-ancestors 'none'`, `object-src 'none'`,
+  `base-uri 'self'`, and Cross-Origin-Opener-Policy; tightened CSP
+  `connect-src` and the Google Maps iframe origins
+- Project `a11y-audit` and `security-audit` skills; WCAG 2.2 AA and
+  OWASP references documented in `CLAUDE.md`
+
+### 🔄 Changed
+
+- **Tooling**: adopted **pnpm** (pinned via `packageManager`), upgraded
+  dependencies, migrated ESLint to flat config, adopted Prettier and
+  formatted the codebase
+- **Tailwind CSS v4**: migrated deprecated `bg-gradient-to-*` →
+  `bg-linear-to-*`, moved dead JS config to `@theme`, restored brand colors
+- **Docs**: consolidated scattered module/`docs` guidance into a single
+  `CLAUDE.md` source of truth; trimmed `README` to a pointer
+
+### 🐛 Fixed
+
+- Footer version text contrast (`text-gray-500` → `text-gray-400`) now meets
+  AA on the dark footer
+- Language and theme toggles: accessible names now contain their visible text
+  (WCAG 2.5.3 Label in Name)
+- Corrected Mages Dev footer logo aspect ratio
+- Removed empty `next.config.ts` stub (config drift; `next.config.js` is the
+  single config)
+
+### 🔒 Security
+
+- Pinned patched transitive dependencies via `pnpm-workspace.yaml`
+  `overrides` (ReDoS / prototype-pollution / XSS in
+  `minimatch`/`picomatch`/`flatted`/`brace-expansion`/`postcss`/`@babel/core`)
+
 ## [2.3.0] - 2025-02-09
 
 ### 🔒 Security

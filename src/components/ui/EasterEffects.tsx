@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useReducedMotion } from '@/hooks';
 
 interface FloatingElement {
   id: number;
@@ -26,48 +27,46 @@ interface SpringElement {
 
 export default function EasterEffects() {
   const { commemorativeTheme } = useTheme();
+  const prefersReducedMotion = useReducedMotion();
   const [elements, setElements] = useState<FloatingElement[]>([]);
   const [springElements, setSpringElements] = useState<SpringElement[]>([]);
   const [mounted, setMounted] = useState(false);
 
-  const isEasterTheme = commemorativeTheme === "easter";
+  const isEasterTheme = commemorativeTheme === 'easter';
 
   // Easter emojis for floating effects (memoized to prevent re-creation)
   const easterEmojis = useMemo(
-    () => ["🐰", "🥚", "🐣", "🐤", "🥕", "🌷", "🌸", "🌺", "🦋", "🌿", "🌱"],
-    []
+    () => ['🐰', '🥚', '🐣', '🐤', '🥕', '🌷', '🌸', '🌺', '🦋', '🌿', '🌱'],
+    [],
   );
 
   // Spring elements (flowers, butterflies, etc.)
-  const springEmojis = useMemo(
-    () => ["🌸", "🌷", "🌺", "🦋", "🌿", "🌱", "🌼", "🌻"],
-    []
-  );
+  const springEmojis = useMemo(() => ['🌸', '🌷', '🌺', '🦋', '🌿', '🌱', '🌼', '🌻'], []);
 
-  // Fixed positions for butterflies (memoized to prevent re-calculation)
-  const butterflyPositions = useMemo(
-    () =>
+  // Random decorative positions, generated client-side after mount so render
+  // stays pure (react-hooks/purity) and SSR output is deterministic.
+  const [butterflyPositions, setButterflyPositions] = useState<
+    Array<{ left: number; top: number }>
+  >([]);
+  const [gardenFlowerPositions, setGardenFlowerPositions] = useState<
+    Array<{ left: number; top: number; emoji: string }>
+  >([]);
+
+  useEffect(() => {
+    setMounted(true);
+    setButterflyPositions(
       Array.from({ length: 12 }, () => ({
         left: Math.random() * 100,
         top: Math.random() * 100,
       })),
-    []
-  );
-
-  // Fixed positions for garden flowers (memoized to prevent re-calculation)
-  const gardenFlowerPositions = useMemo(
-    () =>
+    );
+    setGardenFlowerPositions(
       Array.from({ length: 12 }, (_, i) => ({
         left: Math.random() * 100,
         top: Math.random() * 100,
-        emoji:
-          i % 4 === 0 ? "🌷" : i % 4 === 1 ? "🌸" : i % 4 === 2 ? "🌺" : "🌼",
+        emoji: i % 4 === 0 ? '🌷' : i % 4 === 1 ? '🌸' : i % 4 === 2 ? '🌺' : '🌼',
       })),
-    []
-  );
-
-  useEffect(() => {
-    setMounted(true);
+    );
   }, []);
 
   // Create floating elements
@@ -133,13 +132,13 @@ export default function EasterEffects() {
       createSpringElements();
     };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [mounted, isEasterTheme, createElements, createSpringElements]);
 
   // Animate floating elements
   useEffect(() => {
-    if (!isEasterTheme || elements.length === 0) return;
+    if (!isEasterTheme || elements.length === 0 || prefersReducedMotion) return;
 
     const animateElements = () => {
       setElements((prevElements) =>
@@ -152,17 +151,17 @@ export default function EasterEffects() {
             y: -50,
             x: Math.random() * window.innerWidth,
           }),
-        }))
+        })),
       );
     };
 
     const interval = setInterval(animateElements, 33); // 30 FPS
     return () => clearInterval(interval);
-  }, [isEasterTheme, elements.length]);
+  }, [isEasterTheme, elements.length, prefersReducedMotion]);
 
   // Animate spring elements
   useEffect(() => {
-    if (!isEasterTheme || springElements.length === 0) return;
+    if (!isEasterTheme || springElements.length === 0 || prefersReducedMotion) return;
 
     const animateSpringElements = () => {
       setSpringElements((prevElements) =>
@@ -176,13 +175,13 @@ export default function EasterEffects() {
             y: -20,
             x: Math.random() * window.innerWidth,
           }),
-        }))
+        })),
       );
     };
 
     const interval = setInterval(animateSpringElements, 60); // ~16 FPS
     return () => clearInterval(interval);
-  }, [isEasterTheme, springElements.length]);
+  }, [isEasterTheme, springElements.length, prefersReducedMotion]);
 
   // Don't render anything if not mounted or not Easter theme
   if (!mounted || !isEasterTheme) {
@@ -192,7 +191,7 @@ export default function EasterEffects() {
   return (
     <>
       {/* Floating Easter Elements */}
-      <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">
+      <div className="pointer-events-none fixed inset-0 z-10 overflow-hidden">
         {elements.map((element) => (
           <div
             key={element.id}
@@ -202,7 +201,7 @@ export default function EasterEffects() {
               top: `${element.y}px`,
               fontSize: `${element.size}px`,
               transform: `rotate(${element.rotation}deg)`,
-              filter: "drop-shadow(0 0 3px rgba(16, 185, 129, 0.3))",
+              filter: 'drop-shadow(0 0 3px rgba(16, 185, 129, 0.3))',
             }}
           >
             {element.emoji}
@@ -211,7 +210,7 @@ export default function EasterEffects() {
       </div>
 
       {/* Spring Elements Effect */}
-      <div className="fixed inset-0 pointer-events-none z-15 overflow-hidden">
+      <div className="pointer-events-none fixed inset-0 z-15 overflow-hidden">
         {springElements.map((element) => (
           <div
             key={element.id}
@@ -221,7 +220,7 @@ export default function EasterEffects() {
               top: `${element.y}px`,
               fontSize: `${element.size}px`,
               transform: `rotate(${element.rotation}deg)`,
-              filter: "drop-shadow(0 0 2px rgba(245, 158, 11, 0.3))",
+              filter: 'drop-shadow(0 0 2px rgba(245, 158, 11, 0.3))',
             }}
           >
             {element.emoji}
@@ -230,19 +229,19 @@ export default function EasterEffects() {
       </div>
 
       {/* Easter Background Patterns */}
-      <div className="fixed inset-0 pointer-events-none z-0">
+      <div className="pointer-events-none fixed inset-0 z-0">
         {/* Subtle Easter pattern overlay */}
-        <div className="absolute inset-0 easter-pattern opacity-20" />
+        <div className="easter-pattern absolute inset-0 opacity-20" />
 
         {/* Glowing orbs */}
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-emerald-500/10 rounded-full blur-xl animate-pulse" />
-        <div className="absolute top-3/4 right-1/4 w-28 h-28 bg-yellow-500/10 rounded-full blur-xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-3/4 w-24 h-24 bg-green-500/10 rounded-full blur-xl animate-pulse delay-2000" />
-        <div className="absolute bottom-1/4 left-1/2 w-36 h-36 bg-amber-500/10 rounded-full blur-xl animate-pulse delay-500" />
+        <div className="absolute top-1/4 left-1/4 h-32 w-32 animate-pulse rounded-full bg-emerald-500/10 blur-xl" />
+        <div className="absolute top-3/4 right-1/4 h-28 w-28 animate-pulse rounded-full bg-yellow-500/10 blur-xl delay-1000" />
+        <div className="absolute top-1/2 left-3/4 h-24 w-24 animate-pulse rounded-full bg-green-500/10 blur-xl delay-2000" />
+        <div className="absolute bottom-1/4 left-1/2 h-36 w-36 animate-pulse rounded-full bg-amber-500/10 blur-xl delay-500" />
       </div>
 
       {/* Easter Egg Hunt Effect */}
-      <div className="fixed inset-0 pointer-events-none z-5">
+      <div className="pointer-events-none fixed inset-0 z-5">
         {/* Animated rolling eggs */}
         {[...Array(3)].map((_, i) => (
           <div
@@ -250,12 +249,12 @@ export default function EasterEffects() {
             className="absolute text-2xl"
             style={{
               top: `${30 + i * 25}%`,
-              left: "-50px",
-              animationName: "easter-egg-roll",
+              left: '-50px',
+              animationName: 'easter-egg-roll',
               animationDuration: `${10 + i * 2}s`,
               animationDelay: `${i * 4}s`,
-              animationIterationCount: "infinite",
-              animationTimingFunction: "linear",
+              animationIterationCount: 'infinite',
+              animationTimingFunction: 'linear',
             }}
           >
             🥚
@@ -264,7 +263,7 @@ export default function EasterEffects() {
       </div>
 
       {/* Garden Flowers Effect */}
-      <div className="fixed inset-0 pointer-events-none z-5">
+      <div className="pointer-events-none fixed inset-0 z-5">
         {gardenFlowerPositions.map((pos, i) => (
           <div
             key={`flower-${i}`}
@@ -282,7 +281,7 @@ export default function EasterEffects() {
       </div>
 
       {/* Butterflies Effect */}
-      <div className="fixed inset-0 pointer-events-none z-5">
+      <div className="pointer-events-none fixed inset-0 z-5">
         {butterflyPositions.map((pos, i) => (
           <div
             key={`butterfly-${i}`}
@@ -300,13 +299,13 @@ export default function EasterEffects() {
       </div>
 
       {/* Easter Bunny (decorative) */}
-      <div className="fixed top-4 left-4 pointer-events-none z-10">
-        <div className="text-3xl animate-bounce">🐰🥕</div>
+      <div className="pointer-events-none fixed top-4 left-4 z-10">
+        <div className="animate-bounce text-3xl">🐰🥕</div>
       </div>
 
       {/* Spring Garden (decorative) */}
-      <div className="fixed bottom-4 right-4 pointer-events-none z-10">
-        <div className="text-2xl animate-pulse">🥕🌱</div>
+      <div className="pointer-events-none fixed right-4 bottom-4 z-10">
+        <div className="animate-pulse text-2xl">🥕🌱</div>
       </div>
     </>
   );

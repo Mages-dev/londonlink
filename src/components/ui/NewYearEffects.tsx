@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useReducedMotion } from '@/hooks';
 
 interface FloatingElement {
   id: number;
@@ -21,41 +22,42 @@ interface ConfettiPiece {
   size: number;
   speed: number;
   rotation: number;
+  borderRadius: string;
 }
 
 export default function NewYearEffects() {
   const { commemorativeTheme } = useTheme();
+  const prefersReducedMotion = useReducedMotion();
   const [elements, setElements] = useState<FloatingElement[]>([]);
   const [confetti, setConfetti] = useState<ConfettiPiece[]>([]);
   const [mounted, setMounted] = useState(false);
 
-  const isNewYearTheme = commemorativeTheme === "new-year";
+  const isNewYearTheme = commemorativeTheme === 'new-year';
 
   // New Year emojis for floating effects (memoized to prevent re-creation)
-  const newYearEmojis = useMemo(
-    () => ["🎆", "🎇", "🥂", "🍾", "🎊", "🎉", ""],
-    []
-  );
+  const newYearEmojis = useMemo(() => ['🎆', '🎇', '🥂', '🍾', '🎊', '🎉', ''], []);
 
   // Confetti colors
   const confettiColors = useMemo(
-    () => ["#d97706", "#f59e0b", "#eab308", "#6366f1", "#8b5cf6", "#f3f4f6"],
-    []
+    () => ['#d97706', '#f59e0b', '#eab308', '#6366f1', '#8b5cf6', '#f3f4f6'],
+    [],
   );
 
-  // Fixed positions for sparkles (memoized to prevent re-calculation)
-  const sparklePositions = useMemo(
-    () =>
-      Array.from({ length: 20 }, (_, i) => ({
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-        emoji: i % 3 === 0 ? "✨" : i % 3 === 1 ? "🌟" : "💫",
-      })),
-    []
-  );
+  // Random sparkle positions, generated client-side after mount so render
+  // stays pure (react-hooks/purity) and SSR output is deterministic.
+  const [sparklePositions, setSparklePositions] = useState<
+    Array<{ left: number; top: number; emoji: string }>
+  >([]);
 
   useEffect(() => {
     setMounted(true);
+    setSparklePositions(
+      Array.from({ length: 20 }, (_, i) => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        emoji: i % 3 === 0 ? '✨' : i % 3 === 1 ? '🌟' : '💫',
+      })),
+    );
   }, []);
 
   // Create floating elements
@@ -98,11 +100,11 @@ export default function NewYearEffects() {
         id: i,
         x: Math.random() * window.innerWidth,
         y: -20,
-        color:
-          confettiColors[Math.floor(Math.random() * confettiColors.length)],
+        color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
         size: Math.random() * 8 + 4, // 4-12px
         speed: Math.random() * 3 + 2, // 2-5 speed
         rotation: Math.random() * 360,
+        borderRadius: Math.random() > 0.5 ? '50%' : '0%',
       });
     }
 
@@ -121,13 +123,13 @@ export default function NewYearEffects() {
       createConfetti();
     };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [mounted, isNewYearTheme, createElements, createConfetti]);
 
   // Animate floating elements
   useEffect(() => {
-    if (!isNewYearTheme || elements.length === 0) return;
+    if (!isNewYearTheme || elements.length === 0 || prefersReducedMotion) return;
 
     const animateElements = () => {
       setElements((prevElements) =>
@@ -140,17 +142,17 @@ export default function NewYearEffects() {
             y: -50,
             x: Math.random() * window.innerWidth,
           }),
-        }))
+        })),
       );
     };
 
     const interval = setInterval(animateElements, 33); // 30 FPS
     return () => clearInterval(interval);
-  }, [isNewYearTheme, elements.length]);
+  }, [isNewYearTheme, elements.length, prefersReducedMotion]);
 
   // Animate confetti
   useEffect(() => {
-    if (!isNewYearTheme || confetti.length === 0) return;
+    if (!isNewYearTheme || confetti.length === 0 || prefersReducedMotion) return;
 
     const animateConfetti = () => {
       setConfetti((prevConfetti) =>
@@ -163,13 +165,13 @@ export default function NewYearEffects() {
             y: -20,
             x: Math.random() * window.innerWidth,
           }),
-        }))
+        })),
       );
     };
 
     const interval = setInterval(animateConfetti, 50); // 20 FPS
     return () => clearInterval(interval);
-  }, [isNewYearTheme, confetti.length]);
+  }, [isNewYearTheme, confetti.length, prefersReducedMotion]);
 
   // Don't render anything if not mounted or not New Year theme
   if (!mounted || !isNewYearTheme) {
@@ -179,7 +181,7 @@ export default function NewYearEffects() {
   return (
     <>
       {/* Floating New Year Elements */}
-      <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">
+      <div className="pointer-events-none fixed inset-0 z-10 overflow-hidden">
         {elements.map((element) => (
           <div
             key={element.id}
@@ -189,7 +191,7 @@ export default function NewYearEffects() {
               top: `${element.y}px`,
               fontSize: `${element.size}px`,
               transform: `rotate(${element.rotation}deg)`,
-              filter: "drop-shadow(0 0 4px rgba(217, 119, 6, 0.4))",
+              filter: 'drop-shadow(0 0 4px rgba(217, 119, 6, 0.4))',
             }}
           >
             {element.emoji}
@@ -198,7 +200,7 @@ export default function NewYearEffects() {
       </div>
 
       {/* Confetti Effect */}
-      <div className="fixed inset-0 pointer-events-none z-15 overflow-hidden">
+      <div className="pointer-events-none fixed inset-0 z-15 overflow-hidden">
         {confetti.map((piece) => (
           <div
             key={piece.id}
@@ -210,46 +212,46 @@ export default function NewYearEffects() {
               height: `${piece.size}px`,
               backgroundColor: piece.color,
               transform: `rotate(${piece.rotation}deg)`,
-              borderRadius: Math.random() > 0.5 ? "50%" : "0%",
+              borderRadius: piece.borderRadius,
             }}
           />
         ))}
       </div>
 
       {/* New Year Background Patterns */}
-      <div className="fixed inset-0 pointer-events-none z-0">
+      <div className="pointer-events-none fixed inset-0 z-0">
         {/* Subtle New Year pattern overlay */}
-        <div className="absolute inset-0 newyear-pattern opacity-25" />
+        <div className="newyear-pattern absolute inset-0 opacity-25" />
 
         {/* Glowing orbs */}
-        <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-amber-500/10 rounded-full blur-xl animate-pulse" />
-        <div className="absolute top-3/4 right-1/4 w-32 h-32 bg-indigo-500/10 rounded-full blur-xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-3/4 w-28 h-28 bg-yellow-500/10 rounded-full blur-xl animate-pulse delay-2000" />
-        <div className="absolute bottom-1/4 left-1/2 w-36 h-36 bg-purple-500/10 rounded-full blur-xl animate-pulse delay-500" />
+        <div className="absolute top-1/4 left-1/4 h-40 w-40 animate-pulse rounded-full bg-amber-500/10 blur-xl" />
+        <div className="absolute top-3/4 right-1/4 h-32 w-32 animate-pulse rounded-full bg-indigo-500/10 blur-xl delay-1000" />
+        <div className="absolute top-1/2 left-3/4 h-28 w-28 animate-pulse rounded-full bg-yellow-500/10 blur-xl delay-2000" />
+        <div className="absolute bottom-1/4 left-1/2 h-36 w-36 animate-pulse rounded-full bg-purple-500/10 blur-xl delay-500" />
       </div>
 
       {/* Fireworks Effect */}
-      <div className="fixed inset-0 pointer-events-none z-5">
+      <div className="pointer-events-none fixed inset-0 z-5">
         {/* Animated fireworks */}
         {[...Array(4)].map((_, i) => (
           <div
             key={`firework-${i}`}
-            className="absolute text-2xl animate-bounce"
+            className="absolute animate-bounce text-2xl"
             style={{
               left: `${i * 20 + 15}%`,
-              bottom: "10px",
+              bottom: '10px',
               animationDelay: `${i * 0.8}s`,
               animationDuration: `${2 + i * 0.3}s`,
-              animationIterationCount: "infinite",
+              animationIterationCount: 'infinite',
             }}
           >
-            {i % 2 === 0 ? "🎆" : "🎇"}
+            {i % 2 === 0 ? '🎆' : '🎇'}
           </div>
         ))}
       </div>
 
       {/* Golden Sparkles */}
-      <div className="fixed inset-0 pointer-events-none z-5">
+      <div className="pointer-events-none fixed inset-0 z-5">
         {sparklePositions.map((pos, i) => (
           <div
             key={`sparkle-${i}`}
@@ -267,8 +269,8 @@ export default function NewYearEffects() {
       </div>
 
       {/* Countdown Clock Effect (decorative) */}
-      <div className="fixed top-4 right-4 pointer-events-none z-10">
-        <div className="text-4xl animate-pulse">🕛</div>
+      <div className="pointer-events-none fixed top-4 right-4 z-10">
+        <div className="animate-pulse text-4xl">🕛</div>
       </div>
     </>
   );

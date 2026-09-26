@@ -1,25 +1,21 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { NavigationItem, Language } from "@/types";
-import {
-  OptimizedImage,
-  SHARED_IMAGES,
-  SHARED_IMAGE_ALTS,
-} from "@/domain/shared";
-import { ThemeSelector } from "@/components/ui";
-import { useTheme } from "@/contexts/ThemeContext";
-import "./styles/header.css";
+import { useState, useEffect } from 'react';
+import { NavigationItem, Language } from '@/types';
+import { OptimizedImage, SHARED_IMAGES, SHARED_IMAGE_ALTS } from '@/domain/shared';
+import { ThemeSelector } from '@/components/ui';
+import { useTheme } from '@/contexts/ThemeContext';
+import './styles/header.css';
 
 // Navigation items with bilingual support
 const navigationItems: NavigationItem[] = [
-  { href: "#home", label: { pt: "Início", en: "Home" } },
-  { href: "#about", label: { pt: "Sobre", en: "About" } },
-  { href: "#goals", label: { pt: "Objetivos", en: "Goals" } },
-  { href: "#books", label: { pt: "Livros", en: "Books" } },
-  { href: "#feedback", label: { pt: "Feedback", en: "Feedback" } },
-  { href: "#gallery", label: { pt: "Galeria", en: "Gallery" } },
-  { href: "#contact", label: { pt: "Contato", en: "Contact" } },
+  { href: '#home', label: { pt: 'Início', en: 'Home' } },
+  { href: '#about', label: { pt: 'Sobre', en: 'About' } },
+  { href: '#goals', label: { pt: 'Objetivos', en: 'Goals' } },
+  { href: '#books', label: { pt: 'Livros', en: 'Books' } },
+  { href: '#feedback', label: { pt: 'Feedback', en: 'Feedback' } },
+  { href: '#gallery', label: { pt: 'Galeria', en: 'Gallery' } },
+  { href: '#contact', label: { pt: 'Contato', en: 'Contact' } },
 ];
 
 interface HeaderProps {
@@ -29,10 +25,7 @@ interface HeaderProps {
 }
 
 // 🔹 Novo hook para detectar seção ativa via IntersectionObserver
-function useActiveSection(
-  sections: string[],
-  setActiveSection: (id: string) => void
-) {
+function useActiveSection(sections: string[], setActiveSection: (id: string) => void) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -44,9 +37,9 @@ function useActiveSection(
       },
       {
         // Ajusta para ativar a seção quando ela chega mais pro topo
-        rootMargin: "-20% 0px -70% 0px",
+        rootMargin: '-20% 0px -70% 0px',
         threshold: 0,
-      }
+      },
     );
 
     const elements = sections
@@ -62,12 +55,12 @@ function useActiveSection(
 }
 
 export default function Header({
-  currentLanguage = "pt",
+  currentLanguage = 'pt',
   onLanguageChange,
   disableThemeSelector = false,
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] = useState('home');
   const [windowWidth, setWindowWidth] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
   const { mode, setMode } = useTheme();
@@ -78,31 +71,28 @@ export default function Header({
       setWindowWidth(window.innerWidth);
     };
     handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // 🔹 Agora usamos IntersectionObserver em vez de cálculo manual
-  useActiveSection(
-    ["home", "about", "goals", "books", "feedback", "gallery", "contact"],
-    (id) => {
-      if (!isScrolling) {
-        setActiveSection(id);
-      }
+  useActiveSection(['home', 'about', 'goals', 'books', 'feedback', 'gallery', 'contact'], (id) => {
+    if (!isScrolling) {
+      setActiveSection(id);
     }
-  );
+  });
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const handleLanguageToggle = () => {
-    const newLanguage: Language = currentLanguage === "en" ? "pt" : "en";
+    const newLanguage: Language = currentLanguage === 'en' ? 'pt' : 'en';
     onLanguageChange?.(newLanguage);
   };
 
   const handleThemeToggle = () => {
-    const newMode = mode === "dark" ? "light" : "dark";
+    const newMode = mode === 'dark' ? 'light' : 'dark';
     setMode(newMode);
   };
 
@@ -110,16 +100,19 @@ export default function Header({
     const element = document.querySelector(href);
     if (element) {
       setIsScrolling(true);
-      setActiveSection(href.replace("#", ""));
-      element.scrollIntoView({ behavior: "smooth" });
+      setActiveSection(href.replace('#', ''));
+      element.scrollIntoView({ behavior: 'smooth' });
       setTimeout(() => setIsScrolling(false), 1000);
     }
     setIsMobileMenuOpen(false);
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/75 backdrop-blur-sm border-b border-slate-700">
-      <nav className="max-w-7xl mx-auto px-6 py-5">
+    <header className="fixed top-0 right-0 left-0 z-50 border-b border-slate-700 bg-slate-900/75 backdrop-blur-sm">
+      <nav
+        aria-label={currentLanguage === 'pt' ? 'Navegação principal' : 'Main navigation'}
+        className="mx-auto max-w-7xl px-6 py-5"
+      >
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
@@ -129,24 +122,22 @@ export default function Header({
               width={180}
               height={60}
               priority
-              className="h-8 sm:h-10 md:h-10 lg:h-14 xl:h-16 w-auto object-contain"
+              className="h-8 w-auto object-contain sm:h-10 md:h-10 lg:h-14 xl:h-16"
             />
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-10">
+          <div className="hidden items-center space-x-10 lg:flex">
             {navigationItems.map((item) => {
-              const isActive = activeSection === item.href.replace("#", "");
+              const isActive = activeSection === item.href.replace('#', '');
               return (
                 <button
                   key={item.href}
                   onClick={() => scrollToSection(item.href)}
-                  className={`font-medium transition-all duration-200 text-lg cursor-pointer relative ${
-                    isActive
-                      ? "text-white font-semibold"
-                      : "text-gray-300 hover:text-white"
+                  className={`relative cursor-pointer text-lg font-medium transition-all duration-200 ${
+                    isActive ? 'font-semibold text-white' : 'text-gray-300 hover:text-white'
                   }`}
-                  aria-label={`Navigate to ${item.label[currentLanguage]}`}
+                  aria-current={isActive ? 'true' : undefined}
                 >
                   {item.label[currentLanguage]}
                   {isActive && <span className="nav-active-indicator"></span>}
@@ -158,30 +149,25 @@ export default function Header({
           {/* Tablet Navigation */}
           <div
             className={`items-center ${
-              windowWidth >= 817 && windowWidth < 1024 ? "flex" : "hidden"
+              windowWidth >= 817 && windowWidth < 1024 ? 'flex' : 'hidden'
             }`}
           >
-            <div
-              className="flex items-center"
-              style={{ gap: "clamp(0.7rem, 2.5vw, 1rem)" }}
-            >
+            <div className="flex items-center" style={{ gap: 'clamp(0.7rem, 2.5vw, 1rem)' }}>
               {navigationItems.map((item) => {
-                const isActive = activeSection === item.href.replace("#", "");
+                const isActive = activeSection === item.href.replace('#', '');
                 return (
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href)}
-                    className={`font-medium transition-all duration-200 text-sm cursor-pointer relative px-2 py-1 rounded ${
+                    className={`relative cursor-pointer rounded px-2 py-1 text-sm font-medium transition-all duration-200 ${
                       isActive
-                        ? "nav-tablet-active"
-                        : "text-gray-300 hover:text-white hover:bg-gray-800/30"
+                        ? 'nav-tablet-active'
+                        : 'text-gray-300 hover:bg-gray-800/30 hover:text-white'
                     }`}
-                    aria-label={`Navigate to ${item.label[currentLanguage]}`}
+                    aria-current={isActive ? 'true' : undefined}
                   >
                     {item.label[currentLanguage]}
-                    {isActive && (
-                      <span className="nav-tablet-active-indicator"></span>
-                    )}
+                    {isActive && <span className="nav-tablet-active-indicator"></span>}
                   </button>
                 );
               })}
@@ -190,40 +176,32 @@ export default function Header({
 
           {/* Theme Selector, Theme Toggle, Language Toggle & Mobile Menu */}
           <div className="flex items-center space-x-4">
-            {!disableThemeSelector &&
-              process.env.NODE_ENV === "development" && (
-                <ThemeSelector currentLanguage={currentLanguage} />
-              )}
+            {!disableThemeSelector && process.env.NODE_ENV === 'development' && (
+              <ThemeSelector currentLanguage={currentLanguage} />
+            )}
 
             {/* Theme Toggle Button - Shows current theme */}
             <button
               onClick={handleThemeToggle}
-              className="flex items-center justify-center p-3 rounded-lg bg-gray-800 hover:bg-gray-700 transition-all duration-200 shadow-sm hover:shadow-md"
+              aria-pressed={mode === 'dark'}
+              className="flex items-center justify-center rounded-lg bg-gray-800 p-3 shadow-sm transition-all duration-200 hover:bg-gray-700 hover:shadow-md"
               aria-label={
-                mode === "dark"
-                  ? currentLanguage === "pt"
-                    ? "Tema escuro ativo - Clique para alternar"
-                    : "Dark theme active - Click to toggle"
-                  : currentLanguage === "pt"
-                  ? "Tema claro ativo - Clique para alternar"
-                  : "Light theme active - Click to toggle"
+                mode === 'dark'
+                  ? currentLanguage === 'pt'
+                    ? 'Tema escuro ativo - Clique para alternar'
+                    : 'Dark theme active - Click to toggle'
+                  : currentLanguage === 'pt'
+                    ? 'Tema claro ativo - Clique para alternar'
+                    : 'Light theme active - Click to toggle'
               }
             >
-              <div className="w-6 h-6 flex items-center justify-center">
+              <div className="flex h-6 w-6 items-center justify-center">
                 <OptimizedImage
-                  src={
-                    mode === "dark"
-                      ? SHARED_IMAGES.icons.moon
-                      : SHARED_IMAGES.icons.sun
-                  }
-                  alt={
-                    mode === "dark"
-                      ? SHARED_IMAGE_ALTS.icons.moon
-                      : SHARED_IMAGE_ALTS.icons.sun
-                  }
+                  src={mode === 'dark' ? SHARED_IMAGES.icons.moon : SHARED_IMAGES.icons.sun}
+                  alt={mode === 'dark' ? SHARED_IMAGE_ALTS.icons.moon : SHARED_IMAGE_ALTS.icons.sun}
                   width={24}
                   height={24}
-                  className="w-full h-full object-contain text-gray-300"
+                  className="h-full w-full object-contain text-gray-300"
                 />
               </div>
             </button>
@@ -231,57 +209,57 @@ export default function Header({
             {/* Language Toggle Button */}
             <button
               onClick={handleLanguageToggle}
-              className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-all duration-200 shadow-sm hover:shadow-md"
+              aria-pressed={currentLanguage === 'en'}
+              className="flex items-center space-x-2 rounded-lg bg-gray-800 px-4 py-2 shadow-sm transition-all duration-200 hover:bg-gray-700 hover:shadow-md"
               aria-label={
-                currentLanguage === "en"
-                  ? "Switch to Portuguese"
-                  : "Mudar para Inglês"
+                currentLanguage === 'en' ? 'EN — switch to Portuguese' : 'PT — mudar para inglês'
               }
             >
-              <div className="w-6 h-6 rounded-full overflow-hidden shadow-sm">
+              <div className="h-6 w-6 overflow-hidden rounded-full shadow-sm">
                 <OptimizedImage
                   src={
-                    currentLanguage === "en"
+                    currentLanguage === 'en'
                       ? SHARED_IMAGES.icons.ukFlag
                       : SHARED_IMAGES.icons.brFlag
                   }
                   alt={
-                    currentLanguage === "en"
+                    currentLanguage === 'en'
                       ? SHARED_IMAGE_ALTS.icons.ukFlag
                       : SHARED_IMAGE_ALTS.icons.brFlag
                   }
                   width={24}
                   height={24}
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover"
                 />
               </div>
               <span className="text-sm font-medium text-gray-300">
-                {currentLanguage === "en" ? "EN" : "PT"}
+                {currentLanguage === 'en' ? 'EN' : 'PT'}
               </span>
             </button>
 
             <button
               onClick={toggleMobileMenu}
-              className={`p-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 ${
-                windowWidth < 817 ? "block" : "hidden"
+              className={`rounded-lg p-3 transition-colors duration-200 hover:bg-gray-800 ${
+                windowWidth < 817 ? 'block' : 'hidden'
               }`}
-              aria-label="Toggle mobile menu"
+              aria-label={currentLanguage === 'pt' ? 'Alternar menu' : 'Toggle menu'}
               aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-nav"
             >
-              <div className="w-6 h-6 flex flex-col justify-center items-center">
+              <div className="flex h-6 w-6 flex-col items-center justify-center">
                 <span
-                  className={`block w-5 h-0.5 bg-gray-300 transition-all duration-300 ${
-                    isMobileMenuOpen ? "rotate-45 translate-y-1" : ""
+                  className={`block h-0.5 w-5 bg-gray-300 transition-all duration-300 ${
+                    isMobileMenuOpen ? 'translate-y-1 rotate-45' : ''
                   }`}
                 />
                 <span
-                  className={`block w-5 h-0.5 bg-gray-300 transition-all duration-300 mt-1 ${
-                    isMobileMenuOpen ? "opacity-0" : ""
+                  className={`mt-1 block h-0.5 w-5 bg-gray-300 transition-all duration-300 ${
+                    isMobileMenuOpen ? 'opacity-0' : ''
                   }`}
                 />
                 <span
-                  className={`block w-5 h-0.5 bg-gray-300 transition-all duration-300 mt-1 ${
-                    isMobileMenuOpen ? "-rotate-45 -translate-y-1" : ""
+                  className={`mt-1 block h-0.5 w-5 bg-gray-300 transition-all duration-300 ${
+                    isMobileMenuOpen ? '-translate-y-1 -rotate-45' : ''
                   }`}
                 />
               </div>
@@ -291,25 +269,24 @@ export default function Header({
 
         {/* Mobile Navigation */}
         <div
+          id="mobile-nav"
           className={`transition-all duration-300 ease-in-out ${
-            windowWidth < 817 ? "block" : "hidden"
+            windowWidth < 817 ? 'block' : 'hidden'
           } ${
-            isMobileMenuOpen
-              ? "max-h-screen opacity-100 mt-6"
-              : "max-h-0 opacity-0 overflow-hidden"
+            isMobileMenuOpen ? 'mt-6 max-h-screen opacity-100' : 'max-h-0 overflow-hidden opacity-0'
           }`}
         >
-          <div className="py-6 space-y-2 border-t border-slate-700">
+          <div className="space-y-2 border-t border-slate-700 py-6">
             {navigationItems.map((item) => {
-              const isActive = activeSection === item.href.replace("#", "");
+              const isActive = activeSection === item.href.replace('#', '');
               return (
                 <button
                   key={item.href}
                   onClick={() => scrollToSection(item.href)}
-                  className={`block w-full text-left px-6 py-3 rounded-lg font-medium transition-all duration-200 text-lg cursor-pointer relative ${
+                  className={`relative block w-full cursor-pointer rounded-lg px-6 py-3 text-left text-lg font-medium transition-all duration-200 ${
                     isActive
-                      ? "nav-mobile-active"
-                      : "text-gray-300 hover:text-white hover:bg-gray-800/50"
+                      ? 'nav-mobile-active'
+                      : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
                   }`}
                 >
                   {item.label[currentLanguage]}

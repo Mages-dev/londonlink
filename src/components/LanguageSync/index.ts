@@ -1,2 +1,1 @@
-export { LanguageSync } from "./LanguageSync";
-
+export { LanguageSync } from './LanguageSync';

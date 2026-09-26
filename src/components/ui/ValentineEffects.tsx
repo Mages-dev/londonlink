@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useReducedMotion } from '@/hooks';
 
 interface FloatingElement {
   id: number;
@@ -26,37 +27,37 @@ interface HeartPetal {
 
 export default function ValentineEffects() {
   const { commemorativeTheme } = useTheme();
+  const prefersReducedMotion = useReducedMotion();
   const [elements, setElements] = useState<FloatingElement[]>([]);
   const [petals, setPetals] = useState<HeartPetal[]>([]);
   const [mounted, setMounted] = useState(false);
 
-  const isValentineTheme = commemorativeTheme === "valentine";
+  const isValentineTheme = commemorativeTheme === 'valentine';
 
   // Valentine emojis for floating effects (memoized to prevent re-creation)
   const valentineEmojis = useMemo(
-    () => ["💕", "💖", "💗", "💘", "💝", "💞", "💟", "❤️", "🌹", "💐"],
-    []
+    () => ['💕', '💖', '💗', '💘', '💝', '💞', '💟', '❤️', '🌹', '💐'],
+    [],
   );
 
   // Heart petals and romantic elements
-  const heartPetals = useMemo(
-    () => ["🌹", "💐", "🌺", "🌸", "💕", "💖", "💗", "❤️"],
-    []
-  );
+  const heartPetals = useMemo(() => ['🌹', '💐', '🌺', '🌸', '💕', '💖', '💗', '❤️'], []);
 
-  // Fixed positions for love letters (memoized to prevent re-calculation)
-  const loveLetterPositions = useMemo(
-    () =>
-      Array.from({ length: 15 }, (_, i) => ({
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-        emoji: i % 2 === 0 ? "💌" : "💕",
-      })),
-    []
-  );
+  // Random love-letter positions, generated client-side after mount so render
+  // stays pure (react-hooks/purity) and SSR output is deterministic.
+  const [loveLetterPositions, setLoveLetterPositions] = useState<
+    Array<{ left: number; top: number; emoji: string }>
+  >([]);
 
   useEffect(() => {
     setMounted(true);
+    setLoveLetterPositions(
+      Array.from({ length: 15 }, (_, i) => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        emoji: i % 2 === 0 ? '💌' : '💕',
+      })),
+    );
   }, []);
 
   // Create floating elements
@@ -72,8 +73,7 @@ export default function ValentineEffects() {
     for (let i = 0; i < elementCount; i++) {
       newElements.push({
         id: i,
-        emoji:
-          valentineEmojis[Math.floor(Math.random() * valentineEmojis.length)],
+        emoji: valentineEmojis[Math.floor(Math.random() * valentineEmojis.length)],
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
         size: Math.random() * 16 + 18, // 18-34px
@@ -123,13 +123,13 @@ export default function ValentineEffects() {
       createPetals();
     };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [mounted, isValentineTheme, createElements, createPetals]);
 
   // Animate floating elements
   useEffect(() => {
-    if (!isValentineTheme || elements.length === 0) return;
+    if (!isValentineTheme || elements.length === 0 || prefersReducedMotion) return;
 
     const animateElements = () => {
       setElements((prevElements) =>
@@ -142,17 +142,17 @@ export default function ValentineEffects() {
             y: -50,
             x: Math.random() * window.innerWidth,
           }),
-        }))
+        })),
       );
     };
 
     const interval = setInterval(animateElements, 33); // 30 FPS
     return () => clearInterval(interval);
-  }, [isValentineTheme, elements.length]);
+  }, [isValentineTheme, elements.length, prefersReducedMotion]);
 
   // Animate heart petals
   useEffect(() => {
-    if (!isValentineTheme || petals.length === 0) return;
+    if (!isValentineTheme || petals.length === 0 || prefersReducedMotion) return;
 
     const animatePetals = () => {
       setPetals((prevPetals) =>
@@ -166,13 +166,13 @@ export default function ValentineEffects() {
             y: -20,
             x: Math.random() * window.innerWidth,
           }),
-        }))
+        })),
       );
     };
 
     const interval = setInterval(animatePetals, 50); // 20 FPS
     return () => clearInterval(interval);
-  }, [isValentineTheme, petals.length]);
+  }, [isValentineTheme, petals.length, prefersReducedMotion]);
 
   // Don't render anything if not mounted or not Valentine theme
   if (!mounted || !isValentineTheme) {
@@ -182,7 +182,7 @@ export default function ValentineEffects() {
   return (
     <>
       {/* Floating Valentine Elements */}
-      <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">
+      <div className="pointer-events-none fixed inset-0 z-10 overflow-hidden">
         {elements.map((element) => (
           <div
             key={element.id}
@@ -192,7 +192,7 @@ export default function ValentineEffects() {
               top: `${element.y}px`,
               fontSize: `${element.size}px`,
               transform: `rotate(${element.rotation}deg)`,
-              filter: "drop-shadow(0 0 3px rgba(225, 29, 72, 0.4))",
+              filter: 'drop-shadow(0 0 3px rgba(225, 29, 72, 0.4))',
             }}
           >
             {element.emoji}
@@ -201,7 +201,7 @@ export default function ValentineEffects() {
       </div>
 
       {/* Heart Petals Effect */}
-      <div className="fixed inset-0 pointer-events-none z-15 overflow-hidden">
+      <div className="pointer-events-none fixed inset-0 z-15 overflow-hidden">
         {petals.map((petal) => (
           <div
             key={petal.id}
@@ -211,7 +211,7 @@ export default function ValentineEffects() {
               top: `${petal.y}px`,
               fontSize: `${petal.size}px`,
               transform: `rotate(${petal.rotation}deg)`,
-              filter: "drop-shadow(0 0 2px rgba(236, 72, 153, 0.3))",
+              filter: 'drop-shadow(0 0 2px rgba(236, 72, 153, 0.3))',
             }}
           >
             {petal.emoji}
@@ -220,19 +220,19 @@ export default function ValentineEffects() {
       </div>
 
       {/* Valentine Background Patterns */}
-      <div className="fixed inset-0 pointer-events-none z-0">
+      <div className="pointer-events-none fixed inset-0 z-0">
         {/* Subtle Valentine pattern overlay */}
-        <div className="absolute inset-0 valentine-pattern opacity-20" />
+        <div className="valentine-pattern absolute inset-0 opacity-20" />
 
         {/* Glowing orbs */}
-        <div className="absolute top-1/4 left-1/4 w-36 h-36 bg-rose-500/10 rounded-full blur-xl animate-pulse" />
-        <div className="absolute top-3/4 right-1/4 w-28 h-28 bg-pink-500/10 rounded-full blur-xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-3/4 w-32 h-32 bg-red-500/10 rounded-full blur-xl animate-pulse delay-2000" />
-        <div className="absolute bottom-1/4 left-1/2 w-24 h-24 bg-rose-400/10 rounded-full blur-xl animate-pulse delay-500" />
+        <div className="absolute top-1/4 left-1/4 h-36 w-36 animate-pulse rounded-full bg-rose-500/10 blur-xl" />
+        <div className="absolute top-3/4 right-1/4 h-28 w-28 animate-pulse rounded-full bg-pink-500/10 blur-xl delay-1000" />
+        <div className="absolute top-1/2 left-3/4 h-32 w-32 animate-pulse rounded-full bg-red-500/10 blur-xl delay-2000" />
+        <div className="absolute bottom-1/4 left-1/2 h-24 w-24 animate-pulse rounded-full bg-rose-400/10 blur-xl delay-500" />
       </div>
 
       {/* Cupid's Arrows Effect */}
-      <div className="fixed inset-0 pointer-events-none z-5">
+      <div className="pointer-events-none fixed inset-0 z-5">
         {/* Animated arrows */}
         {[...Array(3)].map((_, i) => (
           <div
@@ -240,12 +240,12 @@ export default function ValentineEffects() {
             className="absolute text-2xl"
             style={{
               top: `${20 + i * 30}%`,
-              left: "-50px",
-              animationName: "valentine-arrow",
+              left: '-50px',
+              animationName: 'valentine-arrow',
               animationDuration: `${8 + i * 2}s`,
               animationDelay: `${i * 3}s`,
-              animationIterationCount: "infinite",
-              animationTimingFunction: "linear",
+              animationIterationCount: 'infinite',
+              animationTimingFunction: 'linear',
             }}
           >
             💘
@@ -254,7 +254,7 @@ export default function ValentineEffects() {
       </div>
 
       {/* Love Letters Effect */}
-      <div className="fixed inset-0 pointer-events-none z-5">
+      <div className="pointer-events-none fixed inset-0 z-5">
         {loveLetterPositions.map((pos, i) => (
           <div
             key={`letter-${i}`}
@@ -272,13 +272,13 @@ export default function ValentineEffects() {
       </div>
 
       {/* Love Birds Effect (decorative) */}
-      <div className="fixed top-4 left-4 pointer-events-none z-10">
-        <div className="text-3xl animate-bounce">🕊️💕</div>
+      <div className="pointer-events-none fixed top-4 left-4 z-10">
+        <div className="animate-bounce text-3xl">🕊️💕</div>
       </div>
 
       {/* Romantic Quote Bubble (decorative) */}
-      <div className="fixed bottom-4 right-4 pointer-events-none z-10">
-        <div className="text-2xl animate-pulse">💭💖</div>
+      <div className="pointer-events-none fixed right-4 bottom-4 z-10">
+        <div className="animate-pulse text-2xl">💭💖</div>
       </div>
     </>
   );

@@ -18,9 +18,9 @@ export function useHeroAnimations() {
   const scrollToSection = (sectionId: string) => {
     const element = document.querySelector(sectionId);
     if (element) {
-      element.scrollIntoView({ 
+      element.scrollIntoView({
         behavior: 'smooth',
-        block: 'start'
+        block: 'start',
       });
     }
   };
@@ -28,6 +28,6 @@ export function useHeroAnimations() {
   return {
     isVisible,
     featuresVisible,
-    scrollToSection
+    scrollToSection,
   };
 }

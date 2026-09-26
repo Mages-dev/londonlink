@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 /**
  * Carnival Effects Component
@@ -23,37 +23,24 @@ export default function CarnivalEffects(): React.JSX.Element | null {
   const { commemorativeTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  const isCarnivalTheme = commemorativeTheme === "carnival";
+  const isCarnivalTheme = commemorativeTheme === 'carnival';
 
   // Carnival emojis for floating effects (memoized to prevent re-creation)
   const carnivalEmojis = useMemo(
-    () => [
-      "🎭",
-      "🎪",
-      "🎨",
-      "🎺",
-      "🥁",
-      "🎷",
-      "💃",
-      "🕺",
-      "🤹",
-      "🎊",
-      "🎉",
-      "🎈",
-    ],
-    []
+    () => ['🎭', '🎪', '🎨', '🎺', '🥁', '🎷', '💃', '🕺', '🤹', '🎊', '🎉', '🎈'],
+    [],
   );
 
   // Samba and parade elements
   const sambaEmojis = useMemo(
-    () => ["💃", "🕺", "🥁", "🎺", "🎷", "🎪", "🎭", "👑", "💎", "✨"],
-    []
+    () => ['💃', '🕺', '🥁', '🎺', '🎷', '🎪', '🎭', '👑', '💎', '✨'],
+    [],
   );
 
   // Confetti colors (Brazilian carnival inspired)
   const confettiColors = useMemo(
-    () => ["#ff6b35", "#f7931e", "#c41e3a", "#2e8b57", "#9932cc", "#ffd700"],
-    []
+    () => ['#ff6b35', '#f7931e', '#c41e3a', '#2e8b57', '#9932cc', '#ffd700'],
+    [],
   );
 
   // Create floating carnival elements
@@ -64,6 +51,7 @@ export default function CarnivalEffects(): React.JSX.Element | null {
     animationDuration: number;
     animationDelay: number;
     size: number;
+    animationDirection: 'normal' | 'reverse';
   }> => {
     return Array.from({ length: 15 }, (_, i) => ({
       id: i,
@@ -72,6 +60,7 @@ export default function CarnivalEffects(): React.JSX.Element | null {
       animationDuration: 8 + Math.random() * 12, // 8-20 seconds
       animationDelay: Math.random() * 5, // 0-5 seconds delay
       size: 0.8 + Math.random() * 0.8, // 0.8-1.6 size multiplier
+      animationDirection: Math.random() > 0.5 ? 'normal' : 'reverse',
     }));
   }, [carnivalEmojis]);
 
@@ -83,6 +72,7 @@ export default function CarnivalEffects(): React.JSX.Element | null {
     animationDuration: number;
     animationDelay: number;
     rotation: number;
+    borderRadius: string;
   }> => {
     return Array.from({ length: 25 }, (_, i) => ({
       id: i,
@@ -91,6 +81,7 @@ export default function CarnivalEffects(): React.JSX.Element | null {
       animationDuration: 3 + Math.random() * 4, // 3-7 seconds
       animationDelay: Math.random() * 3, // 0-3 seconds delay
       rotation: Math.random() * 360, // Random initial rotation
+      borderRadius: Math.random() > 0.5 ? '50%' : '0%',
     }));
   }, [confettiColors]);
 
@@ -102,6 +93,7 @@ export default function CarnivalEffects(): React.JSX.Element | null {
     animationDuration: number;
     animationDelay: number;
     size: number;
+    top: number;
   }> => {
     return Array.from({ length: 8 }, (_, i) => ({
       id: i,
@@ -110,16 +102,14 @@ export default function CarnivalEffects(): React.JSX.Element | null {
       animationDuration: 12 + Math.random() * 8, // 12-20 seconds
       animationDelay: Math.random() * 6, // 0-6 seconds delay
       size: 1 + Math.random() * 0.5, // 1-1.5 size multiplier
+      top: 60 + Math.random() * 30, // Lower part of screen
     }));
   }, [sambaEmojis]);
 
   // Memoize the element arrays to prevent unnecessary re-renders
   const floatingElements = useMemo(() => createElements(), [createElements]);
   const confettiPieces = useMemo(() => createConfetti(), [createConfetti]);
-  const sambaElements = useMemo(
-    () => createSambaElements(),
-    [createSambaElements]
-  );
+  const sambaElements = useMemo(() => createSambaElements(), [createSambaElements]);
 
   useEffect(() => {
     setMounted(true);
@@ -129,19 +119,13 @@ export default function CarnivalEffects(): React.JSX.Element | null {
     if (!mounted || !isCarnivalTheme) return;
 
     // Add carnival theme class to body
-    document.body.classList.add("theme-carnival");
+    document.body.classList.add('theme-carnival');
 
     // Cleanup function
     return () => {
-      document.body.classList.remove("theme-carnival");
+      document.body.classList.remove('theme-carnival');
     };
-  }, [
-    mounted,
-    isCarnivalTheme,
-    createElements,
-    createConfetti,
-    createSambaElements,
-  ]);
+  }, [mounted, isCarnivalTheme, createElements, createConfetti, createSambaElements]);
 
   // Don't render on server or if not carnival theme
   if (!mounted || !isCarnivalTheme) {
@@ -151,7 +135,7 @@ export default function CarnivalEffects(): React.JSX.Element | null {
   return (
     <>
       {/* Floating Carnival Elements */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         {floatingElements.map((element) => (
           <div
             key={`carnival-${element.id}`}
@@ -161,15 +145,11 @@ export default function CarnivalEffects(): React.JSX.Element | null {
               fontSize: `${element.size * 2}rem`,
               animationDuration: `${element.animationDuration}s`,
               animationDelay: `${element.animationDelay}s`,
-              animationDirection: Math.random() > 0.5 ? "normal" : "reverse",
+              animationDirection: element.animationDirection,
               transform: `translateY(100vh)`,
               animation: `
-                carnivalFloat ${
-                  element.animationDuration
-                }s ease-in-out infinite,
-                carnivalSway ${
-                  element.animationDuration * 0.7
-                }s ease-in-out infinite
+                carnivalFloat ${element.animationDuration}s ease-in-out infinite,
+                carnivalSway ${element.animationDuration * 0.7}s ease-in-out infinite
               `,
             }}
           >
@@ -179,15 +159,15 @@ export default function CarnivalEffects(): React.JSX.Element | null {
       </div>
 
       {/* Confetti Rain */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         {confettiPieces.map((confetti) => (
           <div
             key={`confetti-${confetti.id}`}
-            className="absolute w-2 h-2 opacity-80"
+            className="absolute h-2 w-2 opacity-80"
             style={{
               left: `${confetti.left}%`,
               backgroundColor: confetti.color,
-              borderRadius: Math.random() > 0.5 ? "50%" : "0%",
+              borderRadius: confetti.borderRadius,
               animationDuration: `${confetti.animationDuration}s`,
               animationDelay: `${confetti.animationDelay}s`,
               transform: `rotate(${confetti.rotation}deg) translateY(100vh)`,
@@ -198,20 +178,18 @@ export default function CarnivalEffects(): React.JSX.Element | null {
       </div>
 
       {/* Samba Parade Elements */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         {sambaElements.map((element) => (
           <div
             key={`samba-${element.id}`}
             className="absolute"
             style={{
               left: `${element.left}%`,
-              top: `${60 + Math.random() * 30}%`, // Lower part of screen
+              top: `${element.top}%`, // Lower part of screen
               fontSize: `${element.size * 2.5}rem`,
               animationDuration: `${element.animationDuration}s`,
               animationDelay: `${element.animationDelay}s`,
-              animation: `carnivalSamba ${
-                element.animationDuration * 0.3
-              }s ease-in-out infinite`,
+              animation: `carnivalSamba ${element.animationDuration * 0.3}s ease-in-out infinite`,
             }}
           >
             {element.emoji}
@@ -220,23 +198,23 @@ export default function CarnivalEffects(): React.JSX.Element | null {
       </div>
 
       {/* Carnival Masks (decorative) */}
-      <div className="fixed top-4 left-4 pointer-events-none z-10">
-        <div className="text-4xl animate-pulse carnival-mask">🎭🎪</div>
+      <div className="pointer-events-none fixed top-4 left-4 z-10">
+        <div className="carnival-mask animate-pulse text-4xl">🎭🎪</div>
       </div>
 
       {/* Samba Dancers (decorative) */}
-      <div className="fixed top-4 right-4 pointer-events-none z-10">
-        <div className="text-3xl carnival-mask">💃🕺</div>
+      <div className="pointer-events-none fixed top-4 right-4 z-10">
+        <div className="carnival-mask text-3xl">💃🕺</div>
       </div>
 
       {/* Carnival Instruments (decorative) */}
-      <div className="fixed bottom-4 left-4 pointer-events-none z-10">
-        <div className="text-3xl animate-bounce">🎺🥁</div>
+      <div className="pointer-events-none fixed bottom-4 left-4 z-10">
+        <div className="animate-bounce text-3xl">🎺🥁</div>
       </div>
 
       {/* Carnival Celebration (decorative) */}
-      <div className="fixed bottom-4 right-4 pointer-events-none z-10">
-        <div className="text-2xl animate-pulse">🎉🎊</div>
+      <div className="pointer-events-none fixed right-4 bottom-4 z-10">
+        <div className="animate-pulse text-2xl">🎉🎊</div>
       </div>
 
       {/* CSS Animations */}

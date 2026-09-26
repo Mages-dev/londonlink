@@ -1,7 +1,7 @@
 // Gallery hook for managing state and interactions
 
-import { useState, useCallback, useEffect } from "react";
-import { GALLERY_IMAGES } from "../constants/images";
+import { useState, useCallback, useEffect } from 'react';
+import { GALLERY_IMAGES } from '../constants/images';
 
 export interface GalleryImage {
   id: number;
@@ -20,7 +20,7 @@ export function useGallery() {
   // Open image in modal
   const openImage = useCallback((image: GalleryImage) => {
     setSelectedImage(image);
-    setCurrentIndex(GALLERY_IMAGES.findIndex(img => img.id === image.id));
+    setCurrentIndex(GALLERY_IMAGES.findIndex((img) => img.id === image.id));
     setIsModalOpen(true);
   }, []);
 
@@ -50,19 +50,19 @@ export function useGallery() {
 
   // Handle image loading state
   const handleImageLoad = useCallback((imageId: number) => {
-    setIsLoading(prev => ({ ...prev, [imageId]: false }));
-    setLoadErrors(prev => ({ ...prev, [imageId]: false }));
+    setIsLoading((prev) => ({ ...prev, [imageId]: false }));
+    setLoadErrors((prev) => ({ ...prev, [imageId]: false }));
   }, []);
 
   // Handle image loading start
   const handleImageLoadStart = useCallback((imageId: number) => {
-    setIsLoading(prev => ({ ...prev, [imageId]: true }));
+    setIsLoading((prev) => ({ ...prev, [imageId]: true }));
   }, []);
 
   // Handle image error
   const handleImageError = useCallback((imageId: number) => {
-    setIsLoading(prev => ({ ...prev, [imageId]: false }));
-    setLoadErrors(prev => ({ ...prev, [imageId]: true }));
+    setIsLoading((prev) => ({ ...prev, [imageId]: false }));
+    setLoadErrors((prev) => ({ ...prev, [imageId]: true }));
   }, []);
 
   // Keyboard navigation
@@ -71,32 +71,32 @@ export function useGallery() {
       if (!isModalOpen) return;
 
       switch (event.key) {
-        case "Escape":
+        case 'Escape':
           closeModal();
           break;
-        case "ArrowLeft":
+        case 'ArrowLeft':
           previousImage();
           break;
-        case "ArrowRight":
+        case 'ArrowRight':
           nextImage();
           break;
       }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isModalOpen, closeModal, previousImage, nextImage]);
 
   // Prevent body scroll when modal is open
   useEffect(() => {
     if (isModalOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset';
     }
 
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset';
     };
   }, [isModalOpen]);
 
@@ -107,22 +107,22 @@ export function useGallery() {
     currentIndex,
     isLoading,
     loadErrors,
-    
+
     // Actions
     openImage,
     closeModal,
     previousImage,
     nextImage,
-    
+
     // Image handlers
     handleImageLoad,
     handleImageLoadStart,
     handleImageError,
-    
+
     // Data
     images: GALLERY_IMAGES,
     totalImages: GALLERY_IMAGES.length,
-    
+
     // Navigation state
     canGoPrevious: currentIndex > 0,
     canGoNext: currentIndex < GALLERY_IMAGES.length - 1,

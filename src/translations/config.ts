@@ -1,23 +1,23 @@
 // Translation configuration and utilities
 
-export const SUPPORTED_LANGUAGES = ["en", "pt"] as const;
+export const SUPPORTED_LANGUAGES = ['en', 'pt'] as const;
 export type Language = (typeof SUPPORTED_LANGUAGES)[number];
 
-export const DEFAULT_LANGUAGE: Language = "pt";
+export const DEFAULT_LANGUAGE: Language = 'pt';
 
 // Language metadata
 export const LANGUAGE_CONFIG = {
   en: {
-    name: "English",
-    nativeName: "English",
-    flag: "🇺🇸",
-    direction: "ltr" as const,
+    name: 'English',
+    nativeName: 'English',
+    flag: '🇺🇸',
+    direction: 'ltr' as const,
   },
   pt: {
-    name: "Portuguese",
-    nativeName: "Português",
-    flag: "🇧🇷",
-    direction: "ltr" as const,
+    name: 'Portuguese',
+    nativeName: 'Português',
+    flag: '🇧🇷',
+    direction: 'ltr' as const,
   },
 } as const;
 
@@ -36,8 +36,8 @@ export function getDefaultLanguage(): Language {
 
 // Future: Browser language detection
 export function detectBrowserLanguage(): Language {
-  if (typeof window === "undefined") return DEFAULT_LANGUAGE;
+  if (typeof window === 'undefined') return DEFAULT_LANGUAGE;
 
-  const browserLang = navigator.language.split("-")[0];
+  const browserLang = navigator.language.split('-')[0];
   return isValidLanguage(browserLang) ? browserLang : DEFAULT_LANGUAGE;
 }
