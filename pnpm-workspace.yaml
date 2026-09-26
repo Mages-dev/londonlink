@@ -1,20 +1,18 @@
+# Supply chain: a release must be at least a day old before it can be
+# installed (pnpm's default, written out so the policy is visible). Never
+# relax it to get a package in; relax the version range instead.
+minimumReleaseAge: 1440
+
+# eslint-config-next bundles plugins that have not declared ESLint 10 support
+# yet. Lint and one probe per plugin were verified identical on ESLint 10
+# (2026-09-26; hold notes in the tooling-guide skill). Remove each entry once
+# `pnpm view <plugin> peerDependencies.eslint` lists 10.
+peerDependencyRules:
+  allowedVersions:
+    eslint-plugin-react>eslint: '10'
+    eslint-plugin-jsx-a11y>eslint: '10'
+    eslint-plugin-import>eslint: '10'
+
 allowBuilds:
   sharp: true
   unrs-resolver: true
-
-# Security overrides: force patched versions of transitive build/lint-tooling
-# deps flagged by `pnpm audit` (ReDoS / prototype pollution / XSS). All are
-# dev/build-time only — none ship in the client runtime bundle. Range-scoped so
-# each major line is patched without an API-breaking major bump.
-# Re-run `pnpm audit` after dependency changes and prune entries once parents
-# pull patched versions on their own.
-overrides:
-  minimatch@<3.1.5: ^3.1.5
-  minimatch@>=9.0.0 <9.0.9: ^9.0.9
-  picomatch@<2.3.2: ^2.3.2
-  picomatch@>=4.0.0 <4.0.4: ^4.0.4
-  flatted@<3.4.2: ^3.4.2
-  brace-expansion@<1.1.13: ^1.1.15
-  brace-expansion@>=2.0.0 <2.0.3: ^2.1.1
-  postcss@<8.5.10: ^8.5.15
-  '@babel/core@<7.29.1': ^7.29.1
