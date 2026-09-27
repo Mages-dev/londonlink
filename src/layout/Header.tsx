@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { NavigationItem, Language } from '@/types';
 import { OptimizedImage, SHARED_IMAGES, SHARED_IMAGE_ALTS } from '@/domain/shared';
 import { ThemeSelector } from '@/components/ui';
@@ -18,17 +18,30 @@ const navigationItems: NavigationItem[] = [
   { href: '#contact', label: { pt: 'Contato', en: 'Contact' } },
 ];
 
+const SECTION_IDS = navigationItems.map((item) => item.href.replace('#', ''));
+
+// A click-driven scroll counts as finished once no scroll event arrived for this long.
+const SCROLL_IDLE_MS = 150;
+
 interface HeaderProps {
   currentLanguage?: Language;
   onLanguageChange?: (language: Language) => void;
   disableThemeSelector?: boolean;
 }
 
-// 🔹 Novo hook para detectar seção ativa via IntersectionObserver
-function useActiveSection(sections: string[], setActiveSection: (id: string) => void) {
+// Tracks the section under the header. The observer is created once: a new one
+// reports the current intersections right away, which mid-scroll would mark the
+// section being passed over. While a click-driven scroll runs, the clicked
+// section stays active until scrolling goes idle.
+function useActiveSection(initialSection: string) {
+  const [activeSection, setActiveSection] = useState(initialSection);
+  const isLockedRef = useRef(false);
+  const releaseLockRef = useRef<(() => void) | null>(null);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        if (isLockedRef.current) return;
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setActiveSection(entry.target.id);
@@ -42,16 +55,40 @@ function useActiveSection(sections: string[], setActiveSection: (id: string) => 
       },
     );
 
-    const elements = sections
-      .map((id) => document.getElementById(id))
-      .filter(Boolean) as HTMLElement[];
-
-    elements.forEach((el) => observer.observe(el));
+    SECTION_IDS.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
 
     return () => {
-      elements.forEach((el) => observer.unobserve(el));
+      observer.disconnect();
+      releaseLockRef.current?.();
     };
-  }, [sections, setActiveSection]);
+  }, []);
+
+  const selectSection = (id: string) => {
+    releaseLockRef.current?.();
+    setActiveSection(id);
+    isLockedRef.current = true;
+
+    let idleTimer: ReturnType<typeof setTimeout> | undefined;
+    const release = () => {
+      clearTimeout(idleTimer);
+      window.removeEventListener('scroll', waitForIdle);
+      isLockedRef.current = false;
+      releaseLockRef.current = null;
+    };
+    function waitForIdle() {
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(release, SCROLL_IDLE_MS);
+    }
+
+    window.addEventListener('scroll', waitForIdle, { passive: true });
+    waitForIdle();
+    releaseLockRef.current = release;
+  };
+
+  return { activeSection, selectSection };
 }
 
 export default function Header({
@@ -60,9 +97,8 @@ export default function Header({
   disableThemeSelector = false,
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const { activeSection, selectSection } = useActiveSection('home');
   const [windowWidth, setWindowWidth] = useState(0);
-  const [isScrolling, setIsScrolling] = useState(false);
   const { mode, setMode } = useTheme();
 
   // Detect window width for responsive navigation
@@ -74,13 +110,6 @@ export default function Header({
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  // 🔹 Agora usamos IntersectionObserver em vez de cálculo manual
-  useActiveSection(['home', 'about', 'goals', 'books', 'feedback', 'gallery', 'contact'], (id) => {
-    if (!isScrolling) {
-      setActiveSection(id);
-    }
-  });
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -99,10 +128,8 @@ export default function Header({
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      setIsScrolling(true);
-      setActiveSection(href.replace('#', ''));
+      selectSection(href.replace('#', ''));
       element.scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => setIsScrolling(false), 1000);
     }
     setIsMobileMenuOpen(false);
   };
@@ -134,7 +161,7 @@ export default function Header({
                 <button
                   key={item.href}
                   onClick={() => scrollToSection(item.href)}
-                  className={`relative cursor-pointer text-lg font-medium transition-all duration-200 ${
+                  className={`relative cursor-pointer text-lg font-medium transition-colors duration-200 ${
                     isActive ? 'font-semibold text-white' : 'text-gray-300 hover:text-white'
                   }`}
                   aria-current={isActive ? 'true' : undefined}
@@ -159,7 +186,7 @@ export default function Header({
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href)}
-                    className={`relative cursor-pointer rounded px-2 py-1 text-sm font-medium transition-all duration-200 ${
+                    className={`relative cursor-pointer rounded px-2 py-1 text-sm font-medium transition-colors duration-200 ${
                       isActive
                         ? 'nav-tablet-active'
                         : 'text-gray-300 hover:bg-gray-800/30 hover:text-white'
@@ -283,7 +310,7 @@ export default function Header({
                 <button
                   key={item.href}
                   onClick={() => scrollToSection(item.href)}
-                  className={`relative block w-full cursor-pointer rounded-lg px-6 py-3 text-left text-lg font-medium transition-all duration-200 ${
+                  className={`relative block w-full cursor-pointer rounded-lg px-6 py-3 text-left text-lg font-medium transition-colors duration-200 ${
                     isActive
                       ? 'nav-mobile-active'
                       : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
