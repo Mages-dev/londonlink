@@ -200,19 +200,40 @@ Run `/deps-update` (the dependency pipeline). The rules it applies:
 
 ## Deliberate holds
 
-### TypeScript 6 line
+### TypeScript 7 and 6 side by side
 
-`typescript` stays on the 6 line although a newer major exists. The 7 line is
-the native compiler: its package ships only the `tsc` binary, without the
-JavaScript API (`require('typescript').createProgram` is `undefined`).
-`tsc --noEmit` and `next build` pass on it, but `typescript-eslint` imports that
-API and ESLint crashes (proven in a throwaway copy, 2026-09-26).
+The 7 line is the native compiler: its package ships only the `tsc` binary,
+without the JavaScript API (`require('typescript').createProgram` is
+`undefined`), and `typescript-eslint` imports that API even just to parse, so
+ESLint crashes with 7 installed as `typescript` (proven 2026-09-26). The two
+lines are installed side by side with npm aliases (the TS 7.0 announcement's
+recipe), in `package.json` `devDependencies`:
 
-- Retest signal: `pnpm view typescript-eslint peerDependencies.typescript`
-  includes the 7 line, and `pnpm lint` runs on it in a throwaway copy.
-- When it fires: `/deps-update typescript`, then the lint probes.
-- Re-checked 2026-09-26: `typescript-eslint` 8.70.1 peers `>=4.8.4 <6.1.0`;
-  typescript latest 7.0.2.
+- `@typescript/native` → `npm:typescript@<7 line>`: owns the `tsc` binary, so
+  `pnpm exec tsc --noEmit` and the pre-commit hook check with the 7 line.
+- `typescript` → `npm:@typescript/typescript6@<6 line>`: re-exports the 6.0
+  JavaScript API (binary `tsc6`). Everything that does `require('typescript')`
+  gets it: `typescript-eslint` (parser and `typescript-estree`) and the type
+  check inside `next build`.
+
+Check after any install that touches either:
+`./node_modules/.bin/tsc -v` → 7.x; `pnpm exec tsc6 -v` and
+`node -e "console.log(require('typescript').version)"` → 6.x. Prove each gate
+still fails on a planted `const n: number = 'x'` in a throwaway `src/__probe/`:
+`tsc --noEmit`, `pnpm build` ("Failed to type check") and the hook
+(`git add` the probe, `pnpm exec lint-staged --concurrent false` → `✖ tsc`).
+Both compilers must stay clean (`tsc --noEmit` and `tsc6 --noEmit`), since the
+build gate runs on 6. Measured 2026-11-04 on this repo (693 files): 6.0.3
+0.92 s total, 7.0.2 0.09 s.
+
+- Retest signal (undo the aliases): `pnpm view @typescript-eslint/parser
+  peerDependencies.typescript` includes the 7 line (expected with the TS 7.1
+  API), and `pnpm lint` runs with 7 installed as `typescript` in a throwaway
+  copy.
+- When it fires: `/deps-update typescript`, back to one `typescript`
+  dependency, then the lint probes.
+- Re-checked 2026-11-04: `typescript-eslint` 8.72.1 peers `>=4.8.4 <6.1.0`;
+  typescript latest 7.0.2; `@typescript/typescript6` latest 6.0.2.
 
 (History: ESLint was held on 9 until 2026-09-26. The signal that matters is
 every bundled plugin's `peerDependencies.eslint`, not only `typescript-eslint`;
