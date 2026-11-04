@@ -15,7 +15,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Progress tracking
 - Interactive exercises
 
+### 🔒 Security
+
+- **Next.js 16.4.4**: fixes two critical unauthenticated remote code execution
+  advisories in 16.3.x (Image Optimization API with SVG files, `use cache`
+  returning typed arrays) and a high Server Actions denial of service, all
+  fixed in 16.4.1
+
 ### 🔄 Changed
+
+- Node 26 (LTS since 2026-10-28): `engines.node` floor raised to 26 and
+  `@types/node` moved to the 26 line
+- Dependencies refreshed within their ranges (`pnpm update`): React 19.3.1,
+  ESLint 10.14, Tailwind CSS 4.3.4, lucide-react 1.67 and dev tooling
+- TypeScript 7 (native compiler) for `tsc` and the pre-commit type check, side
+  by side with the TypeScript 6 API that `typescript-eslint` and `next build`
+  still need (npm aliases); type check about 10× faster
 
 - Prettier: `printWidth` 100 and Tailwind class sorting
   (`prettier-plugin-tailwindcss`); config trimmed to the options that differ
